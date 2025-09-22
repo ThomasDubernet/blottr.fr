@@ -2,6 +2,41 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Context7 Usage Policy
+
+**Always use Context7 when you need:**
+- Code generation, setup or configuration steps
+- Library/API documentation and best practices
+- Framework-specific implementation patterns
+- Official documentation lookup
+
+**Automatically use Context7 MCP tools without being explicitly asked for:**
+- Resolving library IDs and getting library docs
+- Finding implementation examples and patterns
+- Checking API compatibility and version requirements
+
+## Available Libraries & Technologies
+
+### Core Stack
+- **AdonisJS v6**: `/adonisjs/v6-docs` - Full-stack MVC framework
+- **React**: `/facebook/react` - Frontend UI library
+- **Inertia.js**: `/inertiajs/inertia` - SPA bridge for server-side routing
+- **PostgreSQL**: `/websites/postgresql` - Primary database
+- **VineJS**: `/vinejs/vinejs.dev` - Validation library
+- **Vite**: `/vitejs/vite` - Frontend build tool
+
+### Additional Libraries
+- **AdonisJS Lucid**: `/adonisjs/lucid` - SQL ORM with Active Record
+- **AdonisJS Jobs**: `/kabbouchi/adonisjs-jobs` - Job processing with BullMQ
+- **Postgres.js**: `/porsager/postgres` - PostgreSQL client for Node.js
+- **Tuyau**: `/julien-r44/tuyau` - Typesafe APIs for AdonisJS
+
+### Development Tools
+- **Japa**: Testing framework (built into AdonisJS)
+- **ESLint**: Code linting
+- **Prettier**: Code formatting
+- **TypeScript**: Type checking
+
 ## Key Commands
 
 ### Development
@@ -155,3 +190,30 @@ Tests use the Japa framework with two suites:
 - **Functional tests**: `tests/functional/` (30s timeout)
 
 Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for AdonisJS-specific testing helpers.
+
+## Project-Specific Architecture
+
+### Tattoo Platform Database Schema
+This project implements a comprehensive tattoo platform with:
+
+**Core Entities:**
+- `users` (UUID-based, roles: client=1, artist=2)
+- `artists` (with Instagram scraping & verification system)
+- `salons` & `shops` (establishment management)
+- `tattoos` & `tags` (content with many-to-many relationships)
+- `appointments` (booking system)
+
+**Instagram Integration:**
+- `artists.verification_status`: 'scraped' | 'contacted' | 'onboarding' | 'verified'
+- `contact_requests` (triggers onboarding for unverified artists)
+- `artist_onboarding` (automated verification workflow)
+
+**Multi-Salon Support:**
+- `artist_salon` pivot table for many-to-many relationships
+- Artists can work in multiple salons or be independent
+
+### Workflow Features
+1. **Search → Contact → Discussion** (simplified booking flow)
+2. **Instagram Scraping** → Auto-populated artist profiles
+3. **Automated Onboarding** → Email workflow for artist verification
+4. **Multi-establishment** → Artists can work across multiple salons

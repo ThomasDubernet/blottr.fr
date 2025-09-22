@@ -1,19 +1,20 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'users'
+  protected tableName = 'tags'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.db.rawQuery('gen_random_uuid()').knexQuery)
-      table.string('email', 254).notNullable().unique()
-      table.string('password').notNullable()
-      table.integer('role').notNullable().defaultTo(1) // 1=client, 2=artist
-      table.timestamp('last_login_at').nullable()
-      table.text('avatar_file').nullable()
+      table.string('name').notNullable().unique()
+      table.jsonb('variants').nullable()
+      table.string('category').nullable()
 
       table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
+      table.timestamp('updated_at').notNullable()
+
+      table.index(['name'])
+      table.index(['category'])
     })
   }
 
