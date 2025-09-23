@@ -42,7 +42,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add KNOWLEDGE_BASE.md
+        git add docs/architecture/KNOWLEDGE_BASE.md
         git commit -m "docs: auto-update knowledge base [skip ci]"
 
     - name: Push changes

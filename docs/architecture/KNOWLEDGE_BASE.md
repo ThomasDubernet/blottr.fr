@@ -490,3 +490,171 @@ Total: 78 files, 23 directories
 - Admin dashboard
 - Instagram scraping implementation
 - Testing suite
+## Project Status (Auto-Updated)
+
+**Last Update**: 2025-09-23 02:25:27
+**Git Branch**: main
+**Last Commit**: 15ddcb5 - feat(db): implement comprehensive tattoo platform database schema (Thomas Dubernet, 49 minutes ago)
+
+### 📊 Project Metrics
+- **Files**: 90 files, 34 directories
+- **Dependencies**: 17 production, 20 development
+- **Database**: 14 migrations, 11 models
+- **Version**: 0.0.0
+
+### 🌳 Current Project Structure
+
+```
+.
+├── .claude
+│   └── settings.local.json
+├── .editorconfig
+├── .env
+├── .env.example
+├── .github
+│   └── workflows
+│       └── update-knowledge-base.yml
+├── .gitignore
+├── .husky
+│   └── post-commit
+├── .idea
+│   ├── .gitignore
+│   ├── blottr.fr.iml
+│   ├── inspectionProfiles
+│   │   └── Project_Default.xml
+│   ├── modules.xml
+│   ├── php.xml
+│   ├── prettier.xml
+│   ├── vcs.xml
+│   └── workspace.xml
+├── .serena
+│   ├── .gitignore
+│   ├── memories
+│   └── project.yml
+├── ace.js
+├── adonisrc.ts
+├── app
+│   ├── exceptions
+│   │   └── handler.ts
+│   ├── middleware
+│   │   ├── auth_middleware.ts
+│   │   ├── container_bindings_middleware.ts
+│   │   ├── guest_middleware.ts
+│   │   └── silent_auth_middleware.ts
+│   └── models
+│       ├── appointment.ts
+│       ├── artist_onboarding.ts
+│       ├── artist.ts
+│       ├── auth_access_token.ts
+│       ├── city.ts
+│       ├── contact_request.ts
+│       ├── salon.ts
+│       ├── shop.ts
+│       ├── tag.ts
+│       ├── tattoo.ts
+│       └── user.ts
+├── bin
+│   ├── console.ts
+│   ├── server.ts
+│   └── test.ts
+├── CLAUDE.md
+├── config
+│   ├── app.ts
+│   ├── auth.ts
+│   ├── bodyparser.ts
+│   ├── cors.ts
+│   ├── database.ts
+│   ├── hash.ts
+│   ├── inertia.ts
+│   ├── logger.ts
+│   ├── session.ts
+│   ├── shield.ts
+│   ├── static.ts
+│   └── vite.ts
+├── database
+│   └── migrations
+│       ├── 1758579190445_create_users_table.ts
+│       ├── 1758581896088_create_create_shops_table.ts
+│       ├── 1758581899582_create_create_salons_table.ts
+│       ├── 1758581911346_create_create_artists_table.ts
+│       ├── 1758581915615_create_create_artist_salons_table.ts
+│       ├── 1758581922331_create_create_tags_table.ts
+│       ├── 1758581930280_create_create_tattoos_table.ts
+│       ├── 1758581934955_create_create_contact_requests_table.ts
+│       ├── 1758581935567_create_create_artist_onboardings_table.ts
+│       ├── 1758581936199_create_create_appointments_table.ts
+│       ├── 1758581936809_create_create_auth_access_tokens_table.ts
+│       ├── 1758581937432_create_create_tag_tattoos_table.ts
+│       ├── 1758584991949_create_create_cities_table.ts
+│       └── 1758585023298_create_add_missing_fields_to_tables_table.ts
+├── docker-compose.yml
+├── docs
+│   ├── api
+│   ├── architecture
+│   │   └── KNOWLEDGE_BASE.md
+│   ├── database
+│   │   ├── DATABASE_DOCUMENTATION.md
+│   │   └── DB_VISUALIZATION.md
+│   ├── README.md
+│   └── setup
+│       └── CLAUDE.md
+├── eslint.config.js
+├── inertia
+│   ├── app
+│   │   ├── app.tsx
+│   │   └── ssr.tsx
+│   ├── css
+│   │   └── app.css
+│   ├── pages
+│   │   ├── errors
+│   │   │   ├── not_found.tsx
+│   │   │   └── server_error.tsx
+│   │   └── home.tsx
+│   └── tsconfig.json
+├── package.json
+├── pgadmin-servers.json
+├── pnpm-lock.yaml
+├── resources
+│   └── views
+│       └── inertia_layout.edge
+├── scripts
+│   └── update-knowledge-base.sh
+├── start
+│   ├── env.ts
+│   ├── kernel.ts
+│   └── routes.ts
+├── tests
+│   └── bootstrap.ts
+├── tsconfig.json
+└── vite.config.ts
+
+32 directories, 90 files
+```
+
+### 🔄 Git Status
+
+```
+Current branch: main
+ M .github/workflows/update-knowledge-base.yml
+ M .husky/post-commit
+ M CLAUDE.md
+ D KNOWLEDGE_BASE.md
+ M app/models/appointment.ts
+ M app/models/artist.ts
+ M app/models/contact_request.ts
+ M app/models/salon.ts
+ M app/models/shop.ts
+ M app/models/tag.ts
+ M app/models/tattoo.ts
+ M app/models/user.ts
+ M docker-compose.yml
+ M scripts/update-knowledge-base.sh
+?? app/models/city.ts
+?? database/migrations/1758584991949_create_create_cities_table.ts
+?? database/migrations/1758585023298_create_add_missing_fields_to_tables_table.ts
+?? docs/
+?? pgadmin-servers.json
+```
+
+---
+*Auto-generated by scripts/update-knowledge-base.sh*

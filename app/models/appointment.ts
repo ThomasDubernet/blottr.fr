@@ -4,6 +4,7 @@ import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
 import Artist from './artist.js'
 import Salon from './salon.js'
+import Shop from './shop.js'
 
 export default class Appointment extends BaseModel {
   @column({ isPrimary: true })
@@ -30,6 +31,25 @@ export default class Appointment extends BaseModel {
   @column()
   declare notes: string | null
 
+  // Additional fields
+  @column()
+  declare shopId: string | null
+
+  @column()
+  declare price: number | null
+
+  @column()
+  declare paymentStatus: string | null
+
+  @column()
+  declare clientNotes: string | null
+
+  @column()
+  declare artistNotes: string | null
+
+  @column()
+  declare reminderSent: Record<string, any> | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
@@ -46,4 +66,7 @@ export default class Appointment extends BaseModel {
 
   @belongsTo(() => Salon)
   declare salon: BelongsTo<typeof Salon>
+
+  @belongsTo(() => Shop)
+  declare shop: BelongsTo<typeof Shop>
 }

@@ -20,6 +20,22 @@ export default class ContactRequest extends BaseModel {
   @column()
   declare status: 'pending' | 'artist_contacted' | 'artist_responded' | 'completed'
 
+  // Additional fields
+  @column()
+  declare preferredContactMethod: string | null
+
+  @column()
+  declare availability: Record<string, any> | null
+
+  @column()
+  declare budgetMin: number | null
+
+  @column()
+  declare budgetMax: number | null
+
+  @column()
+  declare urgency: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

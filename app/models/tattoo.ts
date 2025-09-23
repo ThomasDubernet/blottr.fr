@@ -27,6 +27,34 @@ export default class Tattoo extends BaseModel {
   @column()
   declare price: number | null
 
+  // SEO & Display
+  @column()
+  declare slug: string | null
+
+  @column()
+  declare altText: string | null
+
+  // Business logic
+  @column()
+  declare isFeatured: boolean
+
+  @column()
+  declare isVisible: boolean
+
+  // Analytics
+  @column()
+  declare viewCount: number
+
+  @column()
+  declare likeCount: number
+
+  // Instagram specific
+  @column()
+  declare instagramPostUrl: string | null
+
+  @column.dateTime()
+  declare instagramPostedAt: DateTime | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

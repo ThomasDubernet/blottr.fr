@@ -7,9 +7,9 @@ if [ -f "scripts/update-knowledge-base.sh" ]; then
     bash scripts/update-knowledge-base.sh
 
     # Check if KB was updated
-    if [ -n "$(git status --porcelain KNOWLEDGE_BASE.md)" ]; then
+    if [ -n "$(git status --porcelain docs/architecture/KNOWLEDGE_BASE.md)" ]; then
         echo "📝 Knowledge Base updated with latest changes"
-        git add KNOWLEDGE_BASE.md
+        git add docs/architecture/KNOWLEDGE_BASE.md
         git commit --amend --no-edit
     fi
 fi

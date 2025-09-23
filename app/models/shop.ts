@@ -1,5 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import City from './city.js'
+import Salon from './salon.js'
+import Appointment from './appointment.js'
 
 export default class Shop extends BaseModel {
   @column({ isPrimary: true })
@@ -59,9 +63,39 @@ export default class Shop extends BaseModel {
   @column()
   declare instaUrl: string | null
 
+  // SEO & Display
+  @column()
+  declare slug: string | null
+
+  // Geographic reference
+  @column()
+  declare cityId: string | null
+
+  // Business logic
+  @column()
+  declare isActive: boolean
+
+  // Analytics
+  @column()
+  declare viewCount: number
+
+  // Foreign key for salon relationship
+  @column()
+  declare salonId: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  // Relationships
+  @belongsTo(() => City)
+  declare cityRelation: BelongsTo<typeof City>
+
+  @belongsTo(() => Salon)
+  declare salon: BelongsTo<typeof Salon>
+
+  @hasMany(() => Appointment)
+  declare appointments: HasMany<typeof Appointment>
 }

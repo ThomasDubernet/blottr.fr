@@ -1,12 +1,13 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, belongsTo } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import type { HasMany, BelongsTo } from '@adonisjs/lucid/types/relations'
 import AuthAccessToken from './auth_access_token.js'
 import ContactRequest from './contact_request.js'
 import Appointment from './appointment.js'
+import City from './city.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -32,6 +33,37 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare avatarFile: string | null
 
+  // Profile completion
+  @column()
+  declare phone: string | null
+
+  @column.date()
+  declare birthDate: DateTime | null
+
+  @column()
+  declare gender: string | null
+
+  // Geographic preference
+  @column()
+  declare preferredCityId: string | null
+
+  // Analytics
+  @column.dateTime()
+  declare lastActivityAt: DateTime | null
+
+  @column()
+  declare tattooViewCount: number
+
+  @column()
+  declare artistContactCount: number
+
+  // Preferences
+  @column()
+  declare stylePreferences: Record<string, any> | null
+
+  @column()
+  declare notificationPreferences: Record<string, any> | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
@@ -52,4 +84,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
     foreignKey: 'clientId',
   })
   declare appointments: HasMany<typeof Appointment>
+
+  @belongsTo(() => City, {
+    foreignKey: 'preferredCityId',
+  })
+  declare preferredCity: BelongsTo<typeof City>
 }

@@ -2,15 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 📚 Full Documentation
-
-All project documentation has been organized in the `/docs` directory:
-
-@docs/README.md - Complete documentation index and navigation
-@docs/database/DATABASE_DOCUMENTATION.md - Full database schema, relationships, and migration guide
-@docs/database/DB_VISUALIZATION.md - pgAdmin setup and visualization guide
-@docs/architecture/KNOWLEDGE_BASE.md - Project architecture, concepts, and workflows
-
 ## Context7 Usage Policy
 
 **Always use Context7 when you need:**
@@ -40,6 +31,12 @@ All project documentation has been organized in the `/docs` directory:
 - **Postgres.js**: `/porsager/postgres` - PostgreSQL client for Node.js
 - **Tuyau**: `/julien-r44/tuyau` - Typesafe APIs for AdonisJS
 
+### Development Tools
+- **Japa**: Testing framework (built into AdonisJS)
+- **ESLint**: Code linting
+- **Prettier**: Code formatting
+- **TypeScript**: Type checking
+
 ## Key Commands
 
 ### Development
@@ -63,12 +60,6 @@ All project documentation has been organized in the `/docs` directory:
 - `node ace migration:rollback` - Rollback last migration
 - `node ace migration:fresh` - Drop all tables and re-run migrations
 - `node ace db:seed` - Run database seeders
-- `docker-compose up -d` - Start PostgreSQL + pgAdmin
-
-### pgAdmin Access
-- **URL**: http://localhost:5050
-- **Email**: admin@blottr.fr
-- **Password**: admin
 
 ### Code Generation
 - `node ace make:controller ControllerName` - Create controller
@@ -110,7 +101,6 @@ start/
   kernel.ts       # HTTP kernel configuration
 config/           # Configuration files
 tests/            # Test files
-docs/             # Project documentation
 ```
 
 ### Import Aliases
@@ -132,8 +122,8 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
-  declare id: string
-
+  declare id: number
+  
   @column()
   declare email: string
 }
@@ -201,8 +191,29 @@ Tests use the Japa framework with two suites:
 
 Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for AdonisJS-specific testing helpers.
 
-# important-instruction-reminders
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (*.md) or README files. Only create documentation files if explicitly requested by the User.
+## Project-Specific Architecture
+
+### Tattoo Platform Database Schema
+This project implements a comprehensive tattoo platform with:
+
+**Core Entities:**
+- `users` (UUID-based, roles: client=1, artist=2)
+- `artists` (with Instagram scraping & verification system)
+- `salons` & `shops` (establishment management)
+- `tattoos` & `tags` (content with many-to-many relationships)
+- `appointments` (booking system)
+
+**Instagram Integration:**
+- `artists.verification_status`: 'scraped' | 'contacted' | 'onboarding' | 'verified'
+- `contact_requests` (triggers onboarding for unverified artists)
+- `artist_onboarding` (automated verification workflow)
+
+**Multi-Salon Support:**
+- `artist_salon` pivot table for many-to-many relationships
+- Artists can work in multiple salons or be independent
+
+### Workflow Features
+1. **Search → Contact → Discussion** (simplified booking flow)
+2. **Instagram Scraping** → Auto-populated artist profiles
+3. **Automated Onboarding** → Email workflow for artist verification
+4. **Multi-establishment** → Artists can work across multiple salons

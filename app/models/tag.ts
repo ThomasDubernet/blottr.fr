@@ -19,6 +19,18 @@ export default class Tag extends BaseModel {
   @column()
   declare category: string | null
 
+  // SEO & Display
+  @column()
+  declare slug: string | null
+
+  // Analytics
+  @column()
+  declare usageCount: number
+
+  // Business logic
+  @column()
+  declare isFeatured: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
