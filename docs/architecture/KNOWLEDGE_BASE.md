@@ -490,14 +490,15 @@ Total: 78 files, 23 directories
 - Admin dashboard
 - Instagram scraping implementation
 - Testing suite
+
 ## Project Status (Auto-Updated)
 
-**Last Update**: 2025-09-23 02:25:27
+**Last Update**: 2025-09-23 00:34:35
 **Git Branch**: main
-**Last Commit**: 15ddcb5 - feat(db): implement comprehensive tattoo platform database schema (Thomas Dubernet, 49 minutes ago)
+**Last Commit**: 595917b - fix(ci): resolve GitHub Actions permission denied error for auto-commits (Thomas Dubernet, 32 seconds ago)
 
 ### 📊 Project Metrics
-- **Files**: 90 files, 34 directories
+- **Files**: 79 files, 28 directories
 - **Dependencies**: 17 production, 20 development
 - **Database**: 14 migrations, 11 models
 - **Version**: 0.0.0
@@ -509,7 +510,6 @@ Total: 78 files, 23 directories
 ├── .claude
 │   └── settings.local.json
 ├── .editorconfig
-├── .env
 ├── .env.example
 ├── .github
 │   └── workflows
@@ -517,20 +517,7 @@ Total: 78 files, 23 directories
 ├── .gitignore
 ├── .husky
 │   └── post-commit
-├── .idea
-│   ├── .gitignore
-│   ├── blottr.fr.iml
-│   ├── inspectionProfiles
-│   │   └── Project_Default.xml
-│   ├── modules.xml
-│   ├── php.xml
-│   ├── prettier.xml
-│   ├── vcs.xml
-│   └── workspace.xml
-├── .serena
-│   ├── .gitignore
-│   ├── memories
-│   └── project.yml
+├── CLAUDE.md
 ├── ace.js
 ├── adonisrc.ts
 ├── app
@@ -543,8 +530,8 @@ Total: 78 files, 23 directories
 │   │   └── silent_auth_middleware.ts
 │   └── models
 │       ├── appointment.ts
-│       ├── artist_onboarding.ts
 │       ├── artist.ts
+│       ├── artist_onboarding.ts
 │       ├── auth_access_token.ts
 │       ├── city.ts
 │       ├── contact_request.ts
@@ -557,7 +544,6 @@ Total: 78 files, 23 directories
 │   ├── console.ts
 │   ├── server.ts
 │   └── test.ts
-├── CLAUDE.md
 ├── config
 │   ├── app.ts
 │   ├── auth.ts
@@ -589,13 +575,12 @@ Total: 78 files, 23 directories
 │       └── 1758585023298_create_add_missing_fields_to_tables_table.ts
 ├── docker-compose.yml
 ├── docs
-│   ├── api
+│   ├── README.md
 │   ├── architecture
 │   │   └── KNOWLEDGE_BASE.md
 │   ├── database
 │   │   ├── DATABASE_DOCUMENTATION.md
 │   │   └── DB_VISUALIZATION.md
-│   ├── README.md
 │   └── setup
 │       └── CLAUDE.md
 ├── eslint.config.js
@@ -628,32 +613,14 @@ Total: 78 files, 23 directories
 ├── tsconfig.json
 └── vite.config.ts
 
-32 directories, 90 files
+27 directories, 79 files
 ```
 
 ### 🔄 Git Status
 
 ```
 Current branch: main
- M .github/workflows/update-knowledge-base.yml
- M .husky/post-commit
- M CLAUDE.md
- D KNOWLEDGE_BASE.md
- M app/models/appointment.ts
- M app/models/artist.ts
- M app/models/contact_request.ts
- M app/models/salon.ts
- M app/models/shop.ts
- M app/models/tag.ts
- M app/models/tattoo.ts
- M app/models/user.ts
- M docker-compose.yml
  M scripts/update-knowledge-base.sh
-?? app/models/city.ts
-?? database/migrations/1758584991949_create_create_cities_table.ts
-?? database/migrations/1758585023298_create_add_missing_fields_to_tables_table.ts
-?? docs/
-?? pgadmin-servers.json
 ```
 
 ---
