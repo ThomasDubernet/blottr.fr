@@ -193,13 +193,33 @@ router.post('/users', [UsersController, 'store'])
 4. Create model: `node ace make:model User`
 5. Define model relationships and columns with decorators
 
-### Testing
+### Testing & TDD Approach
 
 Tests use the Japa framework with two suites:
 - **Unit tests**: `tests/unit/` (2s timeout)
 - **Functional tests**: `tests/functional/` (30s timeout)
 
 Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for AdonisJS-specific testing helpers.
+
+**Test-Driven Development (TDD) Workflow:**
+1. **Red**: Write a failing test first
+2. **Green**: Write minimal code to make the test pass
+3. **Refactor**: Improve code quality while keeping tests green
+
+**TDD Implementation Guidelines:**
+- Always write tests BEFORE implementing features
+- Start with the simplest test case and gradually add complexity
+- Test one behavior per test method
+- Use descriptive test names that explain the expected behavior
+- Mock external dependencies in unit tests
+- Keep tests isolated and independent
+
+**Testing Best Practices:**
+- Use `test.group()` to organize related tests
+- Leverage AdonisJS testing helpers for database operations
+- Test edge cases and error conditions
+- Maintain high test coverage for critical business logic
+- Run tests frequently during development
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.
