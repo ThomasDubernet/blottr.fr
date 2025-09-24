@@ -11,7 +11,9 @@ export default class extends BaseSchema {
       table.integer('contact_attempts').defaultTo(0)
       table.timestamp('last_contact_at').nullable()
       table.string('onboarding_link').nullable()
-      table.enum('status', ['pending', 'email_sent', 'clicked', 'completed', 'failed']).defaultTo('pending')
+      table
+        .enum('status', ['pending', 'email_sent', 'clicked', 'completed', 'failed'])
+        .defaultTo('pending')
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()

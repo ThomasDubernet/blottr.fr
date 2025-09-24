@@ -93,7 +93,12 @@ export default class extends BaseSchema {
       table.string('gender').nullable()
 
       // Geographic preference
-      table.uuid('preferred_city_id').nullable().references('id').inTable('cities').onDelete('SET NULL')
+      table
+        .uuid('preferred_city_id')
+        .nullable()
+        .references('id')
+        .inTable('cities')
+        .onDelete('SET NULL')
 
       // Analytics (post-MVP)
       table.timestamp('last_activity_at').nullable()

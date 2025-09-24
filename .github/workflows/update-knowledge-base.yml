@@ -2,9 +2,9 @@ name: Update Knowledge Base
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   update-kb:
@@ -13,44 +13,44 @@ jobs:
       contents: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Install tree command
-      run: sudo apt-get update && sudo apt-get install -y tree
+      - name: Install tree command
+        run: sudo apt-get update && sudo apt-get install -y tree
 
-    - name: Make script executable
-      run: chmod +x scripts/update-knowledge-base.sh
+      - name: Make script executable
+        run: chmod +x scripts/update-knowledge-base.sh
 
-    - name: Update Knowledge Base
-      run: ./scripts/update-knowledge-base.sh
+      - name: Update Knowledge Base
+        run: ./scripts/update-knowledge-base.sh
 
-    - name: Check for changes
-      id: verify-changed-files
-      run: |
-        if [ -n "$(git status --porcelain)" ]; then
-          echo "changed=true" >> $GITHUB_OUTPUT
-        else
-          echo "changed=false" >> $GITHUB_OUTPUT
-        fi
+      - name: Check for changes
+        id: verify-changed-files
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
-    - name: Commit changes
-      if: steps.verify-changed-files.outputs.changed == 'true'
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add docs/architecture/KNOWLEDGE_BASE.md
-        git commit -m "docs: auto-update knowledge base [skip ci]"
+      - name: Commit changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add docs/architecture/KNOWLEDGE_BASE.md
+          git commit -m "docs: auto-update knowledge base [skip ci]"
 
-    - name: Push changes
-      if: steps.verify-changed-files.outputs.changed == 'true'
-      run: |
-        git push origin HEAD:${{ github.ref_name }}
+      - name: Push changes
+        if: steps.verify-changed-files.outputs.changed == 'true'
+        run: |
+          git push origin HEAD:${{ github.ref_name }}

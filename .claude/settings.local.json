@@ -1,8 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(node ace:*)"
-    ],
+    "allow": ["Bash(node ace:*)", "mcp__serena__read_file", "mcp__context7__resolve-library-id"],
     "deny": [],
     "ask": []
   }

@@ -3,11 +3,13 @@
 ## 🚀 Démarrage
 
 1. **Lancer les services Docker** :
+
 ```bash
 docker-compose up -d
 ```
 
 2. **Accéder à pgAdmin** :
+
 - URL : http://localhost:5050
 - Email : `admin@blottr.fr`
 - Password : `admin`
@@ -15,6 +17,7 @@ docker-compose up -d
 ## 📊 Connection à la base de données
 
 La connexion est pré-configurée ! Après login, vous verrez :
+
 - **Server** : Blottr Database
 - **Database** : blottr
 - **Username** : postgres
@@ -23,13 +26,16 @@ La connexion est pré-configurée ! Après login, vous verrez :
 ## 🔍 Navigation dans pgAdmin
 
 ### Voir les tables
+
 1. Servers → Blottr Database → Databases → blottr → Schemas → public → Tables
 
 ### Explorer les données
+
 - **Clic droit sur une table** → View/Edit Data → All Rows
 - **SQL Query Tool** : Tools → Query Tool pour exécuter des requêtes SQL
 
 ### Visualiser le schéma
+
 - **ERD Tool** : Clic droit sur database → Generate ERD
 
 ## 🛠️ Commandes Docker utiles
@@ -70,6 +76,7 @@ docker volume rm blottrfr_pgadmin_data
 ## 🔐 Sécurité
 
 ⚠️ **En production** :
+
 - Changer les mots de passe par défaut
 - Utiliser des variables d'environnement
 - Configurer SSL/TLS
@@ -84,7 +91,7 @@ adminer:
   image: adminer:latest
   container_name: blottr_adminer
   ports:
-    - "8080:8080"
+    - '8080:8080'
   depends_on:
     - postgres
   restart: unless-stopped
@@ -93,6 +100,7 @@ adminer:
 ```
 
 Accès : http://localhost:8080
+
 - System: PostgreSQL
 - Server: postgres
 - Username: postgres

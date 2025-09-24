@@ -9,7 +9,9 @@ export default class extends BaseSchema {
       table.uuid('client_id').notNullable().references('id').inTable('users').onDelete('CASCADE')
       table.uuid('artist_id').notNullable().references('id').inTable('artists').onDelete('CASCADE')
       table.text('message').nullable()
-      table.enum('status', ['pending', 'artist_contacted', 'artist_responded', 'completed']).defaultTo('pending')
+      table
+        .enum('status', ['pending', 'artist_contacted', 'artist_responded', 'completed'])
+        .defaultTo('pending')
 
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').notNullable()

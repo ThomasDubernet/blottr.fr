@@ -26,3 +26,6 @@ yarn-error.log
 
 # Serena
 .serena
+
+*storybook.log
+storybook-static

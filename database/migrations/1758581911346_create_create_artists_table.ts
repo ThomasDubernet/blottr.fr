@@ -17,12 +17,16 @@ export default class extends BaseSchema {
 
       // Instagram scraping fields
       table.boolean('is_verified').defaultTo(false)
-      table.enum('verification_status', ['scraped', 'contacted', 'onboarding', 'verified']).defaultTo('scraped')
+      table
+        .enum('verification_status', ['scraped', 'contacted', 'onboarding', 'verified'])
+        .defaultTo('scraped')
       table.string('instagram_handle').nullable()
       table.string('instagram_url').nullable()
       table.integer('instagram_followers').nullable()
       table.timestamp('last_scraped_at').nullable()
-      table.enum('data_source', ['instagram_scraping', 'manual_registration']).defaultTo('instagram_scraping')
+      table
+        .enum('data_source', ['instagram_scraping', 'manual_registration'])
+        .defaultTo('instagram_scraping')
       table.string('verification_token').nullable()
       table.timestamp('verified_at').nullable()
 
