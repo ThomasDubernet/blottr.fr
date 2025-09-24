@@ -69,6 +69,7 @@ export default class Tattoo extends BaseModel {
 
   @manyToMany(() => Tag, {
     pivotTable: 'tag_tattoo',
+    pivotTimestamps: true,
   })
   declare tags: ManyToMany<typeof Tag>
 }

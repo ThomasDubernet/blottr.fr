@@ -10,10 +10,7 @@ export default class Tag extends BaseModel {
   @column()
   declare name: string
 
-  @column({
-    prepare: (value: any) => JSON.stringify(value),
-    consume: (value: string) => JSON.parse(value),
-  })
+  @column()
   declare variants: any | null
 
   @column()
@@ -39,6 +36,7 @@ export default class Tag extends BaseModel {
 
   @manyToMany(() => Tattoo, {
     pivotTable: 'tag_tattoo',
+    pivotTimestamps: true,
   })
   declare tattoos: ManyToMany<typeof Tattoo>
 }
