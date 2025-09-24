@@ -3,12 +3,14 @@
 ## ✅ Implémentation Complète
 
 ### Configuration AdonisJS v6
+
 - **Mode Session** configuré dans `config/auth.ts`
 - **Modèle User** avec AuthFinder mixin pour authentication
 - **Hachage Scrypt** pour les mots de passe
 - **Middleware** guest et auth configurés
 
 ### Backend (SOLID + DDD)
+
 - **AuthController** : Responsabilité unique pour l'authentification
   - `showLogin()` : Afficher page de connexion
   - `login()` : Gérer la connexion avec validation
@@ -17,10 +19,12 @@
   - `logout()` : Déconnexion et redirection
 
 ### Validation (VineJS)
+
 - **loginValidator** : Email + mot de passe (8+ caractères)
 - **registerValidator** : Email + mot de passe + confirmation
 
 ### Frontend (React + Inertia)
+
 - **Page login** : `/inertia/pages/auth/login.tsx`
   - Formulaire avec shadcn/ui components
   - Gestion d'erreurs temps réel
@@ -32,6 +36,7 @@
   - Interface cohérente avec login
 
 ### Routes
+
 ```typescript
 // Protégées par middleware guest (utilisateurs non connectés)
 GET  /login      -> AuthController.showLogin
@@ -44,6 +49,7 @@ POST /logout     -> AuthController.logout
 ```
 
 ### Tests TDD
+
 - **Tests fonctionnels** dans `/tests/functional/auth/`
   - Tests end-to-end du workflow complet
   - Navigation et intégration Inertia
@@ -65,21 +71,22 @@ POST /logout     -> AuthController.logout
 ## 🎯 Fonctionnalités
 
 ### Pour les Clients (role=1)
-✅ **Inscription** : Email + mot de passe + confirmation
-✅ **Connexion** : Email + mot de passe
-✅ **Déconnexion** : Destruction de session
-✅ **Validation** : Côté client et serveur
-✅ **Sécurité** : Hachage Scrypt, protection CSRF
+
+✅ **Inscription** : Email + mot de passe + confirmation ✅ **Connexion** :
+Email + mot de passe ✅ **Déconnexion** : Destruction de session ✅
+**Validation** : Côté client et serveur ✅ **Sécurité** : Hachage Scrypt,
+protection CSRF
 
 ### Restrictions Actuelles
-❌ **Artistes** : Pas d'inscription directe (système onboarding séparé)
-❌ **Reset mot de passe** : Pas encore implémenté
-❌ **Validation email** : Pas encore implémentée
-❌ **2FA** : Pas encore implémentée
+
+❌ **Artistes** : Pas d'inscription directe (système onboarding séparé) ❌
+**Reset mot de passe** : Pas encore implémenté ❌ **Validation email** : Pas
+encore implémentée ❌ **2FA** : Pas encore implémentée
 
 ## 🔧 Utilisation
 
 ### Développement
+
 ```bash
 # Démarrer PostgreSQL
 docker-compose up -d
@@ -92,10 +99,12 @@ npm run dev
 ```
 
 ### Accès
+
 - **Login** : http://localhost:3333/login
 - **Inscription** : http://localhost:3333/register
 
 ### Test
+
 ```bash
 # Tous les tests
 npm test
@@ -116,17 +125,20 @@ node ace test --files="tests/unit/models/user.spec.ts"
 ## 🏗️ Architecture (SOLID + DDD)
 
 ### Entités du Domaine
+
 - **User** : Entité principale avec identité UUID
 - **Email** : Value Object (validation intégrée)
 - **Password** : Value Object (hachage sécurisé)
 
 ### Séparation des Responsabilités
+
 - **Controller** : HTTP et orchestration
 - **Validator** : Validation métier
 - **Model** : Persistance et relations
 - **Middleware** : Contrôle d'accès
 
 ### Tests First (TDD)
+
 1. **RED** : Tests écrits avant implémentation
 2. **GREEN** : Code minimum pour passer les tests
 3. **REFACTOR** : Amélioration continue du code

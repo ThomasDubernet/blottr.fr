@@ -8,14 +8,14 @@ test.group('RegisterValidator Unit Tests', () => {
     const validData = {
       email: 'newuser@example.fr',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     }
 
     const result = await registerValidator.validate(validData)
 
     assert.deepEqual(result, {
       email: 'newuser@example.fr',
-      password: 'password123'
+      password: 'password123',
     })
   })
 
@@ -23,7 +23,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const dataWithUppercaseEmail = {
       email: 'NEWUSER@EXAMPLE.FR',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     }
 
     const result = await registerValidator.validate(dataWithUppercaseEmail)
@@ -35,7 +35,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const mismatchedData = {
       email: 'test@example.fr',
       password: 'password123',
-      password_confirmation: 'differentpassword'
+      password_confirmation: 'differentpassword',
     }
 
     try {
@@ -50,7 +50,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const invalidEmailData = {
       email: 'invalid-email',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     }
 
     try {
@@ -65,7 +65,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const shortPasswordData = {
       email: 'test@example.fr',
       password: '1234567',
-      password_confirmation: '1234567'
+      password_confirmation: '1234567',
     }
 
     try {
@@ -80,7 +80,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const emptyEmailData = {
       email: '',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     }
 
     try {
@@ -95,7 +95,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const emptyPasswordData = {
       email: 'test@example.fr',
       password: '',
-      password_confirmation: ''
+      password_confirmation: '',
     }
 
     try {
@@ -109,7 +109,7 @@ test.group('RegisterValidator Unit Tests', () => {
   test('should reject missing password_confirmation', async ({ assert }) => {
     const missingConfirmationData = {
       email: 'test@example.fr',
-      password: 'password123'
+      password: 'password123',
     }
 
     try {
@@ -124,7 +124,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const exactLengthData = {
       email: 'test@example.fr',
       password: '12345678',
-      password_confirmation: '12345678'
+      password_confirmation: '12345678',
     }
 
     const result = await registerValidator.validate(exactLengthData)
@@ -136,7 +136,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const specialEmailData = {
       email: 'user+test@example.fr',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     }
 
     const result = await registerValidator.validate(specialEmailData)
@@ -148,7 +148,7 @@ test.group('RegisterValidator Unit Tests', () => {
     const validData = {
       email: 'test@example.fr',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     }
 
     const result = await registerValidator.validate(validData)

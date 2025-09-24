@@ -79,7 +79,12 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   }
 
   const renderCompactCard = () => (
-    <Card className={cn('artist-card w-full max-w-sm hover:shadow-card-hover transition-all', className)}>
+    <Card
+      className={cn(
+        'artist-card w-full max-w-sm hover:shadow-card-hover transition-all',
+        className
+      )}
+    >
       <CardContent className="p-responsive-md">
         <div className="flex items-center gap-responsive-sm">
           <Avatar className="artist-avatar">
@@ -192,7 +197,9 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
         </div>
 
         {artist.bio && (
-          <p className="text-responsive-sm text-muted-foreground text-center line-clamp-2 mt-4">{artist.bio}</p>
+          <p className="text-responsive-sm text-muted-foreground text-center line-clamp-2 mt-4">
+            {artist.bio}
+          </p>
         )}
 
         <div className="flex justify-center gap-responsive-lg text-responsive-sm text-muted-foreground mt-4">
@@ -238,12 +245,19 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
       </CardContent>
 
       <CardFooter className="flex gap-responsive-sm p-responsive-md">
-        <Button variant="outline" className="flex-1 btn-responsive focus-ring" onClick={() => onViewProfile?.(artist.id)}>
+        <Button
+          variant="outline"
+          className="flex-1 btn-responsive focus-ring"
+          onClick={() => onViewProfile?.(artist.id)}
+        >
           <ExternalLink className="h-4 w-4 mr-2" />
           View Profile
         </Button>
         {showContact && (
-          <Button className="flex-1 btn-responsive focus-ring" onClick={() => onContact?.(artist.id)}>
+          <Button
+            className="flex-1 btn-responsive focus-ring"
+            onClick={() => onContact?.(artist.id)}
+          >
             Contact Artist
           </Button>
         )}
@@ -252,7 +266,12 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
   )
 
   const renderDefaultCard = () => (
-    <Card className={cn('artist-card w-full max-w-sm hover:shadow-card-hover transition-all', className)}>
+    <Card
+      className={cn(
+        'artist-card w-full max-w-sm hover:shadow-card-hover transition-all',
+        className
+      )}
+    >
       <CardHeader className="p-responsive-md">
         <div className="flex items-center gap-responsive-sm">
           <Avatar className="artist-avatar">
@@ -296,7 +315,9 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
       </CardHeader>
 
       <CardContent className="p-responsive-md space-responsive-sm">
-        {artist.bio && <p className="text-responsive-sm text-muted-foreground line-clamp-2">{artist.bio}</p>}
+        {artist.bio && (
+          <p className="text-responsive-sm text-muted-foreground line-clamp-2">{artist.bio}</p>
+        )}
 
         <div className="flex justify-between text-responsive-sm text-muted-foreground">
           {artist.instagram_handle && (
@@ -342,11 +363,18 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({
       </CardContent>
 
       <CardFooter className="flex gap-responsive-sm p-responsive-md">
-        <Button variant="outline" className="flex-1 btn-responsive focus-ring" onClick={() => onViewProfile?.(artist.id)}>
+        <Button
+          variant="outline"
+          className="flex-1 btn-responsive focus-ring"
+          onClick={() => onViewProfile?.(artist.id)}
+        >
           View Profile
         </Button>
         {showContact && (
-          <Button className="flex-1 btn-responsive focus-ring" onClick={() => onContact?.(artist.id)}>
+          <Button
+            className="flex-1 btn-responsive focus-ring"
+            onClick={() => onContact?.(artist.id)}
+          >
             Contact
           </Button>
         )}

@@ -19,13 +19,15 @@ const Separator = React.forwardRef<
       className
     )}
     style={{
-      ...(orientation === 'horizontal' ? {
-        marginTop: 'var(--spacing-sm)',
-        marginBottom: 'var(--spacing-sm)'
-      } : {
-        marginLeft: 'var(--spacing-sm)',
-        marginRight: 'var(--spacing-sm)'
-      })
+      ...(orientation === 'horizontal'
+        ? {
+            marginTop: 'var(--spacing-sm)',
+            marginBottom: 'var(--spacing-sm)',
+          }
+        : {
+            marginLeft: 'var(--spacing-sm)',
+            marginRight: 'var(--spacing-sm)',
+          }),
     }}
     {...props}
   />

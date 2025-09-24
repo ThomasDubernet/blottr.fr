@@ -2,9 +2,9 @@
 
 ## Testing Philosophy: Test-Driven Development (TDD)
 
-**Approach**: Red-Green-Refactor cycle for all component development
-**Coverage Target**: 90% minimum for component library
-**Strategy**: Unit → Integration → E2E → Accessibility → Performance
+**Approach**: Red-Green-Refactor cycle for all component development **Coverage
+Target**: 90% minimum for component library **Strategy**: Unit → Integration →
+E2E → Accessibility → Performance
 
 ---
 
@@ -178,11 +178,16 @@ export function TattooCard({ tattoo, onFavorite }: TattooCardProps) {
             onFavorite?.(tattoo.id)
           }}
           className="absolute top-2 right-2 p-2 rounded-full bg-white/80"
-          aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+          aria-label={
+            isFavorited ? 'Remove from favorites' : 'Add to favorites'
+          }
           tabIndex={0}
         >
           <Heart
-            className={cn('w-4 h-4', isFavorited ? 'fill-red-500 text-red-500' : 'text-ink-600')}
+            className={cn(
+              'w-4 h-4',
+              isFavorited ? 'fill-red-500 text-red-500' : 'text-ink-600'
+            )}
           />
         </button>
 
@@ -272,7 +277,8 @@ export const TattooCard = memo(
   (prevProps, nextProps) => {
     // Custom comparison for complex objects
     return (
-      prevProps.tattoo.id === nextProps.tattoo.id && prevProps.showPrice === nextProps.showPrice
+      prevProps.tattoo.id === nextProps.tattoo.id &&
+      prevProps.showPrice === nextProps.showPrice
     )
   }
 )
@@ -285,7 +291,9 @@ export const TattooCard = memo(
 const ContactModal = lazy(() => import('./ContactModal'))
 
 // Use dynamic imports for icons
-const HeartIcon = lazy(() => import('lucide-react').then((module) => ({ default: module.Heart })))
+const HeartIcon = lazy(() =>
+  import('lucide-react').then((module) => ({ default: module.Heart }))
+)
 
 // Tree-shake utilities
 import { cn } from '~/lib/utils' // Not the entire library
@@ -312,7 +320,13 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
-      exclude: ['node_modules/', 'dist/', '**/*.d.ts', '**/*.config.*', '**/stories/**'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/stories/**',
+      ],
       thresholds: {
         global: {
           branches: 90,
@@ -337,8 +351,10 @@ const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return <div className="test-wrapper">{children}</div>
 }
 
-const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { wrapper: AllTheProviders, ...options })
+const customRender = (
+  ui: ReactElement,
+  options?: Omit<RenderOptions, 'wrapper'>
+) => render(ui, { wrapper: AllTheProviders, ...options })
 
 export * from '@testing-library/react'
 export { customRender as render }
@@ -346,7 +362,7 @@ export { customRender as render }
 // Mock Inertia.js for testing
 export const mockInertiaLink = (href: string) => ({
   href,
-  'onClick': vi.fn(),
+  onClick: vi.fn(),
   'data-testid': 'inertia-link',
 })
 ```
@@ -526,7 +542,11 @@ describe('TattooCard Performance', () => {
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["eslint --fix", "prettier --write", "npm run test -- --passWithNoTests"]
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "npm run test -- --passWithNoTests"
+    ]
   }
 }
 ```
@@ -629,7 +649,10 @@ export default defineConfig({
     include: ['inertia/components/**/*.test.{ts,tsx}'],
     coverage: {
       include: ['inertia/components/**/*.{ts,tsx}'],
-      exclude: ['inertia/components/**/*.stories.{ts,tsx}', 'inertia/components/**/*.d.ts'],
+      exclude: [
+        'inertia/components/**/*.stories.{ts,tsx}',
+        'inertia/components/**/*.d.ts',
+      ],
     },
   },
   resolve: {
@@ -709,8 +732,7 @@ export default {
 
 ---
 
-**Document Version**: 1.0
-**Testing Framework**: Vitest + React Testing Library + axe-core
-**Coverage Target**: 90% minimum for component library
+**Document Version**: 1.0 **Testing Framework**: Vitest + React Testing
+Library + axe-core **Coverage Target**: 90% minimum for component library
 **Quality Philosophy**: Test-Driven Development with accessibility-first design
 **Automation Level**: 95% automated quality gates

@@ -61,9 +61,7 @@ test.group('Accessibility Tests', (group) => {
 
     // Run axe-core accessibility tests
     const axe = new AxePuppeteer(page)
-    const results = await axe
-      .withTags(ACCESSIBILITY_CONFIG.tags)
-      .analyze()
+    const results = await axe.withTags(ACCESSIBILITY_CONFIG.tags).analyze()
 
     // Assert no WCAG violations
     assert.equal(
@@ -291,7 +289,7 @@ test.group('Accessibility Tests', (group) => {
 
     if (headings.length > 0) {
       const headingLevels = await Promise.all(
-        headings.map((h) => h.evaluate((el) => parseInt(el.tagName.charAt(1))))
+        headings.map((h) => h.evaluate((el) => Number.parseInt(el.tagName.charAt(1))))
       )
 
       // Check for proper heading hierarchy (no skipping levels)

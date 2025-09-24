@@ -281,7 +281,9 @@ function CalendarView({
           </svg>
         </button>
 
-        <h2 className="text-responsive-xl font-semibold text-foreground">{format(currentMonth, 'MMMM yyyy')}</h2>
+        <h2 className="text-responsive-xl font-semibold text-foreground">
+          {format(currentMonth, 'MMMM yyyy')}
+        </h2>
 
         <button
           type="button"

@@ -219,7 +219,7 @@ test.group('Performance Tests', (group) => {
       }, i)
 
       // Wait for render to complete
-      await new Promise(resolve => setTimeout(resolve, 100))
+      await new Promise((resolve) => setTimeout(resolve, 100))
 
       const renderTime = Date.now() - startTime
       renderTimes.push(renderTime)
@@ -291,7 +291,7 @@ test.group('Performance Tests', (group) => {
     }
 
     // Wait for cleanup
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
 
     // Get final memory usage
     const finalMemory = await page.evaluate(() => {
@@ -368,9 +368,10 @@ test.group('Performance Tests', (group) => {
     // Wait for React hydration to complete
     await page.waitForFunction(
       () => {
-        return typeof window !== 'undefined' && (
-          window.document.querySelector('[data-reactroot]') !== null ||
-          window.document.querySelector('#root')?.hasAttribute('data-reactroot')
+        return (
+          typeof window !== 'undefined' &&
+          (window.document.querySelector('[data-reactroot]') !== null ||
+            window.document.querySelector('#root')?.hasAttribute('data-reactroot'))
         )
       },
       { timeout: 5000 }
@@ -423,8 +424,8 @@ test.group('Performance Tests', (group) => {
           if (currentTime - startTime < 3000) {
             if (typeof requestAnimationFrame !== 'undefined') {
               if (typeof requestAnimationFrame !== 'undefined') {
-          requestAnimationFrame(measureFrameRate)
-        }
+                requestAnimationFrame(measureFrameRate)
+              }
             }
           } else {
             resolve(frameRates)

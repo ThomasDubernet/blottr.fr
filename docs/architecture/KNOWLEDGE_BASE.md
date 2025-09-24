@@ -2,14 +2,23 @@
 
 ## Description du projet
 
-**Blottr.fr** est une plateforme moderne de mise en relation entre clients et artistes tatoueurs. Elle combine un système de scraping Instagram pour pré-populer la base d'artistes avec un workflow d'onboarding automatique pour convertir les profils scrapés en artistes vérifiés. La plateforme facilite la recherche d'artistes et la prise de contact tout en gérant un écosystème complexe de salons, artistes indépendants, et multi-établissements.
+**Blottr.fr** est une plateforme moderne de mise en relation entre clients et
+artistes tatoueurs. Elle combine un système de scraping Instagram pour
+pré-populer la base d'artistes avec un workflow d'onboarding automatique pour
+convertir les profils scrapés en artistes vérifiés. La plateforme facilite la
+recherche d'artistes et la prise de contact tout en gérant un écosystème
+complexe de salons, artistes indépendants, et multi-établissements.
 
 ## Objectifs
 
-1. **Marketplace Pré-populé** : Créer une base de données riche d'artistes tatoueurs via scraping Instagram avant même leur inscription
-2. **Onboarding Automatique** : Convertir automatiquement les contacts clients en opportunités d'inscription pour les artistes
-3. **Écosystème Flexible** : Supporter les artistes indépendants, multi-salons, et invités dans un système unifié
-4. **Workflow Simplifié** : Faciliter le processus Recherche → Contact → Discussion sans complexité de paiement
+1. **Marketplace Pré-populé** : Créer une base de données riche d'artistes
+   tatoueurs via scraping Instagram avant même leur inscription
+2. **Onboarding Automatique** : Convertir automatiquement les contacts clients
+   en opportunités d'inscription pour les artistes
+3. **Écosystème Flexible** : Supporter les artistes indépendants, multi-salons,
+   et invités dans un système unifié
+4. **Workflow Simplifié** : Faciliter le processus Recherche → Contact →
+   Discussion sans complexité de paiement
 
 ## Features principales
 
@@ -33,11 +42,15 @@
 ### Clients
 
 1. **Recherche & Découverte** :
-   - En tant que client, je veux rechercher des artistes par style de tatouage pour trouver celui qui correspond à mes goûts.
-   - En tant que client, je veux filtrer par localisation pour trouver des artistes près de chez moi.
-   - En tant que client, je veux voir des portfolios complets pour évaluer le travail des artistes.
+   - En tant que client, je veux rechercher des artistes par style de tatouage
+     pour trouver celui qui correspond à mes goûts.
+   - En tant que client, je veux filtrer par localisation pour trouver des
+     artistes près de chez moi.
+   - En tant que client, je veux voir des portfolios complets pour évaluer le
+     travail des artistes.
 2. **Contact & Communication** :
-   - En tant que client, je veux contacter un artiste directement pour discuter de mon projet :
+   - En tant que client, je veux contacter un artiste directement pour discuter
+     de mon projet :
      - Envoi de message avec description du projet
      - Photos de référence et inspiration
      - Discussion sur la faisabilité et timing
@@ -49,32 +62,40 @@
      - **Historique** : contacts précédents, rendez-vous passés
      - **Favoris** : artistes et designs sauvegardés
      - **Photos** : inspirations et références personnelles
-   - En tant que client, je veux suivre l'historique de mes contacts pour garder une trace des discussions :
+   - En tant que client, je veux suivre l'historique de mes contacts pour garder
+     une trace des discussions :
      - Statut des demandes (en attente, contacté, répondu)
-   - En tant que client, je veux recevoir des notifications quand un artiste me répond.
+   - En tant que client, je veux recevoir des notifications quand un artiste me
+     répond.
 
 ### Artistes
 
 1. **Gestion de Profil** :
-   - En tant qu'artiste, je veux valider et compléter mon profil auto-généré depuis Instagram.
-   - En tant qu'artiste, je veux gérer ma présence dans plusieurs salons ou déclarer mon statut indépendant.
+   - En tant qu'artiste, je veux valider et compléter mon profil auto-généré
+     depuis Instagram.
+   - En tant qu'artiste, je veux gérer ma présence dans plusieurs salons ou
+     déclarer mon statut indépendant.
    - En tant qu'artiste, je veux gérer mon portfolio avec tags et catégories.
 
 ## Implémentation technique
 
 ### 🔐 Authentification & Sécurité
 
-- **Session-based Authentication** via AdonisJS Auth pour la connexion utilisateur
+- **Session-based Authentication** via AdonisJS Auth pour la connexion
+  utilisateur
 - **Token-based API** pour les intégrations externes et services automatisés
-- **Role-based Access Control** avec rôles clients/artistes intégrés au modèle User
+- **Role-based Access Control** avec rôles clients/artistes intégrés au modèle
+  User
 - **Rate Limiting** pour sécuriser les endpoints API et prévenir l'abuse
 
 ### 🤖 Intelligence Artificielle & Automatisation
 
-- **Instagram Scraping** : Extraction automatique de profils d'artistes depuis Instagram
+- **Instagram Scraping** : Extraction automatique de profils d'artistes depuis
+  Instagram
 - **Email Automation** : Workflows d'onboarding automatiques via système de jobs
 - **Content Categorization** : Classification automatique des styles de tatouage
-- **Search & Recommendation** : Algorithmes de recherche et suggestions personnalisées
+- **Search & Recommendation** : Algorithmes de recherche et suggestions
+  personnalisées
 
 ## Initial Scope
 
@@ -102,7 +123,8 @@
      - Prix indicatifs et statut flash/custom
 3. **Système de Contact** :
    - Limitation : contact simple sans négociation complexe
-   - Workflow d'upgrade : contact → onboarding automatique pour artistes non-vérifiés
+   - Workflow d'upgrade : contact → onboarding automatique pour artistes
+     non-vérifiés
 4. **Interface Utilisateur** :
    - Recherche et filtres d'artistes
    - Pages de profils artistes
@@ -131,11 +153,19 @@
 
 ### Paradigms
 
-- **Clean Architecture** → Organise the system into clear layers (application, domain, infrastructure). Maintain modularity to ensure scalability, use-case based!
-- **Feature-Driven Development (FDD)** → Categorize and structure features efficiently, ensuring that they remain self-contained and manageable.
-- **Domain-Driven Design (DDD)** → Focus on business-driven architecture using Entities, Aggregates, Value Objects, Repositories, and Services to enforce domain consistency.
-- **Behavior-Driven Development (BDD)** → When working on user stories, test files, or Gherkin scenarios, focus on real-world user behavior to drive system design.
-- **SOLID Principles** → Maintain single responsibility, modularity, and decoupling to ensure long-term maintainability and flexibility.
+- **Clean Architecture** → Organise the system into clear layers (application,
+  domain, infrastructure). Maintain modularity to ensure scalability, use-case
+  based!
+- **Feature-Driven Development (FDD)** → Categorize and structure features
+  efficiently, ensuring that they remain self-contained and manageable.
+- **Domain-Driven Design (DDD)** → Focus on business-driven architecture using
+  Entities, Aggregates, Value Objects, Repositories, and Services to enforce
+  domain consistency.
+- **Behavior-Driven Development (BDD)** → When working on user stories, test
+  files, or Gherkin scenarios, focus on real-world user behavior to drive system
+  design.
+- **SOLID Principles** → Maintain single responsibility, modularity, and
+  decoupling to ensure long-term maintainability and flexibility.
 
 ### CI
 
@@ -196,20 +226,25 @@
 
 ### Context7 Integration
 
-- **Automatic Documentation**: Utilisation systématique de Context7 pour la documentation des librairies
-- **Code Generation**: Patterns d'implémentation basés sur la documentation officielle
-- **Best Practices**: Application des bonnes pratiques spécifiques à chaque framework
+- **Automatic Documentation**: Utilisation systématique de Context7 pour la
+  documentation des librairies
+- **Code Generation**: Patterns d'implémentation basés sur la documentation
+  officielle
+- **Best Practices**: Application des bonnes pratiques spécifiques à chaque
+  framework
 
 ### Development Workflow with AI
 
-- **Schema-First Development**: Génération de modèles et migrations depuis les schémas ER
+- **Schema-First Development**: Génération de modèles et migrations depuis les
+  schémas ER
 - **Automated Testing**: Génération de tests basés sur les user stories
 - **Code Review**: Analyse automatique de la qualité et conformité du code
 - **Documentation Sync**: Mise à jour automatique de la documentation projet
 
 ### Knowledge Management
 
-- **Project Memory**: Système de mémoire persistante pour les décisions architecturales
+- **Project Memory**: Système de mémoire persistante pour les décisions
+  architecturales
 - **Pattern Recognition**: Identification et réutilisation des patterns de code
 - **Evolution Tracking**: Suivi des changements et impact sur l'architecture
 
@@ -220,7 +255,8 @@ https://github.com/BryanLomerio/conventional-commit-cheatsheet
 Each commit message follows this structure:
 
 - **type**: Describes the change (e.g., `feat`, `fix`, `chore`)
-- **scope**: Optional. Refers to the area of the project being affected (e.g., `api`, `frontend`, `db`)
+- **scope**: Optional. Refers to the area of the project being affected (e.g.,
+  `api`, `frontend`, `db`)
 - **description**: A short description of the change.
 
 ### 📋 Types of Commit
@@ -233,7 +269,8 @@ Each commit message follows this structure:
    - Example: `chore(deps): update @adonisjs/core to version 6.18.0`
 4. **docs**: Documentation updates
    - Example: `docs(api): update artist verification workflow`
-5. **style**: Changes related to code style (e.g., formatting, missing semi-colons)
+5. **style**: Changes related to code style (e.g., formatting, missing
+   semi-colons)
    - Example: `style(models): fix indentation in artist.ts`
 6. **refactor**: Code change that neither fixes a bug nor adds a feature
    - Example: `refactor(auth): simplify role-based access control`
@@ -253,8 +290,10 @@ Each commit message follows this structure:
 
 ## Frontend URLs
 
-- **Dynamic Parameters** → URLs utilisent des paramètres dynamiques ( `/artists/:id`, `/salons/:slug` ).
-- **Query Parameters** → Pour les filtres de recherche ( `?style=traditional&city=paris` ).
+- **Dynamic Parameters** → URLs utilisent des paramètres dynamiques (
+  `/artists/:id`, `/salons/:slug` ).
+- **Query Parameters** → Pour les filtres de recherche (
+  `?style=traditional&city=paris` ).
 - **Hash Routing** → Pour la navigation dans les SPAs ( `#/profile/settings` ).
 
 ### 🔓 Public (Accessible sans connexion)
@@ -371,15 +410,20 @@ ContactRequest → triggers → ArtistOnboarding → Email Automation
 
 ### Key Features
 
-1. **Instagram Integration**: Artists auto-created from scraping with verification workflow
-2. **Multi-Salon Support**: Artists can work in multiple establishments or be independent
-3. **Automated Onboarding**: Contact requests trigger email workflows for unverified artists
+1. **Instagram Integration**: Artists auto-created from scraping with
+   verification workflow
+2. **Multi-Salon Support**: Artists can work in multiple establishments or be
+   independent
+3. **Automated Onboarding**: Contact requests trigger email workflows for
+   unverified artists
 4. **Flexible Portfolio**: Tattoos with tags, pricing, and salon attribution
 5. **UUID-based**: All primary keys use UUIDs for better scalability
 
 ## Additional Files
 
-⚠️ **IMPORTANT**: These files must be taken very seriously as they represent the latest up-to-date versions of our codebase. You MUST rely on these versions and their content imperatively.
+⚠️ **IMPORTANT**: These files must be taken very seriously as they represent the
+latest up-to-date versions of our codebase. You MUST rely on these versions and
+their content imperatively.
 
 ### package.json (Root)
 
@@ -497,16 +541,14 @@ Total: 78 files, 23 directories
 - Instagram scraping implementation
 - Testing suite
 
-
-
-
 ## Project Status (Auto-Updated)
 
-**Last Update**: 2025-09-24 12:47:14
-**Git Branch**: main
-**Last Commit**: a3baed5 - Merge remote-tracking branch 'origin/main' (Thomas Dubernet, 28 seconds ago)
+**Last Update**: 2025-09-24 12:47:14 **Git Branch**: main **Last Commit**:
+a3baed5 - Merge remote-tracking branch 'origin/main' (Thomas Dubernet, 28
+seconds ago)
 
 ### 📊 Project Metrics
+
 - **Files**: 208 files, 53 directories
 - **Dependencies**: 46 production, 43 development
 - **Database**: 14 migrations, 11 models
@@ -787,4 +829,5 @@ Current branch: main
 ```
 
 ---
-*Auto-generated by scripts/update-knowledge-base.sh*
+
+_Auto-generated by scripts/update-knowledge-base.sh_

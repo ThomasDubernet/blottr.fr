@@ -2,17 +2,23 @@
 
 ## Overview
 
-The Blottr.fr quality validation system implements a comprehensive four-phase quality gate structure designed to ensure systematic validation throughout the design system implementation process. This system aligns with Test-Driven Development (TDD) methodology and provides both automated and manual validation checkpoints.
+The Blottr.fr quality validation system implements a comprehensive four-phase
+quality gate structure designed to ensure systematic validation throughout the
+design system implementation process. This system aligns with Test-Driven
+Development (TDD) methodology and provides both automated and manual validation
+checkpoints.
 
 ## Architecture
 
 ### Quality Gate Philosophy
 
 1. **Prevention over Detection**: Catch issues early when they're cheaper to fix
-2. **Systematic Validation**: Multi-phase approach ensures comprehensive coverage
+2. **Systematic Validation**: Multi-phase approach ensures comprehensive
+   coverage
 3. **TDD Alignment**: Tests-first methodology integrated into quality gates
 4. **Evidence-Based**: All quality decisions backed by measurable criteria
-5. **Risk-Based Prioritization**: Critical gates block progression, warnings allow continuation
+5. **Risk-Based Prioritization**: Critical gates block progression, warnings
+   allow continuation
 
 ### Four-Phase Structure
 
@@ -305,11 +311,11 @@ File: `/tests/quality/quality-gates.config.ts`
 ```typescript
 export const QUALITY_TOOLS = {
   'npm audit': 'npm audit --audit-level moderate',
-  'japa': 'node ace test',
+  japa: 'node ace test',
   'test-coverage': 'node ace test --coverage',
   'axe-core': 'npm run test:accessibility',
-  'lighthouse': 'lighthouse --output json --output html',
-  'playwright': 'npm run test:e2e',
+  lighthouse: 'lighthouse --output json --output html',
+  playwright: 'npm run test:e2e',
 }
 ```
 
@@ -628,4 +634,5 @@ When updating validation tools:
 
 ---
 
-_This documentation is automatically updated with the quality gates system. Last updated: $(date)_
+_This documentation is automatically updated with the quality gates system. Last
+updated: $(date)_

@@ -1,14 +1,20 @@
 # Blottr UI Component Library
 
-A comprehensive, production-ready UI component library specifically designed for the tattoo industry platform. Built with React, TypeScript, and Tailwind CSS, these components follow modern design patterns and accessibility standards.
+A comprehensive, production-ready UI component library specifically designed for
+the tattoo industry platform. Built with React, TypeScript, and Tailwind CSS,
+these components follow modern design patterns and accessibility standards.
 
 ## 🎨 Design Philosophy
 
-- **Tattoo Industry Focused**: Components designed specifically for tattoo artists, clients, and salon management
-- **Accessibility First**: WCAG 2.1 AA compliant with keyboard navigation and screen reader support
+- **Tattoo Industry Focused**: Components designed specifically for tattoo
+  artists, clients, and salon management
+- **Accessibility First**: WCAG 2.1 AA compliant with keyboard navigation and
+  screen reader support
 - **Mobile Responsive**: Mobile-first design approach with flexible layouts
-- **Modern Aesthetics**: Professional yet artistic design reflecting the tattoo industry culture
-- **Performance Optimized**: Lightweight, fast, and optimized for real-world usage
+- **Modern Aesthetics**: Professional yet artistic design reflecting the tattoo
+  industry culture
+- **Performance Optimized**: Lightweight, fast, and optimized for real-world
+  usage
 
 ## 🏗️ Architecture
 
@@ -33,7 +39,8 @@ Custom color palette and design tokens tailored for the tattoo industry:
 
 ### 1. ArtistCard
 
-Professional artist profile display with verification status and engagement metrics.
+Professional artist profile display with verification status and engagement
+metrics.
 
 **Features:**
 
@@ -48,7 +55,6 @@ Professional artist profile display with verification status and engagement metr
 
 ```tsx
 import { ArtistCard } from '~/components'
-
 ;<ArtistCard
   artist={artist}
   variant="featured"
@@ -75,7 +81,6 @@ Masonry layout portfolio display with advanced image management.
 
 ```tsx
 import { TattooGallery } from '~/components'
-
 ;<TattooGallery
   tattoos={tattoos}
   columns={3}
@@ -103,7 +108,6 @@ Advanced categorization system with visual styling.
 
 ```tsx
 import { StyleTag, StyleTags } from '~/components'
-
 ;<StyleTags
   tags={tags}
   interactive={true}
@@ -131,7 +135,6 @@ Comprehensive appointment scheduling system.
 
 ```tsx
 import { BookingCalendar } from '~/components'
-
 ;<BookingCalendar
   artistId={artistId}
   availableSlots={timeSlots}
@@ -158,7 +161,6 @@ Multi-step artist contact workflow.
 
 ```tsx
 import { ContactForm } from '~/components'
-
 ;<ContactForm
   artist={artist}
   user={currentUser}
@@ -218,7 +220,6 @@ Advanced drag & drop image upload with metadata management.
 
 ```tsx
 import { PortfolioUploader } from '~/components'
-
 ;<PortfolioUploader
   artistId={artistId}
   maxFiles={10}
@@ -437,4 +438,5 @@ Most components support multiple variants:
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Inertia.js Guide](https://inertiajs.com)
 
-For questions or support, refer to the main project documentation or contact the development team.
+For questions or support, refer to the main project documentation or contact the
+development team.

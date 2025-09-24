@@ -1,6 +1,7 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## Context7 Usage Policy
 
@@ -80,7 +81,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture Overview
 
-This is an **AdonisJS v6** application with **React** and **Inertia.js** for the frontend.
+This is an **AdonisJS v6** application with **React** and **Inertia.js** for the
+frontend.
 
 ### Stack
 
@@ -207,7 +209,8 @@ Tests use the Japa framework with two suites:
 - **Unit tests**: `tests/unit/` (2s timeout)
 - **Functional tests**: `tests/functional/` (30s timeout)
 
-Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for AdonisJS-specific testing helpers.
+Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for
+AdonisJS-specific testing helpers.
 
 ## Project-Specific Architecture
 
@@ -225,7 +228,8 @@ This project implements a comprehensive tattoo platform with:
 
 **Instagram Integration:**
 
-- `artists.verification_status`: 'scraped' | 'contacted' | 'onboarding' | 'verified'
+- `artists.verification_status`: 'scraped' | 'contacted' | 'onboarding' |
+  'verified'
 - `contact_requests` (triggers onboarding for unverified artists)
 - `artist_onboarding` (automated verification workflow)
 

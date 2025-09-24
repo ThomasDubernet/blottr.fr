@@ -9,7 +9,7 @@ test.group('User Model Unit Tests', () => {
     const userData = {
       email: 'test@example.fr',
       password: 'password123',
-      role: 1
+      role: 1,
     }
 
     // Mock la création pour test unitaire isolé
@@ -25,7 +25,7 @@ test.group('User Model Unit Tests', () => {
     const user = new User()
     user.fill({
       email: 'client@example.fr',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Le défaut devrait être géré au niveau application, pas modèle
@@ -58,7 +58,7 @@ test.group('User Model Unit Tests', () => {
     const user = new User()
     user.fill({
       email: 'test@example.fr',
-      password: 'secret123'
+      password: 'secret123',
     })
 
     const serialized = user.serialize()
@@ -122,7 +122,7 @@ test.group('User Model Unit Tests', () => {
     // Test des compteurs par défaut (logique métier)
     const defaultCounters = {
       tattooViewCount: 0,
-      artistContactCount: 0
+      artistContactCount: 0,
     }
 
     assert.equal(defaultCounters.tattooViewCount, 0)
@@ -131,25 +131,16 @@ test.group('User Model Unit Tests', () => {
 
   test('should validate email format (business logic)', async ({ assert }) => {
     // Test de logique métier : validation d'email
-    const validEmails = [
-      'user@example.fr',
-      'test+tag@domain.com',
-      'user.name@company.co.uk'
-    ]
+    const validEmails = ['user@example.fr', 'test+tag@domain.com', 'user.name@company.co.uk']
 
-    const invalidEmails = [
-      'invalid-email',
-      '@domain.com',
-      'user@',
-      'user space@domain.com'
-    ]
+    const invalidEmails = ['invalid-email', '@domain.com', 'user@', 'user space@domain.com']
 
-    validEmails.forEach(email => {
+    validEmails.forEach((email) => {
       const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
       assert.isTrue(isValid, `${email} should be valid`)
     })
 
-    invalidEmails.forEach(email => {
+    invalidEmails.forEach((email) => {
       const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
       assert.isFalse(isValid, `${email} should be invalid`)
     })
@@ -157,23 +148,19 @@ test.group('User Model Unit Tests', () => {
 
   test('should validate password length (business logic)', async ({ assert }) => {
     // Test de logique métier : longueur minimum mot de passe
-    const validPasswords = [
-      'password123',
-      '12345678',
-      'very-long-secure-password!@#'
-    ]
+    const validPasswords = ['password123', '12345678', 'very-long-secure-password!@#']
 
     const invalidPasswords = [
       '123',
       '1234567', // 7 caractères
-      ''
+      '',
     ]
 
-    validPasswords.forEach(password => {
+    validPasswords.forEach((password) => {
       assert.isAtLeast(password.length, 8, `${password} should be at least 8 characters`)
     })
 
-    invalidPasswords.forEach(password => {
+    invalidPasswords.forEach((password) => {
       assert.isBelow(password.length, 8, `${password} should be less than 8 characters`)
     })
   })

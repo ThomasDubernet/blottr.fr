@@ -1,6 +1,7 @@
 # 📚 Blottr Documentation
 
-Bienvenue dans la documentation complète du projet Blottr - Plateforme de découverte et réservation d'artistes tatoueurs.
+Bienvenue dans la documentation complète du projet Blottr - Plateforme de
+découverte et réservation d'artistes tatoueurs.
 
 ## 🗂️ Structure de la documentation
 
@@ -8,7 +9,8 @@ Bienvenue dans la documentation complète du projet Blottr - Plateforme de déco
 
 Documentation complète de la base de données PostgreSQL.
 
-- **[DATABASE_DOCUMENTATION.md](/docs/database/DATABASE_DOCUMENTATION.md)** - Documentation détaillée du schéma de base de données
+- **[DATABASE_DOCUMENTATION.md](/docs/database/DATABASE_DOCUMENTATION.md)** -
+  Documentation détaillée du schéma de base de données
   - Architecture et design principles
   - Description complète des 13 tables
   - Relations et contraintes
@@ -17,7 +19,8 @@ Documentation complète de la base de données PostgreSQL.
   - Optimisation et performance
   - Exemples de requêtes SQL et Lucid ORM
 
-- **[DB_VISUALIZATION.md](/docs/database/DB_VISUALIZATION.md)** - Guide d'utilisation de pgAdmin
+- **[DB_VISUALIZATION.md](/docs/database/DB_VISUALIZATION.md)** - Guide
+  d'utilisation de pgAdmin
   - Configuration Docker avec pgAdmin
   - Navigation dans l'interface
   - Visualisation du schéma
@@ -27,7 +30,8 @@ Documentation complète de la base de données PostgreSQL.
 
 Documentation de l'architecture et concepts du projet.
 
-- **[KNOWLEDGE_BASE.md](/docs/architecture/KNOWLEDGE_BASE.md)** - Base de connaissances du projet
+- **[KNOWLEDGE_BASE.md](/docs/architecture/KNOWLEDGE_BASE.md)** - Base de
+  connaissances du projet
   - Vision et objectifs
   - User stories détaillées
   - Architecture technique
@@ -50,24 +54,28 @@ Guides de configuration et installation.
 
 Système de design complet pour l'interface utilisateur.
 
-- **[README.md](/docs/design-system/README.md)** - Vue d'ensemble du design system
+- **[README.md](/docs/design-system/README.md)** - Vue d'ensemble du design
+  system
   - Architecture et technologies utilisées
   - Guide de démarrage rapide
   - Structure des composants et patterns
 
-- **[IMPLEMENTATION.md](/docs/design-system/IMPLEMENTATION.md)** - Guide d'implémentation technique
+- **[IMPLEMENTATION.md](/docs/design-system/IMPLEMENTATION.md)** - Guide
+  d'implémentation technique
   - Architecture décisionnelle et choix technologiques
   - Structure de la bibliothèque de composants
   - Workflow de développement et bonnes pratiques
   - Documentation interactive en direct
 
-- **[DESIGN_TOKENS.md](/docs/design-system/DESIGN_TOKENS.md)** - Tokens de design spécifiques à la marque
+- **[DESIGN_TOKENS.md](/docs/design-system/DESIGN_TOKENS.md)** - Tokens de
+  design spécifiques à la marque
   - Palette de couleurs pour l'industrie du tatouage
   - Échelles typographiques et familles de polices
   - Système d'espacement et grilles de mise en page
   - Support du mode sombre et thématisation
 
-- **[QUALITY_GATES.md](/docs/design-system/QUALITY_GATES.md)** - Documentation d'assurance qualité
+- **[QUALITY_GATES.md](/docs/design-system/QUALITY_GATES.md)** - Documentation
+  d'assurance qualité
   - Intégration du workflow TDD
   - Protocoles de test d'accessibilité
   - Exigences de compatibilité multi-navigateurs
@@ -83,16 +91,21 @@ Documentation API (à venir).
 
 ### Pour commencer
 
-1. **Installation** : Consultez [CLAUDE.md](/docs/setup/CLAUDE.md) pour setup le projet
-2. **Database** : Référez-vous à [DATABASE_DOCUMENTATION.md](/docs/database/DATABASE_DOCUMENTATION.md)
-3. **Visualisation** : Utilisez [DB_VISUALIZATION.md](/docs/database/DB_VISUALIZATION.md) pour pgAdmin
-4. **Design System** : Consultez [Design System](/docs/design-system/) pour l'interface utilisateur
+1. **Installation** : Consultez [CLAUDE.md](/docs/setup/CLAUDE.md) pour setup le
+   projet
+2. **Database** : Référez-vous à
+   [DATABASE_DOCUMENTATION.md](/docs/database/DATABASE_DOCUMENTATION.md)
+3. **Visualisation** : Utilisez
+   [DB_VISUALIZATION.md](/docs/database/DB_VISUALIZATION.md) pour pgAdmin
+4. **Design System** : Consultez [Design System](/docs/design-system/) pour
+   l'interface utilisateur
 
 ### Concepts clés
 
 - **Multi-salon** : Support des artistes travaillant dans plusieurs salons
 - **Instagram Scraping** : Intégration automatique des profils Instagram
-- **Onboarding automatisé** : Workflow scraped → contacted → onboarding → verified
+- **Onboarding automatisé** : Workflow scraped → contacted → onboarding →
+  verified
 - **Recherche géographique** : Système de villes avec coordonnées GPS
 - **SEO optimisé** : Slugs automatiques et meta descriptions
 
@@ -171,6 +184,5 @@ Pour questions ou clarifications :
 
 ---
 
-_Documentation Version: 1.0.0_
-_Dernière mise à jour: Septembre 2025_
-_AdonisJS v6 | PostgreSQL 16 | React 19_
+_Documentation Version: 1.0.0_ _Dernière mise à jour: Septembre 2025_ _AdonisJS
+v6 | PostgreSQL 16 | React 19_

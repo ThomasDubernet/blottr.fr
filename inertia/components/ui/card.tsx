@@ -100,10 +100,7 @@ const CardFooter = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDiv
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        'flex items-center pt-0 gap-responsive-sm',
-        className
-      )}
+      className={cn('flex items-center pt-0 gap-responsive-sm', className)}
       style={{
         padding: '0 var(--card-padding) var(--card-padding)',
         gap: 'var(--spacing-sm)',

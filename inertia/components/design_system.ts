@@ -48,11 +48,11 @@ export const designSystem = {
       mono: ['JetBrains Mono', 'monospace'],
     },
     fontSize: {
-      'xs': '0.75rem', // 12px
-      'sm': '0.875rem', // 14px
-      'base': '1rem', // 16px
-      'lg': '1.125rem', // 18px
-      'xl': '1.25rem', // 20px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      base: '1rem', // 16px
+      lg: '1.125rem', // 18px
+      xl: '1.25rem', // 20px
       '2xl': '1.5rem', // 24px
       '3xl': '1.875rem', // 30px
       '4xl': '2.25rem', // 36px
@@ -89,14 +89,14 @@ export const designSystem = {
   },
 
   borderRadius: {
-    'none': '0',
-    'sm': '0.125rem', // 2px
-    'default': '0.25rem', // 4px
-    'md': '0.375rem', // 6px
-    'lg': '0.5rem', // 8px
-    'xl': '0.75rem', // 12px
+    none: '0',
+    sm: '0.125rem', // 2px
+    default: '0.25rem', // 4px
+    md: '0.375rem', // 6px
+    lg: '0.5rem', // 8px
+    xl: '0.75rem', // 12px
     '2xl': '1rem', // 16px
-    'full': '9999px',
+    full: '9999px',
   },
 
   boxShadow: {
@@ -108,10 +108,10 @@ export const designSystem = {
   },
 
   breakpoints: {
-    'sm': '640px',
-    'md': '768px',
-    'lg': '1024px',
-    'xl': '1280px',
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
     '2xl': '1536px',
   },
 

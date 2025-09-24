@@ -2,7 +2,9 @@
 
 ## Overview
 
-This guide provides comprehensive documentation for implementing a modern design system stack with Blottr.fr, including Tailwind CSS, shadcn/ui, Radix UI, and Storybook integration with AdonisJS + React + Inertia.js.
+This guide provides comprehensive documentation for implementing a modern design
+system stack with Blottr.fr, including Tailwind CSS, shadcn/ui, Radix UI, and
+Storybook integration with AdonisJS + React + Inertia.js.
 
 ## Technology Stack
 
@@ -36,7 +38,7 @@ const config: Config = {
     extend: {
       colors: {
         // Brand colors for Blottr.fr
-        'brand': {
+        brand: {
           50: '#fef7ee',
           100: '#fdedd6',
           500: '#f97316',
@@ -45,26 +47,26 @@ const config: Config = {
           900: '#9a3412',
         },
         // Semantic colors
-        'background': 'hsl(var(--background))',
-        'foreground': 'hsl(var(--foreground))',
-        'card': 'hsl(var(--card))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: 'hsl(var(--card))',
         'card-foreground': 'hsl(var(--card-foreground))',
-        'popover': 'hsl(var(--popover))',
+        popover: 'hsl(var(--popover))',
         'popover-foreground': 'hsl(var(--popover-foreground))',
-        'primary': 'hsl(var(--primary))',
+        primary: 'hsl(var(--primary))',
         'primary-foreground': 'hsl(var(--primary-foreground))',
-        'secondary': 'hsl(var(--secondary))',
+        secondary: 'hsl(var(--secondary))',
         'secondary-foreground': 'hsl(var(--secondary-foreground))',
-        'muted': 'hsl(var(--muted))',
+        muted: 'hsl(var(--muted))',
         'muted-foreground': 'hsl(var(--muted-foreground))',
-        'accent': 'hsl(var(--accent))',
+        accent: 'hsl(var(--accent))',
         'accent-foreground': 'hsl(var(--accent-foreground))',
-        'destructive': 'hsl(var(--destructive))',
+        destructive: 'hsl(var(--destructive))',
         'destructive-foreground': 'hsl(var(--destructive-foreground))',
-        'border': 'hsl(var(--border))',
-        'input': 'hsl(var(--input))',
-        'ring': 'hsl(var(--ring))',
-        'radius': 'var(--radius)',
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        radius: 'var(--radius)',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -572,7 +574,8 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
 }
@@ -691,7 +694,14 @@ export const ManyStyles: Story = {
       avatar: 'https://via.placeholder.com/100',
       city: { name: 'Marseille' },
       isVerified: true,
-      styles: ['Traditional', 'Neo-traditional', 'Realism', 'Blackwork', 'Japanese', 'Geometric'],
+      styles: [
+        'Traditional',
+        'Neo-traditional',
+        'Realism',
+        'Blackwork',
+        'Japanese',
+        'Geometric',
+      ],
     },
   },
 }
@@ -1117,7 +1127,8 @@ export default defineConfig({
 // Use useIsomorphicLayoutEffect for SSR-safe effects
 import { useLayoutEffect, useEffect } from 'react'
 
-const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+const useIsomorphicLayoutEffect =
+  typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(initialValue)
@@ -1257,5 +1268,5 @@ export default {
 
 ---
 
-_Last Updated: September 2024_
-_Compatible with: AdonisJS 6.18+, React 19+, TypeScript 5.8+_
+_Last Updated: September 2024_ _Compatible with: AdonisJS 6.18+, React 19+,
+TypeScript 5.8+_

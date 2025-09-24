@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build outputs
+build/
+dist/
+tmp/
+.output/
+
+# Cache directories
+.cache/
+.parcel-cache/
+
+# Environment files
+.env
+.env.*
+
+# Database
+*.sqlite
+*.db
+
+# Logs
+logs/
+*.log
+
+# Generated files
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Storybook
+storybook-static/
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
+# AdonisJS specific
+ace-manifest.json
+
+# Don't format compiled JavaScript in build
+bin/
+start/
+config/*.js
+app/**/*.js
+database/**/*.js

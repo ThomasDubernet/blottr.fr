@@ -12,13 +12,13 @@
 
 ## 1. TattooCard Component
 
-**Complexity Score**: 6/10
-**Priority**: Critical
-**Implementation Phase**: Week 2
+**Complexity Score**: 6/10 **Priority**: Critical **Implementation Phase**: Week
+2
 
 ### Purpose
 
-Display tattoo artwork in portfolio grids with artist attribution and interaction features.
+Display tattoo artwork in portfolio grids with artist attribution and
+interaction features.
 
 ### Technical Specifications
 
@@ -94,7 +94,9 @@ export function TattooCard({
 
         {/* Flash Badge */}
         {tattoo.is_flash && (
-          <Badge className="absolute top-2 left-2 bg-flash text-white">Flash</Badge>
+          <Badge className="absolute top-2 left-2 bg-flash text-white">
+            Flash
+          </Badge>
         )}
 
         {/* Favorite Button */}
@@ -106,25 +108,34 @@ export function TattooCard({
           className="absolute top-2 right-2 p-2 rounded-full bg-white/80 hover:bg-white transition-colors"
         >
           <Heart
-            className={cn('w-4 h-4', isFavorited ? 'fill-red-500 text-red-500' : 'text-ink-600')}
+            className={cn(
+              'w-4 h-4',
+              isFavorited ? 'fill-red-500 text-red-500' : 'text-ink-600'
+            )}
           />
         </button>
 
         {/* Loading Overlay */}
-        {!isLoaded && <div className="absolute inset-0 bg-ink-100 animate-pulse" />}
+        {!isLoaded && (
+          <div className="absolute inset-0 bg-ink-100 animate-pulse" />
+        )}
       </div>
 
       {/* Content */}
       <div className="p-4 space-y-3">
         {/* Description */}
         {tattoo.description && (
-          <p className="text-sm text-ink-600 line-clamp-2">{tattoo.description}</p>
+          <p className="text-sm text-ink-600 line-clamp-2">
+            {tattoo.description}
+          </p>
         )}
 
         {/* Price */}
         {showPrice && tattoo.price && (
           <div className="flex items-center justify-between">
-            <span className="text-lg font-semibold text-ink-900">{formatPrice(tattoo.price)}</span>
+            <span className="text-lg font-semibold text-ink-900">
+              {formatPrice(tattoo.price)}
+            </span>
             {tattoo.is_flash && (
               <Badge variant="outline" className="text-xs">
                 Available
@@ -140,7 +151,9 @@ export function TattooCard({
               <Avatar className="w-6 h-6">
                 <AvatarImage src={tattoo.artist.avatar} />
                 <AvatarFallback className="text-xs">
-                  {getInitials(`${tattoo.artist.firstname} ${tattoo.artist.lastname}`)}
+                  {getInitials(
+                    `${tattoo.artist.firstname} ${tattoo.artist.lastname}`
+                  )}
                 </AvatarFallback>
               </Avatar>
               <Link
@@ -214,13 +227,13 @@ const sizeVariants = {
 
 ## 2. ArtistProfileCard Component
 
-**Complexity Score**: 7/10
-**Priority**: Critical
-**Implementation Phase**: Week 2
+**Complexity Score**: 7/10 **Priority**: Critical **Implementation Phase**: Week
+2
 
 ### Purpose
 
-Display artist information in search results and directory listings with verification status and key metrics.
+Display artist information in search results and directory listings with
+verification status and key metrics.
 
 ### Technical Specifications
 
@@ -285,7 +298,8 @@ export function ArtistProfileCard({
     <Card
       className={cn(
         'overflow-hidden transition-all duration-200 hover:shadow-lg',
-        variant === 'featured' && 'border-primary-200 bg-gradient-to-br from-white to-primary-50',
+        variant === 'featured' &&
+          'border-primary-200 bg-gradient-to-br from-white to-primary-50',
         className
       )}
     >
@@ -327,8 +341,12 @@ export function ArtistProfileCard({
 
                   {/* Status Indicator */}
                   <div className="flex items-center space-x-2 mt-1">
-                    <verification.icon className={cn('w-4 h-4', verification.color)} />
-                    <span className={cn('text-sm font-medium', verification.color)}>
+                    <verification.icon
+                      className={cn('w-4 h-4', verification.color)}
+                    />
+                    <span
+                      className={cn('text-sm font-medium', verification.color)}
+                    >
                       {verification.label}
                     </span>
                   </div>
@@ -375,7 +393,9 @@ export function ArtistProfileCard({
 
               {/* Bio */}
               {artist.bio && variant !== 'compact' && (
-                <p className="mt-3 text-sm text-ink-600 line-clamp-2">{artist.bio}</p>
+                <p className="mt-3 text-sm text-ink-600 line-clamp-2">
+                  {artist.bio}
+                </p>
               )}
 
               {/* Styles */}
@@ -404,12 +424,16 @@ export function ArtistProfileCard({
           <div className="flex items-center justify-between">
             <div className="flex space-x-6">
               <div className="text-center">
-                <div className="text-lg font-semibold text-ink-900">{artist.tattoo_count}</div>
+                <div className="text-lg font-semibold text-ink-900">
+                  {artist.tattoo_count}
+                </div>
                 <div className="text-xs text-ink-500">Tattoos</div>
               </div>
 
               <div className="text-center">
-                <div className="text-lg font-semibold text-ink-900">{artist.favorite_count}</div>
+                <div className="text-lg font-semibold text-ink-900">
+                  {artist.favorite_count}
+                </div>
                 <div className="text-xs text-ink-500">Favorites</div>
               </div>
 
@@ -428,7 +452,11 @@ export function ArtistProfileCard({
 
             {/* Contact Button */}
             {showContact && (
-              <Button onClick={() => onContact?.(artist.id)} size="sm" className="ml-4">
+              <Button
+                onClick={() => onContact?.(artist.id)}
+                size="sm"
+                className="ml-4"
+              >
                 Contact
               </Button>
             )}
@@ -451,13 +479,12 @@ function formatNumber(num: number): string {
 
 ## 3. SearchFilters Component
 
-**Complexity Score**: 8/10
-**Priority**: High
-**Implementation Phase**: Week 3
+**Complexity Score**: 8/10 **Priority**: High **Implementation Phase**: Week 3
 
 ### Purpose
 
-Advanced search interface with multiple filter types, location search, and real-time results.
+Advanced search interface with multiple filter types, location search, and
+real-time results.
 
 ### Technical Specifications
 
@@ -519,7 +546,12 @@ export function SearchFilters({
   }).length
 
   return (
-    <div className={cn('bg-white border border-ink-200 rounded-xl shadow-sm', className)}>
+    <div
+      className={cn(
+        'bg-white border border-ink-200 rounded-xl shadow-sm',
+        className
+      )}
+    >
       {/* Search Header */}
       <div className="p-6 border-b border-ink-100">
         <div className="space-y-4">
@@ -538,7 +570,9 @@ export function SearchFilters({
           {/* Quick Filters */}
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => handleFilterChange('is_verified', !filters.is_verified)}
+              onClick={() =>
+                handleFilterChange('is_verified', !filters.is_verified)
+              }
               className={cn(
                 'px-3 py-1 rounded-full text-sm font-medium transition-colors',
                 filters.is_verified
@@ -550,7 +584,12 @@ export function SearchFilters({
             </button>
 
             <button
-              onClick={() => handleFilterChange('has_availability', !filters.has_availability)}
+              onClick={() =>
+                handleFilterChange(
+                  'has_availability',
+                  !filters.has_availability
+                )
+              }
               className={cn(
                 'px-3 py-1 rounded-full text-sm font-medium transition-colors',
                 filters.has_availability
@@ -580,7 +619,10 @@ export function SearchFilters({
               {isExpanded ? 'Hide' : 'Show'} Advanced Filters
             </span>
             <ChevronDown
-              className={cn('w-4 h-4 transition-transform', isExpanded && 'rotate-180')}
+              className={cn(
+                'w-4 h-4 transition-transform',
+                isExpanded && 'rotate-180'
+              )}
             />
           </button>
         </div>
@@ -591,10 +633,14 @@ export function SearchFilters({
         <div className="p-6 space-y-6">
           {/* Location Filter */}
           <div>
-            <Label className="text-sm font-medium text-ink-900 mb-3 block">Location</Label>
+            <Label className="text-sm font-medium text-ink-900 mb-3 block">
+              Location
+            </Label>
             <Select
               value={filters.city || ''}
-              onValueChange={(value) => handleFilterChange('city', value || null)}
+              onValueChange={(value) =>
+                handleFilterChange('city', value || null)
+              }
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select a city" />
@@ -617,7 +663,9 @@ export function SearchFilters({
                 </Label>
                 <Slider
                   value={[filters.distance || 50]}
-                  onValueChange={([value]) => handleFilterChange('distance', value)}
+                  onValueChange={([value]) =>
+                    handleFilterChange('distance', value)
+                  }
                   min={5}
                   max={200}
                   step={5}
@@ -629,10 +677,15 @@ export function SearchFilters({
 
           {/* Style Filter */}
           <div>
-            <Label className="text-sm font-medium text-ink-900 mb-3 block">Tattoo Styles</Label>
+            <Label className="text-sm font-medium text-ink-900 mb-3 block">
+              Tattoo Styles
+            </Label>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
               {availableFilters.styles.map((style) => (
-                <label key={style.id} className="flex items-center space-x-2 cursor-pointer">
+                <label
+                  key={style.id}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <Checkbox
                     checked={filters.styles.includes(style.name)}
                     onCheckedChange={(checked) => {
@@ -662,7 +715,10 @@ export function SearchFilters({
                     type="number"
                     value={filters.price_min || ''}
                     onChange={(e) =>
-                      handleFilterChange('price_min', parseInt(e.target.value) || null)
+                      handleFilterChange(
+                        'price_min',
+                        parseInt(e.target.value) || null
+                      )
                     }
                     placeholder="0"
                     min={availableFilters.price_range.min}
@@ -676,7 +732,10 @@ export function SearchFilters({
                     type="number"
                     value={filters.price_max || ''}
                     onChange={(e) =>
-                      handleFilterChange('price_max', parseInt(e.target.value) || null)
+                      handleFilterChange(
+                        'price_max',
+                        parseInt(e.target.value) || null
+                      )
                     }
                     placeholder="1000"
                     min={availableFilters.price_range.min}
@@ -686,7 +745,8 @@ export function SearchFilters({
               </div>
 
               <div className="text-xs text-ink-500">
-                Flash tattoos typically range from €{availableFilters.price_range.min} to €
+                Flash tattoos typically range from €
+                {availableFilters.price_range.min} to €
                 {availableFilters.price_range.max}
               </div>
             </div>
@@ -702,13 +762,12 @@ export function SearchFilters({
 
 ## 4. ContactModal Component
 
-**Complexity Score**: 7/10
-**Priority**: High
-**Implementation Phase**: Week 3
+**Complexity Score**: 7/10 **Priority**: High **Implementation Phase**: Week 3
 
 ### Purpose
 
-Modal interface for clients to contact artists with project details and scheduling preferences.
+Modal interface for clients to contact artists with project details and
+scheduling preferences.
 
 ### Technical Specifications
 
@@ -748,7 +807,12 @@ interface ContactFormData {
 ### Component Implementation
 
 ```tsx
-export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModalProps) {
+export function ContactModal({
+  isOpen,
+  onClose,
+  artist,
+  onSubmit,
+}: ContactModalProps) {
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState<ContactFormData>({
@@ -780,7 +844,10 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
       case 1:
         return formData.message.trim().length > 10
       case 2:
-        return formData.client_info.email && validateEmail(formData.client_info.email)
+        return (
+          formData.client_info.email &&
+          validateEmail(formData.client_info.email)
+        )
       case 3:
         return true // Optional step
       default:
@@ -834,7 +901,9 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                 </Label>
                 <Textarea
                   value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   placeholder="Describe your tattoo idea, style preferences, size, placement, and any specific details..."
                   rows={6}
                   className="resize-none"
@@ -846,12 +915,26 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
 
               {/* Urgency Selection */}
               <div>
-                <Label className="text-base font-medium mb-3 block">Timeline</Label>
+                <Label className="text-base font-medium mb-3 block">
+                  Timeline
+                </Label>
                 <div className="grid grid-cols-1 gap-3">
                   {[
-                    { value: 'asap', label: 'As soon as possible', desc: 'Within 2 weeks' },
-                    { value: 'this_month', label: 'This month', desc: 'Within 4 weeks' },
-                    { value: 'flexible', label: 'Flexible', desc: 'No rush, whenever works' },
+                    {
+                      value: 'asap',
+                      label: 'As soon as possible',
+                      desc: 'Within 2 weeks',
+                    },
+                    {
+                      value: 'this_month',
+                      label: 'This month',
+                      desc: 'Within 4 weeks',
+                    },
+                    {
+                      value: 'flexible',
+                      label: 'Flexible',
+                      desc: 'No rush, whenever works',
+                    },
                   ].map((option) => (
                     <label
                       key={option.value}
@@ -868,13 +951,20 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                         value={option.value}
                         checked={formData.urgency === option.value}
                         onChange={(e) =>
-                          setFormData({ ...formData, urgency: e.target.value as any })
+                          setFormData({
+                            ...formData,
+                            urgency: e.target.value as any,
+                          })
                         }
                         className="sr-only"
                       />
                       <div className="flex-1">
-                        <div className="font-medium text-ink-900">{option.label}</div>
-                        <div className="text-sm text-ink-600">{option.desc}</div>
+                        <div className="font-medium text-ink-900">
+                          {option.label}
+                        </div>
+                        <div className="text-sm text-ink-600">
+                          {option.desc}
+                        </div>
                       </div>
                       {formData.urgency === option.value && (
                         <Check className="w-5 h-5 text-primary-600" />
@@ -890,18 +980,25 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
           {step === 2 && (
             <div className="space-y-4">
               <div>
-                <Label className="text-base font-medium mb-4 block">Your contact information</Label>
+                <Label className="text-base font-medium mb-4 block">
+                  Your contact information
+                </Label>
 
                 <div className="grid grid-cols-1 gap-4">
                   <div>
-                    <Label className="text-sm font-medium mb-2 block">Email address *</Label>
+                    <Label className="text-sm font-medium mb-2 block">
+                      Email address *
+                    </Label>
                     <Input
                       type="email"
                       value={formData.client_info.email}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          client_info: { ...formData.client_info, email: e.target.value },
+                          client_info: {
+                            ...formData.client_info,
+                            email: e.target.value,
+                          },
                         })
                       }
                       placeholder="your.email@example.com"
@@ -918,7 +1015,10 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                       onChange={(e) =>
                         setFormData({
                           ...formData,
-                          client_info: { ...formData.client_info, phone: e.target.value },
+                          client_info: {
+                            ...formData.client_info,
+                            phone: e.target.value,
+                          },
                         })
                       }
                       placeholder="+33 6 12 34 56 78"
@@ -934,7 +1034,11 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                 </Label>
                 <div className="grid grid-cols-1 gap-2">
                   {[
-                    { value: 'app', label: 'Through Blottr app', icon: MessageCircle },
+                    {
+                      value: 'app',
+                      label: 'Through Blottr app',
+                      icon: MessageCircle,
+                    },
                     { value: 'email', label: 'Email', icon: Mail },
                     { value: 'phone', label: 'Phone call', icon: Phone },
                   ].map((method) => (
@@ -951,7 +1055,9 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                         type="radio"
                         name="contact_method"
                         value={method.value}
-                        checked={formData.preferred_contact_method === method.value}
+                        checked={
+                          formData.preferred_contact_method === method.value
+                        }
                         onChange={(e) =>
                           setFormData({
                             ...formData,
@@ -961,7 +1067,9 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                         className="sr-only"
                       />
                       <method.icon className="w-5 h-5 text-ink-600" />
-                      <span className="flex-1 font-medium text-ink-900">{method.label}</span>
+                      <span className="flex-1 font-medium text-ink-900">
+                        {method.label}
+                      </span>
                       {formData.preferred_contact_method === method.value && (
                         <Check className="w-5 h-5 text-primary-600" />
                       )}
@@ -978,7 +1086,10 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                   onCheckedChange={(checked) =>
                     setFormData({
                       ...formData,
-                      client_info: { ...formData.client_info, first_tattoo: !!checked },
+                      client_info: {
+                        ...formData.client_info,
+                        first_tattoo: !!checked,
+                      },
                     })
                   }
                 />
@@ -1039,7 +1150,10 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
                   <Textarea
                     value={formData.project_description || ''}
                     onChange={(e) =>
-                      setFormData({ ...formData, project_description: e.target.value })
+                      setFormData({
+                        ...formData,
+                        project_description: e.target.value,
+                      })
                     }
                     placeholder="Additional details about style, size, placement, inspiration, etc."
                     rows={4}
@@ -1054,7 +1168,11 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
         <DialogFooter className="flex items-center justify-between pt-6 border-t border-ink-100">
           <div className="flex items-center space-x-2">
             {step > 1 && (
-              <Button variant="outline" onClick={() => setStep(step - 1)} disabled={isSubmitting}>
+              <Button
+                variant="outline"
+                onClick={() => setStep(step - 1)}
+                disabled={isSubmitting}
+              >
                 Back
               </Button>
             )}
@@ -1066,11 +1184,18 @@ export function ContactModal({ isOpen, onClose, artist, onSubmit }: ContactModal
             </Button>
 
             {step < 3 ? (
-              <Button onClick={() => setStep(step + 1)} disabled={!isStepValid()}>
+              <Button
+                onClick={() => setStep(step + 1)}
+                disabled={!isStepValid()}
+              >
                 Continue
               </Button>
             ) : (
-              <Button onClick={handleSubmit} disabled={isSubmitting} className="min-w-[120px]">
+              <Button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="min-w-[120px]"
+              >
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
             )}
@@ -1090,13 +1215,13 @@ function validateEmail(email: string): boolean {
 
 ## 5. Navigation Component
 
-**Complexity Score**: 6/10
-**Priority**: Critical
-**Implementation Phase**: Week 2
+**Complexity Score**: 6/10 **Priority**: Critical **Implementation Phase**: Week
+2
 
 ### Purpose
 
-Main application navigation with authentication state, responsive design, and user menu.
+Main application navigation with authentication state, responsive design, and
+user menu.
 
 ### Technical Specifications
 
@@ -1122,9 +1247,21 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
 
   const navigationItems = [
     { href: '/', label: 'Discover', active: currentPath === '/' },
-    { href: '/artists', label: 'Artists', active: currentPath.startsWith('/artists') },
-    { href: '/salons', label: 'Salons', active: currentPath.startsWith('/salons') },
-    { href: '/flash', label: 'Flash', active: currentPath.startsWith('/flash') },
+    {
+      href: '/artists',
+      label: 'Artists',
+      active: currentPath.startsWith('/artists'),
+    },
+    {
+      href: '/salons',
+      label: 'Salons',
+      active: currentPath.startsWith('/salons'),
+    },
+    {
+      href: '/flash',
+      label: 'Flash',
+      active: currentPath.startsWith('/flash'),
+    },
   ]
 
   return (
@@ -1147,7 +1284,9 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
                 href={item.href}
                 className={cn(
                   'text-sm font-medium transition-colors relative',
-                  item.active ? 'text-primary-600' : 'text-ink-600 hover:text-ink-900'
+                  item.active
+                    ? 'text-primary-600'
+                    : 'text-ink-600 hover:text-ink-900'
                 )}
               >
                 {item.label}
@@ -1173,7 +1312,10 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
                 )}
 
                 {/* User Menu */}
-                <DropdownMenu open={isUserMenuOpen} onOpenChange={setIsUserMenuOpen}>
+                <DropdownMenu
+                  open={isUserMenuOpen}
+                  onOpenChange={setIsUserMenuOpen}
+                >
                   <DropdownMenuTrigger asChild>
                     <button className="flex items-center space-x-2 p-1 rounded-full hover:bg-ink-50 transition-colors">
                       <Avatar className="w-8 h-8">
@@ -1188,7 +1330,9 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
                   <DropdownMenuContent align="end" className="w-56">
                     <DropdownMenuLabel>
                       <div className="flex flex-col space-y-1">
-                        <p className="text-sm font-medium leading-none">{user.email}</p>
+                        <p className="text-sm font-medium leading-none">
+                          {user.email}
+                        </p>
                         <p className="text-xs leading-none text-ink-500">
                           {user.role === 1 ? 'Client' : 'Artist'}
                         </p>
@@ -1238,7 +1382,10 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
                     )}
 
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={onLogout} className="text-red-600">
+                    <DropdownMenuItem
+                      onClick={onLogout}
+                      className="text-red-600"
+                    >
                       <LogOut className="w-4 h-4 mr-2" />
                       Sign out
                     </DropdownMenuItem>
@@ -1261,7 +1408,11 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-ink-600 hover:text-ink-900 transition-colors"
             >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
@@ -1278,7 +1429,9 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={cn(
                   'block text-base font-medium transition-colors',
-                  item.active ? 'text-primary-600' : 'text-ink-600 hover:text-ink-900'
+                  item.active
+                    ? 'text-primary-600'
+                    : 'text-ink-600 hover:text-ink-900'
                 )}
               >
                 {item.label}
@@ -1315,13 +1468,12 @@ export function Navigation({ user, currentPath, onLogout }: NavigationProps) {
 
 ## 6. AppointmentCard Component
 
-**Complexity Score**: 5/10
-**Priority**: Medium
-**Implementation Phase**: Week 4
+**Complexity Score**: 5/10 **Priority**: Medium **Implementation Phase**: Week 4
 
 ### Purpose
 
-Display appointment information with status indicators and action buttons for clients and artists.
+Display appointment information with status indicators and action buttons for
+clients and artists.
 
 ### Technical Specifications
 
@@ -1362,9 +1514,7 @@ interface AppointmentCardProps {
 
 ## 7. StatsWidget Component
 
-**Complexity Score**: 4/10
-**Priority**: Low
-**Implementation Phase**: Week 5
+**Complexity Score**: 4/10 **Priority**: Low **Implementation Phase**: Week 5
 
 ### Purpose
 
@@ -1416,8 +1566,6 @@ interface StatsWidgetProps {
 
 ---
 
-**Document Version**: 1.0
-**Component Count**: 7 Blottr-specific components
-**Complexity Range**: 4-8/10
-**Implementation Timeline**: 6 weeks phased approach
-**Testing Strategy**: TDD with Storybook documentation
+**Document Version**: 1.0 **Component Count**: 7 Blottr-specific components
+**Complexity Range**: 4-8/10 **Implementation Timeline**: 6 weeks phased
+approach **Testing Strategy**: TDD with Storybook documentation

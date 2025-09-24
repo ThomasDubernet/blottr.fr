@@ -2,9 +2,9 @@
 
 ## Performance Philosophy
 
-**Principle**: Performance is a feature, not an afterthought
-**Strategy**: Measure → Optimize → Validate → Monitor
-**Target Audience**: Mobile-first users on 3G networks
+**Principle**: Performance is a feature, not an afterthought **Strategy**:
+Measure → Optimize → Validate → Monitor **Target Audience**: Mobile-first users
+on 3G networks
 
 ---
 
@@ -125,10 +125,10 @@ async function loadIcon(iconName: string) {
 
 // Route-based code splitting
 const routes = {
-  'home': lazy(() => import('~/pages/home')),
-  'artists': lazy(() => import('~/pages/artists/index')),
+  home: lazy(() => import('~/pages/home')),
+  artists: lazy(() => import('~/pages/artists/index')),
   'artists.show': lazy(() => import('~/pages/artists/show')),
-  'search': lazy(() => import('~/pages/search')),
+  search: lazy(() => import('~/pages/search')),
 }
 ```
 
@@ -151,7 +151,11 @@ export default defineConfig({
             '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-select',
           ],
-          'design-system-utils': ['clsx', 'tailwind-merge', 'class-variance-authority'],
+          'design-system-utils': [
+            'clsx',
+            'tailwind-merge',
+            'class-variance-authority',
+          ],
 
           // Icons (separate chunk for caching)
           'vendor-icons': ['lucide-react'],
@@ -161,7 +165,10 @@ export default defineConfig({
           'components-contact': ['./inertia/components/ContactModal'],
 
           // Pages
-          'pages-artists': ['./inertia/pages/artists/index', './inertia/pages/artists/show'],
+          'pages-artists': [
+            './inertia/pages/artists/index',
+            './inertia/pages/artists/show',
+          ],
         },
       },
     },
@@ -571,7 +578,10 @@ class PerformanceMonitor {
 
       if (args[0]?.displayName || args[0]?.name) {
         const componentName = args[0].displayName || args[0].name
-        this.recordMetric(`component.${componentName}.render`, endTime - startTime)
+        this.recordMetric(
+          `component.${componentName}.render`,
+          endTime - startTime
+        )
       }
 
       return result
@@ -663,7 +673,10 @@ export function PerformanceDashboard() {
     <div className="fixed bottom-4 right-4 bg-white border border-ink-300 rounded-lg shadow-lg p-4 z-50 max-w-md">
       <div className="flex items-center justify-between mb-3">
         <h3 className="text-sm font-semibold">Performance Metrics</h3>
-        <button onClick={() => setIsVisible(false)} className="text-ink-400 hover:text-ink-600">
+        <button
+          onClick={() => setIsVisible(false)}
+          className="text-ink-400 hover:text-ink-600"
+        >
           ✕
         </button>
       </div>
@@ -686,7 +699,9 @@ export function PerformanceDashboard() {
         ))}
       </div>
 
-      <div className="text-xs text-ink-500 mt-3 border-t pt-2">Press Ctrl+Shift+P to toggle</div>
+      <div className="text-xs text-ink-500 mt-3 border-t pt-2">
+        Press Ctrl+Shift+P to toggle
+      </div>
     </div>
   )
 }
@@ -942,7 +957,9 @@ class ProductionMetrics {
       })
 
       this.scheduleSend()
-    }).observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] })
+    }).observe({
+      entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'],
+    })
 
     // Monitor component performance
     this.monitorComponents()
@@ -1083,7 +1100,7 @@ class PerformanceAlerts {
 
 ---
 
-**Document Version**: 1.0
-**Performance Framework**: Web Vitals + Custom Metrics + Automated Testing
-**Monitoring Strategy**: Real-time client-side + Server-side analytics
-**Optimization Philosophy**: Measure → Optimize → Validate → Monitor\*\*
+**Document Version**: 1.0 **Performance Framework**: Web Vitals + Custom
+Metrics + Automated Testing **Monitoring Strategy**: Real-time client-side +
+Server-side analytics **Optimization Philosophy**: Measure → Optimize → Validate
+→ Monitor\*\*

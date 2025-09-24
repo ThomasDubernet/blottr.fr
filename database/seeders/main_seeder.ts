@@ -18,13 +18,21 @@ export default class extends BaseSeeder {
 
     try {
       // Import all seeders dynamically
-      const CitySeeder = (await import('./01_city_seeder.js')).default
-      const TagSeeder = (await import('./02_tag_seeder.js')).default
-      const UserSeeder = (await import('./03_user_seeder.js')).default
-      const SalonSeeder = (await import('./04_salon_seeder.js')).default
-      const ArtistSeeder = (await import('./05_artist_seeder.js')).default
-      const TattooSeeder = (await import('./06_tattoo_seeder.js')).default
-      const ContactRequestSeeder = (await import('./07_contact_request_seeder.js')).default
+      const citySeederModule = await import('./01_city_seeder.js')
+      const tagSeederModule = await import('./02_tag_seeder.js')
+      const userSeederModule = await import('./03_user_seeder.js')
+      const salonSeederModule = await import('./04_salon_seeder.js')
+      const artistSeederModule = await import('./05_artist_seeder.js')
+      const tattooSeederModule = await import('./06_tattoo_seeder.js')
+      const contactRequestSeederModule = await import('./07_contact_request_seeder.js')
+
+      const CitySeeder = citySeederModule.default
+      const TagSeeder = tagSeederModule.default
+      const UserSeeder = userSeederModule.default
+      const SalonSeeder = salonSeederModule.default
+      const ArtistSeeder = artistSeederModule.default
+      const TattooSeeder = tattooSeederModule.default
+      const ContactRequestSeeder = contactRequestSeederModule.default
 
       // Run seeders in dependency order
       await this.runSeeder(CitySeeder, 'Cities')
@@ -54,7 +62,6 @@ export default class extends BaseSeeder {
       console.log('   • Contact workflow examples')
       console.log('')
       console.log('✨ Your Blottr database is ready for development!')
-
     } catch (error) {
       console.error('💥 Seeding failed:', error.message)
       throw error

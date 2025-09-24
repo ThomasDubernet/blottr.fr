@@ -3,7 +3,7 @@ import * as SelectPrimitive from '@radix-ui/react-select'
 import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 
 import { cn } from '~/lib/utils'
-import { getRadius } from '~/lib/design-tokens'
+import { getRadius } from '~/lib/design_tokens'
 
 const Select = SelectPrimitive.Root
 
@@ -30,7 +30,7 @@ const SelectTrigger = React.forwardRef<
       paddingRight: 'var(--spacing-sm)',
       paddingTop: 'var(--spacing-xs)',
       paddingBottom: 'var(--spacing-xs)',
-      minHeight: 'var(--component-input-height)'
+      minHeight: 'var(--component-input-height)',
     }}
     {...props}
   >
@@ -93,7 +93,7 @@ const SelectContent = React.forwardRef<
         className
       )}
       style={{
-        borderRadius: `var(--radius-${getRadius('md')})`
+        borderRadius: `var(--radius-${getRadius('md')})`,
       }}
       position={position}
       {...props}
@@ -125,7 +125,7 @@ const SelectLabel = React.forwardRef<
       paddingLeft: 'var(--spacing-sm)',
       paddingRight: 'var(--spacing-sm)',
       paddingTop: 'var(--spacing-xs)',
-      paddingBottom: 'var(--spacing-xs)'
+      paddingBottom: 'var(--spacing-xs)',
     }}
     {...props}
   />
@@ -150,7 +150,7 @@ const SelectItem = React.forwardRef<
       paddingTop: 'var(--spacing-xs)',
       paddingBottom: 'var(--spacing-xs)',
       paddingLeft: 'var(--spacing-sm)',
-      paddingRight: 'var(--spacing-2xl)'
+      paddingRight: 'var(--spacing-2xl)',
     }}
     {...props}
   >
@@ -178,7 +178,7 @@ const SelectSeparator = React.forwardRef<
       marginLeft: 'calc(-1 * var(--spacing-xs))',
       marginRight: 'calc(-1 * var(--spacing-xs))',
       marginTop: 'var(--spacing-xs)',
-      marginBottom: 'var(--spacing-xs)'
+      marginBottom: 'var(--spacing-xs)',
     }}
     {...props}
   />

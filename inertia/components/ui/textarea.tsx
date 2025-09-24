@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { cn } from '~/lib/utils'
-import { getRadius } from '~/lib/design-tokens'
+import { getRadius } from '~/lib/design_tokens'
 
 const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'textarea'>>(
   ({ className, ...props }, ref) => {
@@ -20,7 +20,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<'tex
           paddingRight: 'var(--spacing-sm)',
           paddingTop: 'var(--spacing-xs)',
           paddingBottom: 'var(--spacing-xs)',
-          minHeight: 'var(--component-textarea-min-height, 60px)'
+          minHeight: 'var(--component-textarea-min-height, 60px)',
         }}
         ref={ref}
         {...props}

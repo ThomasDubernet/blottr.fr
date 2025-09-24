@@ -18,7 +18,7 @@ test.group('Authentication - Login', () => {
     // Ce test échouera d'abord car il n'y a pas d'utilisateur
     const response = await client.post('/login').json({
       email: 'client@test.fr',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Pour le moment, ce test échouera (RED)
@@ -29,7 +29,7 @@ test.group('Authentication - Login', () => {
   test('should reject login with invalid credentials', async ({ client }) => {
     const response = await client.post('/login').json({
       email: 'wrong@test.fr',
-      password: 'wrongpass'
+      password: 'wrongpass',
     })
 
     response.assertStatus(302)
@@ -39,7 +39,7 @@ test.group('Authentication - Login', () => {
   test('should validate email format', async ({ client }) => {
     const response = await client.post('/login').json({
       email: 'invalid-email',
-      password: 'password123'
+      password: 'password123',
     })
 
     response.assertStatus(422)
@@ -49,7 +49,7 @@ test.group('Authentication - Login', () => {
   test('should validate password minimum length', async ({ client }) => {
     const response = await client.post('/login').json({
       email: 'test@example.fr',
-      password: '123'
+      password: '123',
     })
 
     response.assertStatus(422)
@@ -69,7 +69,7 @@ test.group('Authentication - Register', () => {
     const response = await client.post('/register').json({
       email: 'newclient@test.fr',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     })
 
     // RED: Ce test échouera initialement
@@ -82,13 +82,13 @@ test.group('Authentication - Register', () => {
     await client.post('/register').json({
       email: 'duplicate@test.fr',
       password: 'password123',
-      password_confirmation: 'password123'
+      password_confirmation: 'password123',
     })
 
     const response = await client.post('/register').json({
       email: 'duplicate@test.fr',
       password: 'differentpass',
-      password_confirmation: 'differentpass'
+      password_confirmation: 'differentpass',
     })
 
     response.assertStatus(302)
@@ -99,7 +99,7 @@ test.group('Authentication - Register', () => {
     const response = await client.post('/register').json({
       email: 'test@example.fr',
       password: 'password123',
-      password_confirmation: 'differentpass'
+      password_confirmation: 'differentpass',
     })
 
     response.assertStatus(422)

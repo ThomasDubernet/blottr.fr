@@ -219,10 +219,7 @@ export default function ContactForm({
 
             {/* Project Description */}
             <div className="form-item-responsive">
-              <label
-                htmlFor="project_description"
-                className="form-label"
-              >
+              <label htmlFor="project_description" className="form-label">
                 Describe your tattoo idea *
               </label>
               <textarea
@@ -242,10 +239,7 @@ export default function ContactForm({
 
             {/* Tattoo Placement */}
             <div className="form-item-responsive">
-              <label
-                htmlFor="tattoo_placement"
-                className="form-label"
-              >
+              <label htmlFor="tattoo_placement" className="form-label">
                 Where do you want the tattoo? *
               </label>
               <input
@@ -258,16 +252,12 @@ export default function ContactForm({
                 value={formData.tattoo_placement}
                 onChange={(e) => handleInputChange('tattoo_placement', e.target.value)}
               />
-              {errors.tattoo_placement && (
-                <p className="form-error">{errors.tattoo_placement}</p>
-              )}
+              {errors.tattoo_placement && <p className="form-error">{errors.tattoo_placement}</p>}
             </div>
 
             {/* Size Selection */}
             <div className="form-item-responsive">
-              <label className="form-label">
-                Approximate size
-              </label>
+              <label className="form-label">Approximate size</label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-responsive-sm">
                 {SIZE_OPTIONS.map((option) => (
                   <label
@@ -287,8 +277,12 @@ export default function ContactForm({
                       className="sr-only"
                     />
                     <div>
-                      <div className="font-medium text-foreground text-responsive-base">{option.label}</div>
-                      <div className="text-responsive-sm text-muted-foreground">{option.description}</div>
+                      <div className="font-medium text-foreground text-responsive-base">
+                        {option.label}
+                      </div>
+                      <div className="text-responsive-sm text-muted-foreground">
+                        {option.description}
+                      </div>
                     </div>
                   </label>
                 ))}
@@ -714,9 +708,7 @@ export default function ContactForm({
               </div>
               {stepNumber < 3 && (
                 <div
-                  className={`flex-1 h-0.5 mx-4 ${
-                    stepNumber < step ? 'bg-primary' : 'bg-muted'
-                  }`}
+                  className={`flex-1 h-0.5 mx-4 ${stepNumber < step ? 'bg-primary' : 'bg-muted'}`}
                 />
               )}
             </React.Fragment>

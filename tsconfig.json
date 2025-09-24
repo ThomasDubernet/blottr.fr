@@ -6,7 +6,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./inertia/*"]
-    },
+    }
   },
   "include": ["./tests/types/**/*"],
   "exclude": ["./inertia/**/*", "./stories/**/*", "node_modules", "build"]

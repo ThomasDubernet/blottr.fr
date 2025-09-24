@@ -1,6 +1,8 @@
 # 🎨 Blottr Design Tokens & Theme System
 
-Complete design token system for the Blottr tattoo platform, capturing the professional yet artistic nature of the tattoo industry while maintaining excellent usability and accessibility.
+Complete design token system for the Blottr tattoo platform, capturing the
+professional yet artistic nature of the tattoo industry while maintaining
+excellent usability and accessibility.
 
 ## 🌈 Color System
 
@@ -200,14 +202,16 @@ Additional spacing values for fine-tuned control:
 
 ```css
 --shadow-gallery: 0 4px 20px 0 rgb(0 0 0 / 0.08), 0 1px 3px 0 rgb(0 0 0 / 0.1);
---shadow-gallery-hover: 0 8px 30px 0 rgb(0 0 0 / 0.12), 0 4px 6px 0 rgb(0 0 0 / 0.1);
+--shadow-gallery-hover:
+  0 8px 30px 0 rgb(0 0 0 / 0.12), 0 4px 6px 0 rgb(0 0 0 / 0.1);
 ```
 
 **Card Shadows**
 
 ```css
 --shadow-card: 0 2px 8px 0 rgb(0 0 0 / 0.06), 0 1px 2px 0 rgb(0 0 0 / 0.04);
---shadow-card-hover: 0 4px 16px 0 rgb(0 0 0 / 0.1), 0 2px 4px 0 rgb(0 0 0 / 0.06);
+--shadow-card-hover:
+  0 4px 16px 0 rgb(0 0 0 / 0.1), 0 2px 4px 0 rgb(0 0 0 / 0.06);
 ```
 
 ### Border Radius
@@ -515,7 +519,6 @@ All interactive elements include appropriate ARIA labels and semantic markup.
 
 ```tsx
 import ThemeSwitcher from '~/components/ThemeSwitcher'
-
 ;<ThemeSwitcher className="ml-auto" showLabels={true} />
 ```
 
@@ -531,8 +534,11 @@ import ThemeSwitcher from '~/components/ThemeSwitcher'
 - **Tailwind CSS Documentation**: https://tailwindcss.com/docs
 - **Inter Font**: https://rsms.me/inter/
 - **WCAG Guidelines**: https://www.w3.org/WAI/WCAG21/quickref/
-- **CSS Custom Properties**: https://developer.mozilla.org/en-US/docs/Web/CSS/--*
+- **CSS Custom Properties**:
+  https://developer.mozilla.org/en-US/docs/Web/CSS/--*
 
 ---
 
-_This design system ensures consistency across the Blottr platform while maintaining the professional yet artistic aesthetic appropriate for the tattoo industry._
+_This design system ensures consistency across the Blottr platform while
+maintaining the professional yet artistic aesthetic appropriate for the tattoo
+industry._

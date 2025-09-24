@@ -5,7 +5,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 
 import { cn } from '~/lib/utils'
-import { getRadius, getShadow } from '~/lib/design-tokens'
+import { getRadius, getShadow } from '~/lib/design_tokens'
 
 const Dialog = DialogPrimitive.Root
 
@@ -52,7 +52,7 @@ const DialogContent = React.forwardRef<
         ...getShadow('level3'),
         borderRadius: `var(--radius-${getRadius('md')})`,
         gap: 'var(--spacing-md)',
-        padding: 'var(--spacing-lg)'
+        padding: 'var(--spacing-lg)',
       }}
       {...props}
     >
@@ -67,7 +67,7 @@ const DialogContent = React.forwardRef<
           right: 'var(--spacing-md)',
           top: 'var(--spacing-md)',
           borderRadius: `var(--radius-${getRadius('sm')})`,
-          padding: 'var(--spacing-xs)'
+          padding: 'var(--spacing-xs)',
         }}
       >
         <X className="h-4 w-4" />

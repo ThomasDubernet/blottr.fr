@@ -63,11 +63,11 @@ export default {
       },
       fontSize: {
         '2xs': '0.625rem',
-        'xs': '0.75rem',
-        'sm': '0.875rem',
-        'base': '1rem',
-        'lg': '1.125rem',
-        'xl': '1.25rem',
+        xs: '0.75rem',
+        sm: '0.875rem',
+        base: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
         '2xl': '1.5rem',
         '3xl': '1.875rem',
         '4xl': '2.25rem',
@@ -78,11 +78,11 @@ export default {
         112: '28rem',
       },
       borderRadius: {
-        'none': '0',
-        'sm': '0.125rem',
-        'DEFAULT': '0.25rem',
-        'lg': '0.5rem',
-        'xl': '0.75rem',
+        none: '0',
+        sm: '0.125rem',
+        DEFAULT: '0.25rem',
+        lg: '0.5rem',
+        xl: '0.75rem',
         '2xl': '1rem',
         '3xl': '1.5rem',
       },
@@ -99,7 +99,8 @@ export default {
     function ({ addUtilities }) {
       addUtilities({
         '.ink-shadow': {
-          'box-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+          'box-shadow':
+            '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         },
         '.tattoo-focus': {
           '@apply ring-2 ring-primary-500 ring-offset-2 outline-none': {},
@@ -379,7 +380,8 @@ const config: StorybookConfig = {
     reactDocgen: 'react-docgen-typescript',
     reactDocgenTypescriptOptions: {
       shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
+      propFilter: (prop) =>
+        prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
 }
@@ -452,7 +454,14 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      options: [
+        'default',
+        'destructive',
+        'outline',
+        'secondary',
+        'ghost',
+        'link',
+      ],
     },
     size: {
       control: 'select',
@@ -525,7 +534,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'design-system': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          'design-system': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+          ],
           'ui-components': ['lucide-react', 'class-variance-authority'],
         },
       },
@@ -685,9 +697,16 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-ui': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+          'vendor-ui': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+          ],
           'vendor-icons': ['lucide-react'],
-          'vendor-utils': ['clsx', 'tailwind-merge', 'class-variance-authority'],
+          'vendor-utils': [
+            'clsx',
+            'tailwind-merge',
+            'class-variance-authority',
+          ],
         },
       },
     },
@@ -717,7 +736,6 @@ export default defineConfig({
 
 ---
 
-**Document Version**: 1.0
-**Technology Stack**: AdonisJS v6 + React 19 + Inertia.js + Tailwind + shadcn/ui
-**Last Updated**: 2025-09-24
-**Next Review**: After Phase 1 implementation
+**Document Version**: 1.0 **Technology Stack**: AdonisJS v6 + React 19 +
+Inertia.js + Tailwind + shadcn/ui **Last Updated**: 2025-09-24 **Next Review**:
+After Phase 1 implementation

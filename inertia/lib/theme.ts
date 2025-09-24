@@ -121,8 +121,8 @@ export const highContrastTheme: ThemeConfig = {
  * Theme configuration mapping
  */
 export const themes = {
-  'light': lightTheme,
-  'dark': darkTheme,
+  light: lightTheme,
+  dark: darkTheme,
   'high-contrast': highContrastTheme,
 } as const
 
@@ -230,11 +230,11 @@ export function useTheme() {
 export const designTokens = {
   // Spacing scale (8px grid)
   spacing: {
-    'xs': '0.25rem', // 4px
-    'sm': '0.5rem', // 8px
-    'md': '1rem', // 16px
-    'lg': '1.5rem', // 24px
-    'xl': '2rem', // 32px
+    xs: '0.25rem', // 4px
+    sm: '0.5rem', // 8px
+    md: '1rem', // 16px
+    lg: '1.5rem', // 24px
+    xl: '2rem', // 32px
     '2xl': '3rem', // 48px
     '3xl': '4rem', // 64px
     '4xl': '6rem', // 96px
@@ -243,19 +243,19 @@ export const designTokens = {
   // Typography scale
   typography: {
     sizes: {
-      'xs': '0.75rem',
-      'sm': '0.875rem',
-      'base': '1rem',
-      'lg': '1.125rem',
-      'xl': '1.25rem',
+      xs: '0.75rem',
+      sm: '0.875rem',
+      base: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
       '2xl': '1.5rem',
       '3xl': '1.875rem',
       '4xl': '2.25rem',
       '5xl': '3rem',
       // Specialty sizes
-      'price': '1.25rem',
-      'artist': '1.5rem',
-      'salon': '1.125rem',
+      price: '1.25rem',
+      artist: '1.5rem',
+      salon: '1.125rem',
     },
     weights: {
       normal: '400',
@@ -272,12 +272,12 @@ export const designTokens = {
 
   // Border radius scale
   radius: {
-    'sm': '0.375rem',
-    'md': '0.5rem',
-    'lg': '0.75rem',
-    'xl': '1rem',
+    sm: '0.375rem',
+    md: '0.5rem',
+    lg: '0.75rem',
+    xl: '1rem',
     '2xl': '1.5rem',
-    'full': '9999px',
+    full: '9999px',
   },
 
   // Animation timing
@@ -288,20 +288,20 @@ export const designTokens = {
   },
 
   easing: {
-    'ease': 'ease',
+    ease: 'ease',
     'ease-in': 'ease-in',
     'ease-out': 'ease-out',
     'ease-in-out': 'ease-in-out',
-    'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
   },
 
   // Breakpoints
   breakpoints: {
-    'xs': '475px',
-    'sm': '640px',
-    'md': '768px',
-    'lg': '1024px',
-    'xl': '1280px',
+    xs: '475px',
+    sm: '640px',
+    md: '768px',
+    lg: '1024px',
+    xl: '1280px',
     '2xl': '1536px',
   },
 

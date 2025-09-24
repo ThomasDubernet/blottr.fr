@@ -16,12 +16,15 @@
 
 ## Overview
 
-The Blottr database is designed to support a comprehensive tattoo artist discovery and booking platform with Instagram integration, multi-salon support, and automated onboarding workflows.
+The Blottr database is designed to support a comprehensive tattoo artist
+discovery and booking platform with Instagram integration, multi-salon support,
+and automated onboarding workflows.
 
 ### Key Features
 
 - **UUID Primary Keys**: All tables use UUIDs for globally unique identifiers
-- **Multi-tenant Architecture**: Support for multiple salons and independent artists
+- **Multi-tenant Architecture**: Support for multiple salons and independent
+  artists
 - **Instagram Integration**: Automated scraping and verification workflows
 - **Geographic Search**: City-based search with GPS coordinates
 - **SEO Optimization**: Slug generation and meta descriptions
@@ -745,19 +748,26 @@ CREATE INDEX idx_artists_name ON artists USING gin(
 1. **Use eager loading** to prevent N+1 queries:
 
 ```typescript
-const artists = await Artist.query().preload('salon').preload('tattoos').preload('city')
+const artists = await Artist.query()
+  .preload('salon')
+  .preload('tattoos')
+  .preload('city')
 ```
 
 2. **Pagination** for large datasets:
 
 ```typescript
-const tattoos = await Tattoo.query().where('is_visible', true).paginate(page, 20)
+const tattoos = await Tattoo.query()
+  .where('is_visible', true)
+  .paginate(page, 20)
 ```
 
 3. **Selective loading** with specific columns:
 
 ```typescript
-const cities = await City.query().select('id', 'name', 'slug').where('country', 'FR')
+const cities = await City.query()
+  .select('id', 'name', 'slug')
+  .where('country', 'FR')
 ```
 
 ### Caching Strategy
@@ -1055,6 +1065,5 @@ For database-related questions or issues:
 
 ---
 
-_Last Updated: September 2025_
-_Database Version: 1.0.0_
-_PostgreSQL Version: 16_
+_Last Updated: September 2025_ _Database Version: 1.0.0_ _PostgreSQL Version:
+16_

@@ -157,18 +157,24 @@ interface BookingReminderToastProps {
 const BookingReminderToast = React.forwardRef<
   React.ElementRef<typeof Toast>,
   BookingReminderToastProps
->(({ appointmentDate, artistName, salonName, canReschedule, children, onOpenChange, ...props }, ref) => (
-  <Toast ref={ref} variant="default" onOpenChange={onOpenChange} {...props}>
-    <div className="grid gap-1">
-      <ToastTitle>Tattoo Appointment Reminder</ToastTitle>
-      <ToastDescription>
-        Your appointment with {artistName} {salonName && `at ${salonName}`} is scheduled for {appointmentDate}
-      </ToastDescription>
-    </div>
-    {children}
-    <ToastClose />
-  </Toast>
-))
+>(
+  (
+    { appointmentDate, artistName, salonName, canReschedule, children, onOpenChange, ...props },
+    ref
+  ) => (
+    <Toast ref={ref} variant="default" onOpenChange={onOpenChange} {...props}>
+      <div className="grid gap-1">
+        <ToastTitle>Tattoo Appointment Reminder</ToastTitle>
+        <ToastDescription>
+          Your appointment with {artistName} {salonName && `at ${salonName}`} is scheduled for{' '}
+          {appointmentDate}
+        </ToastDescription>
+      </div>
+      {children}
+      <ToastClose />
+    </Toast>
+  )
+)
 BookingReminderToast.displayName = 'BookingReminderToast'
 
 export {

@@ -49,7 +49,9 @@ export function DebugCard({ user }: DebugCardProps) {
             <div className="space-y-1 text-xs">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Status:</span>
-                <Badge variant="default" className="text-xs">Authenticated</Badge>
+                <Badge variant="default" className="text-xs">
+                  Authenticated
+                </Badge>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">ID:</span>
@@ -70,11 +72,11 @@ export function DebugCard({ user }: DebugCardProps) {
             <div className="space-y-1 text-xs">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Status:</span>
-                <Badge variant="secondary" className="text-xs">Guest</Badge>
+                <Badge variant="secondary" className="text-xs">
+                  Guest
+                </Badge>
               </div>
-              <div className="text-muted-foreground">
-                No user authentication
-              </div>
+              <div className="text-muted-foreground">No user authentication</div>
             </div>
           )}
         </div>

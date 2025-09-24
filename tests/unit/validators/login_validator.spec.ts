@@ -7,21 +7,21 @@ test.group('LoginValidator Unit Tests', () => {
   test('should validate correct email and password', async ({ assert }) => {
     const validData = {
       email: 'test@example.fr',
-      password: 'password123'
+      password: 'password123',
     }
 
     const result = await loginValidator.validate(validData)
 
     assert.deepEqual(result, {
       email: 'test@example.fr',
-      password: 'password123'
+      password: 'password123',
     })
   })
 
   test('should normalize email to lowercase', async ({ assert }) => {
     const dataWithUppercaseEmail = {
       email: 'TEST@EXAMPLE.FR',
-      password: 'password123'
+      password: 'password123',
     }
 
     const result = await loginValidator.validate(dataWithUppercaseEmail)
@@ -32,7 +32,7 @@ test.group('LoginValidator Unit Tests', () => {
   test('should reject invalid email format', async ({ assert }) => {
     const invalidEmailData = {
       email: 'invalid-email',
-      password: 'password123'
+      password: 'password123',
     }
 
     try {
@@ -46,7 +46,7 @@ test.group('LoginValidator Unit Tests', () => {
   test('should reject empty email', async ({ assert }) => {
     const emptyEmailData = {
       email: '',
-      password: 'password123'
+      password: 'password123',
     }
 
     try {
@@ -60,7 +60,7 @@ test.group('LoginValidator Unit Tests', () => {
   test('should reject password shorter than 8 characters', async ({ assert }) => {
     const shortPasswordData = {
       email: 'test@example.fr',
-      password: '1234567'
+      password: '1234567',
     }
 
     try {
@@ -74,7 +74,7 @@ test.group('LoginValidator Unit Tests', () => {
   test('should reject empty password', async ({ assert }) => {
     const emptyPasswordData = {
       email: 'test@example.fr',
-      password: ''
+      password: '',
     }
 
     try {
@@ -87,7 +87,7 @@ test.group('LoginValidator Unit Tests', () => {
 
   test('should reject missing email field', async ({ assert }) => {
     const missingEmailData = {
-      password: 'password123'
+      password: 'password123',
     }
 
     try {
@@ -100,7 +100,7 @@ test.group('LoginValidator Unit Tests', () => {
 
   test('should reject missing password field', async ({ assert }) => {
     const missingPasswordData = {
-      email: 'test@example.fr'
+      email: 'test@example.fr',
     }
 
     try {
@@ -114,7 +114,7 @@ test.group('LoginValidator Unit Tests', () => {
   test('should accept password with exactly 8 characters', async ({ assert }) => {
     const exactLengthData = {
       email: 'test@example.fr',
-      password: '12345678'
+      password: '12345678',
     }
 
     const result = await loginValidator.validate(exactLengthData)
@@ -125,7 +125,7 @@ test.group('LoginValidator Unit Tests', () => {
   test('should accept long password', async ({ assert }) => {
     const longPasswordData = {
       email: 'test@example.fr',
-      password: 'this-is-a-very-long-password-with-special-chars!@#$%'
+      password: 'this-is-a-very-long-password-with-special-chars!@#$%',
     }
 
     const result = await loginValidator.validate(longPasswordData)

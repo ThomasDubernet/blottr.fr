@@ -158,7 +158,9 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                 {tattoo.artist.firstname} {tattoo.artist.lastname}
               </span>
               {tattoo.artist.instagram_handle && (
-                <span className="text-responsive-xs text-muted-foreground">@{tattoo.artist.instagram_handle}</span>
+                <span className="text-responsive-xs text-muted-foreground">
+                  @{tattoo.artist.instagram_handle}
+                </span>
               )}
             </div>
           </div>
@@ -180,7 +182,9 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
         )}
 
         {tattoo.description && (
-          <p className="text-responsive-xs text-muted-foreground mt-2 line-clamp-2">{tattoo.description}</p>
+          <p className="text-responsive-xs text-muted-foreground mt-2 line-clamp-2">
+            {tattoo.description}
+          </p>
         )}
       </CardContent>
     </Card>
@@ -300,7 +304,9 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                   {selectedTattoo.description && (
                     <div>
                       <h4 className="font-medium text-responsive-base mb-2">Description</h4>
-                      <p className="text-responsive-sm text-muted-foreground">{selectedTattoo.description}</p>
+                      <p className="text-responsive-sm text-muted-foreground">
+                        {selectedTattoo.description}
+                      </p>
                     </div>
                   )}
 
@@ -332,7 +338,10 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
 
                   {/* Actions */}
                   <div className="space-responsive-sm pt-4 border-t">
-                    <Button className="w-full btn-responsive focus-ring" onClick={() => onTattooLike?.(selectedTattoo.id)}>
+                    <Button
+                      className="w-full btn-responsive focus-ring"
+                      onClick={() => onTattooLike?.(selectedTattoo.id)}
+                    >
                       <Heart className="h-4 w-4 mr-2" />
                       Like Tattoo
                     </Button>

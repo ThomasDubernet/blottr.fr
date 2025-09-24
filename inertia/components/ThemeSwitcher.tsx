@@ -169,8 +169,8 @@ export const CompactThemeSwitcher: React.FC<{ className?: string }> = ({ classNa
   }, [])
 
   const themeIcons: Record<Theme, string> = {
-    'light': '☀️',
-    'dark': '🌙',
+    light: '☀️',
+    dark: '🌙',
     'high-contrast': '⚫',
   }
 

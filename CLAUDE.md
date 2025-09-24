@@ -1,16 +1,18 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code (claude.ai/code) when working with
+code in this repository.
 
 ## 📚 Full Documentation
 
 All project documentation has been organized in the `/docs` directory:
 
 @docs/README.md - Complete documentation index and navigation
-@docs/database/DATABASE_DOCUMENTATION.md - Full database schema, relationships, and migration guide
-@docs/database/DB_VISUALIZATION.md - pgAdmin setup and visualization guide
-@docs/architecture/KNOWLEDGE_BASE.md - Project architecture, concepts, and workflows
-@docs/design-system/README.md - Design system overview and component library guide
+@docs/database/DATABASE_DOCUMENTATION.md - Full database schema, relationships,
+and migration guide @docs/database/DB_VISUALIZATION.md - pgAdmin setup and
+visualization guide @docs/architecture/KNOWLEDGE_BASE.md - Project architecture,
+concepts, and workflows @docs/design-system/README.md - Design system overview
+and component library guide
 
 ## 🏗️ Development Principles
 
@@ -65,8 +67,10 @@ All project documentation has been organized in the `/docs` directory:
 ### Design System Libraries
 
 - **Tailwind CSS**: `/tailwindlabs/tailwindcss` - Utility-first CSS framework
-- **shadcn/ui**: `/shadcn/ui` - Re-usable components built with Radix UI and Tailwind
-- **Radix UI**: `/radix-ui/primitives` - Unstyled, accessible components for React
+- **shadcn/ui**: `/shadcn/ui` - Re-usable components built with Radix UI and
+  Tailwind
+- **Radix UI**: `/radix-ui/primitives` - Unstyled, accessible components for
+  React
 - **Lucide React**: `/lucide-icons/lucide` - Icon library for React
 
 ### Additional Libraries
@@ -121,7 +125,8 @@ All project documentation has been organized in the `/docs` directory:
 
 ## Architecture Overview
 
-This is an **AdonisJS v6** application with **React** and **Inertia.js** for the frontend.
+This is an **AdonisJS v6** application with **React** and **Inertia.js** for the
+frontend.
 
 ### Stack
 
@@ -236,11 +241,16 @@ router.post('/users', [UsersController, 'store'])
 
 ### Design System Architecture
 
-- **Component Structure**: Two-tier system with base UI components and Blottr-specific components
-- **Base Components**: `inertia/components/ui/` - shadcn/ui components (Button, Card, Dialog, etc.)
-- **Blottr Components**: `inertia/components/blottr/` - Tattoo industry-specific components
-- **Live Documentation**: Visit `http://localhost:3333/design-system` for interactive component gallery
-- **Theming**: Tailwind CSS with custom tattoo industry color palette and dark mode support
+- **Component Structure**: Two-tier system with base UI components and
+  Blottr-specific components
+- **Base Components**: `inertia/components/ui/` - shadcn/ui components (Button,
+  Card, Dialog, etc.)
+- **Blottr Components**: `inertia/components/blottr/` - Tattoo industry-specific
+  components
+- **Live Documentation**: Visit `http://localhost:3333/design-system` for
+  interactive component gallery
+- **Theming**: Tailwind CSS with custom tattoo industry color palette and dark
+  mode support
 
 ### Database Workflow
 
@@ -257,7 +267,8 @@ Tests use the Japa framework with two suites:
 - **Unit tests**: `tests/unit/` (2s timeout)
 - **Functional tests**: `tests/functional/` (30s timeout)
 
-Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for AdonisJS-specific testing helpers.
+Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for
+AdonisJS-specific testing helpers.
 
 **Test-Driven Development (TDD) Workflow:**
 
@@ -284,7 +295,8 @@ Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for AdonisJS-speci
 
 # important-instruction-reminders
 
-Do what has been asked; nothing more, nothing less.
-NEVER create files unless they're absolutely necessary for achieving your goal.
-ALWAYS prefer editing an existing file to creating a new one.
-NEVER proactively create documentation files (\*.md) or README files. Only create documentation files if explicitly requested by the User.
+Do what has been asked; nothing more, nothing less. NEVER create files unless
+they're absolutely necessary for achieving your goal. ALWAYS prefer editing an
+existing file to creating a new one. NEVER proactively create documentation
+files (\*.md) or README files. Only create documentation files if explicitly
+requested by the User.

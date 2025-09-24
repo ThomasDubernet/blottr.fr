@@ -33,7 +33,8 @@
 ### Code Quality
 
 - [ ] **Naming Convention**: PascalCase for components, camelCase for props
-- [ ] **File Organization**: Component, types, styles, tests in logical structure
+- [ ] **File Organization**: Component, types, styles, tests in logical
+      structure
 - [ ] **Import Optimization**: Proper use of import aliases (#components/\*)
 - [ ] **Dead Code**: No unused imports or variables
 - [ ] **Error Boundaries**: Proper error handling and fallbacks
@@ -152,10 +153,9 @@
 
 ### Sign-off Requirements
 
-**Architecture Review**: Senior Developer + Technical Lead
-**Development Standards**: Code Review + Automated Tests
-**Integration Testing**: QA Lead + DevOps Engineer
-**Production Readiness**: Technical Lead + Product Owner
+**Architecture Review**: Senior Developer + Technical Lead **Development
+Standards**: Code Review + Automated Tests **Integration Testing**: QA Lead +
+DevOps Engineer **Production Readiness**: Technical Lead + Product Owner
 
 ### Documentation Required
 

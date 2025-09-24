@@ -202,19 +202,19 @@ export const QUALITY_TOOLS = {
   // Dependency management
   'npm audit': 'npm audit --audit-level moderate',
   'npm outdated': 'npm outdated',
-  'depcheck': 'npx depcheck',
+  depcheck: 'npx depcheck',
 
   // Testing
-  'japa': 'node ace test',
+  japa: 'node ace test',
   'test-coverage': 'node ace test --coverage',
 
   // Accessibility
   'axe-core': 'npm run test:accessibility',
-  'pa11y': 'pa11y http://localhost:3333',
+  pa11y: 'pa11y http://localhost:3333',
   'lighthouse-a11y': 'lighthouse --only-categories=accessibility',
 
   // TypeScript
-  'tsc': 'npm run typecheck',
+  tsc: 'npm run typecheck',
   'eslint-typescript': 'eslint --ext .ts,.tsx',
 
   // Bundle analysis
@@ -222,10 +222,10 @@ export const QUALITY_TOOLS = {
   'size-limit': 'npx size-limit',
 
   // Browser testing
-  'playwright': 'npm run test:e2e',
+  playwright: 'npm run test:e2e',
   'playwright-mobile': 'npm run test:mobile',
 
   // Performance
-  'lighthouse': 'lighthouse --output json --output html',
+  lighthouse: 'lighthouse --output json --output html',
   'web-vitals': 'npm run test:vitals',
 } as const

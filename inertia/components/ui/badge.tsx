@@ -13,7 +13,8 @@ const badgeVariants = cva(
         success: 'text-white shadow hover:opacity-90',
         warning: 'text-white shadow hover:opacity-90',
         error: 'text-white shadow hover:opacity-90',
-        outline: 'border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground',
+        outline:
+          'border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground',
         // Industry-specific variants
         verified: 'text-white shadow hover:opacity-90',
         flash: 'text-white shadow hover:opacity-90',

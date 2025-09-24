@@ -12,115 +12,135 @@
 /**
  * Breakpoint keys for responsive design
  */
-export type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'large';
+export type Breakpoint = 'mobile' | 'tablet' | 'desktop' | 'large'
 
 /**
  * Color palette scale (50-900)
  */
-export type ColorScale = '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+export type ColorScale =
+  | '50'
+  | '100'
+  | '200'
+  | '300'
+  | '400'
+  | '500'
+  | '600'
+  | '700'
+  | '800'
+  | '900'
 
 /**
  * Semantic color variants
  */
-export type SemanticScale = '400' | '500' | '600';
+export type SemanticScale = '400' | '500' | '600'
 
 /**
  * Typography scale keys
  */
-export type TypographyScale = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'caption' | 'button';
+export type TypographyScale =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'body1'
+  | 'body2'
+  | 'caption'
+  | 'button'
 
 /**
  * Spacing scale keys
  */
-export type SpacingScale = '0' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
+export type SpacingScale = '0' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl'
 
 /**
  * Shadow levels
  */
-export type ShadowLevel = 'level1' | 'level2' | 'level3' | 'level4';
+export type ShadowLevel = 'level1' | 'level2' | 'level3' | 'level4'
 
 /**
  * Border radius variants
  */
-export type RadiusScale = 'none' | 'sm' | 'md' | 'lg' | 'pill' | 'full';
+export type RadiusScale = 'none' | 'sm' | 'md' | 'lg' | 'pill' | 'full'
 
 /**
  * Component state variants
  */
-export type ComponentState = 'default' | 'hover' | 'active' | 'disabled';
+export type ComponentState = 'default' | 'hover' | 'active' | 'disabled'
 
 /**
  * Responsive value configuration
  */
 export interface ResponsiveValue<T> {
-  mobile: T;
-  tablet?: T;
-  desktop?: T;
-  large?: T;
+  mobile: T
+  tablet?: T
+  desktop?: T
+  large?: T
 }
 
 /**
  * Typography configuration per breakpoint
  */
 export interface TypographyConfig {
-  fontSize: number;
-  lineHeight: number;
-  letterSpacing: number;
-  fontWeight: number;
-  fontFamily: string;
+  fontSize: number
+  lineHeight: number
+  letterSpacing: number
+  fontWeight: number
+  fontFamily: string
 }
 
 /**
  * Component padding configuration
  */
 export interface PaddingConfig {
-  vertical: number;
-  horizontal: number;
+  vertical: number
+  horizontal: number
 }
 
 /**
  * Component state configuration
  */
 export interface ComponentStateConfig {
-  backgroundColor: string;
-  textColor: string;
+  backgroundColor: string
+  textColor: string
 }
 
 /**
  * Button component specification
  */
 export interface ButtonTokens {
-  borderRadius: RadiusScale;
-  typography: TypographyScale;
-  padding: ResponsiveValue<PaddingConfig>;
-  states: Record<ComponentState, ComponentStateConfig>;
+  borderRadius: RadiusScale
+  typography: TypographyScale
+  padding: ResponsiveValue<PaddingConfig>
+  states: Record<ComponentState, ComponentStateConfig>
 }
 
 /**
  * Card component specification
  */
 export interface CardTokens {
-  borderRadius: RadiusScale;
-  shadow: ShadowLevel;
-  padding: ResponsiveValue<PaddingConfig>;
-  backgroundColor: string;
-  borderColor: string;
+  borderRadius: RadiusScale
+  shadow: ShadowLevel
+  padding: ResponsiveValue<PaddingConfig>
+  backgroundColor: string
+  borderColor: string
 }
 
 /**
  * Input component specification
  */
 export interface InputTokens {
-  borderRadius: RadiusScale;
-  typography: TypographyScale;
-  padding: ResponsiveValue<PaddingConfig>;
-  borderWidth: number;
+  borderRadius: RadiusScale
+  typography: TypographyScale
+  padding: ResponsiveValue<PaddingConfig>
+  borderWidth: number
   states: {
-    default: { borderColor: string; backgroundColor: string };
-    focus: { borderColor: string; backgroundColor: string };
-    error: { borderColor: string; backgroundColor: string };
-    disabled: { borderColor: string; backgroundColor: string };
-  };
+    default: { borderColor: string; backgroundColor: string }
+    focus: { borderColor: string; backgroundColor: string }
+    error: { borderColor: string; backgroundColor: string }
+    disabled: { borderColor: string; backgroundColor: string }
+  }
 }
 
 // ============================================================================
@@ -135,7 +155,7 @@ export const breakpoints = {
   tablet: 600,
   desktop: 1024,
   large: 1440,
-} as const;
+} as const
 
 /**
  * Color system with palette and semantic aliases
@@ -216,7 +236,7 @@ export const colors = {
     onAccent: '#ffffff',
     onSecondary: '#212121',
   },
-} as const;
+} as const
 
 /**
  * Typography system with font families and responsive scales
@@ -229,57 +249,237 @@ export const typography = {
   },
   scale: {
     h1: {
-      mobile: { fontSize: 32, lineHeight: 40, letterSpacing: -0.5, fontWeight: 700, fontFamily: 'primary' },
-      tablet: { fontSize: 40, lineHeight: 48, letterSpacing: -0.5, fontWeight: 700, fontFamily: 'primary' },
-      desktop: { fontSize: 48, lineHeight: 56, letterSpacing: -1, fontWeight: 700, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 32,
+        lineHeight: 40,
+        letterSpacing: -0.5,
+        fontWeight: 700,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 40,
+        lineHeight: 48,
+        letterSpacing: -0.5,
+        fontWeight: 700,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 48,
+        lineHeight: 56,
+        letterSpacing: -1,
+        fontWeight: 700,
+        fontFamily: 'primary',
+      },
     },
     h2: {
-      mobile: { fontSize: 28, lineHeight: 36, letterSpacing: -0.5, fontWeight: 600, fontFamily: 'primary' },
-      tablet: { fontSize: 32, lineHeight: 40, letterSpacing: -0.5, fontWeight: 600, fontFamily: 'primary' },
-      desktop: { fontSize: 36, lineHeight: 44, letterSpacing: -0.5, fontWeight: 600, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 28,
+        lineHeight: 36,
+        letterSpacing: -0.5,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 32,
+        lineHeight: 40,
+        letterSpacing: -0.5,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 36,
+        lineHeight: 44,
+        letterSpacing: -0.5,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
     },
     h3: {
-      mobile: { fontSize: 24, lineHeight: 32, letterSpacing: 0, fontWeight: 600, fontFamily: 'primary' },
-      tablet: { fontSize: 28, lineHeight: 36, letterSpacing: 0, fontWeight: 600, fontFamily: 'primary' },
-      desktop: { fontSize: 32, lineHeight: 40, letterSpacing: 0, fontWeight: 600, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 24,
+        lineHeight: 32,
+        letterSpacing: 0,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 28,
+        lineHeight: 36,
+        letterSpacing: 0,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 32,
+        lineHeight: 40,
+        letterSpacing: 0,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
     },
     h4: {
-      mobile: { fontSize: 20, lineHeight: 28, letterSpacing: 0, fontWeight: 600, fontFamily: 'primary' },
-      tablet: { fontSize: 24, lineHeight: 32, letterSpacing: 0, fontWeight: 600, fontFamily: 'primary' },
-      desktop: { fontSize: 28, lineHeight: 36, letterSpacing: 0, fontWeight: 600, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 20,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 24,
+        lineHeight: 32,
+        letterSpacing: 0,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 28,
+        lineHeight: 36,
+        letterSpacing: 0,
+        fontWeight: 600,
+        fontFamily: 'primary',
+      },
     },
     h5: {
-      mobile: { fontSize: 18, lineHeight: 26, letterSpacing: 0, fontWeight: 500, fontFamily: 'primary' },
-      tablet: { fontSize: 20, lineHeight: 28, letterSpacing: 0, fontWeight: 500, fontFamily: 'primary' },
-      desktop: { fontSize: 24, lineHeight: 32, letterSpacing: 0, fontWeight: 500, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 18,
+        lineHeight: 26,
+        letterSpacing: 0,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 20,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 24,
+        lineHeight: 32,
+        letterSpacing: 0,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
     },
     h6: {
-      mobile: { fontSize: 16, lineHeight: 24, letterSpacing: 0, fontWeight: 500, fontFamily: 'primary' },
-      tablet: { fontSize: 18, lineHeight: 26, letterSpacing: 0, fontWeight: 500, fontFamily: 'primary' },
-      desktop: { fontSize: 20, lineHeight: 28, letterSpacing: 0, fontWeight: 500, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 16,
+        lineHeight: 24,
+        letterSpacing: 0,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 18,
+        lineHeight: 26,
+        letterSpacing: 0,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 20,
+        lineHeight: 28,
+        letterSpacing: 0,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
     },
     body1: {
-      mobile: { fontSize: 16, lineHeight: 24, letterSpacing: 0, fontWeight: 400, fontFamily: 'primary' },
-      tablet: { fontSize: 16, lineHeight: 24, letterSpacing: 0, fontWeight: 400, fontFamily: 'primary' },
-      desktop: { fontSize: 16, lineHeight: 24, letterSpacing: 0, fontWeight: 400, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 16,
+        lineHeight: 24,
+        letterSpacing: 0,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 16,
+        lineHeight: 24,
+        letterSpacing: 0,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 16,
+        lineHeight: 24,
+        letterSpacing: 0,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
     },
     body2: {
-      mobile: { fontSize: 14, lineHeight: 20, letterSpacing: 0, fontWeight: 400, fontFamily: 'primary' },
-      tablet: { fontSize: 14, lineHeight: 20, letterSpacing: 0, fontWeight: 400, fontFamily: 'primary' },
-      desktop: { fontSize: 14, lineHeight: 20, letterSpacing: 0, fontWeight: 400, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
     },
     caption: {
-      mobile: { fontSize: 12, lineHeight: 16, letterSpacing: 0.5, fontWeight: 400, fontFamily: 'primary' },
-      tablet: { fontSize: 12, lineHeight: 16, letterSpacing: 0.5, fontWeight: 400, fontFamily: 'primary' },
-      desktop: { fontSize: 12, lineHeight: 16, letterSpacing: 0.5, fontWeight: 400, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 12,
+        lineHeight: 16,
+        letterSpacing: 0.5,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 12,
+        lineHeight: 16,
+        letterSpacing: 0.5,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 12,
+        lineHeight: 16,
+        letterSpacing: 0.5,
+        fontWeight: 400,
+        fontFamily: 'primary',
+      },
     },
     button: {
-      mobile: { fontSize: 14, lineHeight: 20, letterSpacing: 0.5, fontWeight: 500, fontFamily: 'primary' },
-      tablet: { fontSize: 14, lineHeight: 20, letterSpacing: 0.5, fontWeight: 500, fontFamily: 'primary' },
-      desktop: { fontSize: 14, lineHeight: 20, letterSpacing: 0.5, fontWeight: 500, fontFamily: 'primary' },
+      mobile: {
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0.5,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
+      tablet: {
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0.5,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
+      desktop: {
+        fontSize: 14,
+        lineHeight: 20,
+        letterSpacing: 0.5,
+        fontWeight: 500,
+        fontFamily: 'primary',
+      },
     },
   },
-} as const;
+} as const
 
 /**
  * Spacing system with consistent scale and layout utilities
@@ -287,11 +487,11 @@ export const typography = {
 export const spacing = {
   scale: {
     '0': 0,
-    'xs': 4,
-    'sm': 8,
-    'md': 16,
-    'lg': 24,
-    'xl': 32,
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
     '2xl': 40,
     '3xl': 64,
   },
@@ -307,7 +507,7 @@ export const spacing = {
       desktop: 64,
     },
   },
-} as const;
+} as const
 
 /**
  * Border radius system
@@ -319,7 +519,7 @@ export const radii = {
   lg: 16,
   pill: 50,
   full: 9999,
-} as const;
+} as const
 
 /**
  * Shadow system with multiple elevation levels
@@ -329,7 +529,7 @@ export const shadows = {
   level2: '0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)',
   level3: '0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05)',
   level4: '0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04)',
-} as const;
+} as const
 
 /**
  * Component-specific token specifications
@@ -377,7 +577,7 @@ export const components = {
       disabled: { borderColor: 'palette.neutral.200', backgroundColor: 'palette.neutral.50' },
     },
   } as InputTokens,
-} as const;
+} as const
 
 // ============================================================================
 // UTILITY FUNCTIONS
@@ -395,7 +595,7 @@ export function getResponsiveValue<T>(
   values: ResponsiveValue<T>,
   breakpoint: Breakpoint = 'mobile'
 ): T {
-  return values[breakpoint] ?? values.mobile;
+  return values[breakpoint] ?? values.mobile
 }
 
 /**
@@ -409,7 +609,7 @@ export function getTypography(
   scale: TypographyScale,
   breakpoint: Breakpoint = 'mobile'
 ): TypographyConfig {
-  return getResponsiveValue(typography.scale[scale], breakpoint);
+  return getResponsiveValue(typography.scale[scale], breakpoint)
 }
 
 /**
@@ -419,7 +619,7 @@ export function getTypography(
  * @returns Spacing value in pixels
  */
 export function getSpacing(scale: SpacingScale): number {
-  return spacing.scale[scale];
+  return spacing.scale[scale]
 }
 
 /**
@@ -429,18 +629,18 @@ export function getSpacing(scale: SpacingScale): number {
  * @returns Color hex value or undefined if path doesn't exist
  */
 export function getColor(path: string): string | undefined {
-  const parts = path.split('.');
-  let current: any = colors;
+  const parts = path.split('.')
+  let current: any = colors
 
   for (const part of parts) {
     if (current && typeof current === 'object' && part in current) {
-      current = current[part];
+      current = current[part]
     } else {
-      return undefined;
+      return undefined
     }
   }
 
-  return typeof current === 'string' ? current : undefined;
+  return typeof current === 'string' ? current : undefined
 }
 
 /**
@@ -450,7 +650,7 @@ export function getColor(path: string): string | undefined {
  * @returns Border radius value in pixels
  */
 export function getRadius(scale: RadiusScale): number {
-  return radii[scale];
+  return radii[scale]
 }
 
 /**
@@ -460,7 +660,7 @@ export function getRadius(scale: RadiusScale): number {
  * @returns CSS box-shadow value
  */
 export function getShadow(level: ShadowLevel): string {
-  return shadows[level];
+  return shadows[level]
 }
 
 /**
@@ -470,40 +670,40 @@ export function getShadow(level: ShadowLevel): string {
  * @returns Object with CSS custom property names and values
  */
 export function generateCSSVariables(): Record<string, string | number> {
-  const variables: Record<string, string | number> = {};
+  const variables: Record<string, string | number> = {}
 
   // Add color variables
   Object.entries(colors.palette).forEach(([paletteName, palette]) => {
     Object.entries(palette).forEach(([scale, color]) => {
-      variables[`--color-${paletteName}-${scale}`] = color;
-    });
-  });
+      variables[`--color-${paletteName}-${scale}`] = color
+    })
+  })
 
   Object.entries(colors.aliases).forEach(([alias, color]) => {
-    variables[`--color-${alias}`] = color;
-  });
+    variables[`--color-${alias}`] = color
+  })
 
   // Add spacing variables
   Object.entries(spacing.scale).forEach(([scale, value]) => {
-    variables[`--spacing-${scale}`] = `${value}px`;
-  });
+    variables[`--spacing-${scale}`] = `${value}px`
+  })
 
   // Add typography variables
   Object.entries(typography.fontFamily).forEach(([family, value]) => {
-    variables[`--font-${family}`] = value;
-  });
+    variables[`--font-${family}`] = value
+  })
 
   // Add radius variables
   Object.entries(radii).forEach(([scale, value]) => {
-    variables[`--radius-${scale}`] = `${value}px`;
-  });
+    variables[`--radius-${scale}`] = `${value}px`
+  })
 
   // Add shadow variables
   Object.entries(shadows).forEach(([level, value]) => {
-    variables[`--shadow-${level}`] = value;
-  });
+    variables[`--shadow-${level}`] = value
+  })
 
-  return variables;
+  return variables
 }
 
 /**
@@ -514,17 +714,17 @@ export function generateCSSVariables(): Record<string, string | number> {
  * @returns Boolean indicating if viewport matches
  */
 export function matchesBreakpoint(breakpoint: Breakpoint): boolean {
-  if (typeof window === 'undefined') return false;
+  if (typeof window === 'undefined') return false
 
-  const width = window.innerWidth;
-  const bp = breakpoints[breakpoint];
-  const nextBp = getNextBreakpoint(breakpoint);
+  const width = window.innerWidth
+  const bp = breakpoints[breakpoint]
+  const nextBp = getNextBreakpoint(breakpoint)
 
   if (nextBp === null) {
-    return width >= bp;
+    return width >= bp
   }
 
-  return width >= bp && width < breakpoints[nextBp];
+  return width >= bp && width < breakpoints[nextBp]
 }
 
 /**
@@ -534,9 +734,9 @@ export function matchesBreakpoint(breakpoint: Breakpoint): boolean {
  * @returns Next breakpoint or null if at the end
  */
 function getNextBreakpoint(current: Breakpoint): Breakpoint | null {
-  const order: Breakpoint[] = ['mobile', 'tablet', 'desktop', 'large'];
-  const currentIndex = order.indexOf(current);
-  return currentIndex < order.length - 1 ? order[currentIndex + 1] : null;
+  const order: Breakpoint[] = ['mobile', 'tablet', 'desktop', 'large']
+  const currentIndex = order.indexOf(current)
+  return currentIndex < order.length - 1 ? order[currentIndex + 1] : null
 }
 
 // ============================================================================
@@ -559,4 +759,4 @@ export type {
   ButtonTokens,
   CardTokens,
   InputTokens,
-};
+}

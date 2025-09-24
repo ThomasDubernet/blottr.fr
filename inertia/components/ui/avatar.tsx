@@ -4,7 +4,7 @@ import * as React from 'react'
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
 
 import { cn } from '~/lib/utils'
-import { getRadius } from '~/lib/design-tokens'
+import { getRadius } from '~/lib/design_tokens'
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -16,7 +16,7 @@ const Avatar = React.forwardRef<
     style={{
       borderRadius: `var(--radius-${getRadius('full')})`,
       width: 'var(--component-avatar-size, 2.5rem)',
-      height: 'var(--component-avatar-size, 2.5rem)'
+      height: 'var(--component-avatar-size, 2.5rem)',
     }}
     {...props}
   />
@@ -46,7 +46,7 @@ const AvatarFallback = React.forwardRef<
       className
     )}
     style={{
-      borderRadius: `var(--radius-${getRadius('full')})`
+      borderRadius: `var(--radius-${getRadius('full')})`,
     }}
     {...props}
   />

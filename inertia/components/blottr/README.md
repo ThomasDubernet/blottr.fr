@@ -1,25 +1,30 @@
 # Blottr Radix UI Components
 
-Advanced, accessible UI components built specifically for the Blottr tattoo platform using Radix UI primitives.
+Advanced, accessible UI components built specifically for the Blottr tattoo
+platform using Radix UI primitives.
 
 ## 🎯 Overview
 
-This collection provides fully accessible, interactive components designed for the tattoo industry, featuring:
+This collection provides fully accessible, interactive components designed for
+the tattoo industry, featuring:
 
-- **WCAG 2.1 AA compliance** - Built-in screen reader support and keyboard navigation
-- **Complex interactions** - Multi-step forms, image galleries, advanced filtering
-- **Tattoo-specific features** - Artist profiles, booking workflows, portfolio management
+- **WCAG 2.1 AA compliance** - Built-in screen reader support and keyboard
+  navigation
+- **Complex interactions** - Multi-step forms, image galleries, advanced
+  filtering
+- **Tattoo-specific features** - Artist profiles, booking workflows, portfolio
+  management
 - **Notification system** - Contextual toasts for platform interactions
 
 ## 📦 Components
 
 ### Artist Profile Modal
 
-A comprehensive artist profile modal with image gallery, portfolio tabs, and contact integration.
+A comprehensive artist profile modal with image gallery, portfolio tabs, and
+contact integration.
 
 ```tsx
 import { ArtistProfileModal } from '~/components/blottr'
-
 ;<ArtistProfileModal
   artist={artist}
   tattoos={tattoos}
@@ -44,7 +49,6 @@ Multi-step contact form for tattoo inquiries with comprehensive validation.
 
 ```tsx
 import { ContactFormWizard } from '~/components/blottr'
-
 ;<ContactFormWizard
   isOpen={isContactFormOpen}
   onOpenChange={setIsContactFormOpen}
@@ -102,7 +106,10 @@ const [filters, setFilters] = useState<SearchFilters>({
 Context-based toast notifications with tattoo platform specializations.
 
 ```tsx
-import { NotificationProvider, useTattooNotifications } from '~/components/blottr'
+import {
+  NotificationProvider,
+  useTattooNotifications,
+} from '~/components/blottr'
 
 // Wrap your app
 ;<NotificationProvider>
@@ -275,7 +282,9 @@ export default function BookingPage({ artist }: { artist: Artist }) {
 
   return (
     <>
-      <Button onClick={() => setIsContactOpen(true)}>Book with {artist.firstname}</Button>
+      <Button onClick={() => setIsContactOpen(true)}>
+        Book with {artist.firstname}
+      </Button>
 
       <ContactFormWizard
         isOpen={isContactOpen}
@@ -305,8 +314,11 @@ npm run test:integration
 
 ## 📚 API Reference
 
-For detailed component APIs, see the TypeScript definitions in each component file. All components export their prop types and include comprehensive JSDoc comments.
+For detailed component APIs, see the TypeScript definitions in each component
+file. All components export their prop types and include comprehensive JSDoc
+comments.
 
 ---
 
-Built with ❤️ for the tattoo community using [Radix UI](https://radix-ui.com) and [Tailwind CSS](https://tailwindcss.com).
+Built with ❤️ for the tattoo community using [Radix UI](https://radix-ui.com)
+and [Tailwind CSS](https://tailwindcss.com).

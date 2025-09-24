@@ -258,7 +258,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
         <Label className="form-label">Body Placement</Label>
         <div className="grid grid-cols-3 gap-responsive-xs">
           {BODY_PARTS.map((part) => (
-            <label key={part} className="flex items-center gap-responsive-xs text-responsive-sm focus-ring">
+            <label
+              key={part}
+              className="flex items-center gap-responsive-xs text-responsive-sm focus-ring"
+            >
               <Checkbox
                 checked={currentFilters.bodyParts?.includes(part) || false}
                 onCheckedChange={(checked) => {

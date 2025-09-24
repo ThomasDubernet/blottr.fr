@@ -236,7 +236,7 @@ test.group('Integration Tests', () => {
             if (textElementCount > 0) {
               const fontSize = await textElements.first().evaluate((el) => {
                 const styles = window.getComputedStyle(el)
-                return parseFloat(styles.fontSize)
+                return Number.parseFloat(styles.fontSize)
               })
 
               if (device.isMobile) {

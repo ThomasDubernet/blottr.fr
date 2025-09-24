@@ -232,7 +232,9 @@ export default function ReviewCard({
                 {review.appointment?.service_type && (
                   <>
                     <span className="text-muted-foreground/50">•</span>
-                    <span className="text-responsive-sm text-muted-foreground">{review.appointment.service_type}</span>
+                    <span className="text-responsive-sm text-muted-foreground">
+                      {review.appointment.service_type}
+                    </span>
                   </>
                 )}
               </div>
@@ -266,7 +268,11 @@ export default function ReviewCard({
           <div>
             <p
               className={`text-foreground leading-relaxed ${
-                isCompact ? 'text-responsive-sm line-clamp-3' : isDetailed ? 'text-responsive-base' : 'text-responsive-sm'
+                isCompact
+                  ? 'text-responsive-sm line-clamp-3'
+                  : isDetailed
+                    ? 'text-responsive-base'
+                    : 'text-responsive-sm'
               }`}
             >
               {review.comment}
