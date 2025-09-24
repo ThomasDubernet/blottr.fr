@@ -1,8 +1,10 @@
-import { useForm } from '@inertiajs/react'
+import { useForm, Head, Link } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card'
+import { Header } from '@/components/blottr/layout/header'
+import { DebugCard } from '@/components/blottr'
 
 interface RegisterData {
   email: string
@@ -10,11 +12,20 @@ interface RegisterData {
   password_confirmation: string
 }
 
+interface User {
+  id: string
+  email: string
+  role: number
+}
+
 interface RegisterProps {
+  auth: {
+    user: User | null
+  }
   errors?: Record<string, string>
 }
 
-export default function Register({ errors = {} }: RegisterProps) {
+export default function Register({ auth, errors = {} }: RegisterProps) {
   const { data, setData, post, processing } = useForm<RegisterData>({
     email: '',
     password: '',
@@ -27,7 +38,11 @@ export default function Register({ errors = {} }: RegisterProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <>
+      <Head title="Inscription - Blottr" />
+      <div className="min-h-screen bg-background">
+        <Header user={auth.user} />
+        <div className="flex items-center justify-center py-16">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Créer un compte</CardTitle>
@@ -66,7 +81,7 @@ export default function Register({ errors = {} }: RegisterProps) {
               {errors.password && (
                 <p className="text-sm text-red-600">{errors.password}</p>
               )}
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-muted-foreground">
                 Minimum 8 caractères
               </p>
             </div>
@@ -93,18 +108,23 @@ export default function Register({ errors = {} }: RegisterProps) {
               {processing ? 'Création...' : 'Créer mon compte'}
             </Button>
 
-            <p className="text-sm text-center text-gray-600">
+            <p className="text-sm text-center text-muted-foreground">
               Déjà un compte ?{' '}
-              <a
+              <Link
                 href="/login"
-                className="text-blue-600 hover:underline"
+                className="text-primary hover:underline font-medium"
               >
                 Se connecter
-              </a>
+              </Link>
             </p>
           </CardFooter>
         </form>
       </Card>
-    </div>
+        </div>
+
+        {/* Debug Card - Only shows in development when DEBUG=true */}
+        <DebugCard user={auth.user} />
+      </div>
+    </>
   )
 }

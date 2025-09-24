@@ -1,15 +1,28 @@
 import { Head } from '@inertiajs/react'
 import { Header } from '@/components/blottr/layout/header'
+import { DebugCard } from '@/components/blottr'
 import { Button } from '@/components/ui'
 
-export default function Home() {
+interface User {
+  id: string
+  email: string
+  role: number
+}
+
+interface HomeProps {
+  auth: {
+    user: User | null
+  }
+}
+
+export default function Home({ auth }: HomeProps) {
   return (
     <>
       <Head title="Blottr - Découvrez les meilleurs artistes tatoueurs" />
 
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <Header />
+        <Header user={auth.user} />
 
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-flash/10 py-20">
@@ -138,6 +151,9 @@ export default function Home() {
             </div>
           </div>
         </footer>
+
+        {/* Debug Card - Only shows in development when DEBUG=true */}
+        <DebugCard user={auth.user} />
       </div>
     </>
   )

@@ -41,13 +41,7 @@ const TDD_CONFIG = {
   ],
 }
 
-interface FileMetrics {
-  path: string
-  lineCount: number
-  testCount: number
-  hasTests: boolean
-  testCoverage?: number
-}
+// Removed unused interface
 
 interface ComponentAnalysis {
   name: string
@@ -177,7 +171,6 @@ test.group('TDD Compliance Tests', () => {
     const components = await collectFiles(componentDir, ['.tsx', '.ts'])
     const testFiles = await collectFiles(testDir, ['.test.ts', '.spec.ts'])
 
-    const violationCount = 0
     const violations: string[] = []
 
     for (const component of components) {

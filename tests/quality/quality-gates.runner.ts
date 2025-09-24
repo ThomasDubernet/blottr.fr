@@ -6,7 +6,7 @@
 import { exec } from 'node:child_process'
 import { promisify } from 'node:util'
 import type { QualityGateConfig, QualityGateResult } from './quality-gates.config.js'
-import { QUALITY_GATES, QUALITY_THRESHOLDS, QUALITY_TOOLS } from './quality-gates.config.js'
+import { QUALITY_GATES, QUALITY_THRESHOLDS } from './quality-gates.config.js'
 
 const execAsync = promisify(exec)
 
@@ -173,7 +173,7 @@ export class QualityGatesRunner {
   private async checkPerformanceImpact(): Promise<QualityGateResult> {
     try {
       // Simulate bundle size analysis
-      const buildResult = await execAsync('npm run build')
+      await execAsync('npm run build')
 
       // In a real implementation, you would parse the build output
       // and compare bundle sizes against thresholds
@@ -217,7 +217,7 @@ export class QualityGatesRunner {
 
   private async checkTddCompliance(): Promise<QualityGateResult> {
     try {
-      const testResult = await execAsync('node ace test --reporter json')
+      await execAsync('node ace test --reporter json')
 
       // Parse test results and check for TDD compliance
       // This would check that tests exist before implementation

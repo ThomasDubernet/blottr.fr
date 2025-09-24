@@ -114,6 +114,63 @@ type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
 
 type ToastActionElement = React.ReactElement<typeof ToastAction>
 
+// Artist Notification Toast Component
+interface ArtistNotificationToastProps {
+  artistName: string
+  message: string
+  action?: 'contact_received' | 'booking_confirmed' | 'profile_updated'
+  avatar?: string
+  children?: React.ReactNode
+  onOpenChange?: (open: boolean) => void
+}
+
+const ArtistNotificationToast = React.forwardRef<
+  React.ElementRef<typeof Toast>,
+  ArtistNotificationToastProps
+>(({ artistName, message, action, avatar, children, onOpenChange, ...props }, ref) => (
+  <Toast ref={ref} variant="default" onOpenChange={onOpenChange} {...props}>
+    <div className="flex items-start gap-3">
+      {avatar && (
+        <img src={avatar} alt={artistName} className="h-10 w-10 rounded-full object-cover" />
+      )}
+      <div className="grid gap-1 flex-1">
+        <ToastTitle>{artistName}</ToastTitle>
+        <ToastDescription>{message}</ToastDescription>
+      </div>
+    </div>
+    {children}
+    <ToastClose />
+  </Toast>
+))
+ArtistNotificationToast.displayName = 'ArtistNotificationToast'
+
+// Booking Reminder Toast Component
+interface BookingReminderToastProps {
+  appointmentDate: string
+  artistName: string
+  salonName?: string
+  canReschedule?: boolean
+  children?: React.ReactNode
+  onOpenChange?: (open: boolean) => void
+}
+
+const BookingReminderToast = React.forwardRef<
+  React.ElementRef<typeof Toast>,
+  BookingReminderToastProps
+>(({ appointmentDate, artistName, salonName, canReschedule, children, onOpenChange, ...props }, ref) => (
+  <Toast ref={ref} variant="default" onOpenChange={onOpenChange} {...props}>
+    <div className="grid gap-1">
+      <ToastTitle>Tattoo Appointment Reminder</ToastTitle>
+      <ToastDescription>
+        Your appointment with {artistName} {salonName && `at ${salonName}`} is scheduled for {appointmentDate}
+      </ToastDescription>
+    </div>
+    {children}
+    <ToastClose />
+  </Toast>
+))
+BookingReminderToast.displayName = 'BookingReminderToast'
+
 export {
   type ToastProps,
   type ToastActionElement,
@@ -124,4 +181,6 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
+  ArtistNotificationToast,
+  BookingReminderToast,
 }

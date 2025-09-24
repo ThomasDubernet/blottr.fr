@@ -4,6 +4,9 @@
 // Layout Components
 export { Header } from './layout/header'
 
+// Development Tools
+export { DebugCard } from './DebugCard'
+
 // Artist & Profile Components
 export { ArtistProfileModal } from './ArtistProfileModal'
 

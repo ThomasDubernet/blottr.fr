@@ -1,19 +1,30 @@
-import { useForm } from '@inertiajs/react'
+import { useForm, Head, Link } from '@inertiajs/react'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Label } from '~/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '~/components/ui/card'
+import { Header } from '@/components/blottr/layout/header'
+import { DebugCard } from '@/components/blottr'
 
 interface LoginData {
   email: string
   password: string
 }
 
+interface User {
+  id: string
+  email: string
+  role: number
+}
+
 interface LoginProps {
+  auth: {
+    user: User | null
+  }
   errors?: Record<string, string>
 }
 
-export default function Login({ errors = {} }: LoginProps) {
+export default function Login({ auth, errors = {} }: LoginProps) {
   const { data, setData, post, processing } = useForm<LoginData>({
     email: '',
     password: '',
@@ -25,7 +36,11 @@ export default function Login({ errors = {} }: LoginProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+    <>
+      <Head title="Connexion - Blottr" />
+      <div className="min-h-screen bg-background">
+        <Header user={auth.user} />
+        <div className="flex items-center justify-center py-16">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Connexion</CardTitle>
@@ -76,18 +91,23 @@ export default function Login({ errors = {} }: LoginProps) {
               {processing ? 'Connexion...' : 'Se connecter'}
             </Button>
 
-            <p className="text-sm text-center text-gray-600">
+            <p className="text-sm text-center text-muted-foreground">
               Pas encore de compte ?{' '}
-              <a
+              <Link
                 href="/register"
-                className="text-blue-600 hover:underline"
+                className="text-primary hover:underline font-medium"
               >
                 Créer un compte
-              </a>
+              </Link>
             </p>
           </CardFooter>
         </form>
       </Card>
-    </div>
+        </div>
+
+        {/* Debug Card - Only shows in development when DEBUG=true */}
+        <DebugCard user={auth.user} />
+      </div>
+    </>
   )
 }

@@ -62,7 +62,6 @@ test.group('Accessibility Tests', (group) => {
     // Run axe-core accessibility tests
     const axe = new AxePuppeteer(page)
     const results = await axe
-      .configure(ACCESSIBILITY_CONFIG.rules)
       .withTags(ACCESSIBILITY_CONFIG.tags)
       .analyze()
 
@@ -173,7 +172,7 @@ test.group('Accessibility Tests', (group) => {
       await menuItems[0].focus()
       await page.keyboard.press('ArrowDown')
 
-      const afterArrowKey = await page.evaluate(() => document.activeElement)
+      await page.evaluate(() => document.activeElement)
       // This test is optional as not all menus implement arrow key navigation
     }
 

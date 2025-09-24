@@ -4,7 +4,8 @@
  */
 
 import { test } from '@japa/runner'
-import { chromium, firefox, webkit, Browser, Page, devices } from 'playwright'
+import { chromium, firefox, webkit, devices } from 'playwright'
+// Browser and Page types available from playwright runtime
 
 /**
  * Integration testing configuration
@@ -185,7 +186,7 @@ test.group('Integration Tests', () => {
             await page.waitForLoadState('networkidle')
 
             // Check viewport dimensions
-            const viewport = await page.evaluate(() => ({
+            await page.evaluate(() => ({
               width: window.innerWidth,
               height: window.innerHeight,
               devicePixelRatio: window.devicePixelRatio,
@@ -311,7 +312,6 @@ test.group('Integration Tests', () => {
           const firstButton = buttons.first()
 
           // Test button click after hydration
-          let clickHandled = false
           await firstButton.click()
 
           // Check if click event was handled (this is component-specific)

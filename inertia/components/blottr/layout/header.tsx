@@ -1,13 +1,23 @@
 import React from 'react'
-import { Link } from '@inertiajs/react'
+import { Link, router } from '@inertiajs/react'
 import { Button } from '@/components/ui'
 import { cn } from '@/lib/utils'
 
-interface HeaderProps {
-  className?: string
+interface User {
+  id: string
+  email: string
+  role: number
 }
 
-export function Header({ className }: HeaderProps) {
+interface HeaderProps {
+  className?: string
+  user?: User | null
+}
+
+export function Header({ className, user }: HeaderProps) {
+  const handleLogout = () => {
+    router.post('/logout')
+  }
   return (
     <header
       className={cn(
@@ -48,10 +58,27 @@ export function Header({ className }: HeaderProps) {
 
         {/* Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm">
-            Connexion
-          </Button>
-          <Button size="sm">Inscription</Button>
+          {user ? (
+            // Authenticated user actions
+            <>
+              <span className="text-sm text-foreground/60 hidden md:inline">
+                Bonjour, {user.email}
+              </span>
+              <Button variant="ghost" size="sm" onClick={handleLogout}>
+                Déconnexion
+              </Button>
+            </>
+          ) : (
+            // Guest user actions
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/login">Connexion</Link>
+              </Button>
+              <Button size="sm" asChild>
+                <Link href="/register">Inscription</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>

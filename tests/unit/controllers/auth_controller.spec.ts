@@ -24,7 +24,7 @@ test.group('AuthController Unit Tests', (group) => {
         })
       },
       request: {
-        validateUsing: (validator: any) => Promise.resolve({
+        validateUsing: (_validator: any) => Promise.resolve({
           email: 'test@example.fr',
           password: 'password123'
         })
@@ -46,7 +46,11 @@ test.group('AuthController Unit Tests', (group) => {
 
     assert.deepEqual(result, {
       view: 'auth/login',
-      data: undefined
+      data: {
+        auth: {
+          user: null
+        }
+      }
     })
   })
 
@@ -55,7 +59,11 @@ test.group('AuthController Unit Tests', (group) => {
 
     assert.deepEqual(result, {
       view: 'auth/register',
-      data: undefined
+      data: {
+        auth: {
+          user: null
+        }
+      }
     })
   })
 

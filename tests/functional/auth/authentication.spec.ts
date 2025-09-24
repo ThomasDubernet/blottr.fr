@@ -1,7 +1,6 @@
 import { test } from '@japa/runner'
-import { E_INVALID_CREDENTIALS } from '@adonisjs/auth/exceptions'
 
-test.group('Authentication - Login', (group) => {
+test.group('Authentication - Login', () => {
   // Suivant TDD : RED - Tests qui échouent d'abord
 
   test('should show login page for guests', async ({ client }) => {
@@ -11,11 +10,11 @@ test.group('Authentication - Login', (group) => {
     response.assertInertiaComponent('auth/login')
   })
 
-  test('should redirect authenticated users away from login page', async ({ client }) => {
+  test('should redirect authenticated users away from login page', async () => {
     // Ce test nécessitera un user authentifié, sera implémenté après GREEN
   })
 
-  test('should login user with valid credentials', async ({ client, assert }) => {
+  test('should login user with valid credentials', async ({ client }) => {
     // Ce test échouera d'abord car il n'y a pas d'utilisateur
     const response = await client.post('/login').json({
       email: 'client@test.fr',
@@ -66,7 +65,7 @@ test.group('Authentication - Register', () => {
     response.assertInertiaComponent('auth/register')
   })
 
-  test('should register new client user', async ({ client, assert }) => {
+  test('should register new client user', async ({ client }) => {
     const response = await client.post('/register').json({
       email: 'newclient@test.fr',
       password: 'password123',

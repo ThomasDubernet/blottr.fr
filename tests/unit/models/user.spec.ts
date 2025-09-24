@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import { DateTime } from 'luxon'
 import User from '#models/user'
 
-test.group('User Model Unit Tests', (group) => {
+test.group('User Model Unit Tests', () => {
   // TDD: Tests isolés du modèle User
 
   test('should create user with default values', async ({ assert }) => {
@@ -76,10 +76,10 @@ test.group('User Model Unit Tests', (group) => {
     user.createdAt = now
     user.updatedAt = now
 
-    assert.instanceOf(user.lastLoginAt, DateTime)
-    assert.instanceOf(user.lastActivityAt, DateTime)
-    assert.instanceOf(user.createdAt, DateTime)
-    assert.instanceOf(user.updatedAt, DateTime)
+    assert.equal(user.lastLoginAt.isValid, true)
+    assert.equal(user.lastActivityAt.isValid, true)
+    assert.equal(user.createdAt.isValid, true)
+    assert.equal(user.updatedAt.isValid, true)
   })
 
   test('should handle JSON fields correctly', async ({ assert }) => {
@@ -119,8 +119,6 @@ test.group('User Model Unit Tests', (group) => {
   })
 
   test('should handle analytics counters', async ({ assert }) => {
-    const user = new User()
-
     // Test des compteurs par défaut (logique métier)
     const defaultCounters = {
       tattooViewCount: 0,

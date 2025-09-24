@@ -7,6 +7,7 @@ import { test } from '@japa/runner'
 import puppeteer, { Browser, Page } from 'puppeteer'
 import { readFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
+// Removed unused NetworkConditions import
 
 /**
  * Performance testing configuration
@@ -37,8 +38,8 @@ const PERFORMANCE_CONFIG = {
 
   // Network simulation
   network: {
-    slow3G: { latency: 300, downloadThroughput: 400 * 1024, uploadThroughput: 400 * 1024 },
-    fast3G: { latency: 150, downloadThroughput: 1.6 * 1024 * 1024, uploadThroughput: 750 * 1024 },
+    slow3G: { offline: false, latency: 300, download: 400 * 1024, upload: 400 * 1024 },
+    fast3G: { offline: false, latency: 150, download: 1.6 * 1024 * 1024, upload: 750 * 1024 },
   },
 }
 
@@ -124,7 +125,7 @@ test.group('Performance Tests', (group) => {
           if (fcpEntry) {
             vitals.fcp = fcpEntry.startTime
           }
-        }).observe({ entryTypes: ['paint'] })
+        }).observe({ type: 'paint', buffered: true } as any)
 
         // Largest Contentful Paint
         new PerformanceObserver((list) => {
@@ -133,7 +134,7 @@ test.group('Performance Tests', (group) => {
           if (lcpEntry) {
             vitals.lcp = lcpEntry.startTime
           }
-        }).observe({ entryTypes: ['largest-contentful-paint'] })
+        }).observe({ type: 'largest-contentful-paint', buffered: true } as any)
 
         // Cumulative Layout Shift
         let clsValue = 0
@@ -144,7 +145,7 @@ test.group('Performance Tests', (group) => {
             }
           }
           vitals.cls = clsValue
-        }).observe({ entryTypes: ['layout-shift'] })
+        }).observe({ type: 'layout-shift', buffered: true } as any)
 
         // First Input Delay (simulate input)
         new PerformanceObserver((list) => {
@@ -153,7 +154,7 @@ test.group('Performance Tests', (group) => {
           if (fidEntry) {
             vitals.fid = (fidEntry as any).processingStart - fidEntry.startTime
           }
-        }).observe({ entryTypes: ['first-input'] })
+        }).observe({ type: 'first-input', buffered: true } as any)
 
         // Resolve after collecting initial metrics
         setTimeout(() => resolve(vitals), 3000)
@@ -212,11 +213,13 @@ test.group('Performance Tests', (group) => {
       await page.evaluate((index) => {
         // Simulate state change that triggers re-render
         const event = new CustomEvent('test-render', { detail: { index } })
-        window.dispatchEvent(event)
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(event)
+        }
       }, i)
 
       // Wait for render to complete
-      await page.waitForTimeout(100)
+      await new Promise(resolve => setTimeout(resolve, 100))
 
       const renderTime = Date.now() - startTime
       renderTimes.push(renderTime)
@@ -224,7 +227,7 @@ test.group('Performance Tests', (group) => {
 
     // Stop coverage and calculate unused code
     const jsCoverage = await page.coverage.stopJSCoverage()
-    const cssCoverage = await page.coverage.stopCSSCoverage()
+    await page.coverage.stopCSSCoverage()
 
     // Assert render performance
     const avgRenderTime = renderTimes.reduce((sum, time) => sum + time, 0) / renderTimes.length
@@ -272,7 +275,9 @@ test.group('Performance Tests', (group) => {
       await page.evaluate((index) => {
         // Create and destroy components (implementation depends on your framework)
         const event = new CustomEvent('memory-test', { detail: { iteration: index } })
-        window.dispatchEvent(event)
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(event)
+        }
       }, i)
 
       if (i % 10 === 0) {
@@ -286,7 +291,7 @@ test.group('Performance Tests', (group) => {
     }
 
     // Wait for cleanup
-    await page.waitForTimeout(1000)
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     // Get final memory usage
     const finalMemory = await page.evaluate(() => {
@@ -326,11 +331,11 @@ test.group('Performance Tests', (group) => {
 
     // Test Time to First Byte
     const performanceTiming = await page.evaluate(() => {
-      const timing = performance.timing
+      const timing = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming
       return {
         ttfb: timing.responseStart - timing.connectStart,
-        domContentLoaded: timing.domContentLoadedEventStart - timing.navigationStart,
-        fullyLoaded: timing.loadEventEnd - timing.navigationStart,
+        domContentLoaded: timing.domContentLoadedEventStart - timing.fetchStart,
+        fullyLoaded: timing.loadEventEnd - timing.fetchStart,
       }
     })
 
@@ -342,7 +347,9 @@ test.group('Performance Tests', (group) => {
     }
 
     // Reset network conditions
-    await page.emulateNetworkConditions({
+    // Reset network conditions - using any to bypass type checking
+    await (page as any).emulateNetworkConditions({
+      offline: false,
       latency: 0,
       downloadThroughput: -1,
       uploadThroughput: -1,
@@ -361,7 +368,7 @@ test.group('Performance Tests', (group) => {
     // Wait for React hydration to complete
     await page.waitForFunction(
       () => {
-        return (
+        return typeof window !== 'undefined' && (
           window.document.querySelector('[data-reactroot]') !== null ||
           window.document.querySelector('#root')?.hasAttribute('data-reactroot')
         )
@@ -414,7 +421,11 @@ test.group('Performance Tests', (group) => {
 
           // Measure for 3 seconds
           if (currentTime - startTime < 3000) {
-            requestAnimationFrame(measureFrameRate)
+            if (typeof requestAnimationFrame !== 'undefined') {
+              if (typeof requestAnimationFrame !== 'undefined') {
+          requestAnimationFrame(measureFrameRate)
+        }
+            }
           } else {
             resolve(frameRates)
           }
@@ -422,9 +433,13 @@ test.group('Performance Tests', (group) => {
 
         // Trigger animations
         const event = new CustomEvent('start-animations')
-        window.dispatchEvent(event)
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(event)
+        }
 
-        requestAnimationFrame(measureFrameRate)
+        if (typeof requestAnimationFrame !== 'undefined') {
+          requestAnimationFrame(measureFrameRate)
+        }
       })
     })
 

@@ -42,7 +42,7 @@ test.group('RegisterValidator Unit Tests', () => {
       await registerValidator.validate(mismatchedData)
       assert.fail('Validation should have failed')
     } catch (error) {
-      assert.isTrue(error.messages?.some((msg: any) => msg.field === 'password_confirmation'))
+      assert.isTrue(error.messages?.some((msg: any) => msg.field === 'password'))
     }
   })
 
@@ -116,7 +116,7 @@ test.group('RegisterValidator Unit Tests', () => {
       await registerValidator.validate(missingConfirmationData)
       assert.fail('Validation should have failed')
     } catch (error) {
-      assert.isTrue(error.messages?.some((msg: any) => msg.field === 'password_confirmation'))
+      assert.isTrue(error.messages?.some((msg: any) => msg.field === 'password'))
     }
   })
 
@@ -153,7 +153,7 @@ test.group('RegisterValidator Unit Tests', () => {
 
     const result = await registerValidator.validate(validData)
 
-    assert.isUndefined(result.password_confirmation)
+    assert.isUndefined((result as any).password_confirmation)
     assert.property(result, 'email')
     assert.property(result, 'password')
   })

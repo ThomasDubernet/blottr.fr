@@ -1,4 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import { DateTime } from 'luxon'
 import User from '#models/user'
 import { loginValidator } from '#validators/login'
 import { registerValidator } from '#validators/register'
@@ -7,15 +8,25 @@ export default class AuthController {
   /**
    * Show login form
    */
-  async showLogin({ inertia }: HttpContext) {
-    return inertia.render('auth/login')
+  async showLogin({ inertia, auth }: HttpContext) {
+    const user = auth.user
+    return inertia.render('auth/login', {
+      auth: {
+        user: user ? { id: user.id, email: user.email, role: user.role } : null,
+      },
+    })
   }
 
   /**
    * Show register form
    */
-  async showRegister({ inertia }: HttpContext) {
-    return inertia.render('auth/register')
+  async showRegister({ inertia, auth }: HttpContext) {
+    const user = auth.user
+    return inertia.render('auth/register', {
+      auth: {
+        user: user ? { id: user.id, email: user.email, role: user.role } : null,
+      },
+    })
   }
 
   /**
@@ -35,7 +46,7 @@ export default class AuthController {
     await auth.use('web').login(user)
 
     // Update last login
-    user.lastLoginAt = new Date()
+    user.lastLoginAt = DateTime.now()
     await user.save()
 
     return response.redirect().toRoute('home')
@@ -73,6 +84,6 @@ export default class AuthController {
    */
   async logout({ auth, response }: HttpContext) {
     await auth.use('web').logout()
-    return response.redirect().toRoute('auth.login')
+    return response.redirect().toRoute('home')
   }
 }
