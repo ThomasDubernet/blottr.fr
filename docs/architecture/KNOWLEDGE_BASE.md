@@ -499,14 +499,15 @@ Total: 78 files, 23 directories
 
 
 
+
 ## Project Status (Auto-Updated)
 
-**Last Update**: 2025-09-24 09:59:27
+**Last Update**: 2025-09-24 12:47:14
 **Git Branch**: main
-**Last Commit**: 9f4709d - Merge remote-tracking branch 'origin/main' (Thomas Dubernet, 24 seconds ago)
+**Last Commit**: a3baed5 - Merge remote-tracking branch 'origin/main' (Thomas Dubernet, 28 seconds ago)
 
 ### 📊 Project Metrics
-- **Files**: 197 files, 45 directories
+- **Files**: 208 files, 53 directories
 - **Dependencies**: 46 production, 43 development
 - **Database**: 14 migrations, 11 models
 - **Version**: 0.0.0
@@ -531,12 +532,15 @@ Total: 78 files, 23 directories
 │   ├── main.ts
 │   ├── preview.ts
 │   └── vitest.setup.ts
+├── AUTH_IMPLEMENTATION.md
 ├── CLAUDE.md
 ├── DESIGN_SYSTEM.md
 ├── IMPLEMENTATION_COMPLETE.md
 ├── ace.js
 ├── adonisrc.ts
 ├── app
+│   ├── controllers
+│   │   └── auth_controller.ts
 │   ├── exceptions
 │   │   └── handler.ts
 │   ├── middleware
@@ -544,18 +548,21 @@ Total: 78 files, 23 directories
 │   │   ├── container_bindings_middleware.ts
 │   │   ├── guest_middleware.ts
 │   │   └── silent_auth_middleware.ts
-│   └── models
-│       ├── appointment.ts
-│       ├── artist.ts
-│       ├── artist_onboarding.ts
-│       ├── auth_access_token.ts
-│       ├── city.ts
-│       ├── contact_request.ts
-│       ├── salon.ts
-│       ├── shop.ts
-│       ├── tag.ts
-│       ├── tattoo.ts
-│       └── user.ts
+│   ├── models
+│   │   ├── appointment.ts
+│   │   ├── artist.ts
+│   │   ├── artist_onboarding.ts
+│   │   ├── auth_access_token.ts
+│   │   ├── city.ts
+│   │   ├── contact_request.ts
+│   │   ├── salon.ts
+│   │   ├── shop.ts
+│   │   ├── tag.ts
+│   │   ├── tattoo.ts
+│   │   └── user.ts
+│   └── validators
+│       ├── login.ts
+│       └── register.ts
 ├── bin
 │   ├── console.ts
 │   ├── server.ts
@@ -675,6 +682,9 @@ Total: 78 files, 23 directories
 │   │   ├── theme.ts
 │   │   └── utils.ts
 │   ├── pages
+│   │   ├── auth
+│   │   │   ├── login.tsx
+│   │   │   └── register.tsx
 │   │   ├── components-demo.tsx
 │   │   ├── design-system.tsx
 │   │   ├── errors
@@ -732,6 +742,9 @@ Total: 78 files, 23 directories
 ├── tailwind.config.js.backup
 ├── tests
 │   ├── bootstrap.ts
+│   ├── functional
+│   │   └── auth
+│   │       └── authentication.spec.ts
 │   ├── playwright
 │   │   └── design-system-integration.test.ts
 │   ├── quality
@@ -747,16 +760,23 @@ Total: 78 files, 23 directories
 │   ├── simple-page-test.js
 │   ├── simple-page-test.mjs
 │   └── unit
-│       └── components
-│           ├── ArtistCard.test.ts
-│           └── ui
-│               └── button.test.ts
+│       ├── components
+│       │   ├── ArtistCard.test.ts
+│       │   └── ui
+│       │       └── button.test.ts
+│       ├── controllers
+│       │   └── auth_controller.spec.ts
+│       ├── models
+│       │   └── user.spec.ts
+│       └── validators
+│           ├── login_validator.spec.ts
+│           └── register_validator.spec.ts
 ├── tsconfig.json
 ├── vite.config.ts
 ├── vitest.shims.d.ts
 └── workflow_phases.md
 
-44 directories, 197 files
+52 directories, 208 files
 ```
 
 ### 🔄 Git Status
