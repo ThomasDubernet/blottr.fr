@@ -12,6 +12,30 @@ All project documentation has been organized in the `/docs` directory:
 @docs/architecture/KNOWLEDGE_BASE.md - Project architecture, concepts, and workflows
 @docs/design-system/README.md - Design system overview and component library guide
 
+## 🏗️ Development Principles
+
+**SOLID Principles** : À respecter impérativement dans tout le code
+
+- **S**ingle Responsibility : Chaque classe/fonction a une seule responsabilité
+- **O**pen/Closed : Ouvert à l'extension, fermé à la modification
+- **L**iskov Substitution : Les sous-classes doivent être substituables
+- **I**nterface Segregation : Interfaces spécifiques plutôt que génériques
+- **D**ependency Inversion : Dépendre d'abstractions, pas de concrétisations
+
+**Test-Driven Development (TDD)** : Workflow obligatoire
+
+1. **Red** : Écrire un test qui échoue d'abord
+2. **Green** : Écrire le code minimum pour faire passer le test
+3. **Refactor** : Améliorer la qualité du code en gardant les tests verts
+
+**Domain-Driven Design (DDD)** : Architecture centrée domaine
+
+- **Entities** : Objets avec identité (User, Artist, Tattoo)
+- **Value Objects** : Objets sans identité (Email, Password, GPS coordinates)
+- **Aggregates** : Groupes cohérents d'entités (Artist + Portfolio)
+- **Repositories** : Interface d'accès aux données
+- **Services** : Logic métier complexe cross-entity
+
 ## Context7 Usage Policy
 
 **Always use Context7 when you need:**
