@@ -180,16 +180,16 @@ export default function BookingCalendar({
   )
 
   return (
-    <div className={`bg-white rounded-lg shadow-soft border border-gray-200 ${className}`}>
+    <div className={`bg-background card-responsive shadow-card border border-border ${className}`}>
       {/* Header */}
-      <div className="px-6 py-4 border-b border-gray-200">
+      <div className="p-responsive-lg border-b border-border">
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">
+            <h3 className="text-responsive-lg font-semibold text-foreground">
               {view === 'calendar' ? 'Select Date' : 'Select Time'}
             </h3>
             {selectedDate && view === 'times' && (
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-responsive-sm text-muted-foreground mt-1">
                 {format(selectedDate, 'EEEE, MMMM d, yyyy')}
               </p>
             )}
@@ -199,7 +199,7 @@ export default function BookingCalendar({
             <button
               type="button"
               onClick={() => setView('calendar')}
-              className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+              className="text-responsive-sm text-primary hover:text-primary/80 font-medium focus-ring"
             >
               ← Back to Calendar
             </button>
@@ -209,11 +209,11 @@ export default function BookingCalendar({
 
       {loading ? (
         <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500"></div>
-          <span className="ml-3 text-gray-600">Loading availability...</span>
+          <div className="loading-spinner"></div>
+          <span className="ml-3 text-muted-foreground">Loading availability...</span>
         </div>
       ) : (
-        <div className="p-6">
+        <div className="p-responsive-lg">
           {view === 'calendar' ? (
             <CalendarView
               currentMonth={currentMonth}
@@ -263,11 +263,11 @@ function CalendarView({
         <button
           type="button"
           onClick={onPrevMonth}
-          className="p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+          className="p-2 hover:bg-accent rounded-md transition-colors duration-200 focus-ring"
           aria-label="Previous month"
         >
           <svg
-            className="w-5 h-5 text-gray-600"
+            className="w-5 h-5 text-muted-foreground"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -281,16 +281,16 @@ function CalendarView({
           </svg>
         </button>
 
-        <h2 className="text-xl font-semibold text-gray-900">{format(currentMonth, 'MMMM yyyy')}</h2>
+        <h2 className="text-responsive-xl font-semibold text-foreground">{format(currentMonth, 'MMMM yyyy')}</h2>
 
         <button
           type="button"
           onClick={onNextMonth}
-          className="p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
+          className="p-2 hover:bg-accent rounded-md transition-colors duration-200 focus-ring"
           aria-label="Next month"
         >
           <svg
-            className="w-5 h-5 text-gray-600"
+            className="w-5 h-5 text-muted-foreground"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -301,16 +301,16 @@ function CalendarView({
       </div>
 
       {/* Week Days Header */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div className="grid grid-cols-7 gap-responsive-xs mb-2">
         {WEEK_DAYS.map((day) => (
           <div key={day} className="p-2 text-center">
-            <span className="text-sm font-medium text-gray-500">{day}</span>
+            <span className="text-responsive-sm font-medium text-muted-foreground">{day}</span>
           </div>
         ))}
       </div>
 
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-responsive-xs">
         {calendarDays.map((day, index) => {
           const isDisabled = isDayDisabled(day.date)
           const hasAvailableSlots = day.hasSlots && day.availableSlots > 0
@@ -322,16 +322,16 @@ function CalendarView({
               onClick={() => onDateClick(day.date)}
               disabled={isDisabled || !hasAvailableSlots}
               className={`
-                relative p-2 h-12 rounded-md text-sm font-medium transition-all duration-200
-                ${!day.isCurrentMonth ? 'text-gray-300' : ''}
-                ${day.isToday ? 'ring-2 ring-primary-200' : ''}
-                ${day.isSelected ? 'bg-primary-500 text-white' : ''}
+                relative p-2 h-12 rounded-md text-responsive-sm font-medium transition-all duration-200 focus-ring
+                ${!day.isCurrentMonth ? 'text-muted-foreground/50' : ''}
+                ${day.isToday ? 'ring-2 ring-primary/30' : ''}
+                ${day.isSelected ? 'bg-primary text-primary-foreground' : ''}
                 ${
                   isDisabled || !hasAvailableSlots
-                    ? 'cursor-not-allowed text-gray-300'
-                    : 'hover:bg-primary-50 hover:text-primary-700'
+                    ? 'cursor-not-allowed text-muted-foreground/30'
+                    : 'hover:bg-primary/5 hover:text-primary'
                 }
-                ${hasAvailableSlots && !day.isSelected ? 'bg-success-50 text-success-700' : ''}
+                ${hasAvailableSlots && !day.isSelected ? 'bg-green-50 text-green-700' : ''}
               `}
               aria-label={`${format(day.date, 'MMMM d, yyyy')}${hasAvailableSlots ? ` - ${day.availableSlots} slots available` : ''}`}
             >
@@ -340,7 +340,7 @@ function CalendarView({
               {/* Available slots indicator */}
               {hasAvailableSlots && !day.isSelected && (
                 <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2">
-                  <div className="w-1.5 h-1.5 bg-success-500 rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                 </div>
               )}
             </button>
@@ -349,18 +349,18 @@ function CalendarView({
       </div>
 
       {/* Legend */}
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-center space-x-6 text-sm text-gray-600">
+      <div className="mt-6 pt-4 border-t border-border">
+        <div className="flex items-center justify-center gap-responsive-lg text-responsive-sm text-muted-foreground">
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-success-50 border border-success-200 rounded mr-2"></div>
+            <div className="w-3 h-3 bg-green-50 border border-green-200 rounded mr-2"></div>
             Available
           </div>
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-gray-100 border border-gray-200 rounded mr-2"></div>
+            <div className="w-3 h-3 bg-muted border border-border rounded mr-2"></div>
             Unavailable
           </div>
           <div className="flex items-center">
-            <div className="w-3 h-3 bg-primary-500 rounded mr-2"></div>
+            <div className="w-3 h-3 bg-primary rounded mr-2"></div>
             Selected
           </div>
         </div>

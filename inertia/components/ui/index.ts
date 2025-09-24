@@ -9,6 +9,7 @@ export { Badge, badgeVariants } from './badge'
 export { Avatar, AvatarImage, AvatarFallback } from './avatar'
 export { Label } from './label'
 export { Separator } from './separator'
+export { Progress } from './progress'
 
 // Form components
 export { Checkbox } from './checkbox'
@@ -84,11 +85,9 @@ export {
   ToastDescription,
   ToastClose,
   ToastAction,
-  ArtistNotificationToast,
-  BookingReminderToast,
   type ToastProps,
   type ToastActionElement,
 } from './toast'
 
 // Utility exports
-export { cn } from '../utils/cn'
+export { cn } from '~/lib/utils'

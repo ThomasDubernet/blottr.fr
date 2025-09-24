@@ -74,22 +74,22 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
     index,
     aspectRatio = 'aspect-square',
   }) => (
-    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
+    <Card className="group gallery-item overflow-hidden hover:shadow-gallery-hover transition-all duration-300 cursor-pointer">
       <div className="relative">
-        <div className={cn('overflow-hidden bg-gray-100', aspectRatio)}>
+        <div className={cn('overflow-hidden bg-muted', aspectRatio)}>
           <img
             src={tattoo.photo}
             alt={
               tattoo.alt_text || `Tattoo by ${tattoo.artist.firstname} ${tattoo.artist.lastname}`
             }
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="tattoo-image transition-transform duration-300 group-hover:scale-105"
             onClick={() => handleTattooClick(tattoo, index)}
           />
         </div>
 
         {/* Overlay with actions */}
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-          <div className="flex space-x-2">
+        <div className="tattoo-overlay">
+          <div className="flex gap-responsive-xs">
             <Button
               variant="secondary"
               size="sm"
@@ -97,7 +97,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                 e.stopPropagation()
                 onTattooLike?.(tattoo.id)
               }}
-              className="bg-white/90 hover:bg-white text-gray-900"
+              className="bg-white/90 hover:bg-white text-foreground focus-ring"
             >
               <Heart className="h-4 w-4" />
             </Button>
@@ -105,7 +105,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
               variant="secondary"
               size="sm"
               onClick={() => handleTattooClick(tattoo, index)}
-              className="bg-white/90 hover:bg-white text-gray-900"
+              className="bg-white/90 hover:bg-white text-foreground focus-ring"
             >
               <Eye className="h-4 w-4" />
             </Button>
@@ -117,7 +117,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                   e.stopPropagation()
                   window.open(tattoo.instagram_post_url, '_blank')
                 }}
-                className="bg-white/90 hover:bg-white text-gray-900"
+                className="bg-white/90 hover:bg-white text-foreground focus-ring"
               >
                 <Instagram className="h-4 w-4" />
               </Button>
@@ -128,7 +128,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
         {/* Flash badge */}
         {tattoo.is_flash && (
           <div className="absolute top-2 left-2">
-            <Badge variant="secondary" className="bg-yellow-400 text-yellow-900 border-yellow-500">
+            <Badge variant="secondary" className="badge-flash">
               Flash {tattoo.price && `€${tattoo.price}`}
             </Badge>
           </div>
@@ -136,12 +136,12 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
 
         {/* Stats overlay */}
         {showStats && (
-          <div className="absolute bottom-2 right-2 flex space-x-2">
-            <div className="flex items-center bg-black/70 rounded-full px-2 py-1 text-xs text-white">
+          <div className="absolute bottom-2 right-2 flex gap-responsive-xs">
+            <div className="flex items-center bg-black/70 rounded-full px-2 py-1 text-responsive-xs text-white">
               <Eye className="h-3 w-3 mr-1" />
               {tattoo.view_count}
             </div>
-            <div className="flex items-center bg-black/70 rounded-full px-2 py-1 text-xs text-white">
+            <div className="flex items-center bg-black/70 rounded-full px-2 py-1 text-responsive-xs text-white">
               <Heart className="h-3 w-3 mr-1" />
               {tattoo.like_count}
             </div>
@@ -150,29 +150,29 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
       </div>
 
       {/* Card content */}
-      <CardContent className="p-3">
+      <CardContent className="p-responsive-sm">
         {showArtistInfo && (
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <span className="text-sm font-medium text-gray-900">
+            <div className="flex items-center gap-responsive-xs">
+              <span className="text-responsive-sm font-medium text-foreground artist-name">
                 {tattoo.artist.firstname} {tattoo.artist.lastname}
               </span>
               {tattoo.artist.instagram_handle && (
-                <span className="text-xs text-gray-500">@{tattoo.artist.instagram_handle}</span>
+                <span className="text-responsive-xs text-muted-foreground">@{tattoo.artist.instagram_handle}</span>
               )}
             </div>
           </div>
         )}
 
         {tattoo.tags && tattoo.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-2">
+          <div className="flex flex-wrap gap-responsive-xs mt-2">
             {tattoo.tags.slice(0, 2).map((tag, index) => (
-              <Badge key={index} variant="outline" className="text-xs">
+              <Badge key={index} variant="outline" className="text-responsive-xs">
                 {tag.name}
               </Badge>
             ))}
             {tattoo.tags.length > 2 && (
-              <Badge variant="outline" className="text-xs">
+              <Badge variant="outline" className="text-responsive-xs">
                 +{tattoo.tags.length - 2}
               </Badge>
             )}
@@ -180,7 +180,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
         )}
 
         {tattoo.description && (
-          <p className="text-xs text-gray-600 mt-2 line-clamp-2">{tattoo.description}</p>
+          <p className="text-responsive-xs text-muted-foreground mt-2 line-clamp-2">{tattoo.description}</p>
         )}
       </CardContent>
     </Card>
@@ -189,13 +189,11 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
   const renderGrid = () => (
     <div
       className={cn(
-        'grid gap-4',
+        'gallery-grid',
         {
-          'grid-cols-2': columns === 2,
-          'grid-cols-3': columns === 3,
-          'grid-cols-4': columns === 4,
+          'gallery-grid-sm': columns === 2,
+          'gallery-grid-lg': columns === 4,
         },
-        'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5',
         className
       )}
     >
@@ -206,9 +204,9 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
   )
 
   const renderMasonry = () => (
-    <div className={cn('columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4', className)}>
+    <div className={cn('masonry', className)}>
       {tattoos.map((tattoo, index) => (
-        <div key={tattoo.id} className="break-inside-avoid mb-4">
+        <div key={tattoo.id} className="masonry-item">
           <TattooCard tattoo={tattoo} index={index} aspectRatio="aspect-auto" />
         </div>
       ))}
@@ -216,7 +214,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
   )
 
   const renderCarousel = () => (
-    <div className={cn('flex space-x-4 overflow-x-auto pb-4', className)}>
+    <div className={cn('flex gap-responsive-md overflow-x-auto pb-4', className)}>
       {tattoos.map((tattoo, index) => (
         <div key={tattoo.id} className="flex-none w-64">
           <TattooCard tattoo={tattoo} index={index} />
@@ -242,7 +240,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
 
       {/* Full-screen modal */}
       <Dialog open={!!selectedTattoo} onOpenChange={(open) => !open && setSelectedTattoo(null)}>
-        <DialogContent className="max-w-4xl h-[90vh] p-0">
+        <DialogContent className="max-w-4xl h-[90vh] p-0 dialog-responsive">
           {selectedTattoo && (
             <div className="flex h-full">
               {/* Image section */}
@@ -259,7 +257,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white focus-ring"
                       onClick={handlePrevious}
                     >
                       <ChevronLeft className="h-6 w-6" />
@@ -267,7 +265,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white focus-ring"
                       onClick={handleNext}
                     >
                       <ChevronRight className="h-6 w-6" />
@@ -277,15 +275,15 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
               </div>
 
               {/* Info sidebar */}
-              <div className="w-80 bg-white p-6 overflow-y-auto">
-                <div className="space-y-4">
+              <div className="w-80 bg-background p-responsive-lg overflow-y-auto">
+                <div className="space-responsive-md">
                   {/* Artist info */}
                   <div>
-                    <h3 className="text-lg font-semibold">
+                    <h3 className="text-responsive-lg font-semibold artist-name">
                       {selectedTattoo.artist.firstname} {selectedTattoo.artist.lastname}
                     </h3>
                     {selectedTattoo.artist.instagram_handle && (
-                      <p className="text-sm text-gray-600">
+                      <p className="text-responsive-sm text-muted-foreground">
                         @{selectedTattoo.artist.instagram_handle}
                       </p>
                     )}
@@ -293,7 +291,7 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
 
                   {/* Flash info */}
                   {selectedTattoo.is_flash && (
-                    <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
+                    <Badge className="badge-flash">
                       Flash Tattoo {selectedTattoo.price && `- €${selectedTattoo.price}`}
                     </Badge>
                   )}
@@ -301,18 +299,18 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                   {/* Description */}
                   {selectedTattoo.description && (
                     <div>
-                      <h4 className="font-medium mb-2">Description</h4>
-                      <p className="text-sm text-gray-600">{selectedTattoo.description}</p>
+                      <h4 className="font-medium text-responsive-base mb-2">Description</h4>
+                      <p className="text-responsive-sm text-muted-foreground">{selectedTattoo.description}</p>
                     </div>
                   )}
 
                   {/* Tags */}
                   {selectedTattoo.tags && selectedTattoo.tags.length > 0 && (
                     <div>
-                      <h4 className="font-medium mb-2">Tags</h4>
-                      <div className="flex flex-wrap gap-1">
+                      <h4 className="font-medium text-responsive-base mb-2">Tags</h4>
+                      <div className="flex flex-wrap gap-responsive-xs">
                         {selectedTattoo.tags.map((tag, index) => (
-                          <Badge key={index} variant="outline" className="text-xs">
+                          <Badge key={index} variant="outline" className="text-responsive-xs">
                             {tag.name}
                           </Badge>
                         ))}
@@ -321,27 +319,27 @@ export const TattooGallery: React.FC<TattooGalleryProps> = ({
                   )}
 
                   {/* Stats */}
-                  <div className="flex items-center space-x-4 pt-4 border-t">
-                    <div className="flex items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-responsive-md pt-4 border-t">
+                    <div className="flex items-center text-responsive-sm text-muted-foreground">
                       <Eye className="h-4 w-4 mr-1" />
                       {selectedTattoo.view_count} views
                     </div>
-                    <div className="flex items-center text-sm text-gray-600">
+                    <div className="flex items-center text-responsive-sm text-muted-foreground">
                       <Heart className="h-4 w-4 mr-1" />
                       {selectedTattoo.like_count} likes
                     </div>
                   </div>
 
                   {/* Actions */}
-                  <div className="space-y-2 pt-4 border-t">
-                    <Button className="w-full" onClick={() => onTattooLike?.(selectedTattoo.id)}>
+                  <div className="space-responsive-sm pt-4 border-t">
+                    <Button className="w-full btn-responsive focus-ring" onClick={() => onTattooLike?.(selectedTattoo.id)}>
                       <Heart className="h-4 w-4 mr-2" />
                       Like Tattoo
                     </Button>
                     {selectedTattoo.instagram_post_url && (
                       <Button
                         variant="outline"
-                        className="w-full"
+                        className="w-full btn-responsive focus-ring"
                         onClick={() => window.open(selectedTattoo.instagram_post_url, '_blank')}
                       >
                         <Instagram className="h-4 w-4 mr-2" />

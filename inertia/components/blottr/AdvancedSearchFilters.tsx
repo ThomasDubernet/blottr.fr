@@ -184,10 +184,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
     filters: SearchFilters
     onChange: (updates: Partial<SearchFilters>) => void
   }> = ({ filters: currentFilters, onChange }) => (
-    <div className="space-y-6">
+    <div className="space-responsive-lg">
       {/* Location Filter */}
-      <div className="space-y-3">
-        <Label className="text-sm font-semibold">Location</Label>
+      <div className="space-responsive-sm">
+        <Label className="form-label">Location</Label>
         <Select
           value={currentFilters.location?.city || ''}
           onValueChange={(value) =>
@@ -231,14 +231,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
       </div>
 
       {/* Tattoo Styles */}
-      <div className="space-y-3">
-        <Label className="text-sm font-semibold">Tattoo Styles</Label>
-        <div className="flex flex-wrap gap-2">
+      <div className="space-responsive-sm">
+        <Label className="form-label">Tattoo Styles</Label>
+        <div className="flex flex-wrap gap-responsive-xs">
           {TATTOO_STYLES.map((style) => (
             <Badge
               key={style}
               variant={currentFilters.styles?.includes(style) ? 'default' : 'outline'}
-              className="cursor-pointer"
+              className="filter-chip cursor-pointer hover:scale-105 transition-transform focus-ring"
               onClick={() => {
                 const currentStyles = currentFilters.styles || []
                 const newStyles = currentStyles.includes(style)
@@ -254,11 +254,11 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
       </div>
 
       {/* Body Parts */}
-      <div className="space-y-3">
-        <Label className="text-sm font-semibold">Body Placement</Label>
-        <div className="grid grid-cols-3 gap-2">
+      <div className="space-responsive-sm">
+        <Label className="form-label">Body Placement</Label>
+        <div className="grid grid-cols-3 gap-responsive-xs">
           {BODY_PARTS.map((part) => (
-            <label key={part} className="flex items-center space-x-2 text-sm">
+            <label key={part} className="flex items-center gap-responsive-xs text-responsive-sm focus-ring">
               <Checkbox
                 checked={currentFilters.bodyParts?.includes(part) || false}
                 onCheckedChange={(checked) => {
@@ -276,10 +276,10 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
       </div>
 
       {/* Price Range */}
-      <div className="space-y-3">
-        <Label className="text-sm font-semibold">Price Range (Session)</Label>
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
+      <div className="space-responsive-sm">
+        <Label className="form-label">Price Range (Session)</Label>
+        <div className="space-responsive-xs">
+          <div className="flex items-center gap-responsive-xs">
             <Input
               type="number"
               placeholder="Min"
@@ -293,9 +293,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                       : undefined,
                 })
               }}
-              className="w-24"
+              className="w-24 input-responsive"
             />
-            <span className="text-secondary-500">to</span>
+            <span className="text-muted-foreground text-responsive-sm">to</span>
             <Input
               type="number"
               placeholder="Max"
@@ -309,9 +309,9 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
                       : undefined,
                 })
               }}
-              className="w-24"
+              className="w-24 input-responsive"
             />
-            <span className="text-secondary-500">USD</span>
+            <span className="text-muted-foreground text-responsive-sm">USD</span>
           </div>
         </div>
       </div>
@@ -490,13 +490,13 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
   )
 
   return (
-    <div className={cn('space-y-4', className)}>
+    <div className={cn('space-responsive-md', className)}>
       {/* Desktop Filters - Sidebar */}
       <div className="hidden lg:block">
-        <div className="sticky top-4 space-y-4">
+        <div className="sticky top-4 space-responsive-md">
           {/* Sort Options */}
-          <div className="space-y-2">
-            <Label className="text-sm font-semibold">Sort by</Label>
+          <div className="space-responsive-xs">
+            <Label className="form-label">Sort by</Label>
             <Select
               value={filters.sortBy || 'relevance'}
               onValueChange={(sortBy) => updateFilters({ sortBy: sortBy as any })}
@@ -517,14 +517,14 @@ export const AdvancedSearchFilters: React.FC<AdvancedSearchFiltersProps> = ({
           {/* Active Filters Summary */}
           {getActiveFilterCount() > 0 && (
             <div className="flex items-center justify-between">
-              <span className="text-sm text-secondary-600">
+              <span className="text-responsive-sm text-muted-foreground">
                 {getActiveFilterCount()} filter{getActiveFilterCount() !== 1 ? 's' : ''} active
               </span>
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={clearFilters}
-                className="h-auto p-0 text-xs text-primary-600 hover:text-primary-700"
+                className="h-auto p-0 text-responsive-xs text-primary hover:text-primary/80 focus-ring"
               >
                 Clear all
               </Button>

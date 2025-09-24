@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from '@inertiajs/react'
 import { Button } from '@/components/ui'
-import { cn } from '~/lib/utils'
+import { cn } from '@/lib/utils'
 
 interface HeaderProps {
   className?: string

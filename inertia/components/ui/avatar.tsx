@@ -4,6 +4,7 @@ import * as React from 'react'
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
 
 import { cn } from '~/lib/utils'
+import { getRadius } from '~/lib/design-tokens'
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -11,7 +12,12 @@ const Avatar = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <AvatarPrimitive.Root
     ref={ref}
-    className={cn('relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full', className)}
+    className={cn('relative flex shrink-0 overflow-hidden avatar-responsive', className)}
+    style={{
+      borderRadius: `var(--radius-${getRadius('full')})`,
+      width: 'var(--component-avatar-size, 2.5rem)',
+      height: 'var(--component-avatar-size, 2.5rem)'
+    }}
     {...props}
   />
 ))
@@ -36,9 +42,12 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      'flex h-full w-full items-center justify-center rounded-full bg-muted',
+      'flex h-full w-full items-center justify-center bg-muted avatar-fallback-responsive',
       className
     )}
+    style={{
+      borderRadius: `var(--radius-${getRadius('full')})`
+    }}
     {...props}
   />
 ))

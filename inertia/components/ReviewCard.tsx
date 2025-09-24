@@ -164,24 +164,24 @@ export default function ReviewCard({
   return (
     <div
       className={`
-        bg-white rounded-lg border border-gray-200 transition-all duration-200
-        ${isTestimonial ? 'shadow-medium hover:shadow-large' : 'shadow-soft hover:shadow-medium'}
+        bg-background card-responsive border border-border transition-all duration-200
+        ${isTestimonial ? 'shadow-gallery hover:shadow-gallery-hover' : 'shadow-card hover:shadow-card-hover'}
         ${className}
       `}
     >
       {/* Header */}
-      <div className={`${isCompact ? 'p-4' : 'p-6'}`}>
+      <div className={`${isCompact ? 'p-responsive-md' : 'p-responsive-lg'}`}>
         <div className="flex items-start justify-between mb-4">
-          <div className="flex items-start space-x-3">
+          <div className="flex items-start gap-responsive-sm">
             {/* Client Avatar */}
             {showClient && <ClientAvatar client={review.client} size={isCompact ? 'sm' : 'md'} />}
 
             <div className="min-w-0 flex-1">
               {/* Client Info */}
               {showClient && (
-                <div className="flex items-center space-x-2 mb-1">
+                <div className="flex items-center gap-responsive-xs mb-1">
                   <h4
-                    className={`font-medium text-gray-900 ${isCompact ? 'text-sm' : 'text-base'}`}
+                    className={`font-medium text-foreground ${isCompact ? 'text-responsive-sm' : 'text-responsive-base'}`}
                   >
                     {review.client?.name || 'Anonymous'}
                   </h4>
@@ -189,7 +189,7 @@ export default function ReviewCard({
                   {review.is_verified && (
                     <div className="flex items-center">
                       <svg
-                        className="w-4 h-4 text-success-500"
+                        className="w-4 h-4 text-green-500"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -199,7 +199,7 @@ export default function ReviewCard({
                           clipRule="evenodd"
                         />
                       </svg>
-                      <span className="ml-1 text-xs text-success-600">Verified</span>
+                      <span className="ml-1 badge-verified text-responsive-xs">Verified</span>
                     </div>
                   )}
                 </div>
@@ -210,7 +210,7 @@ export default function ReviewCard({
                 <div className="mb-2">
                   <Link
                     href={`/artists/${review.artist.slug || review.artist.id}`}
-                    className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+                    className="text-responsive-sm text-primary hover:text-primary/80 font-medium artist-name"
                   >
                     {review.artist.firstname} {review.artist.lastname}
                   </Link>
@@ -218,21 +218,21 @@ export default function ReviewCard({
               )}
 
               {/* Rating and Date */}
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center gap-responsive-sm">
                 <StarRating
                   rating={review.rating}
                   size={isCompact ? 'sm' : 'md'}
                   showNumber={false}
                 />
 
-                <span className="text-sm text-gray-500">
+                <span className="text-responsive-sm text-muted-foreground">
                   {formatDistanceToNow(new Date(review.created_at), { addSuffix: true })}
                 </span>
 
                 {review.appointment?.service_type && (
                   <>
-                    <span className="text-gray-300">•</span>
-                    <span className="text-sm text-gray-600">{review.appointment.service_type}</span>
+                    <span className="text-muted-foreground/50">•</span>
+                    <span className="text-responsive-sm text-muted-foreground">{review.appointment.service_type}</span>
                   </>
                 )}
               </div>
@@ -261,12 +261,12 @@ export default function ReviewCard({
         </div>
 
         {/* Review Content */}
-        <div className="space-y-4">
+        <div className="space-responsive-md">
           {/* Comment */}
           <div>
             <p
-              className={`text-gray-700 leading-relaxed ${
-                isCompact ? 'text-sm line-clamp-3' : isDetailed ? 'text-base' : 'text-sm'
+              className={`text-foreground leading-relaxed ${
+                isCompact ? 'text-responsive-sm line-clamp-3' : isDetailed ? 'text-responsive-base' : 'text-responsive-sm'
               }`}
             >
               {review.comment}
@@ -314,14 +314,14 @@ export default function ReviewCard({
 
       {/* Footer Actions */}
       {showActions && !isCompact && (
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 rounded-b-lg">
+        <div className="p-responsive-lg bg-accent/30 border-t border-border rounded-b-lg">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center gap-responsive-lg">
               {/* Helpful Button */}
               <button
                 type="button"
                 onClick={handleHelpfulClick}
-                className="flex items-center text-sm text-gray-600 hover:text-primary-600 transition-colors duration-200"
+                className="flex items-center text-responsive-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus-ring"
               >
                 <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -340,7 +340,7 @@ export default function ReviewCard({
               {/* Share Button */}
               <button
                 type="button"
-                className="flex items-center text-sm text-gray-600 hover:text-primary-600 transition-colors duration-200"
+                className="flex items-center text-responsive-sm text-muted-foreground hover:text-primary transition-colors duration-200 focus-ring"
               >
                 <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -358,7 +358,7 @@ export default function ReviewCard({
             <button
               type="button"
               onClick={handleReportClick}
-              className="text-sm text-gray-400 hover:text-gray-600 transition-colors duration-200"
+              className="text-responsive-sm text-muted-foreground hover:text-foreground transition-colors duration-200 focus-ring"
             >
               Report
             </button>

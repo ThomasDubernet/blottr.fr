@@ -109,57 +109,57 @@ export default function StyleTag({
   const actualColor = color === 'auto' ? getCategoryColor(tag.category) : color
   const categoryIcon = getCategoryIcon(tag.category)
 
-  // Size classes
+  // Size classes with responsive design tokens
   const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-2.5 py-1 text-sm',
-    lg: 'px-3 py-1.5 text-base',
+    sm: 'px-2 py-0.5 text-responsive-xs',
+    md: 'px-2.5 py-1 text-responsive-sm',
+    lg: 'px-3 py-1.5 text-responsive-base',
   }
 
   // Color classes for different variants
   const getColorClasses = () => {
     const colorMap = {
       primary: {
-        default: 'bg-primary-100 text-primary-800 border-primary-200',
-        outline: 'border-primary-300 text-primary-700 hover:bg-primary-50',
-        minimal: 'text-primary-600 hover:bg-primary-50',
-        pill: 'bg-primary-500 text-white hover:bg-primary-600',
-        badge: 'bg-primary-600 text-white',
+        default: 'bg-primary/10 text-primary border-primary/20',
+        outline: 'border-primary/30 text-primary hover:bg-primary/5',
+        minimal: 'text-primary hover:bg-primary/5',
+        pill: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        badge: 'bg-primary text-primary-foreground',
       },
       secondary: {
-        default: 'bg-gray-100 text-gray-800 border-gray-200',
-        outline: 'border-gray-300 text-gray-700 hover:bg-gray-50',
-        minimal: 'text-gray-600 hover:bg-gray-50',
-        pill: 'bg-gray-500 text-white hover:bg-gray-600',
-        badge: 'bg-gray-600 text-white',
+        default: 'bg-secondary text-secondary-foreground border-border',
+        outline: 'border-border text-foreground hover:bg-accent',
+        minimal: 'text-muted-foreground hover:bg-accent',
+        pill: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
+        badge: 'bg-secondary text-secondary-foreground',
       },
       success: {
-        default: 'bg-success-100 text-success-800 border-success-200',
-        outline: 'border-success-300 text-success-700 hover:bg-success-50',
-        minimal: 'text-success-600 hover:bg-success-50',
-        pill: 'bg-success-500 text-white hover:bg-success-600',
-        badge: 'bg-success-600 text-white',
+        default: 'bg-green-100 text-green-800 border-green-200',
+        outline: 'border-green-300 text-green-700 hover:bg-green-50',
+        minimal: 'text-green-600 hover:bg-green-50',
+        pill: 'bg-green-500 text-white hover:bg-green-600',
+        badge: 'bg-green-600 text-white',
       },
       warning: {
-        default: 'bg-warning-100 text-warning-800 border-warning-200',
-        outline: 'border-warning-300 text-warning-700 hover:bg-warning-50',
-        minimal: 'text-warning-600 hover:bg-warning-50',
-        pill: 'bg-warning-500 text-white hover:bg-warning-600',
-        badge: 'bg-warning-600 text-white',
+        default: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+        outline: 'border-yellow-300 text-yellow-700 hover:bg-yellow-50',
+        minimal: 'text-yellow-600 hover:bg-yellow-50',
+        pill: 'bg-yellow-500 text-white hover:bg-yellow-600',
+        badge: 'bg-yellow-600 text-white',
       },
       error: {
-        default: 'bg-error-100 text-error-800 border-error-200',
-        outline: 'border-error-300 text-error-700 hover:bg-error-50',
-        minimal: 'text-error-600 hover:bg-error-50',
-        pill: 'bg-error-500 text-white hover:bg-error-600',
-        badge: 'bg-error-600 text-white',
+        default: 'bg-red-100 text-red-800 border-red-200',
+        outline: 'border-red-300 text-red-700 hover:bg-red-50',
+        minimal: 'text-red-600 hover:bg-red-50',
+        pill: 'bg-red-500 text-white hover:bg-red-600',
+        badge: 'bg-red-600 text-white',
       },
       ink: {
-        default: 'bg-ink-100 text-ink-800 border-ink-200',
-        outline: 'border-ink-300 text-ink-700 hover:bg-ink-50',
-        minimal: 'text-ink-600 hover:bg-ink-50',
-        pill: 'bg-ink-500 text-white hover:bg-ink-600',
-        badge: 'bg-ink-600 text-white',
+        default: 'bg-neutral-100 text-neutral-800 border-neutral-200',
+        outline: 'border-neutral-300 text-neutral-700 hover:bg-neutral-50',
+        minimal: 'text-neutral-600 hover:bg-neutral-50',
+        pill: 'bg-neutral-500 text-white hover:bg-neutral-600',
+        badge: 'bg-neutral-600 text-white',
       },
     }
 
@@ -199,7 +199,7 @@ export default function StyleTag({
     ${getBorderClasses()}
     ${getShapeClasses()}
     ${getColorClasses()}
-    ${interactive ? 'cursor-pointer hover:shadow-sm' : ''}
+    ${interactive ? 'cursor-pointer hover:shadow-sm focus-ring' : ''}
     ${className}
   `.trim()
 
@@ -230,7 +230,7 @@ export default function StyleTag({
 
       {/* Usage Count */}
       {showCount && tag.usage_count !== undefined && (
-        <span className={`${size === 'sm' ? 'ml-1' : 'ml-1.5'} text-xs opacity-75`}>
+        <span className={`${size === 'sm' ? 'ml-1' : 'ml-1.5'} text-responsive-xs opacity-75`}>
           ({tag.usage_count.toLocaleString()})
         </span>
       )}
@@ -330,7 +330,7 @@ export function StyleTags({
   }
 
   return (
-    <div className={`flex flex-wrap gap-1.5 ${className}`}>
+    <div className={`flex flex-wrap gap-responsive-xs ${className}`}>
       {displayTags.map((tag) => (
         <StyleTag
           key={tag.id}
@@ -350,7 +350,7 @@ export function StyleTags({
       {remainingCount > 0 && (
         <span
           className={`
-            inline-flex items-center font-medium bg-gray-100 text-gray-600 border border-gray-200 rounded-full
+            inline-flex items-center font-medium bg-muted text-muted-foreground border border-border rounded-full
             ${sizeClasses[size]}
           `}
         >

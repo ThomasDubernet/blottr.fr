@@ -212,70 +212,70 @@ export default function ContactForm({
         return (
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
+              <h3 className="text-responsive-lg font-medium text-foreground mb-4">
                 Tell us about your tattoo idea
               </h3>
             </div>
 
             {/* Project Description */}
-            <div>
+            <div className="form-item-responsive">
               <label
                 htmlFor="project_description"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="form-label"
               >
                 Describe your tattoo idea *
               </label>
               <textarea
                 id="project_description"
                 rows={4}
-                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
-                  errors.project_description ? 'border-red-300' : 'border-gray-300'
+                className={`form-textarea ${
+                  errors.project_description ? 'border-destructive' : 'border-input'
                 }`}
                 placeholder="Describe your tattoo concept, style, colors, size, and any specific details..."
                 value={formData.project_description}
                 onChange={(e) => handleInputChange('project_description', e.target.value)}
               />
               {errors.project_description && (
-                <p className="mt-1 text-sm text-red-600">{errors.project_description}</p>
+                <p className="form-error">{errors.project_description}</p>
               )}
             </div>
 
             {/* Tattoo Placement */}
-            <div>
+            <div className="form-item-responsive">
               <label
                 htmlFor="tattoo_placement"
-                className="block text-sm font-medium text-gray-700 mb-2"
+                className="form-label"
               >
                 Where do you want the tattoo? *
               </label>
               <input
                 type="text"
                 id="tattoo_placement"
-                className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 ${
-                  errors.tattoo_placement ? 'border-red-300' : 'border-gray-300'
+                className={`form-input ${
+                  errors.tattoo_placement ? 'border-destructive' : 'border-input'
                 }`}
                 placeholder="e.g., Upper arm, forearm, shoulder blade, ankle..."
                 value={formData.tattoo_placement}
                 onChange={(e) => handleInputChange('tattoo_placement', e.target.value)}
               />
               {errors.tattoo_placement && (
-                <p className="mt-1 text-sm text-red-600">{errors.tattoo_placement}</p>
+                <p className="form-error">{errors.tattoo_placement}</p>
               )}
             </div>
 
             {/* Size Selection */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+            <div className="form-item-responsive">
+              <label className="form-label">
                 Approximate size
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-responsive-sm">
                 {SIZE_OPTIONS.map((option) => (
                   <label
                     key={option.value}
-                    className={`relative flex items-start p-3 border-2 rounded-lg cursor-pointer hover:bg-gray-50 ${
+                    className={`relative flex items-start p-responsive-sm border-2 rounded-lg cursor-pointer hover:bg-accent transition-colors focus-ring ${
                       formData.tattoo_size === option.value
-                        ? 'border-primary-500 bg-primary-50'
-                        : 'border-gray-200'
+                        ? 'border-primary bg-primary/5'
+                        : 'border-input'
                     }`}
                   >
                     <input
@@ -287,8 +287,8 @@ export default function ContactForm({
                       className="sr-only"
                     />
                     <div>
-                      <div className="font-medium text-gray-900">{option.label}</div>
-                      <div className="text-sm text-gray-500">{option.description}</div>
+                      <div className="font-medium text-foreground text-responsive-base">{option.label}</div>
+                      <div className="text-responsive-sm text-muted-foreground">{option.description}</div>
                     </div>
                   </label>
                 ))}
@@ -646,17 +646,17 @@ export default function ContactForm({
 
   return (
     <div
-      className={`bg-white ${isModal ? '' : 'rounded-lg shadow-soft border border-gray-200'} ${className}`}
+      className={`bg-background ${isModal ? '' : 'card-responsive shadow-card border border-border'} ${className}`}
     >
       {/* Header */}
-      <div className={`${isModal ? 'px-6 py-4' : 'px-6 py-5'} border-b border-gray-200`}>
+      <div className={`${isModal ? 'p-responsive-lg' : 'p-responsive-lg'} border-b border-border`}>
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">
+            <h2 className="heading-section text-foreground">
               Contact {artist.firstname} {artist.lastname}
             </h2>
             {!artist.is_verified && (
-              <div className="flex items-center mt-2 text-sm text-warning-700">
+              <div className="flex items-center mt-2 text-responsive-sm text-warning-600">
                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path
                     fillRule="evenodd"
@@ -673,7 +673,7 @@ export default function ContactForm({
             <button
               type="button"
               onClick={onCancel}
-              className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+              className="text-muted-foreground hover:text-foreground transition-colors duration-200 focus-ring"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -692,12 +692,12 @@ export default function ContactForm({
           {[1, 2, 3].map((stepNumber) => (
             <React.Fragment key={stepNumber}>
               <div
-                className={`flex items-center justify-center w-8 h-8 rounded-full text-sm font-medium ${
+                className={`flex items-center justify-center w-8 h-8 rounded-full text-responsive-sm font-medium ${
                   stepNumber === step
-                    ? 'bg-primary-600 text-white'
+                    ? 'bg-primary text-primary-foreground'
                     : stepNumber < step
-                      ? 'bg-primary-100 text-primary-600'
-                      : 'bg-gray-100 text-gray-400'
+                      ? 'bg-primary/10 text-primary'
+                      : 'bg-muted text-muted-foreground'
                 }`}
               >
                 {stepNumber < step ? (
@@ -715,7 +715,7 @@ export default function ContactForm({
               {stepNumber < 3 && (
                 <div
                   className={`flex-1 h-0.5 mx-4 ${
-                    stepNumber < step ? 'bg-primary-600' : 'bg-gray-200'
+                    stepNumber < step ? 'bg-primary' : 'bg-muted'
                   }`}
                 />
               )}
@@ -725,17 +725,17 @@ export default function ContactForm({
       </div>
 
       {/* Form Content */}
-      <form onSubmit={handleSubmit} className="px-6 py-6">
+      <form onSubmit={handleSubmit} className="p-responsive-lg">
         {renderStep()}
 
         {/* Navigation Buttons */}
-        <div className="flex justify-between pt-6 mt-6 border-t border-gray-200">
+        <div className="flex justify-between pt-6 mt-6 border-t border-border">
           <div>
             {step > 1 && (
               <button
                 type="button"
                 onClick={handleBack}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="inline-flex items-center btn-responsive text-responsive-sm font-medium text-foreground bg-background border border-border shadow-sm hover:bg-accent focus-ring"
               >
                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
@@ -750,12 +750,12 @@ export default function ContactForm({
             )}
           </div>
 
-          <div className="flex space-x-3">
+          <div className="flex gap-responsive-sm">
             {onCancel && (
               <button
                 type="button"
                 onClick={onCancel}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="inline-flex items-center btn-responsive text-responsive-sm font-medium text-foreground bg-background border border-border shadow-sm hover:bg-accent focus-ring"
               >
                 Cancel
               </button>
@@ -765,7 +765,7 @@ export default function ContactForm({
               <button
                 type="button"
                 onClick={handleNext}
-                className="inline-flex items-center px-6 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                className="inline-flex items-center btn-responsive text-responsive-sm font-medium text-primary-foreground bg-primary border border-transparent shadow-sm hover:bg-primary/90 focus-ring"
               >
                 Next
                 <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -781,12 +781,12 @@ export default function ContactForm({
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex items-center px-6 py-2 text-sm font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center btn-responsive text-responsive-sm font-medium text-primary-foreground bg-primary border border-transparent shadow-sm hover:bg-primary/90 focus-ring disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
                     <svg
-                      className="animate-spin -ml-1 mr-3 h-4 w-4"
+                      className="loading-spinner -ml-1 mr-3 h-4 w-4"
                       fill="none"
                       viewBox="0 0 24 24"
                     >
