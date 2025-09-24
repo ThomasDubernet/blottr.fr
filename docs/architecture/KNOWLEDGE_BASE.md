@@ -497,16 +497,16 @@ Total: 78 files, 23 directories
 - Instagram scraping implementation
 - Testing suite
 
+
 ## Project Status (Auto-Updated)
 
-**Last Update**: 2025-09-23 00:34:35
+**Last Update**: 2025-09-24 07:30:07
 **Git Branch**: main
-**Last Commit**: 595917b - fix(ci): resolve GitHub Actions permission denied error for auto-commits (Thomas Dubernet, 32 seconds ago)
+**Last Commit**: 9ee53d5 - feat(design-system): implement comprehensive UI library with shadcn/ui and Storybook (Thomas Dubernet, 83 seconds ago)
 
 ### 📊 Project Metrics
-
-- **Files**: 79 files, 28 directories
-- **Dependencies**: 17 production, 20 development
+- **Files**: 189 files, 43 directories
+- **Dependencies**: 45 production, 43 development
 - **Database**: 14 migrations, 11 models
 - **Version**: 0.0.0
 
@@ -520,11 +520,19 @@ Total: 78 files, 23 directories
 ├── .env.example
 ├── .github
 │   └── workflows
+│       ├── quality-gates.yml
 │       └── update-knowledge-base.yml
 ├── .gitignore
 ├── .husky
 │   └── post-commit
+├── .lighthouserc.json
+├── .storybook
+│   ├── main.ts
+│   ├── preview.ts
+│   └── vitest.setup.ts
 ├── CLAUDE.md
+├── DESIGN_SYSTEM.md
+├── IMPLEMENTATION_COMPLETE.md
 ├── ace.js
 ├── adonisrc.ts
 ├── app
@@ -551,6 +559,8 @@ Total: 78 files, 23 directories
 │   ├── console.ts
 │   ├── server.ts
 │   └── test.ts
+├── component_library_specs.md
+├── components.json
 ├── config
 │   ├── app.ts
 │   ├── auth.ts
@@ -580,6 +590,7 @@ Total: 78 files, 23 directories
 │       ├── 1758581937432_create_create_tag_tattoos_table.ts
 │       ├── 1758584991949_create_create_cities_table.ts
 │       └── 1758585023298_create_add_missing_fields_to_tables_table.ts
+├── design_system_architecture.md
 ├── docker-compose.yml
 ├── docs
 │   ├── README.md
@@ -588,39 +599,153 @@ Total: 78 files, 23 directories
 │   ├── database
 │   │   ├── DATABASE_DOCUMENTATION.md
 │   │   └── DB_VISUALIZATION.md
+│   ├── design-system
+│   │   ├── DESIGN_TOKENS.md
+│   │   ├── IMPLEMENTATION.md
+│   │   ├── QUALITY_GATES.md
+│   │   └── README.md
 │   └── setup
 │       └── CLAUDE.md
 ├── eslint.config.js
+├── implementation_stack_docs.md
 ├── inertia
 │   ├── app
 │   │   ├── app.tsx
 │   │   └── ssr.tsx
+│   ├── components
+│   │   ├── ArtistCard.stories.tsx
+│   │   ├── ArtistCard.tsx
+│   │   ├── BookingCalendar.tsx
+│   │   ├── ContactForm.tsx
+│   │   ├── PortfolioUploader.tsx
+│   │   ├── README.md
+│   │   ├── ReviewCard.tsx
+│   │   ├── StyleTag.tsx
+│   │   ├── TattooGallery.tsx
+│   │   ├── ThemeSwitcher.tsx
+│   │   ├── blottr
+│   │   │   ├── AdvancedSearchFilters.tsx
+│   │   │   ├── ArtistProfileModal.tsx
+│   │   │   ├── ContactFormWizard.tsx
+│   │   │   ├── NotificationSystem.tsx
+│   │   │   ├── README.md
+│   │   │   ├── index.ts
+│   │   │   └── layout
+│   │   │       └── header.tsx
+│   │   ├── design-system.ts
+│   │   ├── index.ts
+│   │   ├── ui
+│   │   │   ├── alert.tsx
+│   │   │   ├── avatar.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── button.stories.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── checkbox.tsx
+│   │   │   ├── dialog.tsx
+│   │   │   ├── dropdown-menu.tsx
+│   │   │   ├── form.tsx
+│   │   │   ├── index.ts
+│   │   │   ├── input.tsx
+│   │   │   ├── label.tsx
+│   │   │   ├── popover.tsx
+│   │   │   ├── radio-group.tsx
+│   │   │   ├── select.tsx
+│   │   │   ├── separator.tsx
+│   │   │   ├── slider.tsx
+│   │   │   ├── tabs.tsx
+│   │   │   ├── textarea.tsx
+│   │   │   ├── toast.tsx
+│   │   │   └── tooltip.tsx
+│   │   └── utils
+│   │       └── cn.ts
 │   ├── css
 │   │   └── app.css
+│   ├── hooks
+│   │   ├── index.ts
+│   │   ├── use-debounce.ts
+│   │   ├── use-local-storage.ts
+│   │   ├── use-media-query.ts
+│   │   ├── use-on-click-outside.ts
+│   │   └── use-toggle.ts
+│   ├── lib
+│   │   ├── theme.ts
+│   │   └── utils.ts
 │   ├── pages
+│   │   ├── components-demo.tsx
+│   │   ├── design-system.tsx
 │   │   ├── errors
 │   │   │   ├── not_found.tsx
 │   │   │   └── server_error.tsx
-│   │   └── home.tsx
+│   │   ├── home.tsx
+│   │   └── ui-showcase.tsx
 │   └── tsconfig.json
 ├── package.json
+├── performance_benchmarks.md
 ├── pgadmin-servers.json
 ├── pnpm-lock.yaml
+├── postcss.config.js
+├── quality_gates.md
 ├── resources
 │   └── views
 │       └── inertia_layout.edge
 ├── scripts
+│   ├── quality-gates.sh
 │   └── update-knowledge-base.sh
 ├── start
 │   ├── env.ts
 │   ├── kernel.ts
 │   └── routes.ts
+├── stories
+│   ├── Button.stories.ts
+│   ├── Button.tsx
+│   ├── Configure.mdx
+│   ├── Header.stories.ts
+│   ├── Header.tsx
+│   ├── Page.stories.ts
+│   ├── Page.tsx
+│   ├── assets
+│   │   ├── accessibility.png
+│   │   ├── accessibility.svg
+│   │   ├── addon-library.png
+│   │   ├── assets.png
+│   │   ├── avif-test-image.avif
+│   │   ├── context.png
+│   │   ├── discord.svg
+│   │   ├── docs.png
+│   │   ├── figma-plugin.png
+│   │   ├── github.svg
+│   │   ├── share.png
+│   │   ├── styling.png
+│   │   ├── testing.png
+│   │   ├── theming.png
+│   │   ├── tutorials.svg
+│   │   └── youtube.svg
+│   ├── button.css
+│   ├── header.css
+│   └── page.css
+├── tailwind.config.js
 ├── tests
-│   └── bootstrap.ts
+│   ├── bootstrap.ts
+│   ├── quality
+│   │   ├── accessibility.test.ts
+│   │   ├── integration.test.ts
+│   │   ├── manual-checklists.md
+│   │   ├── performance.test.ts
+│   │   ├── quality-gates.config.ts
+│   │   ├── quality-gates.runner.ts
+│   │   └── tdd-compliance.test.ts
+│   └── unit
+│       └── components
+│           ├── ArtistCard.test.ts
+│           └── ui
+│               └── button.test.ts
 ├── tsconfig.json
-└── vite.config.ts
+├── vite.config.ts
+├── vitest.shims.d.ts
+└── workflow_phases.md
 
-27 directories, 79 files
+42 directories, 189 files
 ```
 
 ### 🔄 Git Status
@@ -631,5 +756,4 @@ Current branch: main
 ```
 
 ---
-
-_Auto-generated by scripts/update-knowledge-base.sh_
+*Auto-generated by scripts/update-knowledge-base.sh*
