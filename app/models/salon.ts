@@ -343,8 +343,7 @@ export default class Salon extends BaseModel {
   }
 
   public async updateArtistCount(): Promise<void> {
-    const artistRelation = this.related('artists') as any
-    const activeArtistsCount = await artistRelation
+    const activeArtistsCount = await (this.related('artists' as never) as any)
       .query()
       .wherePivot('is_active', true)
       .count('* as total')
@@ -357,8 +356,7 @@ export default class Salon extends BaseModel {
     artistId: string,
     relationshipType: 'primary' | 'guest' | 'freelance' = 'guest'
   ): Promise<void> {
-    const artistRelation = this.related('artists') as any
-    await artistRelation.attach({
+    await (this.related('artists' as never) as any).attach({
       [artistId]: {
         relationship_type: relationshipType,
         is_active: true,
@@ -372,8 +370,7 @@ export default class Salon extends BaseModel {
   }
 
   public async removeArtist(artistId: string): Promise<void> {
-    const artistRelation = this.related('artists') as any
-    await artistRelation.detach([artistId])
+    await (this.related('artists' as never) as any).detach([artistId])
     await this.updateArtistCount()
   }
 

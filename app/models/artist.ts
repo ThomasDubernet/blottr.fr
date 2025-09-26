@@ -459,8 +459,7 @@ export default class Artist extends BaseModel {
     salonId: string,
     relationshipType: 'primary' | 'guest' | 'freelance' = 'guest'
   ): Promise<void> {
-    const salonRelation = this.related('salons') as any
-    await salonRelation.attach({
+    await (this.related('salons' as never) as any).attach({
       [salonId]: {
         relationship_type: relationshipType,
         is_active: true,
@@ -477,8 +476,7 @@ export default class Artist extends BaseModel {
   }
 
   public async removeFromSalon(salonId: string): Promise<void> {
-    const salonRelation = this.related('salons') as any
-    await salonRelation.detach([salonId])
+    await (this.related('salons' as never) as any).detach([salonId])
 
     if (this.primarySalonId === salonId) {
       this.primarySalonId = null
@@ -491,8 +489,7 @@ export default class Artist extends BaseModel {
     await this.save()
 
     // Update the relationship to primary
-    const salonRelation = this.related('salons') as any
-    await salonRelation.pivotQuery().where('salon_id', salonId).update({
+    await (this.related('salons' as never) as any).pivotQuery().where('salon_id', salonId).update({
       relationship_type: 'primary',
       updated_at: DateTime.now().toSQL(),
     })

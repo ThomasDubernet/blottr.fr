@@ -278,7 +278,7 @@ export default class Tattoo extends BaseModel {
   }
 
   public async addPrimaryTag(tag: Tag): Promise<void> {
-    await this.related('tags').attach({
+    await (this.related('tags' as never) as any).attach({
       [tag.id]: {
         relevance_score: 1.0,
         is_primary: true,
@@ -293,7 +293,7 @@ export default class Tattoo extends BaseModel {
     relevanceScore: number = 0.8,
     isPrimary: boolean = false
   ): Promise<void> {
-    await this.related('tags').attach({
+    await (this.related('tags' as never) as any).attach({
       [tag.id]: {
         relevance_score: relevanceScore,
         is_primary: isPrimary,
@@ -365,7 +365,7 @@ export default class Tattoo extends BaseModel {
   })
 
   public static withTags = scope((query, tagIds: number[]) => {
-    query.whereHas('tags', (tagQuery) => {
+    query.whereHas('tags' as never, (tagQuery: any) => {
       tagQuery.whereIn('id', tagIds)
     })
   })

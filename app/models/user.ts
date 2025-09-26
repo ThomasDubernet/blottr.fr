@@ -5,6 +5,7 @@ import { BaseModel, column, computed, belongsTo, hasMany } from '@adonisjs/lucid
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import City from './city.js'
+import Artist from './artist.js'
 
 // Define user roles enum
 export enum UserRole {
@@ -96,8 +97,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @belongsTo(() => City)
   declare city: BelongsTo<typeof City>
 
-  @hasMany(() => import('./artist.js').then((m) => m.default))
-  declare artists: HasMany<any>
+  @hasMany(() => Artist)
+  declare artists: HasMany<typeof Artist>
 
   // Computed properties
   @computed()

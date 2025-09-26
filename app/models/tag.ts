@@ -158,7 +158,7 @@ export default class Tag extends BaseModel {
   }
 
   public async attachToTattoo(tattoo: Tattoo, options: TagTattooAttachment): Promise<void> {
-    await this.related('tattoos').attach({
+    await (this.related('tattoos' as never) as any).attach({
       [tattoo.id]: {
         relevance_score: options.relevanceScore,
         is_primary: options.isPrimary,
