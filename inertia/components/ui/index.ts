@@ -14,3 +14,11 @@ export type {
   CardContentProps,
   CardFooterProps,
 } from './Card'
+
+// Discovery components
+export { ArtistCard, TattooCard, FilterBar } from '../discovery'
+export type { Artist, ArtistCardProps, Tattoo, TattooCardProps, FilterBarProps } from '../discovery'
+
+// Gallery components
+export { MasonryGrid, useMasonryGrid } from '../gallery'
+export type { MasonryGridProps } from '../gallery'
