@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed, belongsTo, hasMany, manyToMany } from '@adonisjs/lucid/orm'
-import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, computed, belongsTo, manyToMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import City from './city.js'
 import Artist from './artist.js'
 import string from '@adonisjs/core/helpers/string'
@@ -11,7 +11,7 @@ export enum SalonVerificationStatus {
   SCRAPED = 'scraped',
   CONTACTED = 'contacted',
   ONBOARDING = 'onboarding',
-  VERIFIED = 'verified'
+  VERIFIED = 'verified',
 }
 
 // Opening hours type
@@ -70,13 +70,13 @@ export default class Salon extends BaseModel {
   // Business information
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare openingHours: OpeningHours | null
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare services: string[] | null
 
@@ -101,7 +101,7 @@ export default class Salon extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare galleryImages: string[] | null
 
@@ -143,7 +143,7 @@ export default class Salon extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare seoKeywords: string[] | null
 
@@ -177,7 +177,16 @@ export default class Salon extends BaseModel {
     relatedKey: 'id',
     pivotRelatedForeignKey: 'artist_id',
     pivotTimestamps: true,
-    pivotColumns: ['relationship_type', 'is_active', 'schedule', 'hourly_rate', 'commission_rate', 'started_working_at', 'ended_working_at', 'notes']
+    pivotColumns: [
+      'relationship_type',
+      'is_active',
+      'schedule',
+      'hourly_rate',
+      'commission_rate',
+      'started_working_at',
+      'ended_working_at',
+      'notes',
+    ],
   })
   declare artists: ManyToMany<typeof Artist>
 
@@ -213,7 +222,7 @@ export default class Salon extends BaseModel {
     if (!this.latitude || !this.longitude) return null
     return {
       lat: this.latitude,
-      lng: this.longitude
+      lng: this.longitude,
     }
   }
 
@@ -223,7 +232,7 @@ export default class Salon extends BaseModel {
 
     const formatter = new Intl.NumberFormat('fr-FR', {
       style: 'currency',
-      currency: this.currency
+      currency: this.currency,
     })
 
     if (this.priceRangeMin && this.priceRangeMax) {
@@ -244,11 +253,7 @@ export default class Salon extends BaseModel {
 
   // Business methods
   public static async findBySlug(slug: string): Promise<Salon | null> {
-    return this.query()
-      .where('slug', slug)
-      .where('is_active', true)
-      .preload('city')
-      .first()
+    return this.query().where('slug', slug).where('is_active', true).preload('city').first()
   }
 
   public static async findInCity(cityId: number): Promise<Salon[]> {
@@ -270,10 +275,14 @@ export default class Salon extends BaseModel {
       .preload('city')
   }
 
-  public static async findNearby(latitude: number, longitude: number, radiusKm: number = 25): Promise<Salon[]> {
+  public static async findNearby(
+    latitude: number,
+    longitude: number,
+    radiusKm: number = 25
+  ): Promise<Salon[]> {
     // Using Haversine formula approximation for nearby salons
     const latRange = radiusKm / 111.32 // 1 degree of latitude ≈ 111.32 km
-    const lngRange = radiusKm / (111.32 * Math.cos(latitude * Math.PI / 180))
+    const lngRange = radiusKm / (111.32 * Math.cos((latitude * Math.PI) / 180))
 
     return this.query()
       .where('is_active', true)
@@ -319,7 +328,10 @@ export default class Salon extends BaseModel {
     await this.save()
   }
 
-  public async updateVerificationStatus(status: SalonVerificationStatus, notes?: string): Promise<void> {
+  public async updateVerificationStatus(
+    status: SalonVerificationStatus,
+    notes?: string
+  ): Promise<void> {
     this.verificationStatus = status
     this.verificationNotes = notes || null
 
@@ -331,7 +343,8 @@ export default class Salon extends BaseModel {
   }
 
   public async updateArtistCount(): Promise<void> {
-    const activeArtistsCount = await this.related('artists')
+    const artistRelation = this.related('artists') as any
+    const activeArtistsCount = await artistRelation
       .query()
       .wherePivot('is_active', true)
       .count('* as total')
@@ -340,22 +353,27 @@ export default class Salon extends BaseModel {
     await this.save()
   }
 
-  public async addArtist(artistId: string, relationshipType: 'primary' | 'guest' | 'freelance' = 'guest'): Promise<void> {
-    await this.related('artists').attach({
+  public async addArtist(
+    artistId: string,
+    relationshipType: 'primary' | 'guest' | 'freelance' = 'guest'
+  ): Promise<void> {
+    const artistRelation = this.related('artists') as any
+    await artistRelation.attach({
       [artistId]: {
         relationship_type: relationshipType,
         is_active: true,
         started_working_at: DateTime.now().toSQLDate(),
         created_at: DateTime.now(),
-        updated_at: DateTime.now()
-      }
+        updated_at: DateTime.now(),
+      },
     })
 
     await this.updateArtistCount()
   }
 
   public async removeArtist(artistId: string): Promise<void> {
-    await this.related('artists').detach([artistId])
+    const artistRelation = this.related('artists') as any
+    await artistRelation.detach([artistId])
     await this.updateArtistCount()
   }
 
@@ -364,13 +382,15 @@ export default class Salon extends BaseModel {
 
     // Haversine formula for distance calculation
     const R = 6371 // Earth's radius in kilometers
-    const dLat = (targetLat - this.latitude) * Math.PI / 180
-    const dLng = (targetLng - this.longitude) * Math.PI / 180
+    const dLat = ((targetLat - this.latitude) * Math.PI) / 180
+    const dLng = ((targetLng - this.longitude) * Math.PI) / 180
     const a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(this.latitude * Math.PI / 180) * Math.cos(targetLat * Math.PI / 180) *
-      Math.sin(dLng/2) * Math.sin(dLng/2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((this.latitude * Math.PI) / 180) *
+        Math.cos((targetLat * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     return R * c
   }
 
@@ -385,6 +405,30 @@ export default class Salon extends BaseModel {
     this.before('create', async (salon) => {
       if (!salon.slug) {
         salon.slug = Salon.generateSlug(salon.name)
+      }
+
+      // Set default values
+      if (!salon.verificationStatus) {
+        salon.verificationStatus = SalonVerificationStatus.UNVERIFIED
+      }
+      if (!salon.currency) {
+        salon.currency = 'EUR'
+      }
+
+      // Set boolean defaults if undefined
+      if (salon.isActive === undefined) {
+        salon.isActive = true
+      }
+      if (salon.isFeatured === undefined) {
+        salon.isFeatured = false
+      }
+
+      // Set numeric defaults if undefined
+      if (salon.totalReviews === undefined) {
+        salon.totalReviews = 0
+      }
+      if (salon.totalArtists === undefined) {
+        salon.totalArtists = 0
       }
     })
   }

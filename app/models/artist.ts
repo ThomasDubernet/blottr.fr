@@ -1,5 +1,11 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed, belongsTo, manyToMany } from '@adonisjs/lucid/orm'
+import {
+  BaseModel,
+  column,
+  computed,
+  belongsTo,
+  manyToMany,
+} from '@adonisjs/lucid/orm'
 import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
 import City from './city.js'
@@ -12,7 +18,7 @@ export enum ArtistVerificationStatus {
   SCRAPED = 'scraped',
   CONTACTED = 'contacted',
   ONBOARDING = 'onboarding',
-  VERIFIED = 'verified'
+  VERIFIED = 'verified',
 }
 
 // Artist experience level enum
@@ -20,7 +26,7 @@ export enum ArtistExperienceLevel {
   BEGINNER = 'beginner',
   INTERMEDIATE = 'intermediate',
   ADVANCED = 'advanced',
-  EXPERT = 'expert'
+  EXPERT = 'expert',
 }
 
 // Availability type
@@ -69,7 +75,17 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => {
+      if (!value) return null
+      if (typeof value === 'string') {
+        try {
+          return JSON.parse(value)
+        } catch {
+          return [value] // If it's not JSON, treat as single value
+        }
+      }
+      return Array.isArray(value) ? value : null
+    },
   })
   declare artStyles: string[] | null
 
@@ -98,14 +114,14 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare availability: Availability | null
 
   // Portfolio and social presence
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare portfolioImages: string[] | null
 
@@ -120,7 +136,7 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare socialLinks: Record<string, string> | null
 
@@ -139,7 +155,7 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare verificationDocuments: string[] | null
 
@@ -194,7 +210,7 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => JSON.stringify(value),
-    consume: (value) => value ? JSON.parse(value) : null
+    consume: (value) => (value ? JSON.parse(value) : null),
   })
   declare seoKeywords: string[] | null
 
@@ -212,7 +228,7 @@ export default class Artist extends BaseModel {
   declare city: BelongsTo<typeof City>
 
   @belongsTo(() => Salon, {
-    foreignKey: 'primarySalonId'
+    foreignKey: 'primarySalonId',
   })
   declare primarySalon: BelongsTo<typeof Salon>
 
@@ -223,7 +239,16 @@ export default class Artist extends BaseModel {
     relatedKey: 'id',
     pivotRelatedForeignKey: 'salon_id',
     pivotTimestamps: true,
-    pivotColumns: ['relationship_type', 'is_active', 'schedule', 'hourly_rate', 'commission_rate', 'started_working_at', 'ended_working_at', 'notes']
+    pivotColumns: [
+      'relationship_type',
+      'is_active',
+      'schedule',
+      'hourly_rate',
+      'commission_rate',
+      'started_working_at',
+      'ended_working_at',
+      'notes',
+    ],
   })
   declare salons: ManyToMany<typeof Salon>
 
@@ -240,8 +265,10 @@ export default class Artist extends BaseModel {
 
   @computed()
   public get isExperienced(): boolean {
-    return this.experienceLevel === ArtistExperienceLevel.ADVANCED ||
-           this.experienceLevel === ArtistExperienceLevel.EXPERT
+    return (
+      this.experienceLevel === ArtistExperienceLevel.ADVANCED ||
+      this.experienceLevel === ArtistExperienceLevel.EXPERT
+    )
   }
 
   @computed()
@@ -250,7 +277,7 @@ export default class Artist extends BaseModel {
 
     const formatter = new Intl.NumberFormat('fr-FR', {
       style: 'currency',
-      currency: this.currency
+      currency: this.currency,
     })
 
     if (this.minPrice && this.maxPrice) {
@@ -287,9 +314,11 @@ export default class Artist extends BaseModel {
 
   @computed()
   public get hasHealthCredentials(): boolean {
-    return this.hasHealthCertificate &&
-           this.hasProfessionalInsurance &&
-           (this.healthCertificateExpiresAt ? this.healthCertificateExpiresAt > DateTime.now() : false)
+    return (
+      this.hasHealthCertificate &&
+      this.hasProfessionalInsurance &&
+      (this.healthCertificateExpiresAt ? this.healthCertificateExpiresAt > DateTime.now() : false)
+    )
   }
 
   @computed()
@@ -300,12 +329,10 @@ export default class Artist extends BaseModel {
       this.specialty,
       this.artStyles,
       this.minPrice,
-      this.portfolioImages?.length
+      this.portfolioImages?.length,
     ]
 
-    return requiredFields.every(field =>
-      field !== null && field !== undefined && field !== 0
-    )
+    return requiredFields.every((field) => field !== null && field !== undefined && field !== 0)
   }
 
   // Business methods
@@ -366,10 +393,16 @@ export default class Artist extends BaseModel {
   }
 
   public static async findByArtStyle(artStyles: string[]): Promise<Artist[]> {
-    return this.query()
-      .where('is_active', true)
-      .where('is_accepting_new_clients', true)
-      .whereJsonSuperset('art_styles', artStyles)
+    let query = this.query().where('is_active', true).where('is_accepting_new_clients', true)
+
+    // Build OR conditions for each art style
+    query = query.where((builder) => {
+      for (const style of artStyles) {
+        builder.orWhereRaw('art_styles::jsonb @> ?', [JSON.stringify([style])])
+      }
+    })
+
+    return query
       .orderBy('is_featured', 'desc')
       .orderBy('total_reviews', 'desc')
       .preload('user')
@@ -414,7 +447,10 @@ export default class Artist extends BaseModel {
     await this.save()
   }
 
-  public async updateVerificationStatus(status: ArtistVerificationStatus, notes?: string): Promise<void> {
+  public async updateVerificationStatus(
+    status: ArtistVerificationStatus,
+    notes?: string
+  ): Promise<void> {
     this.verificationStatus = status
     this.verificationNotes = notes || null
 
@@ -425,15 +461,19 @@ export default class Artist extends BaseModel {
     await this.save()
   }
 
-  public async addToSalon(salonId: string, relationshipType: 'primary' | 'guest' | 'freelance' = 'guest'): Promise<void> {
-    await this.related('salons').attach({
+  public async addToSalon(
+    salonId: string,
+    relationshipType: 'primary' | 'guest' | 'freelance' = 'guest'
+  ): Promise<void> {
+    const salonRelation = this.related('salons') as any
+    await salonRelation.attach({
       [salonId]: {
         relationship_type: relationshipType,
         is_active: true,
         started_working_at: DateTime.now().toSQLDate(),
         created_at: DateTime.now(),
-        updated_at: DateTime.now()
-      }
+        updated_at: DateTime.now(),
+      },
     })
 
     if (relationshipType === 'primary') {
@@ -443,7 +483,8 @@ export default class Artist extends BaseModel {
   }
 
   public async removeFromSalon(salonId: string): Promise<void> {
-    await this.related('salons').detach([salonId])
+    const salonRelation = this.related('salons') as any
+    await salonRelation.detach([salonId])
 
     if (this.primarySalonId === salonId) {
       this.primarySalonId = null
@@ -456,11 +497,10 @@ export default class Artist extends BaseModel {
     await this.save()
 
     // Update the relationship to primary
-    await this.related('salons').updatePivot({
-      [salonId]: {
-        relationship_type: 'primary',
-        updated_at: DateTime.now()
-      }
+    const salonRelation = this.related('salons') as any
+    await salonRelation.pivotQuery().where('salon_id', salonId).update({
+      relationship_type: 'primary',
+      updated_at: DateTime.now().toSQL(),
     })
   }
 
@@ -485,6 +525,51 @@ export default class Artist extends BaseModel {
     this.before('create', async (artist) => {
       if (!artist.slug) {
         artist.slug = Artist.generateSlug(artist.stageName)
+      }
+
+      // Set default values
+      if (!artist.experienceLevel) {
+        artist.experienceLevel = ArtistExperienceLevel.INTERMEDIATE
+      }
+      if (!artist.currency) {
+        artist.currency = 'EUR'
+      }
+      if (!artist.verificationStatus) {
+        artist.verificationStatus = ArtistVerificationStatus.UNVERIFIED
+      }
+
+      // Set boolean defaults if undefined
+      if (artist.isActive === undefined) {
+        artist.isActive = true
+      }
+      if (artist.acceptsBookings === undefined) {
+        artist.acceptsBookings = true
+      }
+      if (artist.appointmentOnly === undefined) {
+        artist.appointmentOnly = true
+      }
+      if (artist.isAcceptingNewClients === undefined) {
+        artist.isAcceptingNewClients = true
+      }
+      if (artist.isFeatured === undefined) {
+        artist.isFeatured = false
+      }
+
+      // Set numeric defaults if undefined
+      if (artist.totalReviews === undefined) {
+        artist.totalReviews = 0
+      }
+      if (artist.totalTattoos === undefined) {
+        artist.totalTattoos = 0
+      }
+      if (artist.profileViews === undefined) {
+        artist.profileViews = 0
+      }
+      if (artist.hasHealthCertificate === undefined) {
+        artist.hasHealthCertificate = false
+      }
+      if (artist.hasProfessionalInsurance === undefined) {
+        artist.hasProfessionalInsurance = false
       }
     })
   }
