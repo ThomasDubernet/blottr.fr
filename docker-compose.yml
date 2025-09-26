@@ -1,22 +1,125 @@
+# =================================================================
+# BLOTTR DOCKER COMPOSE CONFIGURATION
+# =================================================================
+# Development and staging environment setup
+
+version: '3.8'
+
 services:
+  # =================================================================
+  # APPLICATION SERVICE
+  # =================================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: blottr_app
+    ports:
+      - "${PORT:-3333}:3333"
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - DATABASE_URL=postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-password}@postgres:5432/${DB_DATABASE:-blottr}
+      - REDIS_URL=redis://redis:6379
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - blottr-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3333/api/health/contact-inquiries"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    profiles:
+      - app
+
+  # =================================================================
+  # DATABASE SERVICE (PostgreSQL)
+  # =================================================================
   postgres:
     image: postgres:16
     container_name: blottr_postgres
     environment:
-      POSTGRES_DB: blottr
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ${DB_DATABASE:-blottr}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
     ports:
-      - '5432:5432'
+      - "${DB_PORT:-5432}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./database/init:/docker-entrypoint-initdb.d
     restart: unless-stopped
     networks:
       - blottr-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_DATABASE:-blottr}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
+  # =================================================================
+  # CACHE SERVICE (Redis)
+  # =================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: blottr_redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-redis}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    restart: unless-stopped
+    networks:
+      - blottr-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    profiles:
+      - cache
+
+  # =================================================================
+  # MONITORING SERVICES
+  # =================================================================
+
+  # PostgreSQL Exporter for Prometheus
+  postgres_exporter:
+    image: prometheuscommunity/postgres-exporter
+    container_name: blottr_postgres_exporter
+    environment:
+      DATA_SOURCE_NAME: "postgresql://${DB_USER:-postgres}:${DB_PASSWORD:-password}@postgres:5432/${DB_DATABASE:-blottr}?sslmode=disable"
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - blottr-network
+    profiles:
+      - monitoring
+
+# =================================================================
+# VOLUMES
+# =================================================================
 volumes:
   postgres_data:
+    driver: local
+  redis_data:
+    driver: local
 
+# =================================================================
+# NETWORKS
+# =================================================================
 networks:
   blottr-network:
     driver: bridge

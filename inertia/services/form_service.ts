@@ -1,4 +1,5 @@
 import { ContactInquiry } from '../components/forms'
+import { api } from '../lib/api'
 
 export interface FormSubmissionResult {
   success: boolean
@@ -11,7 +12,7 @@ export class FormService {
   private baseUrl: string
 
   private constructor() {
-    this.baseUrl = '/api/forms'
+    this.baseUrl = '/api'
   }
 
   public static getInstance(): FormService {
@@ -29,8 +30,8 @@ export class FormService {
       // Create FormData for file uploads
       const formData = new FormData()
 
-      // Add basic form fields
-      formData.append('name', inquiry.name)
+      // Add basic form fields (map to backend expected names)
+      formData.append('fullName', inquiry.name)
       formData.append('email', inquiry.email)
       formData.append('subject', inquiry.subject)
       formData.append('message', inquiry.message)
@@ -47,7 +48,10 @@ export class FormService {
 
       // Add array fields
       if (inquiry.tattooStyle && inquiry.tattooStyle.length > 0) {
-        formData.append('tattooStyles', JSON.stringify(inquiry.tattooStyle))
+        // Send each style as separate form field for backend array handling
+        inquiry.tattooStyle.forEach((style, index) => {
+          formData.append(`tattooStyles[${index}]`, style)
+        })
       }
 
       // Add boolean fields
@@ -56,27 +60,45 @@ export class FormService {
       // Add reference images
       if (inquiry.referenceImages && inquiry.referenceImages.length > 0) {
         inquiry.referenceImages.forEach((file, index) => {
-          formData.append(`referenceImage_${index}`, file)
+          formData.append('referenceImages', file)
         })
         formData.append('referenceImageCount', inquiry.referenceImages.length.toString())
       }
 
-      // For now, simulate API call with timeout
-      // In production, this would be a real API endpoint
-      await this.simulateApiCall()
+      // Add CSRF token to FormData for manual fetch
+      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content')
+      if (csrfToken) {
+        formData.append('_token', csrfToken)
+      }
 
-      // Mock successful response
+      // Make actual API call
+      const response = await fetch(`${this.baseUrl}/contact-inquiries`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json',
+          'X-CSRF-TOKEN': csrfToken || '',
+          // Don't set Content-Type - let browser set it with boundary for FormData
+        },
+        credentials: 'same-origin',
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to submit inquiry')
+      }
+
       return {
-        success: true,
-        message:
-          "Votre demande a été envoyée avec succès ! L'artiste vous contactera dans les plus brefs délais.",
-        inquiryId: `INQ_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        success: data.success,
+        message: data.message,
+        inquiryId: data.inquiryId,
       }
     } catch (error) {
       console.error('Form submission error:', error)
       return {
         success: false,
-        message: "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer.",
+        message: error instanceof Error ? error.message : "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer.",
       }
     }
   }
@@ -89,19 +111,22 @@ export class FormService {
     tattooId?: string
   }): Promise<FormSubmissionResult> {
     try {
-      // Simulate API call
-      await this.simulateApiCall()
+      const result = await api.post<{
+        success: boolean
+        message: string
+        inquiryId?: string
+      }>('/contact-inquiries/quick', data)
 
       return {
-        success: true,
-        message: 'Votre message a été envoyé avec succès !',
-        inquiryId: `QUICK_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        success: result.success,
+        message: result.message,
+        inquiryId: result.inquiryId,
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Quick inquiry submission error:', error)
       return {
         success: false,
-        message: "Une erreur est survenue lors de l'envoi de votre message.",
+        message: error?.response?.data?.message || error?.message || "Une erreur est survenue lors de l'envoi de votre message.",
       }
     }
   }

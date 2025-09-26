@@ -15,7 +15,15 @@
     "format:check": "prettier --check .",
     "fix": "npm run lint:fix && npm run format",
     "quality": "npm run lint && npm run format:check && npm run typecheck",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "env:validate": "node -e \"import('./app/services/environment_service.js').then(m => m.environmentService.logEnvironmentStatus())\"",
+    "env:staging": "cp .env.staging .env && npm run env:validate",
+    "env:production": "cp .env.production .env && npm run env:validate",
+    "deploy:staging": "NODE_ENV=staging npm run build && npm run migration:run",
+    "deploy:production": "NODE_ENV=production npm run build && npm run migration:run",
+    "migration:run": "node ace migration:run",
+    "migration:rollback": "node ace migration:rollback",
+    "db:seed": "node ace db:seed"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",

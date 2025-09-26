@@ -8,8 +8,22 @@
 */
 
 import router from '@adonisjs/core/services/router'
+const ContactInquiriesController = () => import('#controllers/contact_inquiries_controller')
 
 router.on('/').renderInertia('home')
+
+// API Routes
+router.group(() => {
+  // Contact Inquiry routes with rate limiting and monitoring
+  router.post('/contact-inquiries', [ContactInquiriesController, 'store'])
+    .middleware(['monitoring', 'rateLimit:5,900000']) // 5 requests per 15 minutes for full form
+  router.post('/contact-inquiries/quick', [ContactInquiriesController, 'storeQuick'])
+    .middleware(['monitoring', 'rateLimit:10,900000']) // 10 requests per 15 minutes for quick form
+  router.get('/contact-inquiries/:id', [ContactInquiriesController, 'show'])
+    .middleware(['monitoring', 'rateLimit:30,900000']) // 30 requests per 15 minutes for read operations
+  router.get('/health/contact-inquiries', [ContactInquiriesController, 'health'])
+    .middleware('monitoring')
+}).prefix('/api')
 
 // Artist routes
 router.get('/artists/:slug', async ({ params, inertia }) => {
