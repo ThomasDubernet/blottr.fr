@@ -88,14 +88,16 @@ export default class City extends BaseModel {
   @computed()
   public get formattedPopulation(): string | null {
     if (!this.population) return null
-    return new Intl.NumberFormat('fr-FR', { useGrouping: true }).format(this.population).replace(/\u202f/g, ' ')
+    return new Intl.NumberFormat('fr-FR', { useGrouping: true })
+      .format(this.population)
+      .replace(/\u202f/g, ' ')
   }
 
   @computed()
   public get coordinates(): { lat: number; lng: number } {
     return {
       lat: this.latitude,
-      lng: this.longitude
+      lng: this.longitude,
     }
   }
 
@@ -112,10 +114,14 @@ export default class City extends BaseModel {
       .orderBy('name', 'asc')
   }
 
-  public static async findNearby(latitude: number, longitude: number, radiusKm: number = 50): Promise<City[]> {
+  public static async findNearby(
+    latitude: number,
+    longitude: number,
+    radiusKm: number = 50
+  ): Promise<City[]> {
     // Using Haversine formula approximation for nearby cities
     const latRange = radiusKm / 111.32 // 1 degree of latitude ≈ 111.32 km
-    const lngRange = radiusKm / (111.32 * Math.cos(latitude * Math.PI / 180))
+    const lngRange = radiusKm / (111.32 * Math.cos((latitude * Math.PI) / 180))
 
     return this.query()
       .where('is_active', true)
@@ -136,18 +142,23 @@ export default class City extends BaseModel {
   public distanceToKm(targetLat: number, targetLng: number): number {
     // Haversine formula for distance calculation
     const R = 6371 // Earth's radius in kilometers
-    const dLat = (targetLat - this.latitude) * Math.PI / 180
-    const dLng = (targetLng - this.longitude) * Math.PI / 180
+    const dLat = ((targetLat - this.latitude) * Math.PI) / 180
+    const dLng = ((targetLng - this.longitude) * Math.PI) / 180
     const a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(this.latitude * Math.PI / 180) * Math.cos(targetLat * Math.PI / 180) *
-      Math.sin(dLng/2) * Math.sin(dLng/2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((this.latitude * Math.PI) / 180) *
+        Math.cos((targetLat * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     return R * c
   }
 
   public async getUsersCount(): Promise<number> {
-    const result = await User.query().where('city_id', this.id).where('is_active', true).count('* as total')
+    const result = await User.query()
+      .where('city_id', this.id)
+      .where('is_active', true)
+      .count('* as total')
     return Number(result[0].$extras.total) || 0
   }
 }

@@ -27,11 +27,12 @@ export default class extends BaseSeeder {
         regionName: 'Île-de-France',
         description: 'Capitale de la France, centre culturel et économique majeur',
         metaTitle: 'Tatoueurs à Paris - Trouvez votre artiste tatoueur à Paris',
-        metaDescription: 'Découvrez les meilleurs tatoueurs de Paris. Réservez votre rendez-vous avec un artiste tatoueur qualifié dans la capitale.',
+        metaDescription:
+          'Découvrez les meilleurs tatoueurs de Paris. Réservez votre rendez-vous avec un artiste tatoueur qualifié dans la capitale.',
         seoKeywords: JSON.stringify(['tatoueur paris', 'tattoo paris', 'salon tatouage paris']),
         isActive: true,
         isFeatured: true,
-        priority: 1
+        priority: 1,
       },
       {
         name: 'Marseille',
@@ -45,21 +46,26 @@ export default class extends BaseSeeder {
         departmentCode: '13',
         departmentName: 'Bouches-du-Rhône',
         regionCode: '93',
-        regionName: 'Provence-Alpes-Côte d\'Azur',
+        regionName: "Provence-Alpes-Côte d'Azur",
         description: 'Deuxième ville de France, port méditerranéen historique',
         metaTitle: 'Tatoueurs à Marseille - Studios de tatouage Marseille',
-        metaDescription: 'Trouvez les meilleurs tatoueurs de Marseille. Découvrez les studios de tatouage réputés dans la cité phocéenne.',
-        seoKeywords: JSON.stringify(['tatoueur marseille', 'tattoo marseille', 'studio tatouage marseille']),
+        metaDescription:
+          'Trouvez les meilleurs tatoueurs de Marseille. Découvrez les studios de tatouage réputés dans la cité phocéenne.',
+        seoKeywords: JSON.stringify([
+          'tatoueur marseille',
+          'tattoo marseille',
+          'studio tatouage marseille',
+        ]),
         isActive: true,
         isFeatured: true,
-        priority: 2
+        priority: 2,
       },
       {
         name: 'Lyon',
         slug: 'lyon',
         postalCode: '69000',
         inseeCode: '69123',
-        latitude: 45.7640,
+        latitude: 45.764,
         longitude: 4.8357,
         population: 518000,
         area: 47.9,
@@ -69,11 +75,12 @@ export default class extends BaseSeeder {
         regionName: 'Auvergne-Rhône-Alpes',
         description: 'Troisième ville de France, capitale de la gastronomie',
         metaTitle: 'Tatoueurs à Lyon - Meilleurs studios de tatouage Lyon',
-        metaDescription: 'Découvrez les tatoueurs lyonnais les plus talentueux. Réservez dans un studio de tatouage professionnel à Lyon.',
+        metaDescription:
+          'Découvrez les tatoueurs lyonnais les plus talentueux. Réservez dans un studio de tatouage professionnel à Lyon.',
         seoKeywords: JSON.stringify(['tatoueur lyon', 'tattoo lyon', 'salon tatouage lyon']),
         isActive: true,
         isFeatured: true,
-        priority: 3
+        priority: 3,
       },
       {
         name: 'Toulouse',
@@ -90,11 +97,16 @@ export default class extends BaseSeeder {
         regionName: 'Occitanie',
         description: 'La ville rose, capitale aéronautique européenne',
         metaTitle: 'Tatoueurs à Toulouse - Studios tatouage Toulouse',
-        metaDescription: 'Trouvez votre tatoueur à Toulouse. Les meilleurs artistes tatoueurs de la ville rose vous attendent.',
-        seoKeywords: JSON.stringify(['tatoueur toulouse', 'tattoo toulouse', 'studio tatouage toulouse']),
+        metaDescription:
+          'Trouvez votre tatoueur à Toulouse. Les meilleurs artistes tatoueurs de la ville rose vous attendent.',
+        seoKeywords: JSON.stringify([
+          'tatoueur toulouse',
+          'tattoo toulouse',
+          'studio tatouage toulouse',
+        ]),
         isActive: true,
         isFeatured: true,
-        priority: 4
+        priority: 4,
       },
       {
         name: 'Nice',
@@ -102,20 +114,21 @@ export default class extends BaseSeeder {
         postalCode: '06000',
         inseeCode: '06088',
         latitude: 43.7102,
-        longitude: 7.2620,
+        longitude: 7.262,
         population: 343000,
         area: 71.9,
         departmentCode: '06',
         departmentName: 'Alpes-Maritimes',
         regionCode: '93',
-        regionName: 'Provence-Alpes-Côte d\'Azur',
-        description: 'Perle de la Côte d\'Azur, destination touristique majeure',
-        metaTitle: 'Tatoueurs à Nice - Artistes tatoueurs Côte d\'Azur',
-        metaDescription: 'Les meilleurs tatoueurs de Nice et de la Côte d\'Azur. Réservez votre tatouage dans un studio professionnel.',
+        regionName: "Provence-Alpes-Côte d'Azur",
+        description: "Perle de la Côte d'Azur, destination touristique majeure",
+        metaTitle: "Tatoueurs à Nice - Artistes tatoueurs Côte d'Azur",
+        metaDescription:
+          "Les meilleurs tatoueurs de Nice et de la Côte d'Azur. Réservez votre tatouage dans un studio professionnel.",
         seoKeywords: JSON.stringify(['tatoueur nice', 'tattoo nice', 'tatouage côte azur']),
         isActive: true,
         isFeatured: true,
-        priority: 5
+        priority: 5,
       },
       {
         name: 'Nantes',
@@ -132,18 +145,19 @@ export default class extends BaseSeeder {
         regionName: 'Pays de la Loire',
         description: 'Ancienne capitale bretonne, ville culturelle dynamique',
         metaTitle: 'Tatoueurs à Nantes - Studios de tatouage Nantes',
-        metaDescription: 'Découvrez les tatoueurs nantais. Trouvez votre artiste tatoueur dans un studio professionnel à Nantes.',
+        metaDescription:
+          'Découvrez les tatoueurs nantais. Trouvez votre artiste tatoueur dans un studio professionnel à Nantes.',
         seoKeywords: JSON.stringify(['tatoueur nantes', 'tattoo nantes', 'salon tatouage nantes']),
         isActive: true,
         isFeatured: true,
-        priority: 6
+        priority: 6,
       },
       {
         name: 'Montpellier',
         slug: 'montpellier',
         postalCode: '34000',
         inseeCode: '34172',
-        latitude: 43.6110,
+        latitude: 43.611,
         longitude: 3.8767,
         population: 295000,
         area: 56.9,
@@ -153,11 +167,16 @@ export default class extends BaseSeeder {
         regionName: 'Occitanie',
         description: 'Ville universitaire dynamique du sud de la France',
         metaTitle: 'Tatoueurs à Montpellier - Meilleurs studios tatouage',
-        metaDescription: 'Les tatoueurs les plus talentueux de Montpellier. Réservez votre rendez-vous dans un studio de tatouage reconnu.',
-        seoKeywords: JSON.stringify(['tatoueur montpellier', 'tattoo montpellier', 'studio tatouage montpellier']),
+        metaDescription:
+          'Les tatoueurs les plus talentueux de Montpellier. Réservez votre rendez-vous dans un studio de tatouage reconnu.',
+        seoKeywords: JSON.stringify([
+          'tatoueur montpellier',
+          'tattoo montpellier',
+          'studio tatouage montpellier',
+        ]),
         isActive: true,
         isFeatured: true,
-        priority: 7
+        priority: 7,
       },
       {
         name: 'Strasbourg',
@@ -174,11 +193,16 @@ export default class extends BaseSeeder {
         regionName: 'Grand Est',
         description: 'Capitale européenne, ville frontalière franco-allemande',
         metaTitle: 'Tatoueurs à Strasbourg - Studios tatouage Strasbourg',
-        metaDescription: 'Trouvez les meilleurs tatoueurs strasbourgeois. Découvrez les studios de tatouage de qualité à Strasbourg.',
-        seoKeywords: JSON.stringify(['tatoueur strasbourg', 'tattoo strasbourg', 'salon tatouage strasbourg']),
+        metaDescription:
+          'Trouvez les meilleurs tatoueurs strasbourgeois. Découvrez les studios de tatouage de qualité à Strasbourg.',
+        seoKeywords: JSON.stringify([
+          'tatoueur strasbourg',
+          'tattoo strasbourg',
+          'salon tatouage strasbourg',
+        ]),
         isActive: true,
         isFeatured: false,
-        priority: 10
+        priority: 10,
       },
       {
         name: 'Bordeaux',
@@ -195,11 +219,16 @@ export default class extends BaseSeeder {
         regionName: 'Nouvelle-Aquitaine',
         description: 'Capitale mondiale du vin, patrimoine UNESCO',
         metaTitle: 'Tatoueurs à Bordeaux - Artistes tatoueurs Bordeaux',
-        metaDescription: 'Les meilleurs tatoueurs de Bordeaux vous accueillent. Réservez dans un studio de tatouage professionnel.',
-        seoKeywords: JSON.stringify(['tatoueur bordeaux', 'tattoo bordeaux', 'studio tatouage bordeaux']),
+        metaDescription:
+          'Les meilleurs tatoueurs de Bordeaux vous accueillent. Réservez dans un studio de tatouage professionnel.',
+        seoKeywords: JSON.stringify([
+          'tatoueur bordeaux',
+          'tattoo bordeaux',
+          'studio tatouage bordeaux',
+        ]),
         isActive: true,
         isFeatured: true,
-        priority: 8
+        priority: 8,
       },
       {
         name: 'Lille',
@@ -216,11 +245,12 @@ export default class extends BaseSeeder {
         regionName: 'Hauts-de-France',
         description: 'Capitale des Flandres, carrefour européen',
         metaTitle: 'Tatoueurs à Lille - Studios de tatouage Lille',
-        metaDescription: 'Découvrez les tatoueurs lillois les plus créatifs. Trouvez votre studio de tatouage idéal à Lille.',
+        metaDescription:
+          'Découvrez les tatoueurs lillois les plus créatifs. Trouvez votre studio de tatouage idéal à Lille.',
         seoKeywords: JSON.stringify(['tatoueur lille', 'tattoo lille', 'salon tatouage lille']),
         isActive: true,
         isFeatured: false,
-        priority: 9
+        priority: 9,
       },
       {
         name: 'Rennes',
@@ -237,11 +267,12 @@ export default class extends BaseSeeder {
         regionName: 'Bretagne',
         description: 'Capitale bretonne, ville universitaire dynamique',
         metaTitle: 'Tatoueurs à Rennes - Meilleurs studios tatouage Rennes',
-        metaDescription: 'Les tatoueurs rennais les plus talentueux. Réservez votre tatouage dans un studio professionnel à Rennes.',
+        metaDescription:
+          'Les tatoueurs rennais les plus talentueux. Réservez votre tatouage dans un studio professionnel à Rennes.',
         seoKeywords: JSON.stringify(['tatoueur rennes', 'tattoo rennes', 'studio tatouage rennes']),
         isActive: true,
         isFeatured: false,
-        priority: 11
+        priority: 11,
       },
       {
         name: 'Reims',
@@ -258,11 +289,12 @@ export default class extends BaseSeeder {
         regionName: 'Grand Est',
         description: 'Cité des rois, capitale du champagne',
         metaTitle: 'Tatoueurs à Reims - Studios tatouage Reims',
-        metaDescription: 'Trouvez votre tatoueur à Reims. Découvrez les studios de tatouage de la cité des sacres.',
+        metaDescription:
+          'Trouvez votre tatoueur à Reims. Découvrez les studios de tatouage de la cité des sacres.',
         seoKeywords: JSON.stringify(['tatoueur reims', 'tattoo reims', 'salon tatouage reims']),
         isActive: true,
         isFeatured: false,
-        priority: 15
+        priority: 15,
       },
       // Additional cities for better coverage
       {
@@ -280,11 +312,16 @@ export default class extends BaseSeeder {
         regionName: 'Normandie',
         description: 'Port atlantique majeur, architecture moderne classée UNESCO',
         metaTitle: 'Tatoueurs au Havre - Studios de tatouage Le Havre',
-        metaDescription: 'Les meilleurs tatoueurs du Havre. Trouvez votre artiste tatoueur en Normandie.',
-        seoKeywords: JSON.stringify(['tatoueur le havre', 'tattoo le havre', 'studio tatouage havre']),
+        metaDescription:
+          'Les meilleurs tatoueurs du Havre. Trouvez votre artiste tatoueur en Normandie.',
+        seoKeywords: JSON.stringify([
+          'tatoueur le havre',
+          'tattoo le havre',
+          'studio tatouage havre',
+        ]),
         isActive: true,
         isFeatured: false,
-        priority: 20
+        priority: 20,
       },
       {
         name: 'Saint-Étienne',
@@ -301,11 +338,16 @@ export default class extends BaseSeeder {
         regionName: 'Auvergne-Rhône-Alpes',
         description: 'Ville industrielle historique, patrimoine minier',
         metaTitle: 'Tatoueurs à Saint-Étienne - Studios tatouage Loire',
-        metaDescription: 'Découvrez les tatoueurs stéphanois. Réservez dans un studio de tatouage professionnel à Saint-Étienne.',
-        seoKeywords: JSON.stringify(['tatoueur saint etienne', 'tattoo saint etienne', 'salon tatouage loire']),
+        metaDescription:
+          'Découvrez les tatoueurs stéphanois. Réservez dans un studio de tatouage professionnel à Saint-Étienne.',
+        seoKeywords: JSON.stringify([
+          'tatoueur saint etienne',
+          'tattoo saint etienne',
+          'salon tatouage loire',
+        ]),
         isActive: true,
         isFeatured: false,
-        priority: 25
+        priority: 25,
       },
       {
         name: 'Toulon',
@@ -313,21 +355,22 @@ export default class extends BaseSeeder {
         postalCode: '83000',
         inseeCode: '83137',
         latitude: 43.1242,
-        longitude: 5.9280,
+        longitude: 5.928,
         population: 176000,
         area: 42.8,
         departmentCode: '83',
         departmentName: 'Var',
         regionCode: '93',
-        regionName: 'Provence-Alpes-Côte d\'Azur',
+        regionName: "Provence-Alpes-Côte d'Azur",
         description: 'Port militaire méditerranéen, base navale française',
         metaTitle: 'Tatoueurs à Toulon - Studios de tatouage Var',
-        metaDescription: 'Les tatoueurs toulonnais les plus créatifs. Trouvez votre studio de tatouage dans le Var.',
+        metaDescription:
+          'Les tatoueurs toulonnais les plus créatifs. Trouvez votre studio de tatouage dans le Var.',
         seoKeywords: JSON.stringify(['tatoueur toulon', 'tattoo toulon', 'studio tatouage var']),
         isActive: true,
         isFeatured: false,
-        priority: 30
-      }
+        priority: 30,
+      },
     ]
 
     // Insert cities with proper error handling

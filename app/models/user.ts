@@ -9,7 +9,7 @@ import City from './city.js'
 // Define user roles enum
 export enum UserRole {
   CLIENT = 1,
-  ARTIST = 2
+  ARTIST = 2,
 }
 
 export type UserGender = 'male' | 'female' | 'other' | 'prefer_not_to_say'
@@ -96,7 +96,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @belongsTo(() => City)
   declare city: BelongsTo<typeof City>
 
-  @hasMany(() => import('./artist.js').then(m => m.default))
+  @hasMany(() => import('./artist.js').then((m) => m.default))
   declare artists: HasMany<any>
 
   // Computed properties
@@ -118,7 +118,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @computed()
   public get isProfileComplete(): boolean {
     const requiredFields = [this.fullName, this.phone, this.cityId]
-    return requiredFields.every(field => field !== null && field !== undefined)
+    return requiredFields.every((field) => field !== null && field !== undefined)
   }
 
   @computed()
@@ -137,7 +137,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
     if (!this.latitude || !this.longitude) return null
     return {
       lat: this.latitude,
-      lng: this.longitude
+      lng: this.longitude,
     }
   }
 
@@ -167,10 +167,14 @@ export default class User extends compose(BaseModel, AuthFinder) {
       .orderBy('created_at', 'desc')
   }
 
-  public static async findNearby(latitude: number, longitude: number, radiusKm: number = 50): Promise<User[]> {
+  public static async findNearby(
+    latitude: number,
+    longitude: number,
+    radiusKm: number = 50
+  ): Promise<User[]> {
     // Using Haversine formula approximation for nearby users
     const latRange = radiusKm / 111.32 // 1 degree of latitude ≈ 111.32 km
-    const lngRange = radiusKm / (111.32 * Math.cos(latitude * Math.PI / 180))
+    const lngRange = radiusKm / (111.32 * Math.cos((latitude * Math.PI) / 180))
 
     return this.query()
       .where('is_active', true)
@@ -221,13 +225,15 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
     // Haversine formula for distance calculation
     const R = 6371 // Earth's radius in kilometers
-    const dLat = (targetLat - this.latitude) * Math.PI / 180
-    const dLng = (targetLng - this.longitude) * Math.PI / 180
+    const dLat = ((targetLat - this.latitude) * Math.PI) / 180
+    const dLng = ((targetLng - this.longitude) * Math.PI) / 180
     const a =
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(this.latitude * Math.PI / 180) * Math.cos(targetLat * Math.PI / 180) *
-      Math.sin(dLng/2) * Math.sin(dLng/2)
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((this.latitude * Math.PI) / 180) *
+        Math.cos((targetLat * Math.PI) / 180) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2)
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     return R * c
   }
 }

@@ -40,7 +40,15 @@ export default class CreateSalonsTable extends BaseSchema {
       table.json('gallery_images').nullable() // Array of image URLs
 
       // Verification and status
-      table.enu('verification_status', ['unverified', 'scraped', 'contacted', 'onboarding', 'verified']).defaultTo('unverified')
+      table
+        .enu('verification_status', [
+          'unverified',
+          'scraped',
+          'contacted',
+          'onboarding',
+          'verified',
+        ])
+        .defaultTo('unverified')
       table.timestamp('verified_at').nullable()
       table.string('verified_by').nullable() // Admin who verified
       table.text('verification_notes').nullable()

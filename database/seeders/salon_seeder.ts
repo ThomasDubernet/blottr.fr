@@ -22,7 +22,8 @@ export default class SalonSeeder extends BaseSeeder {
       {
         name: 'Ink Palace Studio',
         slug: 'ink-palace-studio-paris',
-        description: 'Studio de tatouage haut de gamme au cœur de Paris. Spécialisé dans le réalisme, le traditionnel et les créations personnalisées. Équipe d\'artistes expérimentés depuis 2010.',
+        description:
+          "Studio de tatouage haut de gamme au cœur de Paris. Spécialisé dans le réalisme, le traditionnel et les créations personnalisées. Équipe d'artistes expérimentés depuis 2010.",
         shortDescription: 'Studio parisien spécialisé en réalisme et traditionnel',
         email: 'contact@inkpalace.fr',
         phone: '+33142365478',
@@ -39,16 +40,23 @@ export default class SalonSeeder extends BaseSeeder {
           thursday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           friday: { isOpen: true, openTime: '10:00', closeTime: '20:00' },
           saturday: { isOpen: true, openTime: '09:00', closeTime: '18:00' },
-          sunday: { isOpen: false }
+          sunday: { isOpen: false },
         },
-        services: ['Tatouage traditionnel', 'Réalisme', 'Noir et blanc', 'Couleur', 'Cover-up', 'Retouches'],
+        services: [
+          'Tatouage traditionnel',
+          'Réalisme',
+          'Noir et blanc',
+          'Couleur',
+          'Cover-up',
+          'Retouches',
+        ],
         priceRangeMin: 120,
         priceRangeMax: 400,
         instagramHandle: '@inkpalaceparis',
         galleryImages: [
           'https://images.unsplash.com/photo-1565058379802-bbe93b2e6eb3?w=800',
           'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=800',
-          'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800'
+          'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800',
         ],
         verificationStatus: SalonVerificationStatus.VERIFIED,
         verifiedAt: DateTime.fromISO('2024-01-15'),
@@ -58,13 +66,15 @@ export default class SalonSeeder extends BaseSeeder {
         averageRating: 4.8,
         totalReviews: 127,
         metaTitle: 'Ink Palace Studio - Tatouage Paris | Réalisme & Traditionnel',
-        metaDescription: 'Studio de tatouage parisien spécialisé en réalisme et traditionnel. Équipe expérimentée, matériel stérilisé, créations uniques sur rendez-vous.',
-        seoKeywords: ['tattoo', 'tatouage', 'paris', 'réalisme', 'traditionnel', 'rivoli']
+        metaDescription:
+          'Studio de tatouage parisien spécialisé en réalisme et traditionnel. Équipe expérimentée, matériel stérilisé, créations uniques sur rendez-vous.',
+        seoKeywords: ['tattoo', 'tatouage', 'paris', 'réalisme', 'traditionnel', 'rivoli'],
       },
       {
         name: 'Black Rose Tattoo',
         slug: 'black-rose-tattoo-paris',
-        description: 'Salon spécialisé dans les tatouages féminins, floraux et délicats. Atmosphère cosy et accueillante dans le Marais.',
+        description:
+          'Salon spécialisé dans les tatouages féminins, floraux et délicats. Atmosphère cosy et accueillante dans le Marais.',
         shortDescription: 'Tatouages féminins et floraux dans le Marais',
         email: 'hello@blackrosetattoo.fr',
         phone: '+33143298765',
@@ -81,7 +91,7 @@ export default class SalonSeeder extends BaseSeeder {
           thursday: { isOpen: true, openTime: '11:00', closeTime: '19:00' },
           friday: { isOpen: true, openTime: '11:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '10:00', closeTime: '17:00' },
-          sunday: { isOpen: false }
+          sunday: { isOpen: false },
         },
         services: ['Tatouages féminins', 'Motifs floraux', 'Fine line', 'Minimaliste', 'Lettering'],
         priceRangeMin: 80,
@@ -91,22 +101,23 @@ export default class SalonSeeder extends BaseSeeder {
         verifiedAt: DateTime.fromISO('2024-02-10'),
         verifiedBy: 'admin@blottr.fr',
         averageRating: 4.6,
-        totalReviews: 89
+        totalReviews: 89,
       },
 
       // Lyon Salons
       {
         name: 'Lyon Tattoo Collective',
         slug: 'lyon-tattoo-collective',
-        description: 'Collectif d\'artistes tatoueurs lyonnais réunissant différents styles et spécialités. Créativité et professionnalisme au service de vos projets.',
-        shortDescription: 'Collectif d\'artistes lyonnais multi-styles',
+        description:
+          "Collectif d'artistes tatoueurs lyonnais réunissant différents styles et spécialités. Créativité et professionnalisme au service de vos projets.",
+        shortDescription: "Collectif d'artistes lyonnais multi-styles",
         email: 'contact@lyontattoo.fr',
         phone: '+33478456789',
         website: 'https://lyontattoo.fr',
         cityId: lyon.id,
         address: '42 rue de la République',
         postalCode: '69001',
-        latitude: 45.7640,
+        latitude: 45.764,
         longitude: 4.8357,
         openingHours: {
           monday: { isOpen: false },
@@ -115,9 +126,15 @@ export default class SalonSeeder extends BaseSeeder {
           thursday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           friday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '09:00', closeTime: '18:00' },
-          sunday: { isOpen: true, openTime: '11:00', closeTime: '17:00' }
+          sunday: { isOpen: true, openTime: '11:00', closeTime: '17:00' },
         },
-        services: ['Traditionnel japonais', 'New School', 'Géométrique', 'Biomécanique', 'Portrait'],
+        services: [
+          'Traditionnel japonais',
+          'New School',
+          'Géométrique',
+          'Biomécanique',
+          'Portrait',
+        ],
         priceRangeMin: 100,
         priceRangeMax: 350,
         instagramHandle: '@lyontattooCollective',
@@ -127,14 +144,15 @@ export default class SalonSeeder extends BaseSeeder {
         isFeatured: true,
         priority: 2,
         averageRating: 4.7,
-        totalReviews: 156
+        totalReviews: 156,
       },
 
       // Marseille Salons
       {
         name: 'Méditerranée Ink',
         slug: 'mediterranee-ink-marseille',
-        description: 'Studio marseillais avec vue sur le Vieux-Port. Spécialisé dans les tatouages maritimes, tribaux méditerranéens et styles provençaux.',
+        description:
+          'Studio marseillais avec vue sur le Vieux-Port. Spécialisé dans les tatouages maritimes, tribaux méditerranéens et styles provençaux.',
         shortDescription: 'Tatouages maritimes et méditerranéens',
         email: 'contact@mediterraneink.fr',
         phone: '+33491234567',
@@ -150,9 +168,14 @@ export default class SalonSeeder extends BaseSeeder {
           thursday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
           friday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
-          sunday: { isOpen: false }
+          sunday: { isOpen: false },
         },
-        services: ['Tatouages maritimes', 'Tribal méditerranéen', 'Anchors & nautique', 'Provençal'],
+        services: [
+          'Tatouages maritimes',
+          'Tribal méditerranéen',
+          'Anchors & nautique',
+          'Provençal',
+        ],
         priceRangeMin: 90,
         priceRangeMax: 280,
         instagramHandle: '@mediterraneink',
@@ -160,20 +183,21 @@ export default class SalonSeeder extends BaseSeeder {
         verifiedAt: DateTime.fromISO('2024-02-05'),
         verifiedBy: 'admin@blottr.fr',
         averageRating: 4.5,
-        totalReviews: 73
+        totalReviews: 73,
       },
 
       // Bordeaux Salons
       {
         name: 'Bordeaux Art & Ink',
         slug: 'bordeaux-art-ink',
-        description: 'Studio bordelais alliance entre art traditionnel et techniques modernes. Spécialisé dans les œuvres d\'art corporel sur-mesure.',
+        description:
+          "Studio bordelais alliance entre art traditionnel et techniques modernes. Spécialisé dans les œuvres d'art corporel sur-mesure.",
         shortDescription: 'Art corporel sur-mesure à Bordeaux',
         email: 'studio@bordeauxartink.fr',
         phone: '+33556789123',
         website: 'https://bordeauxartink.fr',
         cityId: bordeaux.id,
-        address: '8 cours de l\'Intendance',
+        address: "8 cours de l'Intendance",
         postalCode: '33000',
         latitude: 44.8378,
         longitude: -0.5792,
@@ -184,22 +208,29 @@ export default class SalonSeeder extends BaseSeeder {
           thursday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
           friday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '09:00', closeTime: '18:00' },
-          sunday: { isOpen: false }
+          sunday: { isOpen: false },
         },
-        services: ['Art sur-mesure', 'Réalisme coloré', 'Aquarelle', 'Neo-traditional', 'Cover-up artistique'],
+        services: [
+          'Art sur-mesure',
+          'Réalisme coloré',
+          'Aquarelle',
+          'Neo-traditional',
+          'Cover-up artistique',
+        ],
         priceRangeMin: 110,
         priceRangeMax: 380,
         instagramHandle: '@bordeauxartink',
         verificationStatus: SalonVerificationStatus.CONTACTED,
         averageRating: 4.4,
-        totalReviews: 42
+        totalReviews: 42,
       },
 
       // Toulouse Salons
       {
         name: 'Pink City Tattoo',
         slug: 'pink-city-tattoo-toulouse',
-        description: 'Dans la ville rose, studio moderne spécialisé dans les créations colorées et les designs contemporains. Ambiance rock et conviviale.',
+        description:
+          'Dans la ville rose, studio moderne spécialisé dans les créations colorées et les designs contemporains. Ambiance rock et conviviale.',
         shortDescription: 'Créations colorées et designs contemporains',
         email: 'info@pinkcitytattoo.fr',
         phone: '+33561234567',
@@ -215,7 +246,7 @@ export default class SalonSeeder extends BaseSeeder {
           thursday: { isOpen: true, openTime: '11:00', closeTime: '19:00' },
           friday: { isOpen: true, openTime: '11:00', closeTime: '20:00' },
           saturday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
-          sunday: { isOpen: false }
+          sunday: { isOpen: false },
         },
         services: ['New School coloré', 'Pop Art', 'Cartoon', 'Illustration', 'Typography moderne'],
         priceRangeMin: 85,
@@ -223,16 +254,13 @@ export default class SalonSeeder extends BaseSeeder {
         instagramHandle: '@pinkcitytattoo',
         verificationStatus: SalonVerificationStatus.SCRAPED,
         averageRating: 4.3,
-        totalReviews: 67
-      }
+        totalReviews: 67,
+      },
     ]
 
     // Create salons
     for (const salonData of salonsData) {
-      await Salon.firstOrCreate(
-        { slug: salonData.slug },
-        salonData
-      )
+      await Salon.firstOrCreate({ slug: salonData.slug }, salonData)
     }
 
     console.log('✅ Salons seeded successfully')

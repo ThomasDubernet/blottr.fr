@@ -37,7 +37,7 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: paris.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Céline Dubois',
@@ -48,7 +48,7 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: paris.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Maxime Laurent',
@@ -59,7 +59,7 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: lyon.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Sophie Bernard',
@@ -70,7 +70,7 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: lyon.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Thomas Martinez',
@@ -81,7 +81,7 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: marseille.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Julie Petit',
@@ -92,7 +92,7 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: bordeaux.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Nicolas Garcia',
@@ -103,17 +103,14 @@ export default class ArtistSeeder extends BaseSeeder {
         cityId: toulouse.id,
         emailVerified: true,
         phoneVerified: true,
-        isActive: true
-      }
+        isActive: true,
+      },
     ]
 
     // Create artist users
     const createdUsers = []
     for (const userData of artistUsersData) {
-      const user = await User.firstOrCreate(
-        { email: userData.email },
-        userData
-      )
+      const user = await User.firstOrCreate({ email: userData.email }, userData)
       createdUsers.push(user)
     }
 
@@ -123,8 +120,8 @@ export default class ArtistSeeder extends BaseSeeder {
         userId: createdUsers[0].id,
         stageName: 'Alex Ink',
         slug: 'alex-ink-paris',
-        bio: 'Artiste tatoueur parisien spécialisé dans le réalisme et le traditionnel. Plus de 12 ans d\'expérience, formé aux techniques japonaises traditionnelles. Passion pour les portraits et les créations personnalisées.',
-        shortBio: 'Expert réalisme et traditionnel, 12 ans d\'expérience',
+        bio: "Artiste tatoueur parisien spécialisé dans le réalisme et le traditionnel. Plus de 12 ans d'expérience, formé aux techniques japonaises traditionnelles. Passion pour les portraits et les créations personnalisées.",
+        shortBio: "Expert réalisme et traditionnel, 12 ans d'expérience",
         specialty: 'Réalisme, portraits, traditionnel japonais',
         yearsExperience: 12,
         startedTattooingAt: DateTime.now().minus({ years: 12 }),
@@ -139,7 +136,7 @@ export default class ArtistSeeder extends BaseSeeder {
         portfolioImages: [
           'https://images.unsplash.com/photo-1565058379802-bbe93b2e6eb3?w=800',
           'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=800',
-          'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800'
+          'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800',
         ],
         instagramHandle: '@alex_ink_paris',
         instagramUrl: 'https://instagram.com/alex_ink_paris',
@@ -163,11 +160,12 @@ export default class ArtistSeeder extends BaseSeeder {
           thursday: { isAvailable: true, startTime: '10:00', endTime: '18:00' },
           friday: { isAvailable: true, startTime: '10:00', endTime: '19:00' },
           saturday: { isAvailable: true, startTime: '09:00', endTime: '17:00' },
-          sunday: { isAvailable: false }
+          sunday: { isAvailable: false },
         },
         metaTitle: 'Alex Ink - Artiste Tatoueur Paris | Réalisme & Traditionnel',
-        metaDescription: 'Expert en tatouage réaliste et traditionnel à Paris. 12 ans d\'expérience, spécialisé dans les portraits et créations japonaises.',
-        seoKeywords: ['alex ink', 'tatoueur paris', 'réalisme', 'traditionnel', 'portrait tattoo']
+        metaDescription:
+          "Expert en tatouage réaliste et traditionnel à Paris. 12 ans d'expérience, spécialisé dans les portraits et créations japonaises.",
+        seoKeywords: ['alex ink', 'tatoueur paris', 'réalisme', 'traditionnel', 'portrait tattoo'],
       },
       {
         userId: createdUsers[1].id,
@@ -186,9 +184,7 @@ export default class ArtistSeeder extends BaseSeeder {
         appointmentOnly: true,
         minPrice: 100,
         maxPrice: 280,
-        portfolioImages: [
-          'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800'
-        ],
+        portfolioImages: ['https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800'],
         instagramHandle: '@celine_rose_tattoo',
         instagramUrl: 'https://instagram.com/celine_rose_tattoo',
         verificationStatus: ArtistVerificationStatus.VERIFIED,
@@ -202,7 +198,7 @@ export default class ArtistSeeder extends BaseSeeder {
         averageRating: 4.7,
         totalReviews: 67,
         totalTattoos: 210,
-        profileViews: 890
+        profileViews: 890,
       },
       {
         userId: createdUsers[2].id,
@@ -231,13 +227,13 @@ export default class ArtistSeeder extends BaseSeeder {
         averageRating: 4.6,
         totalReviews: 52,
         totalTattoos: 185,
-        profileViews: 650
+        profileViews: 650,
       },
       {
         userId: createdUsers[3].id,
         stageName: 'Sophie Art',
         slug: 'sophie-art-lyon',
-        bio: 'Artiste lyonnaise spécialisée dans les portraits réalistes et l\'art néo-traditionnel. Formée aux beaux-arts, j\'apporte une approche artistique unique à chaque création.',
+        bio: "Artiste lyonnaise spécialisée dans les portraits réalistes et l'art néo-traditionnel. Formée aux beaux-arts, j'apporte une approche artistique unique à chaque création.",
         shortBio: 'Portraits réalistes et néo-traditionnel',
         specialty: 'Portrait, néo-traditionnel, art figuratif',
         yearsExperience: 6,
@@ -260,7 +256,7 @@ export default class ArtistSeeder extends BaseSeeder {
         averageRating: 4.5,
         totalReviews: 38,
         totalTattoos: 125,
-        profileViews: 420
+        profileViews: 420,
       },
       {
         userId: createdUsers[4].id,
@@ -289,13 +285,13 @@ export default class ArtistSeeder extends BaseSeeder {
         averageRating: 4.4,
         totalReviews: 31,
         totalTattoos: 95,
-        profileViews: 315
+        profileViews: 315,
       },
       {
         userId: createdUsers[5].id,
         stageName: 'Julie Bordeaux',
         slug: 'julie-bordeaux',
-        bio: 'Artiste bordelaise spécialisée dans l\'art sur-mesure et les créations aquarelle. Approche artistique unique mêlant techniques traditionnelles et innovations contemporaines.',
+        bio: "Artiste bordelaise spécialisée dans l'art sur-mesure et les créations aquarelle. Approche artistique unique mêlant techniques traditionnelles et innovations contemporaines.",
         shortBio: 'Art sur-mesure et aquarelle',
         specialty: 'Aquarelle, art sur-mesure, néo-traditionnel',
         yearsExperience: 7,
@@ -316,7 +312,7 @@ export default class ArtistSeeder extends BaseSeeder {
         averageRating: 4.2,
         totalReviews: 19,
         totalTattoos: 68,
-        profileViews: 180
+        profileViews: 180,
       },
       {
         userId: createdUsers[6].id,
@@ -342,17 +338,14 @@ export default class ArtistSeeder extends BaseSeeder {
         averageRating: 4.1,
         totalReviews: 25,
         totalTattoos: 78,
-        profileViews: 245
-      }
+        profileViews: 245,
+      },
     ]
 
     // Create artists
     const createdArtists = []
     for (const artistData of artistsData) {
-      const artist = await Artist.firstOrCreate(
-        { slug: artistData.slug },
-        artistData
-      )
+      const artist = await Artist.firstOrCreate({ slug: artistData.slug }, artistData)
       createdArtists.push(artist)
     }
 
@@ -367,7 +360,7 @@ export default class ArtistSeeder extends BaseSeeder {
       { artistIndex: 6, salonId: pinkCity?.id, type: 'primary' },
       // Guest relationships
       { artistIndex: 0, salonId: blackRose?.id, type: 'guest' },
-      { artistIndex: 1, salonId: inkPalace?.id, type: 'guest' }
+      { artistIndex: 1, salonId: inkPalace?.id, type: 'guest' },
     ]
 
     for (const rel of relationships) {
@@ -382,7 +375,14 @@ export default class ArtistSeeder extends BaseSeeder {
     }
 
     // Update salon artist counts
-    for (const salon of [inkPalace, blackRose, lyonCollective, mediterranee, bordeauxArt, pinkCity]) {
+    for (const salon of [
+      inkPalace,
+      blackRose,
+      lyonCollective,
+      mediterranee,
+      bordeauxArt,
+      pinkCity,
+    ]) {
       if (salon) {
         await salon.updateArtistCount()
       }

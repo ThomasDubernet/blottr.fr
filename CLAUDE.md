@@ -72,18 +72,21 @@ Presentation Layer (Interface)
 
 ```markdown
 ## Analyse Préalable
+
 - **Edge cases identifiés** : [liste des cas limites]
 - **Architecture de tests** : [stratégie de tests à implémenter]
 - **Dépendances externes** : [services/APIs concernés]
 - **Impact existant** : [code à modifier/étendre]
 
 ## Options d'Implémentation
+
 **Option A** : [approche 1 avec avantages/inconvénients]
 **Option B** : [approche 2 avec avantages/inconvénients]
 
 **Recommandation** : [option préférée avec justification]
 
 ## Tests à Implémenter
+
 - [ ] Tests unitaires : [scope précis]
 - [ ] Tests d'intégration : [endpoints/flows]
 - [ ] Tests edge cases : [scénarios limites]
@@ -125,6 +128,7 @@ npm run build              # Production build success
 ## 🚀 STACK TECHNIQUE ACTUEL
 
 ### Core Technologies
+
 - **Backend** : AdonisJS 6 (TypeScript)
 - **Frontend** : React 19 + Inertia.js
 - **Database** : PostgreSQL + Lucid ORM
@@ -133,6 +137,7 @@ npm run build              # Production build success
 - **Build** : Vite
 
 ### Architecture État Actuel
+
 - **Models** : `app/models/user.ts` (Lucid BaseModel + Auth)
 - **Middleware** : Auth, Guest, SilentAuth, ContainerBindings
 - **Tests** : Bootstrap configuré, suites unit/functional
@@ -141,6 +146,7 @@ npm run build              # Production build success
 ## 📁 CONVENTIONS DE NOMMAGE
 
 ### Backend (AdonisJS)
+
 ```typescript
 // Models - PascalCase, singular
 export default class User extends BaseModel
@@ -163,6 +169,7 @@ test.group('Utilisateur - Inscription', () => {
 ```
 
 ### Frontend (React)
+
 ```typescript
 // Components - PascalCase
 export default function UserProfile() {}
@@ -178,6 +185,7 @@ export function useUserAuth() {}
 ## 🔧 COMMANDES DE DÉVELOPPEMENT
 
 ### Développement Quotidien
+
 ```bash
 npm run dev                    # Dev server + HMR
 npm test -- --watch           # Tests en continu
@@ -185,6 +193,7 @@ npm run lint:fix              # Fix automatique du code
 ```
 
 ### Base de Données
+
 ```bash
 node ace migration:run         # Appliquer migrations
 node ace migration:rollback    # Rollback dernière migration
@@ -193,6 +202,7 @@ node ace make:model User       # Créer modèle + migration
 ```
 
 ### Génération de Code
+
 ```bash
 node ace make:controller Users    # Controller + resource routes
 node ace make:middleware Auth     # Middleware personnalisé
@@ -203,6 +213,7 @@ node ace make:service UserAuth   # Business service
 ## 🎯 PATTERNS SPÉCIFIQUES ADONISJS
 
 ### Model Pattern avec Business Logic
+
 ```typescript
 import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
 
@@ -231,6 +242,7 @@ export default class User extends BaseModel {
 ```
 
 ### Controller Pattern avec Use Cases
+
 ```typescript
 import { HttpContext } from '@adonisjs/core/http'
 import { RegisterUserUseCase } from '#use-cases/register_user_use_case'
@@ -248,6 +260,7 @@ export default class UsersController {
 ```
 
 ### Service Pattern pour Business Logic
+
 ```typescript
 export default class UserRegistrationService {
   async register(userData: CreateUserDTO): Promise<User> {
@@ -257,7 +270,7 @@ export default class UserRegistrationService {
     // Création sécurisée
     const user = await User.create({
       ...userData,
-      password: await hash.make(userData.password)
+      password: await hash.make(userData.password),
     })
 
     // Actions post-création
@@ -276,6 +289,7 @@ export default class UserRegistrationService {
 ```
 
 ### Test Pattern Complet
+
 ```typescript
 import { test } from '@japa/runner'
 import { UserFactory } from '#factories/user_factory'
@@ -286,7 +300,7 @@ test.group('Users Controller', () => {
     const userData = {
       email: 'test@example.com',
       password: 'secure123',
-      fullName: 'Test User'
+      fullName: 'Test User',
     }
 
     // Act
@@ -296,7 +310,7 @@ test.group('Users Controller', () => {
     response.assertStatus(201)
     response.assertBodyContains({
       email: userData.email,
-      fullName: userData.fullName
+      fullName: userData.fullName,
     })
 
     // Verify in database
@@ -313,16 +327,18 @@ test.group('Users Controller', () => {
     const response = await client.post('/users').json({
       email: existingUser.email,
       password: 'password123',
-      fullName: 'Another User'
+      fullName: 'Another User',
     })
 
     // Assert
     response.assertStatus(422)
     response.assertBodyContains({
-      errors: [{
-        field: 'email',
-        rule: 'unique'
-      }]
+      errors: [
+        {
+          field: 'email',
+          rule: 'unique',
+        },
+      ],
     })
   })
 })
@@ -331,6 +347,7 @@ test.group('Users Controller', () => {
 ## 🔒 RÈGLES DE SÉCURITÉ
 
 ### Validation Obligatoire
+
 ```typescript
 // Toujours valider les inputs
 const payload = request.validateUsing(createUserValidator)
@@ -341,11 +358,14 @@ const users = await Database.rawQuery('SELECT * FROM users') // ❌
 ```
 
 ### Authentification
+
 ```typescript
 // Middleware auth obligatoire sur routes protégées
-router.group(() => {
-  router.get('/profile', [UsersController, 'profile'])
-}).middleware('auth')
+router
+  .group(() => {
+    router.get('/profile', [UsersController, 'profile'])
+  })
+  .middleware('auth')
 
 // Vérification des permissions
 export default class UsersController {
@@ -359,6 +379,7 @@ export default class UsersController {
 ## 📊 MÉTRIQUES DE QUALITÉ
 
 ### Objectifs Chiffrés
+
 - **Test Coverage** : >90% sur business logic
 - **TypeScript Errors** : 0
 - **ESLint Warnings** : 0
@@ -366,6 +387,7 @@ export default class UsersController {
 - **Test Suite** : <10s pour unit tests
 
 ### Monitoring Continu
+
 ```bash
 # Coverage report
 npm run test:coverage -- --reporter=html
@@ -382,6 +404,7 @@ npm audit --audit-level moderate
 ## 🎯 RÉSUMÉ EXÉCUTIF
 
 **Workflow Ultra-Efficace :**
+
 1. **Test d'abord** → Implémentation → Refactor → Quality Gates
 2. **Architecture en couches** → Domain/Application/Infrastructure/Presentation
 3. **Clarification proactive** → Zero aller-retour, options claires

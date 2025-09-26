@@ -1,10 +1,12 @@
 # Phase 1: Authentication System Enhancement Workflow
 
 ## Overview
+
 **Duration**: Weeks 1-3 (78 development hours)
 **Objective**: Enhance basic authentication to support role-based access and location services
 
 ## Target Tables
+
 - **users** (enhanced from existing)
 - **cities** (new location foundation)
 
@@ -13,6 +15,7 @@
 ### Week 1: Foundation & Analysis (26 hours)
 
 #### 🔍 Current State Analysis (6 hours)
+
 - [ ] **Audit existing User model** (2h)
   - Analyze current fields and relationships
   - Document authentication flow
@@ -27,6 +30,7 @@
   - Plan role-based enhancements
 
 #### 🏗️ Architecture Design (8 hours)
+
 - [ ] **Enhanced User model design** (3h)
   - Add role fields (user_type, permissions)
   - Add profile fields (phone, bio, location)
@@ -41,6 +45,7 @@
   - Authentication flow enhancement
 
 #### 🧪 Test Strategy Planning (6 hours)
+
 - [ ] **Authentication test suite design** (3h)
   - Unit tests for enhanced User model
   - Integration tests for auth flow
@@ -51,6 +56,7 @@
   - Performance benchmarking setup
 
 #### 📝 Documentation & Setup (6 hours)
+
 - [ ] **Development environment preparation** (2h)
   - Test database setup
   - Migration testing environment
@@ -67,6 +73,7 @@
 ### Week 2: Implementation Core (26 hours)
 
 #### 🗄️ Database Layer (10 hours)
+
 - [ ] **Enhanced users migration** (4h)
   ```typescript
   // Add fields: user_type, phone, bio, city_id, email_verified_at, avatar_url
@@ -84,6 +91,7 @@
   - Performance impact assessment
 
 #### 🏛️ Model Layer (8 hours)
+
 - [ ] **Enhanced User model** (5h)
   ```typescript
   // Add role management methods
@@ -99,6 +107,7 @@
   ```
 
 #### 🔒 Security Layer (8 hours)
+
 - [ ] **Role-based middleware** (4h)
   - Role verification middleware
   - Permission checking system
@@ -111,6 +120,7 @@
 ### Week 3: Integration & Validation (26 hours)
 
 #### 🧪 Testing Implementation (12 hours)
+
 - [ ] **Unit test suite** (6h)
   ```typescript
   // User model business logic tests
@@ -125,6 +135,7 @@
   ```
 
 #### 🎨 Frontend Integration (8 hours)
+
 - [ ] **Authentication UI enhancement** (4h)
   - Role-based navigation
   - Profile completion flows
@@ -135,6 +146,7 @@
   - Geographic search features
 
 #### ✅ Quality Assurance (6 hours)
+
 - [ ] **Performance optimization** (3h)
   - Query optimization
   - Index effectiveness validation
@@ -147,6 +159,7 @@
 ## Critical Dependencies
 
 ### Internal Dependencies
+
 ```
 Enhanced User Model → Role-based Middleware → Frontend Auth Components
       ↓                        ↓                         ↓
@@ -154,6 +167,7 @@ City Model Implementation → Location Services → Location UI Components
 ```
 
 ### External Dependencies
+
 - **Database**: PostgreSQL optimization for geographic queries
 - **Frontend**: React component library for location picker
 - **Testing**: Enhanced Japa configuration for auth testing
@@ -161,6 +175,7 @@ City Model Implementation → Location Services → Location UI Components
 ## Quality Gates
 
 ### Phase 1 Completion Criteria
+
 - ✅ **Migration Success**: Both migrations run successfully up/down
 - ✅ **Test Coverage**: >95% on authentication logic
 - ✅ **Performance**: Auth operations <100ms
@@ -168,6 +183,7 @@ City Model Implementation → Location Services → Location UI Components
 - ✅ **Integration**: Frontend components work with enhanced auth
 
 ### Validation Checkpoints
+
 1. **Week 1 End**: Architecture approved, tests designed
 2. **Week 2 End**: Core implementation complete, basic tests pass
 3. **Week 3 End**: Full integration complete, all quality gates passed
@@ -175,12 +191,14 @@ City Model Implementation → Location Services → Location UI Components
 ## Risk Mitigation
 
 ### 🔴 Critical Risks
+
 1. **Authentication Breaking**: Existing users can't log in
    - **Mitigation**: Backward compatibility testing, staged rollout
 2. **Performance Regression**: New queries slow down auth
    - **Mitigation**: Query optimization, database indexing, benchmarking
 
 ### 🟡 Medium Risks
+
 1. **Role System Complexity**: Over-engineering permissions
    - **Mitigation**: Start simple, iterate based on requirements
 2. **Frontend Integration Delays**: UI components take longer than expected
@@ -189,12 +207,14 @@ City Model Implementation → Location Services → Location UI Components
 ## Rollback Procedures
 
 ### Emergency Rollback (< 1 hour)
+
 1. **Database**: Rollback migrations to previous state
 2. **Code**: Revert to pre-phase-1 commit
 3. **Tests**: Run full regression suite
 4. **Monitoring**: Verify system stability
 
 ### Partial Rollback (< 30 minutes)
+
 - Rollback specific features while maintaining core functionality
 - Disable role-based access, keep basic authentication
 - Remove location services, maintain user system
@@ -202,12 +222,14 @@ City Model Implementation → Location Services → Location UI Components
 ## Success Metrics
 
 ### Technical Metrics
+
 - **Migration Time**: <5 minutes for up/down
 - **Test Suite Time**: <2 minutes for full auth suite
 - **Code Coverage**: >95% on authentication logic
 - **Performance**: No regression in auth response times
 
 ### Business Metrics
+
 - **User Experience**: No authentication disruption
 - **Feature Readiness**: Role system ready for Phase 2
 - **Location Foundation**: City system ready for business entities
@@ -215,16 +237,18 @@ City Model Implementation → Location Services → Location UI Components
 ## Phase 1 → Phase 2 Handoff
 
 ### Deliverables for Phase 2
+
 1. **Enhanced User Model**: With roles and location support
 2. **City System**: Foundation for business location services
 3. **Security Framework**: Role-based access control
 4. **Test Foundation**: Comprehensive auth test suite
 
 ### Dependencies Resolved for Phase 2
+
 - User authentication system can support artist/salon roles
 - Location system ready for business entity geographic features
 - Permission framework ready for business entity access control
 
 ---
 
-*Next: Phase 2 Business Core workflow design*
+_Next: Phase 2 Business Core workflow design_

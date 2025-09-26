@@ -1,6 +1,7 @@
 # Codebase Structure
 
 ## Root Directory
+
 ```
 /
 ├── app/                    # Backend application code
@@ -25,6 +26,7 @@
 ```
 
 ## Key Files
+
 - `package.json`: Dependencies and scripts
 - `adonisrc.ts`: AdonisJS application configuration
 - `vite.config.ts`: Frontend build configuration

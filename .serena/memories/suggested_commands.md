@@ -1,6 +1,7 @@
 # Essential Development Commands
 
 ## Core Development
+
 ```bash
 # Start development server with HMR
 npm run dev
@@ -16,6 +17,7 @@ npm test
 ```
 
 ## Code Quality
+
 ```bash
 # Run ESLint
 npm run lint
@@ -28,6 +30,7 @@ npm run typecheck
 ```
 
 ## Database Operations
+
 ```bash
 # Run migrations
 node ace migration:run
@@ -46,6 +49,7 @@ node ace db:seed
 ```
 
 ## Development Tools
+
 ```bash
 # AdonisJS REPL
 node ace repl
@@ -64,6 +68,7 @@ node ace make:middleware <name>
 ```
 
 ## System Commands (macOS)
+
 ```bash
 # File operations
 ls -la                    # List files with details
@@ -79,6 +84,7 @@ git log --oneline         # View commit history
 ```
 
 ## Package Management
+
 ```bash
 # Install dependencies
 pnpm install

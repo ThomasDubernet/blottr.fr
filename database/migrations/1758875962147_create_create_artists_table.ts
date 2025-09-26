@@ -21,7 +21,9 @@ export default class CreateArtistsTable extends BaseSchema {
       // Professional status and experience
       table.integer('years_experience').nullable()
       table.date('started_tattooing_at').nullable()
-      table.enu('experience_level', ['beginner', 'intermediate', 'advanced', 'expert']).defaultTo('intermediate')
+      table
+        .enu('experience_level', ['beginner', 'intermediate', 'advanced', 'expert'])
+        .defaultTo('intermediate')
       table.json('art_styles').nullable() // Array of art styles: realism, traditional, etc.
 
       // Location and primary salon
@@ -44,7 +46,15 @@ export default class CreateArtistsTable extends BaseSchema {
       table.json('social_links').nullable() // Other social media links
 
       // Verification system
-      table.enu('verification_status', ['unverified', 'scraped', 'contacted', 'onboarding', 'verified']).defaultTo('unverified')
+      table
+        .enu('verification_status', [
+          'unverified',
+          'scraped',
+          'contacted',
+          'onboarding',
+          'verified',
+        ])
+        .defaultTo('unverified')
       table.timestamp('verified_at').nullable()
       table.string('verified_by').nullable() // Admin who verified
       table.text('verification_notes').nullable()

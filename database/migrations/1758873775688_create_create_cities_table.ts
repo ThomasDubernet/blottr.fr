@@ -34,7 +34,11 @@ export default class extends BaseSchema {
       // Status and visibility
       table.boolean('is_active').notNullable().defaultTo(true)
       table.boolean('is_featured').notNullable().defaultTo(false)
-      table.integer('priority').notNullable().defaultTo(100).comment('Lower number = higher priority')
+      table
+        .integer('priority')
+        .notNullable()
+        .defaultTo(100)
+        .comment('Lower number = higher priority')
 
       // Timestamps
       table.timestamp('created_at').notNullable()

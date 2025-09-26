@@ -1,12 +1,14 @@
 # Comprehensive Testing & Validation Protocols
 
 ## Overview
+
 **Objective**: Ensure 100% data integrity, zero regression, and production readiness across all 4 phases
 **Framework**: Test-Driven Development with comprehensive coverage across unit, integration, and E2E layers
 
 ## Testing Architecture Strategy
 
 ### Testing Pyramid Implementation
+
 ```
 E2E Tests (10%)          ← Complete user journeys, critical flows
     ↑
@@ -16,6 +18,7 @@ Unit Tests (60%)         ← Business logic, models, services
 ```
 
 ### Test-First Development Workflow
+
 ```
 🔴 RED → 🟢 GREEN → 🔵 REFACTOR → ✅ VALIDATE
   ↓        ↓           ↓            ↓
@@ -29,6 +32,7 @@ First     Code       Quality      Pass
 ### Phase 1: Authentication System Testing
 
 #### Unit Testing Requirements (90% Coverage Target)
+
 ```typescript
 // User Model Tests
 describe('Enhanced User Model', () => {
@@ -56,6 +60,7 @@ describe('Role-based Authentication', () => {
 ```
 
 #### Integration Testing Requirements
+
 ```typescript
 // Authentication Flow Tests
 describe('Authentication API Integration', () => {
@@ -76,6 +81,7 @@ describe('Phase 1 Migration Integrity', () => {
 ```
 
 #### E2E Testing Requirements
+
 ```typescript
 // Critical User Journeys
 describe('Authentication User Journey', () => {
@@ -88,6 +94,7 @@ describe('Authentication User Journey', () => {
 ### Phase 2: Business Core Testing
 
 #### Unit Testing Requirements
+
 ```typescript
 // Business Entity Models
 describe('Shop Model', () => {
@@ -113,6 +120,7 @@ describe('Business Management Service', () => {
 ```
 
 #### Integration Testing Requirements
+
 ```typescript
 // Business Entity API Tests
 describe('Business Management API', () => {
@@ -133,6 +141,7 @@ describe('Business Relationship Integration', () => {
 ### Phase 3: Content System Testing
 
 #### Unit Testing Requirements
+
 ```typescript
 // Content Models
 describe('Tattoo Model', () => {
@@ -158,6 +167,7 @@ describe('Image Processing Service', () => {
 ```
 
 #### Integration Testing Requirements
+
 ```typescript
 // Content Management API Tests
 describe('Portfolio Management API', () => {
@@ -178,6 +188,7 @@ describe('Content Discovery Integration', () => {
 ### Phase 4: Booking Platform Testing
 
 #### Unit Testing Requirements
+
 ```typescript
 // Booking Models
 describe('Appointment Model', () => {
@@ -197,6 +208,7 @@ describe('Booking Service', () => {
 ```
 
 #### Integration Testing Requirements
+
 ```typescript
 // Booking System API Tests
 describe('Booking Management API', () => {
@@ -217,6 +229,7 @@ describe('Complete Booking Integration', () => {
 ## Cross-Phase Integration Testing
 
 ### Full System Integration Tests
+
 ```typescript
 describe('Complete Platform Integration', () => {
   test('User registration → Artist profile → Portfolio upload → Booking creation')
@@ -227,6 +240,7 @@ describe('Complete Platform Integration', () => {
 ```
 
 ### Performance Integration Testing
+
 ```typescript
 describe('Performance Validation', () => {
   test('should handle 1000+ concurrent users without degradation')
@@ -239,6 +253,7 @@ describe('Performance Validation', () => {
 ## Migration and Rollback Testing
 
 ### Migration Validation Protocol
+
 ```typescript
 describe('Database Migration Validation', () => {
   // For each phase migration
@@ -266,6 +281,7 @@ describe('Database Migration Validation', () => {
 ```
 
 ### Data Integrity Validation
+
 ```typescript
 describe('Data Integrity Across Phases', () => {
   test('should preserve all existing user data through migrations')
@@ -278,6 +294,7 @@ describe('Data Integrity Across Phases', () => {
 ## Quality Gates and Validation Checkpoints
 
 ### Automated Quality Gates
+
 ```bash
 # Pre-commit Quality Gates
 npm run lint:fix                 # Code style consistency
@@ -293,6 +310,7 @@ npm run test:accessibility    # WCAG 2.1 AA compliance
 ```
 
 ### Manual Quality Validation
+
 1. **User Experience Review**: Complete user journey testing
 2. **Business Logic Validation**: All business rules enforced correctly
 3. **Security Audit**: Authentication, authorization, data protection
@@ -302,6 +320,7 @@ npm run test:accessibility    # WCAG 2.1 AA compliance
 ## Testing Environment Strategy
 
 ### Environment Configuration
+
 ```
 Development Environment:
 ├── Local Database: PostgreSQL test instance
@@ -323,32 +342,34 @@ Production Environment:
 ```
 
 ### Test Data Management
+
 ```typescript
 // Comprehensive test data strategy
 const testDataSets = {
   phase1: {
     users: { basic: 50, with_roles: 25, with_locations: 25 },
-    cities: { major: 20, regional: 30, international: 10 }
+    cities: { major: 20, regional: 30, international: 10 },
   },
   phase2: {
     shops: { single_salon: 15, multi_salon: 10, featured: 5 },
     salons: { urban: 30, suburban: 20, rural: 10 },
-    artists: { new: 25, established: 20, featured: 10 }
+    artists: { new: 25, established: 20, featured: 10 },
   },
   phase3: {
     tattoos: { per_artist: 50, various_styles: 500, featured: 100 },
-    tags: { style: 20, subject: 30, technical: 15 }
+    tags: { style: 20, subject: 30, technical: 15 },
   },
   phase4: {
     appointments: { past: 100, upcoming: 50, various_statuses: 30 },
-    contact_requests: { new: 40, processed: 30, converted: 20 }
-  }
+    contact_requests: { new: 40, processed: 30, converted: 20 },
+  },
 }
 ```
 
 ## Testing Tool Configuration
 
 ### AdonisJS Testing Setup
+
 ```typescript
 // Enhanced test configuration
 export const testConfig = {
@@ -361,19 +382,20 @@ export const testConfig = {
         branches: 90,
         functions: 90,
         lines: 90,
-        statements: 90
-      }
-    }
+        statements: 90,
+      },
+    },
   },
   testMatch: [
     '<rootDir>/tests/unit/**/*.test.ts',
     '<rootDir>/tests/integration/**/*.test.ts',
-    '<rootDir>/tests/e2e/**/*.test.ts'
-  ]
+    '<rootDir>/tests/e2e/**/*.test.ts',
+  ],
 }
 ```
 
 ### Continuous Integration Pipeline
+
 ```yaml
 # CI/CD Testing Pipeline
 testing_pipeline:
@@ -391,6 +413,7 @@ testing_pipeline:
 ## Success Criteria and Metrics
 
 ### Technical Success Metrics
+
 - **Test Coverage**: >90% across all phases
 - **Migration Success**: 100% success rate up/down
 - **Performance**: All targets met consistently
@@ -398,6 +421,7 @@ testing_pipeline:
 - **Reliability**: >99.9% uptime during testing
 
 ### Business Success Metrics
+
 - **Feature Completeness**: All user stories testable and validated
 - **User Experience**: Smooth workflows without friction
 - **Data Integrity**: Zero data loss or corruption
@@ -405,4 +429,4 @@ testing_pipeline:
 
 ---
 
-*Next: Risk Management and Rollback Procedures*
+_Next: Risk Management and Rollback Procedures_
