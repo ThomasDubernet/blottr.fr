@@ -24,8 +24,5 @@ yarn-error.log
 # Platform specific
 .DS_Store
 
-# Serena
-.serena
-
-*storybook.log
-storybook-static
+# Legacy
+legacy

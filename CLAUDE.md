@@ -1,302 +1,390 @@
-# CLAUDE.md
+# CLAUDE.md - Configuration Optimisée Blottr.fr
 
-This file provides guidance to Claude Code (claude.ai/code) when working with
-code in this repository.
+Configuration Claude Code ultra-efficace pour développement sans friction avec qualité maximale.
 
-## 📚 Full Documentation
+## 🧪 TEST-FIRST WORKFLOW (OBLIGATOIRE)
 
-All project documentation has been organized in the `/docs` directory:
+**Chaque feature DOIT suivre ce pattern strict :**
 
-@docs/README.md - Complete documentation index and navigation
-@docs/database/DATABASE_DOCUMENTATION.md - Full database schema, relationships,
-and migration guide @docs/database/DB_VISUALIZATION.md - pgAdmin setup and
-visualization guide @docs/architecture/KNOWLEDGE_BASE.md - Project architecture,
-concepts, and workflows @docs/design-system/README.md - Design system overview
-and component library guide
+1. **RED** : Écrire le test qui échoue d'abord
+2. **GREEN** : Implémenter le code minimum pour passer le test
+3. **REFACTOR** : Améliorer la qualité en gardant les tests verts
+4. **VERIFY** : Vérifier la couverture et les quality gates
 
-## 🏗️ Development Principles
+### Règles Absolues de Tests
 
-**SOLID Principles** : À respecter impérativement dans tout le code
+- ❌ **Aucune fonction sans test unitaire**
+- ❌ **Aucun endpoint sans test fonctionnel**
+- ❌ **Aucun commit sans tests verts**
+- ✅ **Coverage minimum 90% sur business logic**
+- ✅ **Edge cases obligatoires testés**
 
-- **S**ingle Responsibility : Chaque classe/fonction a une seule responsabilité
-- **O**pen/Closed : Ouvert à l'extension, fermé à la modification
-- **L**iskov Substitution : Les sous-classes doivent être substituables
-- **I**nterface Segregation : Interfaces spécifiques plutôt que génériques
-- **D**ependency Inversion : Dépendre d'abstractions, pas de concrétisations
-
-**Test-Driven Development (TDD)** : Workflow obligatoire
-
-1. **Red** : Écrire un test qui échoue d'abord
-2. **Green** : Écrire le code minimum pour faire passer le test
-3. **Refactor** : Améliorer la qualité du code en gardant les tests verts
-
-**Domain-Driven Design (DDD)** : Architecture centrée domaine
-
-- **Entities** : Objets avec identité (User, Artist, Tattoo)
-- **Value Objects** : Objets sans identité (Email, Password, GPS coordinates)
-- **Aggregates** : Groupes cohérents d'entités (Artist + Portfolio)
-- **Repositories** : Interface d'accès aux données
-- **Services** : Logic métier complexe cross-entity
-
-## Context7 Usage Policy
-
-**Always use Context7 when you need:**
-
-- Code generation, setup or configuration steps
-- Library/API documentation and best practices
-- Framework-specific implementation patterns
-- Official documentation lookup
-
-**Automatically use Context7 MCP tools without being explicitly asked for:**
-
-- Resolving library IDs and getting library docs
-- Finding implementation examples and patterns
-- Checking API compatibility and version requirements
-
-## Available Libraries & Technologies
-
-### Core Stack
-
-- **AdonisJS v6**: `/adonisjs/v6-docs` - Full-stack MVC framework
-- **React**: `/facebook/react` - Frontend UI library
-- **Inertia.js**: `/inertiajs/inertia` - SPA bridge for server-side routing
-- **PostgreSQL**: `/websites/postgresql` - Primary database
-- **VineJS**: `/vinejs/vinejs.dev` - Validation library
-- **Vite**: `/vitejs/vite` - Frontend build tool
-
-### Design System Libraries
-
-- **Tailwind CSS**: `/tailwindlabs/tailwindcss` - Utility-first CSS framework
-- **shadcn/ui**: `/shadcn/ui` - Re-usable components built with Radix UI and
-  Tailwind
-- **Radix UI**: `/radix-ui/primitives` - Unstyled, accessible components for
-  React
-- **Lucide React**: `/lucide-icons/lucide` - Icon library for React
-
-### Additional Libraries
-
-- **AdonisJS Lucid**: `/adonisjs/lucid` - SQL ORM with Active Record
-- **AdonisJS Jobs**: `/kabbouchi/adonisjs-jobs` - Job processing with BullMQ
-- **Postgres.js**: `/porsager/postgres` - PostgreSQL client for Node.js
-- **Tuyau**: `/julien-r44/tuyau` - Typesafe APIs for AdonisJS
-
-## Key Commands
-
-### Development
-
-- `npm run dev` - Start development server with HMR
-- `npm run build` - Build for production
-- `npm start` - Start production server
-
-### Testing
-
-- `npm test` - Run all tests
-- `node ace test --files="tests/path/to/test.spec.ts"` - Run specific test
-- `node ace test unit` - Run unit tests only
-- `node ace test functional` - Run functional tests only
-
-### Code Quality
-
-- `npm run lint` - Run ESLint
-- `npm run format` - Format code with Prettier
-- `npm run typecheck` - TypeScript type checking
-
-### Database
-
-- `node ace migration:run` - Run pending migrations
-- `node ace migration:rollback` - Rollback last migration
-- `node ace migration:fresh` - Drop all tables and re-run migrations
-- `node ace db:seed` - Run database seeders
-- `docker-compose up -d` - Start PostgreSQL + pgAdmin
-
-### pgAdmin Access
-
-- **URL**: http://localhost:5050
-- **Email**: admin@blottr.fr
-- **Password**: admin
-
-### Code Generation
-
-- `node ace make:controller ControllerName` - Create controller
-- `node ace make:model ModelName` - Create Lucid model
-- `node ace make:migration create_table_name` - Create migration
-- `node ace make:middleware MiddlewareName` - Create middleware
-- `node ace make:validator ValidatorName` - Create validator
-
-## Architecture Overview
-
-This is an **AdonisJS v6** application with **React** and **Inertia.js** for the
-frontend.
-
-### Stack
-
-- **Backend**: AdonisJS v6 (TypeScript)
-- **Frontend**: React 19 with Inertia.js
-- **Database**: PostgreSQL with Lucid ORM
-- **Validation**: VineJS
-- **Testing**: Japa
-- **Build**: Vite
-
-### Directory Structure
-
-```
-app/
-  controllers/     # HTTP controllers
-  models/          # Lucid ORM models
-  middleware/      # Request middleware
-  validators/      # VineJS validators
-  exceptions/      # Custom exceptions
-  services/        # Business logic services
-inertia/
-  pages/          # React page components
-  app/            # React app setup (app.tsx, ssr.tsx)
-  css/            # Stylesheets
-database/
-  migrations/     # Database migrations
-start/
-  routes.ts       # HTTP routes definition
-  kernel.ts       # HTTP kernel configuration
-config/           # Configuration files
-tests/            # Test files
-docs/             # Project documentation
+```bash
+# Tests obligatoires après chaque feature
+npm test                    # Tous les tests verts
+npm run test:coverage      # Coverage >90%
+npm run test:unit          # Tests unitaires rapides
+npm run test:functional    # Tests d'intégration
 ```
 
-### Import Aliases
+## 🏗️ CLEAN ARCHITECTURE (Structure Obligatoire)
 
-The project uses import maps for cleaner imports:
+### Couches Définies
 
-- `#controllers/*` → `app/controllers/*`
-- `#models/*` → `app/models/*`
-- `#services/*` → `app/services/*`
-- `#validators/*` → `app/validators/*`
-- `#middleware/*` → `app/middleware/*`
-- `#config/*` → `config/*`
-- `~/` → `inertia/` (in frontend code)
+```
+Domain Layer (Core Business)
+├── entities/          # User, Artist, Tattoo
+├── value-objects/     # Email, Password, Address
+├── repositories/      # Interfaces uniquement
+└── services/         # Business logic pure
 
-### Code Patterns
+Application Layer (Use Cases)
+├── use-cases/        # RegisterUser, BookAppointment
+├── services/         # Application services
+├── dto/              # Data Transfer Objects
+└── contracts/        # Interfaces
 
-**Models**: Use Lucid ORM with decorators
+Infrastructure Layer (External)
+├── database/         # Lucid models, repos implémentation
+├── external/         # APIs, services externes
+├── events/           # Event listeners
+└── queues/           # Job processing
 
-```typescript
-import { BaseModel, column } from '@adonisjs/lucid/orm'
-
-export default class User extends BaseModel {
-  @column({ isPrimary: true })
-  declare id: string
-
-  @column()
-  declare email: string
-}
+Presentation Layer (Interface)
+├── controllers/      # HTTP controllers
+├── middleware/       # Request/Response handling
+├── validators/       # VineJS schemas
+└── serializers/      # Response formatting
 ```
 
-**Controllers**: Return Inertia responses for frontend routes
+### Règles de Dépendances
 
-```typescript
-import { HttpContext } from '@adonisjs/core/http'
+- **Infrastructure** → **Application** → **Domain**
+- **Jamais de dépendance inverse**
+- **Domain ne dépend de rien d'autre**
+- **Application ne connaît pas Infrastructure**
 
-export default class HomeController {
-  async index({ inertia }: HttpContext) {
-    return inertia.render('home', { data })
+## 🤝 COMMUNICATION PROACTIVE (Zéro Aller-Retour)
+
+**Avant chaque implémentation, TOUJOURS clarifier :**
+
+### Questions Obligatoires à Poser
+
+```markdown
+## Analyse Préalable
+- **Edge cases identifiés** : [liste des cas limites]
+- **Architecture de tests** : [stratégie de tests à implémenter]
+- **Dépendances externes** : [services/APIs concernés]
+- **Impact existant** : [code à modifier/étendre]
+
+## Options d'Implémentation
+**Option A** : [approche 1 avec avantages/inconvénients]
+**Option B** : [approche 2 avec avantages/inconvénients]
+
+**Recommandation** : [option préférée avec justification]
+
+## Tests à Implémenter
+- [ ] Tests unitaires : [scope précis]
+- [ ] Tests d'intégration : [endpoints/flows]
+- [ ] Tests edge cases : [scénarios limites]
+```
+
+### Format de Clarification Standard
+
+> "J'ai analysé la demande. Je vois ces scénarios : [A, B, C].
+> Dois-je [option précise A] ou [option précise B] ?
+> Les tests couvriront [scope exact]."
+
+## ✅ QUALITY GATES AUTOMATIQUES
+
+### Commandes Post-Développement (Auto-Run)
+
+```bash
+# Séquence obligatoire après chaque feature
+npm run lint:fix           # Auto-fix style issues
+npm run typecheck          # Zero TypeScript errors
+npm test                   # All tests green
+npm run test:coverage      # Coverage >90%
+npm run build              # Production build success
+```
+
+### Scripts Package.json Requis
+
+```json
+{
+  "scripts": {
+    "test:coverage": "node ace test --coverage",
+    "test:unit": "node ace test unit",
+    "test:functional": "node ace test functional",
+    "test:watch": "node ace test --watch",
+    "quality:check": "npm run lint && npm run typecheck && npm test"
   }
 }
 ```
 
-**React Pages**: Located in `inertia/pages/`
+## 🚀 STACK TECHNIQUE ACTUEL
 
+### Core Technologies
+- **Backend** : AdonisJS 6 (TypeScript)
+- **Frontend** : React 19 + Inertia.js
+- **Database** : PostgreSQL + Lucid ORM
+- **Validation** : VineJS
+- **Testing** : Japa + @japa/assert
+- **Build** : Vite
+
+### Architecture État Actuel
+- **Models** : `app/models/user.ts` (Lucid BaseModel + Auth)
+- **Middleware** : Auth, Guest, SilentAuth, ContainerBindings
+- **Tests** : Bootstrap configuré, suites unit/functional
+- **Routes** : Route simple vers home.tsx via Inertia
+
+## 📁 CONVENTIONS DE NOMMAGE
+
+### Backend (AdonisJS)
 ```typescript
-export default function HomePage({ data }) {
-  return <div>{/* Component */}</div>
+// Models - PascalCase, singular
+export default class User extends BaseModel
+
+// Controllers - PascalCase + Controller suffix
+export default class UsersController
+
+// Services - PascalCase + Service suffix
+export default class UserRegistrationService
+
+// Use Cases - PascalCase + UseCase suffix
+export default class RegisterUserUseCase
+
+// Tests - describe blocks in French
+test.group('Utilisateur - Inscription', () => {
+  test('doit créer un utilisateur valide', async () => {
+    // Test implementation
+  })
+})
+```
+
+### Frontend (React)
+```typescript
+// Components - PascalCase
+export default function UserProfile() {}
+
+// Pages - PascalCase + location
+// inertia/pages/users/profile.tsx
+export default function UsersProfile() {}
+
+// Hooks - camelCase + use prefix
+export function useUserAuth() {}
+```
+
+## 🔧 COMMANDES DE DÉVELOPPEMENT
+
+### Développement Quotidien
+```bash
+npm run dev                    # Dev server + HMR
+npm test -- --watch           # Tests en continu
+npm run lint:fix              # Fix automatique du code
+```
+
+### Base de Données
+```bash
+node ace migration:run         # Appliquer migrations
+node ace migration:rollback    # Rollback dernière migration
+node ace db:seed              # Peupler avec données test
+node ace make:model User       # Créer modèle + migration
+```
+
+### Génération de Code
+```bash
+node ace make:controller Users    # Controller + resource routes
+node ace make:middleware Auth     # Middleware personnalisé
+node ace make:validator User      # VineJS validator
+node ace make:service UserAuth   # Business service
+```
+
+## 🎯 PATTERNS SPÉCIFIQUES ADONISJS
+
+### Model Pattern avec Business Logic
+```typescript
+import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
+
+export default class User extends BaseModel {
+  @column({ isPrimary: true })
+  declare id: number
+
+  @column()
+  declare email: string
+
+  @column({ serializeAs: null })
+  declare password: string
+
+  @computed()
+  public get isEmailVerified() {
+    return this.emailVerifiedAt !== null
+  }
+
+  // Business methods
+  public async changeEmail(newEmail: string): Promise<void> {
+    this.email = newEmail
+    this.emailVerifiedAt = null
+    await this.save()
+  }
 }
 ```
 
-**Validation**: Use VineJS schemas
-
+### Controller Pattern avec Use Cases
 ```typescript
-import vine from '@vinejs/vine'
+import { HttpContext } from '@adonisjs/core/http'
+import { RegisterUserUseCase } from '#use-cases/register_user_use_case'
 
-export const createUserValidator = vine.compile(
-  vine.object({
-    email: vine.string().email(),
-    password: vine.string().minLength(8),
+export default class UsersController {
+  async store({ request, response }: HttpContext) {
+    const payload = request.validateUsing(createUserValidator)
+
+    const useCase = new RegisterUserUseCase()
+    const result = await useCase.execute(payload)
+
+    return response.created(result)
+  }
+}
+```
+
+### Service Pattern pour Business Logic
+```typescript
+export default class UserRegistrationService {
+  async register(userData: CreateUserDTO): Promise<User> {
+    // Validation métier
+    await this.validateEmailUniqueness(userData.email)
+
+    // Création sécurisée
+    const user = await User.create({
+      ...userData,
+      password: await hash.make(userData.password)
+    })
+
+    // Actions post-création
+    await this.sendWelcomeEmail(user)
+
+    return user
+  }
+
+  private async validateEmailUniqueness(email: string): Promise<void> {
+    const existingUser = await User.findBy('email', email)
+    if (existingUser) {
+      throw new EmailAlreadyExistsException()
+    }
+  }
+}
+```
+
+### Test Pattern Complet
+```typescript
+import { test } from '@japa/runner'
+import { UserFactory } from '#factories/user_factory'
+
+test.group('Users Controller', () => {
+  test('POST /users - doit créer un utilisateur valide', async ({ client, assert }) => {
+    // Arrange
+    const userData = {
+      email: 'test@example.com',
+      password: 'secure123',
+      fullName: 'Test User'
+    }
+
+    // Act
+    const response = await client.post('/users').json(userData)
+
+    // Assert
+    response.assertStatus(201)
+    response.assertBodyContains({
+      email: userData.email,
+      fullName: userData.fullName
+    })
+
+    // Verify in database
+    const user = await User.findBy('email', userData.email)
+    assert.isNotNull(user)
+    assert.equal(user!.email, userData.email)
   })
-)
+
+  test('POST /users - doit rejeter un email déjà utilisé', async ({ client }) => {
+    // Arrange - Create existing user
+    const existingUser = await UserFactory.create()
+
+    // Act - Try to create user with same email
+    const response = await client.post('/users').json({
+      email: existingUser.email,
+      password: 'password123',
+      fullName: 'Another User'
+    })
+
+    // Assert
+    response.assertStatus(422)
+    response.assertBodyContains({
+      errors: [{
+        field: 'email',
+        rule: 'unique'
+      }]
+    })
+  })
+})
 ```
 
-**Routes**: Defined in `start/routes.ts`
+## 🔒 RÈGLES DE SÉCURITÉ
 
+### Validation Obligatoire
 ```typescript
-import router from '@adonisjs/core/services/router'
+// Toujours valider les inputs
+const payload = request.validateUsing(createUserValidator)
 
-router.get('/', [HomeController, 'index'])
-router.post('/users', [UsersController, 'store'])
+// Jamais de query brute
+const users = await User.query().where('active', true) // ✅
+const users = await Database.rawQuery('SELECT * FROM users') // ❌
 ```
 
-### Frontend Development
+### Authentification
+```typescript
+// Middleware auth obligatoire sur routes protégées
+router.group(() => {
+  router.get('/profile', [UsersController, 'profile'])
+}).middleware('auth')
 
-- Inertia.js handles client-server communication
-- React components in `inertia/pages/` are automatically resolved
-- SSR is enabled via `inertia/app/ssr.tsx`
-- Vite handles HMR and bundling
-- Use `~/` alias for imports within Inertia directory
+// Vérification des permissions
+export default class UsersController {
+  async profile({ auth, bouncer }: HttpContext) {
+    await bouncer.authorize('viewProfile', auth.user!)
+    return auth.user
+  }
+}
+```
 
-### Design System Architecture
+## 📊 MÉTRIQUES DE QUALITÉ
 
-- **Component Structure**: Two-tier system with base UI components and
-  Blottr-specific components
-- **Base Components**: `inertia/components/ui/` - shadcn/ui components (Button,
-  Card, Dialog, etc.)
-- **Blottr Components**: `inertia/components/blottr/` - Tattoo industry-specific
-  components
-- **Live Documentation**: Visit `http://localhost:3333/design-system` for
-  interactive component gallery
-- **Theming**: Tailwind CSS with custom tattoo industry color palette and dark
-  mode support
+### Objectifs Chiffrés
+- **Test Coverage** : >90% sur business logic
+- **TypeScript Errors** : 0
+- **ESLint Warnings** : 0
+- **Build Time** : <30s
+- **Test Suite** : <10s pour unit tests
 
-### Database Workflow
+### Monitoring Continu
+```bash
+# Coverage report
+npm run test:coverage -- --reporter=html
 
-1. Create migration: `node ace make:migration create_users_table`
-2. Edit migration in `database/migrations/`
-3. Run migration: `node ace migration:run`
-4. Create model: `node ace make:model User`
-5. Define model relationships and columns with decorators
+# Performance tests
+npm run test:perf
 
-### Testing & TDD Approach
+# Security audit
+npm audit --audit-level moderate
+```
 
-Tests use the Japa framework with two suites:
+---
 
-- **Unit tests**: `tests/unit/` (2s timeout)
-- **Functional tests**: `tests/functional/` (30s timeout)
+## 🎯 RÉSUMÉ EXÉCUTIF
 
-Use `@japa/assert` for assertions and `@japa/plugin-adonisjs` for
-AdonisJS-specific testing helpers.
+**Workflow Ultra-Efficace :**
+1. **Test d'abord** → Implémentation → Refactor → Quality Gates
+2. **Architecture en couches** → Domain/Application/Infrastructure/Presentation
+3. **Clarification proactive** → Zero aller-retour, options claires
+4. **Automatisation complète** → Tests, lint, build, coverage
 
-**Test-Driven Development (TDD) Workflow:**
-
-1. **Red**: Write a failing test first
-2. **Green**: Write minimal code to make the test pass
-3. **Refactor**: Improve code quality while keeping tests green
-
-**TDD Implementation Guidelines:**
-
-- Always write tests BEFORE implementing features
-- Start with the simplest test case and gradually add complexity
-- Test one behavior per test method
-- Use descriptive test names that explain the expected behavior
-- Mock external dependencies in unit tests
-- Keep tests isolated and independent
-
-**Testing Best Practices:**
-
-- Use `test.group()` to organize related tests
-- Leverage AdonisJS testing helpers for database operations
-- Test edge cases and error conditions
-- Maintain high test coverage for critical business logic
-- Run tests frequently during development
-
-# important-instruction-reminders
-
-Do what has been asked; nothing more, nothing less. NEVER create files unless
-they're absolutely necessary for achieving your goal. ALWAYS prefer editing an
-existing file to creating a new one. NEVER proactively create documentation
-files (\*.md) or README files. Only create documentation files if explicitly
-requested by the User.
+**Objectif** : Code qui marche du premier coup, testé à 100%, architecture scalable.
