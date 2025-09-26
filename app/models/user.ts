@@ -96,6 +96,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @belongsTo(() => City)
   declare city: BelongsTo<typeof City>
 
+  @hasMany(() => import('./artist.js').then(m => m.default))
+  declare artists: HasMany<any>
+
   // Computed properties
   @computed()
   public get isClient(): boolean {

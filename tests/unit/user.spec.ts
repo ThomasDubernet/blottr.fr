@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import { DateTime } from 'luxon'
-import User, { UserRole, UserGender } from '#models/user'
+import User, { UserRole } from '#models/user'
 import City from '#models/city'
 import hash from '@adonisjs/core/services/hash'
 
@@ -16,7 +16,7 @@ test.group('User Model', (group) => {
     const user = await User.create({
       fullName: 'Jean Dupont',
       email: 'jean@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Assert
@@ -35,7 +35,7 @@ test.group('User Model', (group) => {
     const user = await User.create({
       fullName: 'Jane Doe',
       email: 'jane@example.com',
-      password: 'mySecretPassword'
+      password: 'mySecretPassword',
     })
 
     // Assert
@@ -49,7 +49,7 @@ test.group('User Model', (group) => {
       fullName: 'Marie Artiste',
       email: 'marie@tatoueur.com',
       password: 'password123',
-      role: UserRole.ARTIST
+      role: UserRole.ARTIST,
     })
 
     // Assert
@@ -58,7 +58,7 @@ test.group('User Model', (group) => {
     assert.isFalse(artist.isClient)
   })
 
-  test('doit calculer l\'âge correctement', async ({ assert }) => {
+  test("doit calculer l'âge correctement", async ({ assert }) => {
     // Arrange
     const birthDate = DateTime.now().minus({ years: 25, months: 6 })
 
@@ -67,19 +67,19 @@ test.group('User Model', (group) => {
       fullName: 'Test User',
       email: 'test@example.com',
       password: 'password123',
-      birthDate: birthDate
+      birthDate: birthDate,
     })
 
     // Assert
     assert.equal(user.age, 25)
   })
 
-  test('doit retourner null pour l\'âge si pas de date de naissance', async ({ assert }) => {
+  test("doit retourner null pour l'âge si pas de date de naissance", async ({ assert }) => {
     // Arrange & Act
     const user = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Assert
@@ -91,12 +91,12 @@ test.group('User Model', (group) => {
     const userWithName = await User.create({
       fullName: 'Jean Dupont',
       email: 'jean@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     const userWithoutName = await User.create({
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Assert
@@ -116,14 +116,14 @@ test.group('User Model', (group) => {
       departmentCode: '75',
       departmentName: 'Paris',
       regionCode: '11',
-      regionName: 'Île-de-France'
+      regionName: 'Île-de-France',
     })
 
     // Act
     const incompleteUser = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     const completeUser = await User.create({
@@ -131,7 +131,7 @@ test.group('User Model', (group) => {
       email: 'complete@example.com',
       password: 'password123',
       phone: '+33123456789',
-      cityId: city.id
+      cityId: city.id,
     })
 
     // Assert
@@ -139,12 +139,12 @@ test.group('User Model', (group) => {
     assert.isTrue(completeUser.isProfileComplete)
   })
 
-  test('doit marquer l\'email comme vérifié', async ({ assert }) => {
+  test("doit marquer l'email comme vérifié", async ({ assert }) => {
     // Arrange
     const user = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Act
@@ -162,7 +162,7 @@ test.group('User Model', (group) => {
       fullName: 'Test User',
       email: 'test@example.com',
       password: 'password123',
-      phone: '+33123456789'
+      phone: '+33123456789',
     })
 
     // Act
@@ -180,7 +180,7 @@ test.group('User Model', (group) => {
       fullName: 'Test User',
       email: 'test@example.com',
       password: 'password123',
-      role: UserRole.CLIENT
+      role: UserRole.CLIENT,
     })
 
     // Act
@@ -192,14 +192,14 @@ test.group('User Model', (group) => {
     assert.isFalse(user.isClient)
   })
 
-  test('doit changer l\'email et réinitialiser la vérification', async ({ assert }) => {
+  test("doit changer l'email et réinitialiser la vérification", async ({ assert }) => {
     // Arrange
     const user = await User.create({
       fullName: 'Test User',
       email: 'old@example.com',
       password: 'password123',
       emailVerified: true,
-      emailVerifiedAt: DateTime.now()
+      emailVerifiedAt: DateTime.now(),
     })
 
     // Act
@@ -218,15 +218,15 @@ test.group('User Model', (group) => {
       email: 'paris@example.com',
       password: 'password123',
       latitude: 48.8566,
-      longitude: 2.3522
+      longitude: 2.3522,
     })
 
     const user2 = await User.create({
       fullName: 'User Lyon',
       email: 'lyon@example.com',
       password: 'password123',
-      latitude: 45.7640,
-      longitude: 4.8357
+      latitude: 45.764,
+      longitude: 4.8357,
     })
 
     // Act
@@ -244,7 +244,7 @@ test.group('User Model', (group) => {
     const user = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Act
@@ -259,7 +259,7 @@ test.group('User Model', (group) => {
     const user = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
-      password: 'password123'
+      password: 'password123',
     })
 
     // Act
@@ -273,11 +273,11 @@ test.group('User Model', (group) => {
 
   test('ne doit pas trouver un utilisateur inactif par email', async ({ assert }) => {
     // Arrange
-    const user = await User.create({
+    await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
       password: 'password123',
-      isActive: false
+      isActive: false,
     })
 
     // Act
@@ -294,20 +294,20 @@ test.group('User Model', (group) => {
         fullName: 'Client 1',
         email: 'client1@example.com',
         password: 'password123',
-        role: UserRole.CLIENT
+        role: UserRole.CLIENT,
       },
       {
         fullName: 'Artist 1',
         email: 'artist1@example.com',
         password: 'password123',
-        role: UserRole.ARTIST
+        role: UserRole.ARTIST,
       },
       {
         fullName: 'Client 2',
         email: 'client2@example.com',
         password: 'password123',
-        role: UserRole.CLIENT
-      }
+        role: UserRole.CLIENT,
+      },
     ])
 
     // Act
@@ -315,7 +315,7 @@ test.group('User Model', (group) => {
 
     // Assert
     assert.lengthOf(clients, 2)
-    clients.forEach(client => {
+    clients.forEach((client) => {
       assert.equal(client.role, UserRole.CLIENT)
       assert.isTrue(client.isClient)
     })
@@ -328,20 +328,20 @@ test.group('User Model', (group) => {
         fullName: 'Client 1',
         email: 'client1@example.com',
         password: 'password123',
-        role: UserRole.CLIENT
+        role: UserRole.CLIENT,
       },
       {
         fullName: 'Artist 1',
         email: 'artist1@example.com',
         password: 'password123',
-        role: UserRole.ARTIST
+        role: UserRole.ARTIST,
       },
       {
         fullName: 'Artist 2',
         email: 'artist2@example.com',
         password: 'password123',
-        role: UserRole.ARTIST
-      }
+        role: UserRole.ARTIST,
+      },
     ])
 
     // Act
@@ -349,7 +349,7 @@ test.group('User Model', (group) => {
 
     // Assert
     assert.lengthOf(artists, 2)
-    artists.forEach(artist => {
+    artists.forEach((artist) => {
       assert.equal(artist.role, UserRole.ARTIST)
       assert.isTrue(artist.isArtist)
     })

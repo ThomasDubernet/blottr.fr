@@ -1,6 +1,6 @@
 import { test } from '@japa/runner'
 import City from '#models/city'
-import User, { UserRole } from '#models/user'
+import User from '#models/user'
 
 test.group('City Model', (group) => {
   group.each.setup(async () => {
@@ -21,7 +21,7 @@ test.group('City Model', (group) => {
       departmentCode: '75',
       departmentName: 'Paris',
       regionCode: '11',
-      regionName: 'Île-de-France'
+      regionName: 'Île-de-France',
     })
 
     // Assert
@@ -45,12 +45,12 @@ test.group('City Model', (group) => {
       slug: 'lyon',
       postalCode: '69000',
       inseeCode: '69123',
-      latitude: 45.7640,
+      latitude: 45.764,
       longitude: 4.8357,
       departmentCode: '69',
       departmentName: 'Rhône',
       regionCode: '84',
-      regionName: 'Auvergne-Rhône-Alpes'
+      regionName: 'Auvergne-Rhône-Alpes',
     })
 
     // Assert
@@ -70,7 +70,7 @@ test.group('City Model', (group) => {
       departmentCode: '13',
       departmentName: 'Bouches-du-Rhône',
       regionCode: '93',
-      regionName: 'Provence-Alpes-Côte d\'Azur'
+      regionName: "Provence-Alpes-Côte d'Azur",
     })
 
     const cityWithoutPopulation = await City.create({
@@ -83,7 +83,7 @@ test.group('City Model', (group) => {
       departmentCode: '12',
       departmentName: 'Test Department',
       regionCode: '12',
-      regionName: 'Test Region'
+      regionName: 'Test Region',
     })
 
     // Assert
@@ -99,15 +99,15 @@ test.group('City Model', (group) => {
       postalCode: '06000',
       inseeCode: '06088',
       latitude: 43.7102,
-      longitude: 7.2620,
+      longitude: 7.262,
       departmentCode: '06',
       departmentName: 'Alpes-Maritimes',
       regionCode: '93',
-      regionName: 'Provence-Alpes-Côte d\'Azur'
+      regionName: "Provence-Alpes-Côte d'Azur",
     })
 
     // Assert
-    assert.deepEqual(city.coordinates, { lat: 43.7102, lng: 7.2620 })
+    assert.deepEqual(city.coordinates, { lat: 43.7102, lng: 7.262 })
   })
 
   test('doit trouver une ville par slug', async ({ assert }) => {
@@ -122,7 +122,7 @@ test.group('City Model', (group) => {
       departmentCode: '31',
       departmentName: 'Haute-Garonne',
       regionCode: '76',
-      regionName: 'Occitanie'
+      regionName: 'Occitanie',
     })
 
     // Act
@@ -136,7 +136,7 @@ test.group('City Model', (group) => {
 
   test('ne doit pas trouver une ville inactive par slug', async ({ assert }) => {
     // Arrange
-    const city = await City.create({
+    await City.create({
       name: 'Inactive City',
       slug: 'inactive-city',
       postalCode: '12345',
@@ -147,7 +147,7 @@ test.group('City Model', (group) => {
       departmentName: 'Test Department',
       regionCode: '12',
       regionName: 'Test Region',
-      isActive: false
+      isActive: false,
     })
 
     // Act
@@ -171,21 +171,21 @@ test.group('City Model', (group) => {
         departmentName: 'Paris',
         regionCode: '11',
         regionName: 'Île-de-France',
-        priority: 1
+        priority: 1,
       },
       {
         name: 'Paris 2ème',
         slug: 'paris-2eme',
         postalCode: '75002',
         inseeCode: '75102',
-        latitude: 48.8680,
-        longitude: 2.3410,
+        latitude: 48.868,
+        longitude: 2.341,
         departmentCode: '75',
         departmentName: 'Paris',
         regionCode: '11',
         regionName: 'Île-de-France',
-        priority: 2
-      }
+        priority: 2,
+      },
     ])
 
     // Act
@@ -211,7 +211,7 @@ test.group('City Model', (group) => {
         regionCode: '11',
         regionName: 'Test Region',
         isFeatured: true,
-        priority: 1
+        priority: 1,
       },
       {
         name: 'Regular City',
@@ -224,7 +224,7 @@ test.group('City Model', (group) => {
         departmentName: 'Test Department 2',
         regionCode: '22',
         regionName: 'Test Region 2',
-        isFeatured: false
+        isFeatured: false,
       },
       {
         name: 'Featured City 2',
@@ -238,8 +238,8 @@ test.group('City Model', (group) => {
         regionCode: '33',
         regionName: 'Test Region 3',
         isFeatured: true,
-        priority: 2
-      }
+        priority: 2,
+      },
     ])
 
     // Act
@@ -263,7 +263,7 @@ test.group('City Model', (group) => {
       departmentCode: '75',
       departmentName: 'Paris',
       regionCode: '11',
-      regionName: 'Île-de-France'
+      regionName: 'Île-de-France',
     })
 
     const lyon = await City.create({
@@ -271,12 +271,12 @@ test.group('City Model', (group) => {
       slug: 'lyon',
       postalCode: '69000',
       inseeCode: '69123',
-      latitude: 45.7640,
+      latitude: 45.764,
       longitude: 4.8357,
       departmentCode: '69',
       departmentName: 'Rhône',
       regionCode: '84',
-      regionName: 'Auvergne-Rhône-Alpes'
+      regionName: 'Auvergne-Rhône-Alpes',
     })
 
     // Act
@@ -305,7 +305,7 @@ test.group('City Model', (group) => {
         departmentName: 'Paris',
         regionCode: '11',
         regionName: 'Île-de-France',
-        priority: 1
+        priority: 1,
       },
       {
         name: 'Versailles',
@@ -318,21 +318,21 @@ test.group('City Model', (group) => {
         departmentName: 'Yvelines',
         regionCode: '11',
         regionName: 'Île-de-France',
-        priority: 10
+        priority: 10,
       },
       {
         name: 'Lyon',
         slug: 'lyon',
         postalCode: '69000',
         inseeCode: '69123',
-        latitude: 45.7640,
+        latitude: 45.764,
         longitude: 4.8357, // ~465km from Paris
         departmentCode: '69',
         departmentName: 'Rhône',
         regionCode: '84',
         regionName: 'Auvergne-Rhône-Alpes',
-        priority: 5
-      }
+        priority: 5,
+      },
     ])
 
     // Act - Find cities within 30km of Paris
@@ -340,13 +340,13 @@ test.group('City Model', (group) => {
 
     // Assert
     assert.isTrue(nearbyCities.length >= 2) // Paris and Versailles
-    const cityNames = nearbyCities.map(city => city.name)
+    const cityNames = nearbyCities.map((city) => city.name)
     assert.include(cityNames, 'Paris')
     assert.include(cityNames, 'Versailles')
     assert.notInclude(cityNames, 'Lyon') // Lyon should be too far
   })
 
-  test('doit compter les utilisateurs d\'une ville', async ({ assert }) => {
+  test("doit compter les utilisateurs d'une ville", async ({ assert }) => {
     // Arrange
     const city = await City.create({
       name: 'Test City',
@@ -358,7 +358,7 @@ test.group('City Model', (group) => {
       departmentCode: '12',
       departmentName: 'Test Department',
       regionCode: '12',
-      regionName: 'Test Region'
+      regionName: 'Test Region',
     })
 
     // Create users in the city
@@ -368,22 +368,22 @@ test.group('City Model', (group) => {
         email: 'user1@example.com',
         password: 'password123',
         cityId: city.id,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'User 2',
         email: 'user2@example.com',
         password: 'password123',
         cityId: city.id,
-        isActive: true
+        isActive: true,
       },
       {
         fullName: 'Inactive User',
         email: 'inactive@example.com',
         password: 'password123',
         cityId: city.id,
-        isActive: false // Should not be counted
-      }
+        isActive: false, // Should not be counted
+      },
     ])
 
     // Act
@@ -405,14 +405,14 @@ test.group('City Model', (group) => {
       departmentCode: '12',
       departmentName: 'Test Department',
       regionCode: '12',
-      regionName: 'Test Region'
+      regionName: 'Test Region',
     })
 
     const user = await User.create({
       fullName: 'Test User',
       email: 'test@example.com',
       password: 'password123',
-      cityId: city.id
+      cityId: city.id,
     })
 
     // Act
