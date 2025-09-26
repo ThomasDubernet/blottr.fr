@@ -10,7 +10,11 @@
     "dev": "node ace serve --hmr",
     "test": "node ace test",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "fix": "npm run lint:fix && npm run format",
+    "quality": "npm run lint && npm run format:check && npm run typecheck",
     "typecheck": "tsc --noEmit"
   },
   "imports": {

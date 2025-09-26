@@ -11,9 +11,9 @@ export class ArtistService {
       ...Object.fromEntries(
         Object.entries(filters).map(([key, value]) => [
           key,
-          Array.isArray(value) ? value.join(',') : String(value)
+          Array.isArray(value) ? value.join(',') : String(value),
         ])
-      )
+      ),
     })
 
     return api.get<PaginatedResponse<Artist>>(`/artists?${params}`)
@@ -29,15 +29,18 @@ export class ArtistService {
   /**
    * Search artists by name or location
    */
-  async searchArtists(query: string, filters: ArtistFilters = {}): Promise<PaginatedResponse<Artist>> {
+  async searchArtists(
+    query: string,
+    filters: ArtistFilters = {}
+  ): Promise<PaginatedResponse<Artist>> {
     const params = new URLSearchParams({
       q: query,
       ...Object.fromEntries(
         Object.entries(filters).map(([key, value]) => [
           key,
-          Array.isArray(value) ? value.join(',') : String(value)
+          Array.isArray(value) ? value.join(',') : String(value),
         ])
-      )
+      ),
     })
 
     return api.get<PaginatedResponse<Artist>>(`/artists/search?${params}`)
@@ -60,13 +63,16 @@ export class ArtistService {
   /**
    * Submit a project inquiry to an artist
    */
-  async submitInquiry(artistId: string, inquiry: {
-    description: string
-    bodyZone: string
-    size: string
-    budget: string
-    email: string
-  }): Promise<void> {
+  async submitInquiry(
+    artistId: string,
+    inquiry: {
+      description: string
+      bodyZone: string
+      size: string
+      budget: string
+      email: string
+    }
+  ): Promise<void> {
     return api.post(`/artists/${artistId}/inquiries`, inquiry)
   }
 

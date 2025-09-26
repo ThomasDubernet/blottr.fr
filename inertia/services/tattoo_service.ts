@@ -11,9 +11,9 @@ export class TattooService {
       ...Object.fromEntries(
         Object.entries(filters).map(([key, value]) => [
           key,
-          Array.isArray(value) ? value.join(',') : String(value)
+          Array.isArray(value) ? value.join(',') : String(value),
         ])
-      )
+      ),
     })
 
     return api.get<PaginatedResponse<Tattoo>>(`/tattoos?${params}`)
@@ -29,15 +29,18 @@ export class TattooService {
   /**
    * Search tattoos by title, description, or tags
    */
-  async searchTattoos(query: string, filters: TattooFilters = {}): Promise<PaginatedResponse<Tattoo>> {
+  async searchTattoos(
+    query: string,
+    filters: TattooFilters = {}
+  ): Promise<PaginatedResponse<Tattoo>> {
     const params = new URLSearchParams({
       q: query,
       ...Object.fromEntries(
         Object.entries(filters).map(([key, value]) => [
           key,
-          Array.isArray(value) ? value.join(',') : String(value)
+          Array.isArray(value) ? value.join(',') : String(value),
         ])
-      )
+      ),
     })
 
     return api.get<PaginatedResponse<Tattoo>>(`/tattoos/search?${params}`)

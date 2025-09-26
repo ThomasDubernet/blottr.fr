@@ -7,8 +7,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 ## Page Architecture Overview
 
 ### 1. Homepage (`/`)
+
 **Purpose**: Landing page with artist showcase and call-to-action
 **Key Components**:
+
 - Hero section with tagline "Trouvez le tatoueur parfait"
 - Artist portfolio grid featuring recent work
 - Style category navigation
@@ -16,8 +18,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 - Featured artists with portfolio previews
 
 ### 2. Homepage with Map View
+
 **Variant**: Geographic discovery interface
 **Key Features**:
+
 - Interactive France map with artist locations
 - Toggleable Plan/Satellite view
 - Artist count indicator (24 tatoueurs trouvés)
@@ -25,8 +29,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 - Filter and sorting options (Carte/Liste toggle)
 
 ### 3. Tattoos Gallery (`/tatouages`)
+
 **Purpose**: Browse all tattoo portfolios
 **Key Components**:
+
 - Search bar with style filters
 - Masonry grid layout for tattoo images
 - Save/favorite functionality per image
@@ -34,8 +40,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 - Infinite scroll or pagination
 
 ### 4. Tattoo Detail (`/tatouages/{id}`)
+
 **Purpose**: Individual tattoo showcase
 **Key Features**:
+
 - Full-screen image display
 - Artist attribution with profile link
 - "Voir le profil" CTA button
@@ -43,8 +51,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 - Navigation between portfolio items
 
 ### 5. Artists Directory (`/tatoueurs`)
+
 **Purpose**: Browse and filter tattoo artists
 **Key Components**:
+
 - Filter navigation (styles, location, etc.)
 - Artist cards with:
   - Profile photo
@@ -55,8 +65,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 - Search and sorting capabilities
 
 ### 6. Artist Profile (`/tatoueurs/{id}`)
+
 **Purpose**: Detailed artist showcase
 **Key Modals/Features**:
+
 - **Project Inquiry Form**:
   - Project description field
   - Body zone selector
@@ -76,8 +88,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
   - Text reviews
 
 ### 7. Registration (`/inscription`)
+
 **Purpose**: User account creation
 **Key Features**:
+
 - Dual-path registration (Client vs Artist)
 - Email/password fields
 - "3000+ tatoueurs" marketing copy
@@ -85,8 +99,10 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 - Social proof elements
 
 ### 8. Login (`/connexion`)
+
 **Purpose**: User authentication
 **Key Features**:
+
 - Simple email/password form
 - Registration link for new users
 - Clean, focused design
@@ -95,18 +111,21 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 ## Design System Analysis
 
 ### Visual Language
+
 - **Typography**: Clean, modern sans-serif
 - **Color Palette**: Black/white primary with accent colors
 - **Layout**: Card-based, responsive grid system
 - **Imagery**: High-quality tattoo photography dominant
 
 ### UI Components
+
 - **Buttons**: Rounded, high contrast CTAs
 - **Cards**: Clean borders, subtle shadows
 - **Forms**: Minimal, well-spaced inputs
 - **Navigation**: Persistent header with key actions
 
 ### User Experience Patterns
+
 - **Discovery-First**: Browse before account creation
 - **Visual-Heavy**: Images drive engagement
 - **Progressive Disclosure**: Details on demand
@@ -115,12 +134,14 @@ Complete analysis of UI/UX mockups for the Blottr.fr public-facing platform. The
 ## Technical Implementation Requirements
 
 ### Frontend Stack Alignment
+
 - **React 19**: Component-based architecture
 - **Inertia.js**: Server-driven SPA behavior
 - **TypeScript**: Type-safe components
 - **Responsive Design**: Mobile-first approach
 
 ### Component Architecture
+
 ```
 components/
 ├── layout/
@@ -148,6 +169,7 @@ components/
 ```
 
 ### Data Requirements
+
 - Artist profiles with portfolios
 - Tattoo images with metadata
 - Geographic data for map view
@@ -158,6 +180,7 @@ components/
 ## Backend Integration Points
 
 ### API Endpoints Needed
+
 ```
 GET    /api/artists          # List with filters
 GET    /api/artists/{id}     # Artist details
@@ -171,6 +194,7 @@ GET    /api/locations        # Map data
 ```
 
 ### State Management
+
 - User authentication state
 - Portfolio browsing history
 - Filter/search preferences
@@ -180,12 +204,14 @@ GET    /api/locations        # Map data
 ## Performance Considerations
 
 ### Critical Optimizations
+
 - **Image Optimization**: WebP format, lazy loading
 - **Code Splitting**: Route-based chunks
 - **Caching Strategy**: CDN for images
 - **SEO**: Server-side rendering for discovery
 
 ### Metrics Targets
+
 - First Contentful Paint: <1.5s
 - Time to Interactive: <3s
 - Image Load: Progressive enhancement
@@ -194,24 +220,28 @@ GET    /api/locations        # Map data
 ## Implementation Roadmap
 
 ### Phase 1: Core Pages (Week 1)
+
 1. Layout components (Header, Navigation)
 2. Homepage with artist grid
 3. Authentication pages (Login/Register)
 4. Basic routing setup
 
 ### Phase 2: Discovery Features (Week 2)
+
 1. Artists directory with filters
 2. Tattoos gallery with search
 3. Detail pages (artist/tattoo)
 4. Map view integration
 
 ### Phase 3: Interactive Features (Week 3)
+
 1. Project inquiry forms
 2. Review system
 3. Favorite/save functionality
 4. Guest registration flows
 
 ### Phase 4: Polish & Optimization (Week 4)
+
 1. Responsive refinements
 2. Performance optimization
 3. Error states and loading
@@ -220,12 +250,14 @@ GET    /api/locations        # Map data
 ## Security & Privacy Considerations
 
 ### Data Protection
+
 - Secure authentication flow
 - GDPR-compliant data handling
 - Image rights management
 - User consent mechanisms
 
 ### Form Validation
+
 - Client-side validation
 - Server-side sanitization
 - CSRF protection
@@ -234,6 +266,7 @@ GET    /api/locations        # Map data
 ## Accessibility Requirements
 
 ### WCAG 2.1 AA Compliance
+
 - Keyboard navigation support
 - Screen reader compatibility
 - Color contrast ratios
@@ -244,11 +277,13 @@ GET    /api/locations        # Map data
 ## Mobile-First Considerations
 
 ### Responsive Breakpoints
+
 - Mobile: 320-768px
 - Tablet: 768-1024px
 - Desktop: 1024px+
 
 ### Touch Optimizations
+
 - 44px minimum touch targets
 - Swipe gestures for galleries
 - Bottom sheet modals

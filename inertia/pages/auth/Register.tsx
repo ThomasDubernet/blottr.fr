@@ -16,7 +16,7 @@ export default function Register() {
     email: '',
     password: '',
     passwordConfirmation: '',
-    role: 'client'
+    role: 'client',
   })
 
   const handleSubmit = (e: FormEvent) => {
@@ -34,9 +34,7 @@ export default function Register() {
             <Link href="/" className="text-3xl font-bold text-gray-900">
               Blottr
             </Link>
-            <h2 className="mt-6 text-2xl font-bold text-gray-900">
-              Accède à 3000+ tatoueurs
-            </h2>
+            <h2 className="mt-6 text-2xl font-bold text-gray-900">Accède à 3000+ tatoueurs</h2>
             <p className="mt-2 text-sm text-gray-600">
               Déniche les meilleurs tatoueurs pour votre prochain projet
             </p>
@@ -47,9 +45,7 @@ export default function Register() {
           <Card>
             <CardHeader>
               <CardTitle>Créer un compte</CardTitle>
-              <CardDescription>
-                Commencez votre recherche dès maintenant
-              </CardDescription>
+              <CardDescription>Commencez votre recherche dès maintenant</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -84,11 +80,7 @@ export default function Register() {
                   required
                 />
 
-                <Button
-                  type="submit"
-                  fullWidth
-                  loading={processing}
-                >
+                <Button type="submit" fullWidth loading={processing}>
                   Créer mon compte
                 </Button>
               </form>
@@ -116,20 +108,14 @@ export default function Register() {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm font-medium text-gray-900">
-                        Tu es tatoueur ?
-                      </h3>
+                      <h3 className="text-sm font-medium text-gray-900">Tu es tatoueur ?</h3>
                       <p className="text-sm text-gray-500">
                         Gagne en visibilité et organise ton activité simplement.
                       </p>
                     </div>
                   </div>
                   <div className="mt-4">
-                    <Button
-                      variant="outline"
-                      fullWidth
-                      onClick={() => setData('role', 'artist')}
-                    >
+                    <Button variant="outline" fullWidth onClick={() => setData('role', 'artist')}>
                       Commencer
                     </Button>
                   </div>
@@ -139,10 +125,7 @@ export default function Register() {
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Déjà membre ?{' '}
-                  <Link
-                    href="/login"
-                    className="font-medium text-gray-900 hover:text-gray-700"
-                  >
+                  <Link href="/login" className="font-medium text-gray-900 hover:text-gray-700">
                     Se connecter
                   </Link>
                 </p>

@@ -14,7 +14,7 @@ export default function Login() {
   const { data, setData, post, processing, errors } = useForm<LoginForm>({
     email: '',
     password: '',
-    remember: false
+    remember: false,
   })
 
   const handleSubmit = (e: FormEvent) => {
@@ -32,12 +32,8 @@ export default function Login() {
             <Link href="/" className="text-3xl font-bold text-gray-900">
               Blottr
             </Link>
-            <h2 className="mt-6 text-2xl font-bold text-gray-900">
-              Connexion
-            </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Connectez-vous à votre compte
-            </p>
+            <h2 className="mt-6 text-2xl font-bold text-gray-900">Connexion</h2>
+            <p className="mt-2 text-sm text-gray-600">Connectez-vous à votre compte</p>
           </div>
         </div>
 
@@ -45,9 +41,7 @@ export default function Login() {
           <Card>
             <CardHeader>
               <CardTitle>Se connecter</CardTitle>
-              <CardDescription>
-                Accédez à votre compte Blottr
-              </CardDescription>
+              <CardDescription>Accédez à votre compte Blottr</CardDescription>
             </CardHeader>
 
             <CardContent>
@@ -94,11 +88,7 @@ export default function Login() {
                   </div>
                 </div>
 
-                <Button
-                  type="submit"
-                  fullWidth
-                  loading={processing}
-                >
+                <Button type="submit" fullWidth loading={processing}>
                   Connexion
                 </Button>
               </form>
@@ -106,10 +96,7 @@ export default function Login() {
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Vous n'avez pas de compte ?{' '}
-                  <Link
-                    href="/register"
-                    className="font-medium text-gray-900 hover:text-gray-700"
-                  >
+                  <Link href="/register" className="font-medium text-gray-900 hover:text-gray-700">
                     Inscription
                   </Link>
                 </p>

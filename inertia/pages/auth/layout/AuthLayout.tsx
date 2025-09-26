@@ -10,7 +10,7 @@ interface AuthLayoutProps {
 export function AuthLayout({
   children,
   title = 'Blottr',
-  description = 'Trouvez le tatoueur parfait'
+  description = 'Trouvez le tatoueur parfait',
 }: AuthLayoutProps) {
   return (
     <>
@@ -18,9 +18,7 @@ export function AuthLayout({
         <meta name="description" content={description} />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
-        {children}
-      </div>
+      <div className="min-h-screen bg-gray-50">{children}</div>
     </>
   )
 }

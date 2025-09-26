@@ -39,9 +39,7 @@ export function Header({ user }: HeaderProps) {
         <div className="flex items-center space-x-4">
           {user ? (
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">
-                {user.email}
-              </span>
+              <span className="text-sm text-gray-600">{user.email}</span>
               <Button variant="outline" size="sm">
                 <Link href="/logout" method="post" as="button">
                   Déconnexion
@@ -56,9 +54,7 @@ export function Header({ user }: HeaderProps) {
                 </Button>
               </Link>
               <Link href="/register">
-                <Button size="sm">
-                  Commencer
-                </Button>
+                <Button size="sm">Commencer</Button>
               </Link>
             </div>
           )}
@@ -67,7 +63,12 @@ export function Header({ user }: HeaderProps) {
         {/* Mobile menu button */}
         <button className="md:hidden p-2">
           <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
           </svg>
         </button>
       </div>
