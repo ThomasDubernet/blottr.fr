@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from '@inertiajs/react'
 import { Card, CardContent, CardHeader } from '../ui/Card'
 import { cn } from '../../lib/utils'
+import { useFavorites } from '../../hooks'
 
 interface Artist {
   id: string
@@ -19,12 +20,33 @@ interface ArtistCardProps {
   artist: Artist
   className?: string
   onClick?: () => void
+  showFavoriteButton?: boolean
 }
 
-export const ArtistCard: React.FC<ArtistCardProps> = ({ artist, className, onClick }) => {
+export const ArtistCard: React.FC<ArtistCardProps> = ({
+  artist,
+  className,
+  onClick,
+  showFavoriteButton = true,
+}) => {
+  const { isFavorite, toggleFavorite } = useFavorites()
+
   const handleClick = () => {
     onClick?.()
   }
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    toggleFavorite({
+      id: artist.id,
+      type: 'artist',
+      title: artist.name,
+      imageUrl: artist.portfolioPreview?.[0],
+      location: artist.location,
+    })
+  }
+
+  const isArtistFavorited = isFavorite(artist.id, 'artist')
 
   return (
     <Card
@@ -100,22 +122,32 @@ export const ArtistCard: React.FC<ArtistCardProps> = ({ artist, className, onCli
           </div>
 
           {/* Favorite Button */}
-          <button
-            className="text-gray-400 hover:text-red-500 transition-colors"
-            onClick={(e) => {
-              e.stopPropagation()
-              // TODO: Implement favorite functionality
-            }}
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-          </button>
+          {showFavoriteButton && (
+            <button
+              className={cn(
+                'transition-colors p-1 rounded-full',
+                isArtistFavorited
+                  ? 'text-yellow-500 hover:text-yellow-600'
+                  : 'text-gray-400 hover:text-yellow-500'
+              )}
+              onClick={handleFavoriteClick}
+              title={isArtistFavorited ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+            >
+              <svg
+                className="w-5 h-5"
+                fill={isArtistFavorited ? 'currentColor' : 'none'}
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                />
+              </svg>
+            </button>
+          )}
         </div>
 
         {/* Rating */}

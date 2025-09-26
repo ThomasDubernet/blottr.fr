@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Head } from '@inertiajs/react'
-import { MainLayout } from '../../components/layout/MainLayout'
-import { FilterBar } from '../../components/discovery/FilterBar'
-import { ArtistCard, Artist } from '../../components/discovery/ArtistCard'
-import { Button } from '../../components/ui/Button'
-import { cn } from '../../lib/utils'
+import { MainLayout } from '~/components/layout/MainLayout'
+import { Artist, ArtistCard, FilterBar } from '~/components/discovery'
+import { Button } from '~/components/ui'
 
 interface ArtistsIndexProps {
   user?: {

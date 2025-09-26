@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react'
 import { MainLayout } from '../../components/layout/MainLayout'
 import { FilterBar } from '../../components/discovery/FilterBar'
 import { TattooCard, Tattoo } from '../../components/discovery/TattooCard'
-import { MasonryGrid, useMasonryGrid } from '../../components/gallery/MasonryGrid'
+import { MasonryGrid, useMasonryGrid, QuickViewModal } from '../../components/gallery'
 import { Button } from '../../components/ui/Button'
 
 interface TattoosIndexProps {
@@ -29,6 +29,11 @@ export default function TattoosIndex({
 
   // Masonry grid state
   const { items: tattoos, loading, hasMore, loadMore, reset } = useMasonryGrid<Tattoo>([], 20)
+
+  // Quick view modal state
+  const [quickViewOpen, setQuickViewOpen] = useState(false)
+  const [selectedTattoo, setSelectedTattoo] = useState<Tattoo | null>(null)
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   // Mock tattoo data for development
   const mockTattoos: Tattoo[] = [
@@ -197,8 +202,31 @@ export default function TattoosIndex({
   }
 
   const handleTattooClick = (tattoo: Tattoo) => {
-    // Open quick view modal - implement in Phase 3
-    console.log('Open quick view for tattoo:', tattoo.id)
+    const index = sortedTattoos.findIndex((t) => t.id === tattoo.id)
+    setSelectedTattoo(tattoo)
+    setSelectedIndex(index)
+    setQuickViewOpen(true)
+  }
+
+  const handleQuickViewClose = () => {
+    setQuickViewOpen(false)
+    setSelectedTattoo(null)
+  }
+
+  const handleQuickViewNext = () => {
+    if (selectedIndex < sortedTattoos.length - 1) {
+      const nextIndex = selectedIndex + 1
+      setSelectedIndex(nextIndex)
+      setSelectedTattoo(sortedTattoos[nextIndex])
+    }
+  }
+
+  const handleQuickViewPrevious = () => {
+    if (selectedIndex > 0) {
+      const prevIndex = selectedIndex - 1
+      setSelectedIndex(prevIndex)
+      setSelectedTattoo(sortedTattoos[prevIndex])
+    }
   }
 
   const handleArtistClick = (artistId: string) => {
@@ -207,8 +235,26 @@ export default function TattoosIndex({
   }
 
   const handleLikeToggle = (tattooId: string) => {
-    // Toggle like - implement with real API
-    console.log('Toggle like for tattoo:', tattooId)
+    // Toggle like in both the main list and selected tattoo
+    const updatedTattoos = tattoos.map((tattoo) =>
+      tattoo.id === tattooId
+        ? {
+            ...tattoo,
+            isLiked: !tattoo.isLiked,
+            likes: (tattoo.likes || 0) + (tattoo.isLiked ? -1 : 1),
+          }
+        : tattoo
+    )
+    reset(updatedTattoos)
+
+    // Update selected tattoo if it's the same one
+    if (selectedTattoo?.id === tattooId) {
+      setSelectedTattoo({
+        ...selectedTattoo,
+        isLiked: !selectedTattoo.isLiked,
+        likes: (selectedTattoo.likes || 0) + (selectedTattoo.isLiked ? -1 : 1),
+      })
+    }
   }
 
   // Mock load more function
@@ -325,11 +371,24 @@ export default function TattoosIndex({
         </div>
       )}
 
+      {/* Quick View Modal */}
+      <QuickViewModal
+        isOpen={quickViewOpen}
+        onClose={handleQuickViewClose}
+        tattoo={selectedTattoo}
+        onNext={handleQuickViewNext}
+        onPrevious={handleQuickViewPrevious}
+        hasNext={selectedIndex < sortedTattoos.length - 1}
+        hasPrevious={selectedIndex > 0}
+        onLikeToggle={handleLikeToggle}
+        onArtistClick={handleArtistClick}
+      />
+
       {/* Development Note */}
-      <div className="mt-12 p-4 bg-blue-50 rounded-lg border border-blue-200">
-        <p className="text-sm text-blue-800">
-          <strong>Sprint 2 Développement:</strong> Galerie avec Masonry Grid et filtres avancés. La
-          fonction "Quick View" sera implémentée en Phase 3.
+      <div className="mt-12 p-4 bg-green-50 rounded-lg border border-green-200">
+        <p className="text-sm text-green-800">
+          <strong>Sprint 3 Développement:</strong> Quick View Modal intégré avec navigation clavier
+          et tactile. Support complet pour mobile avec swipe gestures et interface responsive.
         </p>
       </div>
     </MainLayout>

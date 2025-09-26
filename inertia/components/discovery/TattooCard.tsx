@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from '@inertiajs/react'
 import { cn } from '../../lib/utils'
+import { useFavorites } from '../../hooks'
 
 interface Tattoo {
   id: string
@@ -24,6 +25,7 @@ interface TattooCardProps {
   onImageClick?: (tattoo: Tattoo) => void
   onArtistClick?: (artistId: string) => void
   onLikeToggle?: (tattooId: string) => void
+  showFavoriteButton?: boolean
 }
 
 export const TattooCard: React.FC<TattooCardProps> = ({
@@ -32,9 +34,11 @@ export const TattooCard: React.FC<TattooCardProps> = ({
   onImageClick,
   onArtistClick,
   onLikeToggle,
+  showFavoriteButton = true,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageError, setImageError] = useState(false)
+  const { isFavorite, toggleFavorite } = useFavorites()
 
   const handleImageClick = () => {
     onImageClick?.(tattoo)
@@ -49,6 +53,20 @@ export const TattooCard: React.FC<TattooCardProps> = ({
     e.stopPropagation()
     onLikeToggle?.(tattoo.id)
   }
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    toggleFavorite({
+      id: tattoo.id,
+      type: 'tattoo',
+      title: tattoo.title || 'Tatouage',
+      imageUrl: tattoo.imageUrl,
+      artistName: tattoo.artist.name,
+      location: tattoo.artist.location,
+    })
+  }
+
+  const isTattooFavorited = isFavorite(tattoo.id, 'tattoo')
 
   return (
     <div
@@ -115,29 +133,61 @@ export const TattooCard: React.FC<TattooCardProps> = ({
 
         {/* Quick actions overlay */}
         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button
-            onClick={handleLikeClick}
-            className={cn(
-              'p-2 rounded-full backdrop-blur-sm transition-all duration-200',
-              tattoo.isLiked
-                ? 'bg-red-500 text-white hover:bg-red-600'
-                : 'bg-white/80 text-gray-700 hover:bg-white'
-            )}
-          >
-            <svg
-              className="w-4 h-4"
-              fill={tattoo.isLiked ? 'currentColor' : 'none'}
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="flex space-x-1">
+            {/* Like button */}
+            <button
+              onClick={handleLikeClick}
+              className={cn(
+                'p-2 rounded-full backdrop-blur-sm transition-all duration-200',
+                tattoo.isLiked
+                  ? 'bg-red-500 text-white hover:bg-red-600'
+                  : 'bg-white/80 text-gray-700 hover:bg-white'
+              )}
+              title={tattoo.isLiked ? "Je n'aime plus" : "J'aime"}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-4 h-4"
+                fill={tattoo.isLiked ? 'currentColor' : 'none'}
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </button>
+
+            {/* Favorite button */}
+            {showFavoriteButton && (
+              <button
+                onClick={handleFavoriteClick}
+                className={cn(
+                  'p-2 rounded-full backdrop-blur-sm transition-all duration-200',
+                  isTattooFavorited
+                    ? 'bg-yellow-500 text-white hover:bg-yellow-600'
+                    : 'bg-white/80 text-gray-700 hover:bg-white'
+                )}
+                title={isTattooFavorited ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+              >
+                <svg
+                  className="w-4 h-4"
+                  fill={isTattooFavorited ? 'currentColor' : 'none'}
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Expand icon */}

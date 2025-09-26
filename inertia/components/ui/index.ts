@@ -15,6 +15,9 @@ export type {
   CardFooterProps,
 } from './Card'
 
+export { ShareModal } from './share_modal'
+export type { ShareModalProps } from './share_modal'
+
 // Discovery components
 export { ArtistCard, TattooCard, FilterBar } from '../discovery'
 export type { Artist, ArtistCardProps, Tattoo, TattooCardProps, FilterBarProps } from '../discovery'
