@@ -1,5 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createContactInquiryValidator, createQuickInquiryValidator } from '#validators/contact_inquiry'
+import {
+  createContactInquiryValidator,
+  createQuickInquiryValidator,
+} from '#validators/contact_inquiry'
 import ContactInquiry from '#models/contact_inquiry'
 import Artist from '#models/artist'
 import { InquiryStatus, InquirySource, ProjectType } from '#models/contact_inquiry'
@@ -13,6 +16,7 @@ export default class ContactInquiriesController {
    * Handle contact inquiry form submission
    */
   async store({ request, response }: HttpContext) {
+    const startTime = Date.now()
     try {
       // Validate the request data
       const payload = await request.validateUsing(createContactInquiryValidator)
@@ -64,12 +68,41 @@ export default class ContactInquiriesController {
         await this.sendArtistNotification(inquiry, artist)
       }
 
+      // Record monitoring metrics
+      const responseTime = Date.now() - startTime
+      monitoringService.recordApiMetric({
+        endpoint: request.url(),
+        method: request.method(),
+        responseTime,
+        statusCode: 201,
+        userAgent: request.header('user-agent'),
+        ipAddress: request.ip(),
+      })
+
       return response.created({
         success: true,
-        message: "Votre demande a été envoyée avec succès ! L'artiste vous contactera dans les plus brefs délais.",
+        message:
+          "Votre demande a été envoyée avec succès ! L'artiste vous contactera dans les plus brefs délais.",
         inquiryId: inquiry.id,
       })
     } catch (error) {
+      // Record error metrics
+      const responseTime = Date.now() - startTime
+      monitoringService.recordApiMetric({
+        endpoint: request.url(),
+        method: request.method(),
+        responseTime,
+        statusCode: 400,
+        userAgent: request.header('user-agent'),
+        ipAddress: request.ip(),
+      })
+
+      monitoringService.logError(error, {
+        endpoint: request.url(),
+        method: request.method(),
+        ipAddress: request.ip(),
+      })
+
       console.error('Contact inquiry creation error:', error)
       return response.badRequest({
         success: false,
@@ -126,13 +159,25 @@ export default class ContactInquiriesController {
   /**
    * Get inquiry by ID (for confirmation pages)
    */
-  async show({ params, response }: HttpContext) {
+  async show({ params, request, response }: HttpContext) {
+    const startTime = Date.now()
     try {
       const inquiry = await ContactInquiry.find(params.id)
 
       if (!inquiry) {
         throw new ContactInquiryNotFoundException(params.id)
       }
+
+      // Record monitoring metrics
+      const responseTime = Date.now() - startTime
+      monitoringService.recordApiMetric({
+        endpoint: request.url(),
+        method: request.method(),
+        responseTime,
+        statusCode: 200,
+        userAgent: request.header('user-agent'),
+        ipAddress: request.ip(),
+      })
 
       return response.ok({
         success: true,
@@ -153,6 +198,17 @@ export default class ContactInquiriesController {
         throw error
       }
 
+      // Record error metrics
+      const responseTime = Date.now() - startTime
+      monitoringService.recordApiMetric({
+        endpoint: request.url(),
+        method: request.method(),
+        responseTime,
+        statusCode: 500,
+        userAgent: request.header('user-agent'),
+        ipAddress: request.ip(),
+      })
+
       monitoringService.logError(error, {
         endpoint: '/contact-inquiries/:id',
         inquiryId: params.id,
@@ -171,8 +227,10 @@ export default class ContactInquiriesController {
   private async sendArtistNotification(inquiry: ContactInquiry, artist: Artist) {
     // TODO: Implement email service integration
     // This would integrate with a service like Mailgun, SendGrid, or SES
-    console.log(`Notification email would be sent to artist ${artist.stageName} for inquiry ${inquiry.id}`)
-    
+    console.log(
+      `Notification email would be sent to artist ${artist.stageName} for inquiry ${inquiry.id}`
+    )
+
     // Log inquiry details for now
     console.log('Inquiry details:', {
       from: inquiry.email,
@@ -190,9 +248,8 @@ export default class ContactInquiriesController {
     try {
       const healthCheck = await monitoringService.getHealthCheck()
 
-      const statusCode = healthCheck.status === 'healthy' ? 200
-                       : healthCheck.status === 'degraded' ? 200
-                       : 503
+      const statusCode =
+        healthCheck.status === 'healthy' ? 200 : healthCheck.status === 'degraded' ? 200 : 503
 
       return response.status(statusCode).json({
         service: 'contact_inquiries',

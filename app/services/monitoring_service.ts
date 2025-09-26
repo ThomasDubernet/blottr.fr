@@ -61,8 +61,8 @@ export default class MonitoringService {
     const metrics = await this.getSystemMetrics()
 
     // Determine overall status
-    const failedChecks = Object.values(checks).filter(check => check.status === 'fail')
-    const warningChecks = Object.values(checks).filter(check => check.status === 'warn')
+    const failedChecks = Object.values(checks).filter((check) => check.status === 'fail')
+    const warningChecks = Object.values(checks).filter((check) => check.status === 'warn')
 
     let overallStatus: 'healthy' | 'degraded' | 'unhealthy'
     if (failedChecks.length > 0) {
@@ -149,8 +149,9 @@ export default class MonitoringService {
   }
 
   private async checkApiPerformance(): Promise<HealthStatus> {
-    const recentMetrics = this.performanceMetrics
-      .filter(m => m.timestamp.diffNow('minutes').minutes > -5)
+    const recentMetrics = this.performanceMetrics.filter(
+      (m) => m.timestamp.diffNow('minutes').minutes > -5
+    )
 
     if (recentMetrics.length === 0) {
       return {
@@ -159,8 +160,9 @@ export default class MonitoringService {
       }
     }
 
-    const avgResponseTime = recentMetrics.reduce((sum, m) => sum + m.responseTime, 0) / recentMetrics.length
-    const slowRequests = recentMetrics.filter(m => m.responseTime > 2000).length
+    const avgResponseTime =
+      recentMetrics.reduce((sum, m) => sum + m.responseTime, 0) / recentMetrics.length
+    const slowRequests = recentMetrics.filter((m) => m.responseTime > 2000).length
     const slowRequestRate = slowRequests / recentMetrics.length
 
     if (avgResponseTime > 1500) {
@@ -228,17 +230,18 @@ export default class MonitoringService {
       .where('status', InquiryStatus.PENDING)
       .count('* as total')
 
-    const recentMetrics = this.performanceMetrics
-      .filter(m => m.timestamp.diffNow('minutes').minutes > -5)
+    const recentMetrics = this.performanceMetrics.filter(
+      (m) => m.timestamp.diffNow('minutes').minutes > -5
+    )
 
-    const averageResponseTime = recentMetrics.length > 0
-      ? recentMetrics.reduce((sum, m) => sum + m.responseTime, 0) / recentMetrics.length
-      : 0
+    const averageResponseTime =
+      recentMetrics.length > 0
+        ? recentMetrics.reduce((sum, m) => sum + m.responseTime, 0) / recentMetrics.length
+        : 0
 
     const totalErrors = Array.from(this.errorCounts.values()).reduce((sum, count) => sum + count, 0)
-    const errorRate = this.performanceMetrics.length > 0
-      ? totalErrors / this.performanceMetrics.length
-      : 0
+    const errorRate =
+      this.performanceMetrics.length > 0 ? totalErrors / this.performanceMetrics.length : 0
 
     return {
       totalInquiries: Number((totalInquiries[0] as any)?.total || 0),

@@ -96,10 +96,13 @@ export default class ContactInquiryRepository {
   /**
    * Find inquiries by artist with optimized query
    */
-  async findByArtist(artistId: string, options: {
-    limit?: number
-    status?: InquiryStatus[]
-  } = {}): Promise<ContactInquiry[]> {
+  async findByArtist(
+    artistId: string,
+    options: {
+      limit?: number
+      status?: InquiryStatus[]
+    } = {}
+  ): Promise<ContactInquiry[]> {
     return databaseOptimizationService.getInquiriesOptimized({
       artistId,
       status: options.status,
@@ -110,10 +113,13 @@ export default class ContactInquiryRepository {
   /**
    * Search inquiries with full-text search
    */
-  async search(searchTerm: string, options: {
-    limit?: number
-    filters?: Partial<InquiryFilters>
-  } = {}): Promise<ContactInquiry[]> {
+  async search(
+    searchTerm: string,
+    options: {
+      limit?: number
+      filters?: Partial<InquiryFilters>
+    } = {}
+  ): Promise<ContactInquiry[]> {
     return databaseOptimizationService.getInquiriesOptimized({
       searchTerm,
       ...options.filters,
@@ -132,12 +138,10 @@ export default class ContactInquiryRepository {
    * Batch update inquiries status (optimized for multiple updates)
    */
   async batchUpdateStatus(inquiryIds: string[], status: InquiryStatus): Promise<number> {
-    const result = await ContactInquiry.query()
-      .whereIn('id', inquiryIds)
-      .update({
-        status,
-        updated_at: DateTime.now(),
-      })
+    const result = await ContactInquiry.query().whereIn('id', inquiryIds).update({
+      status,
+      updated_at: DateTime.now(),
+    })
 
     // Invalidate relevant caches
     await this.invalidateStatusCaches()
@@ -149,12 +153,10 @@ export default class ContactInquiryRepository {
    * Batch mark as read (optimized for multiple updates)
    */
   async batchMarkAsRead(inquiryIds: string[]): Promise<number> {
-    const result = await ContactInquiry.query()
-      .whereIn('id', inquiryIds)
-      .update({
-        is_read: true,
-        updated_at: DateTime.now(),
-      })
+    const result = await ContactInquiry.query().whereIn('id', inquiryIds).update({
+      is_read: true,
+      updated_at: DateTime.now(),
+    })
 
     // Invalidate read status caches
     await this.invalidateReadCaches()
@@ -209,17 +211,11 @@ export default class ContactInquiryRepository {
    * Get dashboard summary with optimized queries
    */
   async getDashboardSummary() {
-    const [
-      totalInquiries,
-      pendingInquiries,
-      unreadInquiries,
-      urgentInquiries,
-      todayInquiries,
-    ] = await Promise.all([
+    const urgentInquiries = await this.findUrgent()
+    const [totalInquiries, pendingInquiries, unreadInquiries, todayInquiries] = await Promise.all([
       this.getTotalCount(),
       this.getTotalCount({ status: [InquiryStatus.PENDING] }),
       this.getTotalCount({ isRead: false }),
-      (await this.findUrgent()).length,
       this.getTotalCount({
         dateRange: {
           start: DateTime.now().startOf('day'),
@@ -232,7 +228,7 @@ export default class ContactInquiryRepository {
       totalInquiries,
       pendingInquiries,
       unreadInquiries,
-      urgentInquiries,
+      urgentInquiries: urgentInquiries.length,
       todayInquiries,
     }
   }
@@ -276,8 +272,8 @@ export default class ContactInquiryRepository {
 
     if (filters.dateRange) {
       query = query.whereBetween('created_at', [
-        filters.dateRange.start.toSQL(),
-        filters.dateRange.end.toSQL(),
+        filters.dateRange.start.toSQL() as any,
+        filters.dateRange.end.toSQL() as any,
       ])
     }
 

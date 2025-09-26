@@ -199,15 +199,15 @@ export default class ContactInquiry extends BaseModel {
 
   public async recordReply(): Promise<void> {
     const now = DateTime.now()
-    
+
     if (!this.firstRepliedAt) {
       this.firstRepliedAt = now
     }
-    
+
     this.lastRepliedAt = now
     this.repliesCount += 1
     this.status = InquiryStatus.REPLIED
-    
+
     await this.save()
   }
 

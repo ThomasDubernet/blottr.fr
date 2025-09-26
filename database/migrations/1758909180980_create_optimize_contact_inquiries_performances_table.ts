@@ -10,7 +10,10 @@ export default class extends BaseSchema {
       table.index(['status', 'created_at'], 'idx_contact_inquiries_status_created')
       table.index(['artist_id', 'created_at'], 'idx_contact_inquiries_artist_created')
       table.index(['project_type', 'status'], 'idx_contact_inquiries_project_status')
-      table.index(['is_read', 'priority', 'created_at'], 'idx_contact_inquiries_read_priority_created')
+      table.index(
+        ['is_read', 'priority', 'created_at'],
+        'idx_contact_inquiries_read_priority_created'
+      )
 
       // Partial indexes for performance (PostgreSQL specific)
       // Index only unread inquiries
@@ -98,7 +101,10 @@ export default class extends BaseSchema {
       table.dropIndex(['status', 'created_at'], 'idx_contact_inquiries_status_created')
       table.dropIndex(['artist_id', 'created_at'], 'idx_contact_inquiries_artist_created')
       table.dropIndex(['project_type', 'status'], 'idx_contact_inquiries_project_status')
-      table.dropIndex(['is_read', 'priority', 'created_at'], 'idx_contact_inquiries_read_priority_created')
+      table.dropIndex(
+        ['is_read', 'priority', 'created_at'],
+        'idx_contact_inquiries_read_priority_created'
+      )
     })
 
     // Drop partial and specialized indexes

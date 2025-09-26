@@ -97,7 +97,10 @@ export default class DatabaseOptimizationService {
     }
 
     // Optimize ordering based on available indexes
-    if (options.isRead === false && (!options.status || options.status.includes(InquiryStatus.PENDING))) {
+    if (
+      options.isRead === false &&
+      (!options.status || options.status.includes(InquiryStatus.PENDING))
+    ) {
       // Use optimized partial index for unread pending inquiries
       query = query.orderBy('priority', 'desc').orderBy('created_at', 'asc')
     } else {
@@ -134,8 +137,7 @@ export default class DatabaseOptimizationService {
     // This query uses the idx_contact_inquiries_urgent partial index
     const result = await ContactInquiry.query()
       .where((query) => {
-        query.where('priority', '>=', 8)
-             .orWhere('project_type', ProjectType.APPOINTMENT)
+        query.where('priority', '>=', 8).orWhere('project_type', ProjectType.APPOINTMENT)
       })
       .where('status', InquiryStatus.PENDING)
       .orderBy('priority', 'desc')
@@ -226,7 +228,7 @@ export default class DatabaseOptimizationService {
 
     // Suggest vacuum if needed
     const tableStats = await this.getTableStats()
-    const contactInquiriesStats = tableStats.find(t => t.table === 'contact_inquiries')
+    const contactInquiriesStats = tableStats.find((t: any) => t.table === 'contact_inquiries')
 
     if (contactInquiriesStats && contactInquiriesStats.deadTuples > 1000) {
       optimizations.push('VACUUM suggested for contact_inquiries table')
@@ -290,9 +292,9 @@ export default class DatabaseOptimizationService {
     `)
 
     return {
-      totalConnections: parseInt(result.rows[0]?.total_connections || '0'),
-      activeConnections: parseInt(result.rows[0]?.active_connections || '0'),
-      idleConnections: parseInt(result.rows[0]?.idle_connections || '0'),
+      totalConnections: Number.parseInt(result.rows[0]?.total_connections || '0'),
+      activeConnections: Number.parseInt(result.rows[0]?.active_connections || '0'),
+      idleConnections: Number.parseInt(result.rows[0]?.idle_connections || '0'),
     }
   }
 
@@ -304,7 +306,7 @@ export default class DatabaseOptimizationService {
     `)
 
     return {
-      activeQueries: parseInt(result.rows[0]?.active_queries || '0'),
+      activeQueries: Number.parseInt(result.rows[0]?.active_queries || '0'),
     }
   }
 
@@ -329,7 +331,7 @@ export default class DatabaseOptimizationService {
     return result.rows.map((row: any) => ({
       table: row.table_name,
       index: row.index_name,
-      usage: parseInt(row.usage_count || '0'),
+      usage: Number.parseInt(row.usage_count || '0'),
     }))
   }
 
@@ -349,8 +351,8 @@ export default class DatabaseOptimizationService {
     return result.rows.map((row: any) => ({
       table: row.table_name,
       size: row.table_size,
-      rows: parseInt(row.total_rows || '0'),
-      deadTuples: parseInt(row.dead_tuples || '0'),
+      rows: Number.parseInt(row.total_rows || '0'),
+      deadTuples: Number.parseInt(row.dead_tuples || '0'),
     }))
   }
 }

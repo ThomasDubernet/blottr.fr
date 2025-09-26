@@ -1,4 +1,4 @@
-import env from '@adonisjs/core/services/env'
+import env from '#start/env'
 
 export interface EnvironmentCheck {
   key: string
@@ -117,7 +117,12 @@ export default class EnvironmentService {
       { key: 'TZ', required: false, sensitive: false },
       { key: 'SESSION_MAX_AGE', required: false, sensitive: false },
       { key: 'DB_SSL', required: false, sensitive: false, validator: this.validateBoolean },
-      { key: 'RATE_LIMIT_ENABLED', required: false, sensitive: false, validator: this.validateBoolean },
+      {
+        key: 'RATE_LIMIT_ENABLED',
+        required: false,
+        sensitive: false,
+        validator: this.validateBoolean,
+      },
       { key: 'CORS_ENABLED', required: false, sensitive: false, validator: this.validateBoolean },
       { key: 'CSRF_ENABLED', required: false, sensitive: false, validator: this.validateBoolean },
     ]
@@ -127,7 +132,12 @@ export default class EnvironmentService {
         ...base,
         { key: 'CDN_URL', required: false, sensitive: false, validator: this.validateUrl },
         { key: 'METRICS_ENDPOINT', required: false, sensitive: false },
-        { key: 'BACKUP_ENABLED', required: false, sensitive: false, validator: this.validateBoolean },
+        {
+          key: 'BACKUP_ENABLED',
+          required: false,
+          sensitive: false,
+          validator: this.validateBoolean,
+        },
       ]
     }
 
@@ -179,8 +189,8 @@ export default class EnvironmentService {
   }
 
   private validatePort(value: string) {
-    const port = parseInt(value, 10)
-    if (isNaN(port) || port < 1 || port > 65535) {
+    const port = Number.parseInt(value, 10)
+    if (Number.isNaN(port) || port < 1 || port > 65535) {
       return { valid: false, message: 'Must be a valid port number (1-65535)' }
     }
     return { valid: true }
@@ -248,7 +258,7 @@ export default class EnvironmentService {
     }
   }
 
-  private validateStagingEnvironment(errors: string[], warnings: string[]) {
+  private validateStagingEnvironment(_errors: string[], warnings: string[]) {
     // Staging-specific validations
     const database = env.get('DB_DATABASE')
     if (database && !database.includes('staging')) {
@@ -277,19 +287,19 @@ export default class EnvironmentService {
 
     if (result.errors.length > 0) {
       console.log('\n🚨 ERRORS:')
-      result.errors.forEach(error => console.log(`  - ${error}`))
+      result.errors.forEach((error) => console.log(`  - ${error}`))
     }
 
     if (result.warnings.length > 0) {
       console.log('\n⚠️  WARNINGS:')
-      result.warnings.forEach(warning => console.log(`  - ${warning}`))
+      result.warnings.forEach((warning) => console.log(`  - ${warning}`))
     }
 
     console.log(`\n📊 Configuration Summary:`)
-    console.log(`  - Required variables: ${result.checks.filter(c => c.required).length}`)
-    console.log(`  - Optional variables: ${result.checks.filter(c => !c.required).length}`)
-    console.log(`  - Valid checks: ${result.checks.filter(c => c.valid).length}`)
-    console.log(`  - Invalid checks: ${result.checks.filter(c => !c.valid).length}`)
+    console.log(`  - Required variables: ${result.checks.filter((c) => c.required).length}`)
+    console.log(`  - Optional variables: ${result.checks.filter((c) => !c.required).length}`)
+    console.log(`  - Valid checks: ${result.checks.filter((c) => c.valid).length}`)
+    console.log(`  - Invalid checks: ${result.checks.filter((c) => !c.valid).length}`)
 
     if (result.environment === 'production' && !result.isValid) {
       console.log('\n💥 CRITICAL: Production environment is not properly configured!')

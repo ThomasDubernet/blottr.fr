@@ -24,17 +24,13 @@ export default class RateLimitMiddleware {
     skipFailedRequests: false,
   }
 
-  async handle(
-    ctx: HttpContext,
-    next: NextFn,
-    options: string[] = []
-  ) {
+  async handle(ctx: HttpContext, next: NextFn, options: string[] = []) {
     // Parse middleware parameters: max,windowMs
     const [maxStr, windowMsStr] = options
     const config: RateLimitConfig = {
       ...this.defaultConfig,
-      max: maxStr ? parseInt(maxStr, 10) : this.defaultConfig.max,
-      windowMs: windowMsStr ? parseInt(windowMsStr, 10) : this.defaultConfig.windowMs,
+      max: maxStr ? Number.parseInt(maxStr, 10) : this.defaultConfig.max,
+      windowMs: windowMsStr ? Number.parseInt(windowMsStr, 10) : this.defaultConfig.windowMs,
     }
     const key = this.generateKey(ctx)
     const now = Date.now()

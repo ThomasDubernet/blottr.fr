@@ -98,7 +98,10 @@ export class FormService {
       console.error('Form submission error:', error)
       return {
         success: false,
-        message: error instanceof Error ? error.message : "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer.",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer.",
       }
     }
   }
@@ -126,7 +129,10 @@ export class FormService {
       console.error('Quick inquiry submission error:', error)
       return {
         success: false,
-        message: error?.response?.data?.message || error?.message || "Une erreur est survenue lors de l'envoi de votre message.",
+        message:
+          error?.response?.data?.message ||
+          error?.message ||
+          "Une erreur est survenue lors de l'envoi de votre message.",
       }
     }
   }

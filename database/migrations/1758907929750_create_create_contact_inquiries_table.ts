@@ -30,8 +30,12 @@ export default class extends BaseSchema {
       table.uuid('tattoo_id').nullable().references('tattoos.id').onDelete('set null')
 
       // Status and Tracking
-      table.enum('status', ['pending', 'in_progress', 'replied', 'closed', 'spam']).defaultTo('pending')
-      table.enum('source', ['website', 'quick_form', 'social_media', 'referral']).defaultTo('website')
+      table
+        .enum('status', ['pending', 'in_progress', 'replied', 'closed', 'spam'])
+        .defaultTo('pending')
+      table
+        .enum('source', ['website', 'quick_form', 'social_media', 'referral'])
+        .defaultTo('website')
       table.integer('priority').defaultTo(3).checkBetween([1, 10])
       table.boolean('is_read').defaultTo(false)
       table.boolean('is_starred').defaultTo(false)

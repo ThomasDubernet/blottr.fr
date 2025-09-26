@@ -120,7 +120,7 @@ export default function ArtistShow({ user, artist }: ArtistShowProps) {
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center">
               <span className="text-2xl font-bold text-gray-600">
-                {artist.name.charAt(0).toUpperCase()}
+                {artist.name?.charAt(0)?.toUpperCase() || '?'}
               </span>
             </div>
             <div>
@@ -158,12 +158,12 @@ export default function ArtistShow({ user, artist }: ArtistShowProps) {
                       ))}
                     </div>
                     <span className="ml-1 text-sm text-gray-600">
-                      {artist.rating} ({artist.stats.totalReviews} avis)
+                      {artist.rating} ({artist.stats?.totalReviews || 0} avis)
                     </span>
                   </div>
                 )}
                 <span className="text-sm text-gray-500">
-                  {artist.stats.experienceYears} ans d'expérience
+                  {artist.stats?.experienceYears || 0} ans d'expérience
                 </span>
               </div>
             </div>
@@ -227,7 +227,7 @@ export default function ArtistShow({ user, artist }: ArtistShowProps) {
 
         {/* Style Tags */}
         <div className="mt-4 flex flex-wrap gap-2">
-          {artist.styles.map((style) => (
+          {artist.styles?.map((style) => (
             <span
               key={style}
               className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-colors"
@@ -242,20 +242,20 @@ export default function ArtistShow({ user, artist }: ArtistShowProps) {
       <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900">{artist.stats.totalTattoos}</div>
+            <div className="text-2xl font-bold text-gray-900">{artist.stats?.totalTattoos || 0}</div>
             <div className="text-sm text-gray-600">Tatouages réalisés</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900">{artist.stats.totalLikes}</div>
+            <div className="text-2xl font-bold text-gray-900">{artist.stats?.totalLikes || 0}</div>
             <div className="text-sm text-gray-600">Likes reçus</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900">{artist.stats.experienceYears}</div>
+            <div className="text-2xl font-bold text-gray-900">{artist.stats?.experienceYears || 0}</div>
             <div className="text-sm text-gray-600">Années d'expérience</div>
           </div>
           <div className="text-center">
             <div className="text-2xl font-bold text-gray-900">
-              {artist.stats.averageRating.toFixed(1)}
+              {artist.stats?.averageRating?.toFixed(1) || '0.0'}
             </div>
             <div className="text-sm text-gray-600">Note moyenne</div>
           </div>
@@ -267,8 +267,8 @@ export default function ArtistShow({ user, artist }: ArtistShowProps) {
         <div className="border-b border-gray-200">
           <nav className="flex space-x-8 px-6">
             {[
-              { key: 'portfolio', label: 'Portfolio', count: artist.portfolio.length },
-              { key: 'reviews', label: 'Avis', count: artist.reviews.length },
+              { key: 'portfolio', label: 'Portfolio', count: artist.portfolio?.length || 0 },
+              { key: 'reviews', label: 'Avis', count: artist.reviews?.length || 0 },
               { key: 'contact', label: 'Contact', count: null },
             ].map((tab) => (
               <button
