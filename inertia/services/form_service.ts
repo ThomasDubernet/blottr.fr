@@ -1,5 +1,5 @@
-import { ContactInquiry } from '../components/forms'
-import { api } from '../lib/api'
+import { ContactInquiry } from '~/components/forms'
+import { api } from '~/lib/api'
 
 export interface FormSubmissionResult {
   success: boolean
@@ -9,7 +9,7 @@ export interface FormSubmissionResult {
 
 export class FormService {
   private static instance: FormService
-  private baseUrl: string
+  private readonly baseUrl: string
 
   private constructor() {
     this.baseUrl = '/api'
@@ -48,7 +48,7 @@ export class FormService {
 
       // Add array fields
       if (inquiry.tattooStyle && inquiry.tattooStyle.length > 0) {
-        // Send each style as separate form field for backend array handling
+        // Send each style as a separate form field for backend array handling
         inquiry.tattooStyle.forEach((style, index) => {
           formData.append(`tattooStyles[${index}]`, style)
         })
