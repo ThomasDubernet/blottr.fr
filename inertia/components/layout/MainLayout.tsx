@@ -1,6 +1,6 @@
 import React from 'react'
 import { Head } from '@inertiajs/react'
-import { Header } from './Header'
+import { Navbar } from './Navbar'
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -25,10 +25,10 @@ export function MainLayout({
         <meta name="description" content={description} />
       </Head>
 
-      <div className="min-h-screen bg-gray-50">
-        <Header user={user} />
+      <div className="min-h-screen bg-white">
+        <Navbar user={user} />
 
-        <main className="container mx-auto px-4 py-8">{children}</main>
+        <main className="">{children}</main>
 
         <footer className="border-t bg-white">
           <div className="container mx-auto px-4 py-8">

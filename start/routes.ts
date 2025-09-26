@@ -11,6 +11,27 @@ import router from '@adonisjs/core/services/router'
 const ContactInquiriesController = () => import('#controllers/contact_inquiries_controller')
 
 router.on('/').renderInertia('home')
+router.on('/inscription').renderInertia('auth/Inscription')
+router.on('/connexion').renderInertia('auth/Connexion')
+
+// Auth routes
+router.post('/inscription', async ({ request, response }) => {
+  // Placeholder for registration logic
+  // TODO: Implement user registration with validation
+  const { email, password, role } = request.only(['email', 'password', 'role'])
+  
+  // For now, redirect back to inscription with success message
+  return response.redirect('/inscription')
+})
+
+router.post('/connexion', async ({ request, response }) => {
+  // Placeholder for login logic
+  // TODO: Implement user authentication with validation
+  const { email, password } = request.only(['email', 'password'])
+  
+  // For now, redirect to home page
+  return response.redirect('/')
+})
 
 // API Routes
 router

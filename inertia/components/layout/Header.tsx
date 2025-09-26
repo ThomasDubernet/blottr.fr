@@ -12,24 +12,23 @@ interface HeaderProps {
 
 export function Header({ user }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
+      <div className="container mx-auto flex h-16 items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-gray-900">Blottr</span>
+        <Link href="/" className="flex items-center">
+          <span className="text-2xl font-bold text-black">Blottr</span>
         </Link>
 
         {/* Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <Link
-            href="/tatoueurs"
-            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-          >
-            Explorer
+        <nav className="hidden md:flex items-center space-x-8">
+          <Link href="/tatoueurs">
+            <button className="px-4 py-2 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+              Explorer
+            </button>
           </Link>
           <Link
             href="/tatouages"
-            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-black transition-colors"
           >
             Tatouages
           </Link>
@@ -40,21 +39,24 @@ export function Header({ user }: HeaderProps) {
           {user ? (
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">{user.email}</span>
-              <Button variant="outline" size="sm">
-                <Link href="/logout" method="post" as="button">
+              <Link href="/logout" method="post" as="button">
+                <button className="px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                   Déconnexion
-                </Link>
-              </Button>
+                </button>
+              </Link>
             </div>
           ) : (
-            <div className="flex items-center space-x-2">
-              <Link href="/login">
-                <Button variant="ghost" size="sm">
-                  Se connecter
-                </Button>
+            <div className="flex items-center space-x-4">
+              <Link
+                href="/connexion"
+                className="text-sm font-medium text-gray-700 hover:text-black transition-colors"
+              >
+                Se connecter
               </Link>
-              <Link href="/register">
-                <Button size="sm">Commencer</Button>
+              <Link href="/inscription">
+                <button className="px-4 py-2 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors">
+                  Commencer
+                </button>
               </Link>
             </div>
           )}
