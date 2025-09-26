@@ -284,18 +284,22 @@ export default class Tattoo extends BaseModel {
         is_primary: true,
         assignment_type: 'manual',
         is_approved: true,
-      }
+      },
     })
   }
 
-  public async addTag(tag: Tag, relevanceScore: number = 0.8, isPrimary: boolean = false): Promise<void> {
+  public async addTag(
+    tag: Tag,
+    relevanceScore: number = 0.8,
+    isPrimary: boolean = false
+  ): Promise<void> {
     await this.related('tags').attach({
       [tag.id]: {
         relevance_score: relevanceScore,
         is_primary: isPrimary,
         assignment_type: 'manual',
         is_approved: true,
-      }
+      },
     })
   }
 
@@ -312,14 +316,13 @@ export default class Tattoo extends BaseModel {
     const shareWeight = this.shareCount * 1.0
     const featuredBonus = this.isFeatured ? 2 : 0
     const portfolioBonus = this.isPortfolioHighlight ? 1.5 : 0
-    
+
     return Math.min(10, viewWeight + likeWeight + shareWeight + featuredBonus + portfolioBonus)
   }
 
   // Scopes
   public static published = scope((query) => {
-    query.where('status', TattooStatus.PUBLISHED)
-      .whereNotNull('publishedAt')
+    query.where('status', TattooStatus.PUBLISHED).whereNotNull('publishedAt')
   })
 
   public static byArtist = scope((query, artistId: string) => {
@@ -339,8 +342,7 @@ export default class Tattoo extends BaseModel {
   })
 
   public static portfolioHighlights = scope((query) => {
-    query.where('isPortfolioHighlight', true)
-      .orderBy('engagementScore', 'desc')
+    query.where('isPortfolioHighlight', true).orderBy('engagementScore', 'desc')
   })
 
   public static highEngagement = scope((query) => {
@@ -352,7 +354,8 @@ export default class Tattoo extends BaseModel {
   })
 
   public static search = scope((query, searchTerm: string) => {
-    query.whereILike('title', `%${searchTerm}%`)
+    query
+      .whereILike('title', `%${searchTerm}%`)
       .orWhereILike('description', `%${searchTerm}%`)
       .orWhereRaw('search_keywords::jsonb @> ?', [JSON.stringify([searchTerm])])
   })

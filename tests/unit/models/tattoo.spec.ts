@@ -7,7 +7,7 @@ import Tattoo, {
   SizeCategory,
   ColorType,
   type ImageVariants,
-  type ImageDimensions
+  type ImageDimensions,
 } from '#models/tattoo'
 import Tag, { TagCategory } from '#models/tag'
 import Artist, { ArtistExperienceLevel } from '#models/artist'
@@ -179,7 +179,12 @@ test.group('Tattoo Model', (group) => {
       publishedAt: DateTime.now(),
       originalFilename: 'published-test.jpg',
       storagePath: '/uploads/published-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -194,7 +199,12 @@ test.group('Tattoo Model', (group) => {
       status: TattooStatus.DRAFT,
       originalFilename: 'draft-test.jpg',
       storagePath: '/uploads/draft-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -210,7 +220,12 @@ test.group('Tattoo Model', (group) => {
       publishedAt: null,
       originalFilename: 'nodate-test.jpg',
       storagePath: '/uploads/nodate-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -265,7 +280,12 @@ test.group('Tattoo Model', (group) => {
       engagementScore: 8.5,
       originalFilename: 'high-test.jpg',
       storagePath: '/uploads/high-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -279,7 +299,12 @@ test.group('Tattoo Model', (group) => {
       engagementScore: 6.0,
       originalFilename: 'low-test.jpg',
       storagePath: '/uploads/low-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -303,7 +328,12 @@ test.group('Tattoo Model', (group) => {
       priceCurrency: 'EUR',
       originalFilename: 'price-test.jpg',
       storagePath: '/uploads/price-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -317,7 +347,12 @@ test.group('Tattoo Model', (group) => {
       priceCurrency: 'EUR',
       originalFilename: 'noprice-test.jpg',
       storagePath: '/uploads/noprice-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -342,7 +377,12 @@ test.group('Tattoo Model', (group) => {
       status: TattooStatus.DRAFT,
       originalFilename: 'business-test.jpg',
       storagePath: '/uploads/business-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -365,7 +405,7 @@ test.group('Tattoo Model', (group) => {
     assert.isFalse(tattoo.isPublished)
   })
 
-  test('doit incrémenter les métriques d\'engagement', async ({ assert }) => {
+  test("doit incrémenter les métriques d'engagement", async ({ assert }) => {
     // Arrange
     const { artist } = await createTestArtist('engagement-metrics-test')
 
@@ -378,7 +418,12 @@ test.group('Tattoo Model', (group) => {
       shareCount: 2,
       originalFilename: 'engagement-test.jpg',
       storagePath: '/uploads/engagement-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -415,7 +460,12 @@ test.group('Tattoo Model', (group) => {
       slug: 'test-tags-attachment',
       originalFilename: 'tags-test.jpg',
       storagePath: '/uploads/tags-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -462,8 +512,10 @@ test.group('Tattoo Model', (group) => {
     // Assert
     assert.lengthOf(tattoo.tags, 2)
 
-    const primaryTagPivot = tattoo.tags.find(t => t.id === primaryTag.id)?.$extras.pivot_is_primary
-    const secondaryTagPivot = tattoo.tags.find(t => t.id === secondaryTag.id)?.$extras.pivot_is_primary
+    const primaryTagPivot = tattoo.tags.find((t) => t.id === primaryTag.id)?.$extras
+      .pivot_is_primary
+    const secondaryTagPivot = tattoo.tags.find((t) => t.id === secondaryTag.id)?.$extras
+      .pivot_is_primary
 
     assert.isTrue(primaryTagPivot)
     assert.isFalse(secondaryTagPivot)
@@ -479,7 +531,12 @@ test.group('Tattoo Model', (group) => {
       slug: 'test-alt-text',
       originalFilename: 'alt-test.jpg',
       storagePath: '/uploads/alt-test.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -508,7 +565,12 @@ test.group('Tattoo Model', (group) => {
       publishedAt: DateTime.now(),
       originalFilename: 'pub-scope.jpg',
       storagePath: '/uploads/pub-scope.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -523,7 +585,12 @@ test.group('Tattoo Model', (group) => {
       status: TattooStatus.DRAFT,
       originalFilename: 'draft-scope.jpg',
       storagePath: '/uploads/draft-scope.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -534,7 +601,7 @@ test.group('Tattoo Model', (group) => {
     const publishedTattoos = await Tattoo.query().apply((scopes) => scopes.published())
 
     // Assert - Should find only published tattoos from this test
-    const testPublishedTattoos = publishedTattoos.filter(t => t.slug === 'published-scope-test')
+    const testPublishedTattoos = publishedTattoos.filter((t) => t.slug === 'published-scope-test')
     assert.isAtLeast(testPublishedTattoos.length, 1)
     assert.equal(testPublishedTattoos[0].title, 'Published Scope')
   })
@@ -553,7 +620,12 @@ test.group('Tattoo Model', (group) => {
       displayOrder: 1,
       originalFilename: 'trad-scopes.jpg',
       storagePath: '/uploads/trad-scopes.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -570,7 +642,12 @@ test.group('Tattoo Model', (group) => {
       engagementScore: 9.2,
       originalFilename: 'real-scopes.jpg',
       storagePath: '/uploads/real-scopes.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -578,18 +655,28 @@ test.group('Tattoo Model', (group) => {
     })
 
     // Test scopes
-    const traditionalTattoos = await Tattoo.query().apply((scopes) => scopes.byStyle(TattooStyle.TRADITIONAL))
-    const armTattoos = await Tattoo.query().apply((scopes) => scopes.byBodyPlacement(BodyPlacement.ARM))
+    const traditionalTattoos = await Tattoo.query().apply((scopes) =>
+      scopes.byStyle(TattooStyle.TRADITIONAL)
+    )
+    const armTattoos = await Tattoo.query().apply((scopes) =>
+      scopes.byBodyPlacement(BodyPlacement.ARM)
+    )
     const featuredTattoos = await Tattoo.query().apply((scopes) => scopes.featured())
     const portfolioTattoos = await Tattoo.query().apply((scopes) => scopes.portfolioHighlights())
     const highEngagementTattoos = await Tattoo.query().apply((scopes) => scopes.highEngagement())
 
     // Assert - Filter for our test data
-    const testTraditional = traditionalTattoos.filter(t => t.slug === 'traditional-dragon-scopes-test')
-    const testArm = armTattoos.filter(t => t.slug === 'traditional-dragon-scopes-test')
-    const testFeatured = featuredTattoos.filter(t => t.slug === 'traditional-dragon-scopes-test')
-    const testPortfolio = portfolioTattoos.filter(t => t.slug === 'realistic-portrait-scopes-test')
-    const testHighEngagement = highEngagementTattoos.filter(t => t.slug === 'realistic-portrait-scopes-test')
+    const testTraditional = traditionalTattoos.filter(
+      (t) => t.slug === 'traditional-dragon-scopes-test'
+    )
+    const testArm = armTattoos.filter((t) => t.slug === 'traditional-dragon-scopes-test')
+    const testFeatured = featuredTattoos.filter((t) => t.slug === 'traditional-dragon-scopes-test')
+    const testPortfolio = portfolioTattoos.filter(
+      (t) => t.slug === 'realistic-portrait-scopes-test'
+    )
+    const testHighEngagement = highEngagementTattoos.filter(
+      (t) => t.slug === 'realistic-portrait-scopes-test'
+    )
 
     assert.isAtLeast(testTraditional.length, 1)
     assert.isAtLeast(testArm.length, 1)
@@ -610,7 +697,12 @@ test.group('Tattoo Model', (group) => {
       searchKeywords: JSON.stringify(['dragon', 'japonais', 'traditionnel']),
       originalFilename: 'dragon-search.jpg',
       storagePath: '/uploads/dragon-search.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -625,7 +717,12 @@ test.group('Tattoo Model', (group) => {
       searchKeywords: JSON.stringify(['rose', 'realisme', 'fleur']),
       originalFilename: 'rose-search.jpg',
       storagePath: '/uploads/rose-search.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -638,9 +735,9 @@ test.group('Tattoo Model', (group) => {
     const keywordResults = await Tattoo.query().apply((scopes) => scopes.search('japonais'))
 
     // Assert - Filter for our test data
-    const testDragon = dragonResults.filter(t => t.slug === 'dragon-japonais-search-test')
-    const testRose = roseResults.filter(t => t.slug === 'rose-realiste-search-test')
-    const testKeyword = keywordResults.filter(t => t.slug === 'dragon-japonais-search-test')
+    const testDragon = dragonResults.filter((t) => t.slug === 'dragon-japonais-search-test')
+    const testRose = roseResults.filter((t) => t.slug === 'rose-realiste-search-test')
+    const testKeyword = keywordResults.filter((t) => t.slug === 'dragon-japonais-search-test')
 
     assert.isAtLeast(testDragon.length, 1)
     assert.isAtLeast(testRose.length, 1)
@@ -658,7 +755,12 @@ test.group('Tattoo Model', (group) => {
       priceEstimate: 150,
       originalFilename: 'petit-filter.jpg',
       storagePath: '/uploads/petit-filter.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -672,7 +774,12 @@ test.group('Tattoo Model', (group) => {
       priceEstimate: 800,
       originalFilename: 'grand-filter.jpg',
       storagePath: '/uploads/grand-filter.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',
@@ -684,8 +791,8 @@ test.group('Tattoo Model', (group) => {
     const expensiveTattoos = await Tattoo.query().apply((scopes) => scopes.priceRange(500, 1000))
 
     // Assert - Filter for our test data
-    const testBudget = budgetTattoos.filter(t => t.slug === 'petit-tatouage-filter-test')
-    const testExpensive = expensiveTattoos.filter(t => t.slug === 'grand-tatouage-filter-test')
+    const testBudget = budgetTattoos.filter((t) => t.slug === 'petit-tatouage-filter-test')
+    const testExpensive = expensiveTattoos.filter((t) => t.slug === 'grand-tatouage-filter-test')
 
     assert.isAtLeast(testBudget.length, 1)
     assert.isAtLeast(testExpensive.length, 1)
@@ -701,7 +808,12 @@ test.group('Tattoo Model', (group) => {
       slug: 'tatouage-slug-relations-test',
       originalFilename: 'slug-relations.jpg',
       storagePath: '/uploads/slug-relations.jpg',
-      imageVariants: { thumbnail: 'thumb.jpg', medium: 'med.jpg', large: 'large.jpg', original: 'orig.jpg' },
+      imageVariants: {
+        thumbnail: 'thumb.jpg',
+        medium: 'med.jpg',
+        large: 'large.jpg',
+        original: 'orig.jpg',
+      },
       fileSize: 512000,
       dimensions: { width: 1600, height: 1200, aspectRatio: 1.33 },
       contentType: 'image/jpeg',

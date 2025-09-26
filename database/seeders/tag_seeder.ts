@@ -292,7 +292,7 @@ export default class extends BaseSeeder {
 
     // Create some hierarchical tags
     const parentTags = await Tag.query().where('category', 'subject').limit(3)
-    
+
     for (const parentTag of parentTags) {
       await Tag.create({
         name: `${parentTag.name} Detailed`,

@@ -3,13 +3,15 @@
 ## Advanced Testing Patterns Discovered
 
 ### JSON Field Testing Strategy
+
 **Challenge**: PostgreSQL JSONB columns with AdonisJS Lucid ORM serialization
 **Solution Pattern**:
+
 ```typescript
 // Database Storage: Serialize objects to JSON strings
 const tattoo = await Tattoo.create({
   searchKeywords: JSON.stringify(['dragon', 'japonais', 'traditionnel']),
-  altText: JSON.stringify({ fr: 'Dragon japonais', en: 'Japanese dragon' })
+  altText: JSON.stringify({ fr: 'Dragon japonais', en: 'Japanese dragon' }),
 })
 
 // Test Assertions: Parse JSON strings back for comparison
@@ -18,19 +20,23 @@ assert.deepEqual(JSON.parse(tattoo.searchKeywords as string), expectedKeywords)
 ```
 
 ### Unique Constraint Resolution
+
 **Challenge**: Database unique constraints in test environments with parallel execution
 **Solution Pattern**:
+
 ```typescript
 // Enhanced unique ID generation
 const timestamp = Date.now()
-const randomNum = Math.floor(Math.random() * 9999)  
+const randomNum = Math.floor(Math.random() * 9999)
 const uniqueId = `${timestamp}-${randomNum}`.slice(-8)
 const inseeCode = `7${uniqueId.slice(-4)}` // Keep within database constraints
 ```
 
 ### Complex Pivot Relationship Testing
+
 **Challenge**: Many-to-many relationships with metadata columns requiring proper validation
 **Solution Pattern**:
+
 ```typescript
 await tag.related('tattoos').attach({
   [tattoo.id]: {
@@ -38,15 +44,17 @@ await tag.related('tattoos').attach({
     is_primary: true,
     assignment_type: 'manual',
     is_approved: true ?? false, // Use nullish coalescing, not logical OR
-  }
+  },
 })
 ```
 
 ## Database Architecture Patterns
 
 ### JSONB Query Optimization
+
 **Challenge**: Search functionality across JSON arrays with PostgreSQL
 **Solution Pattern**:
+
 ```typescript
 public static search = scope((query, searchTerm: string) => {
   query.whereILike('title', `%${searchTerm}%`)
@@ -56,8 +64,10 @@ public static search = scope((query, searchTerm: string) => {
 ```
 
 ### Model Lifecycle Hook Enhancement
+
 **Challenge**: Ensuring consistent default values across complex models
 **Solution Pattern**:
+
 ```typescript
 public static async boot() {
   super.boot()
@@ -73,8 +83,10 @@ public static async boot() {
 ```
 
 ### Hierarchical Relationship Validation
+
 **Challenge**: Parent-child relationships with level constraints and circular reference prevention
 **Solution Pattern**:
+
 ```typescript
 // Computed property for hierarchical detection
 @computed()
@@ -96,7 +108,9 @@ public async createChild(childData: Partial<Tag>): Promise<Tag> {
 ## Business Logic Implementation Patterns
 
 ### Engagement Scoring Algorithm
+
 **Pattern**: Logarithmic scoring with weighted metrics and caps
+
 ```typescript
 private calculateEngagementScore(): number {
   const viewWeight = Math.log(this.viewCount + 1) * 0.1
@@ -104,13 +118,15 @@ private calculateEngagementScore(): number {
   const shareWeight = this.shareCount * 1.0
   const featuredBonus = this.isFeatured ? 2 : 0
   const portfolioBonus = this.isPortfolioHighlight ? 1.5 : 0
-  
+
   return Math.min(10, viewWeight + likeWeight + shareWeight + featuredBonus + portfolioBonus)
 }
 ```
 
 ### Multi-language Translation System
+
 **Pattern**: Flexible translation structure with fallback logic
+
 ```typescript
 export interface TagTranslations {
   [locale: string]: TagTranslation
@@ -133,7 +149,9 @@ public async setTranslation(locale: string, data: TagTranslation): Promise<void>
 ```
 
 ### Price Range Estimation
+
 **Pattern**: Percentage-based range calculation with currency formatting
+
 ```typescript
 @computed()
 public get estimatedPriceRange(): string | null {
@@ -147,13 +165,15 @@ public get estimatedPriceRange(): string | null {
 ## Testing Architecture Patterns
 
 ### French Business Domain Testing
+
 **Pattern**: Business-focused test descriptions in domain language
+
 ```typescript
 test.group('Tattoo Model', () => {
   test('doit calculer correctement estimatedPriceRange', async ({ assert }) => {
     // Business logic validation in domain language
   })
-  
+
   test('doit gérer les propriétés JSON complexes', async ({ assert }) => {
     // Complex data structure validation
   })
@@ -161,7 +181,9 @@ test.group('Tattoo Model', () => {
 ```
 
 ### Comprehensive Enum Testing
+
 **Pattern**: Systematic validation of all business enumeration values
+
 ```typescript
 test('doit tester tous les statuts de tatouage', async ({ assert }) => {
   const statuses = Object.values(TattooStatus)
@@ -173,14 +195,22 @@ test('doit tester tous les statuts de tatouage', async ({ assert }) => {
 ```
 
 ### Helper Function Pattern for Test Data
+
 **Pattern**: Reusable test data generation with relationship management
+
 ```typescript
 async function createTestArtist(testIdentifier: string) {
   const uniqueId = generateUniqueId()
-  const city = await City.create({/* unique city data */})
-  const user = await User.create({/* user data linked to city */})
-  const artist = await Artist.create({/* artist data linked to user */})
-  
+  const city = await City.create({
+    /* unique city data */
+  })
+  const user = await User.create({
+    /* user data linked to city */
+  })
+  const artist = await Artist.create({
+    /* artist data linked to user */
+  })
+
   return { city, user, artist, uniqueId }
 }
 ```
@@ -188,7 +218,9 @@ async function createTestArtist(testIdentifier: string) {
 ## Performance Optimization Patterns
 
 ### Strategic Database Indexing
+
 **Pattern**: Composite indexes for complex query patterns
+
 ```sql
 -- Engagement and filtering optimization
 CREATE INDEX idx_tattoos_engagement ON tattoos(status, engagement_score DESC);
@@ -198,7 +230,9 @@ CREATE INDEX idx_pivot_primary ON tag_tattoos(tattoo_id, is_primary);
 ```
 
 ### Computed Property Caching
+
 **Pattern**: Expensive calculations cached in database with recalculation triggers
+
 ```typescript
 public async updateEngagement(): Promise<void> {
   this.engagementScore = this.calculateEngagementScore() // Recalculate
@@ -215,14 +249,18 @@ public async incrementLike(): Promise<void> {
 ## Error Resolution Patterns
 
 ### PostgreSQL Constraint Debugging
+
 **Pattern**: Systematic constraint violation resolution
+
 1. **Identify**: Parse PostgreSQL error messages for constraint names
-2. **Analyze**: Understand which unique/foreign key constraints are violated  
+2. **Analyze**: Understand which unique/foreign key constraints are violated
 3. **Resolve**: Generate truly unique values or fix relationship logic
 4. **Validate**: Test constraint resolution with multiple executions
 
-### JSON Serialization Debugging  
+### JSON Serialization Debugging
+
 **Pattern**: Systematic JSON field troubleshooting
+
 1. **Database Level**: Ensure JSONB column types are properly configured
 2. **Model Level**: Verify JSON.stringify() for storage, proper typing for retrieval
 3. **Query Level**: Use raw SQL with explicit casting for complex JSON operations
@@ -231,15 +269,19 @@ public async incrementLike(): Promise<void> {
 ## Quality Assurance Patterns
 
 ### Production-Ready Validation
+
 **Standards Applied**:
+
 - No TODO comments in production code
-- No mock objects in integration tests  
+- No mock objects in integration tests
 - Comprehensive error handling for all edge cases
 - Proper TypeScript typing for all interfaces
 - Database transaction safety for all operations
 
 ### Continuous Quality Verification
+
 **Automated Checks**:
+
 ```bash
 npm run lint          # ESLint validation
 npm run typecheck     # TypeScript compilation

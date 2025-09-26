@@ -1,5 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed, belongsTo, hasMany, manyToMany, scope } from '@adonisjs/lucid/orm'
+import {
+  BaseModel,
+  column,
+  computed,
+  belongsTo,
+  hasMany,
+  manyToMany,
+  scope,
+} from '@adonisjs/lucid/orm'
 import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Tattoo from '#models/tattoo'
 
@@ -156,7 +164,7 @@ export default class Tag extends BaseModel {
         is_primary: options.isPrimary,
         assignment_type: options.assignmentType,
         is_approved: options.isApproved ?? true,
-      }
+      },
     })
     await this.incrementUsage()
   }
@@ -190,8 +198,6 @@ export default class Tag extends BaseModel {
   })
 
   public static search = scope((query, searchTerm: string) => {
-    query
-      .whereILike('name', `%${searchTerm}%`)
-      .orWhereILike('description', `%${searchTerm}%`)
+    query.whereILike('name', `%${searchTerm}%`).orWhereILike('description', `%${searchTerm}%`)
   })
 }

@@ -54,15 +54,16 @@ export default class extends BaseSeeder {
         shareCount: 23,
         allowsInquiries: true,
         showsPricing: true,
-        priceEstimate: 1800.00,
+        priceEstimate: 1800.0,
         priceCurrency: 'EUR',
         altText: {
           fr: 'Tatouage dragon traditionnel sur bras complet avec couleurs vives',
-          en: 'Traditional dragon tattoo full arm sleeve with vibrant colors'
+          en: 'Traditional dragon tattoo full arm sleeve with vibrant colors',
         },
         searchKeywords: ['dragon', 'traditional', 'sleeve', 'arm', 'colorful'],
         metaTitle: 'Dragon Sleeve Traditional Tattoo | Blottr Portfolio',
-        metaDescription: 'Stunning traditional dragon sleeve tattoo featuring vibrant colors and expert linework',
+        metaDescription:
+          'Stunning traditional dragon sleeve tattoo featuring vibrant colors and expert linework',
         publishedAt: new Date('2024-01-15T10:00:00Z'),
       },
       {
@@ -100,15 +101,16 @@ export default class extends BaseSeeder {
         shareCount: 12,
         allowsInquiries: true,
         showsPricing: true,
-        priceEstimate: 650.00,
+        priceEstimate: 650.0,
         priceCurrency: 'EUR',
         altText: {
           fr: 'Tatouage rose réaliste en noir et gris sur épaule',
-          en: 'Realistic black and grey rose tattoo on shoulder'
+          en: 'Realistic black and grey rose tattoo on shoulder',
         },
         searchKeywords: ['rose', 'realistic', 'black and grey', 'shoulder', 'flower'],
         metaTitle: 'Realistic Rose Tattoo | Professional Portfolio',
-        metaDescription: 'Beautiful realistic rose tattoo in black and grey with stunning detail work',
+        metaDescription:
+          'Beautiful realistic rose tattoo in black and grey with stunning detail work',
         publishedAt: new Date('2024-01-20T14:30:00Z'),
       },
       {
@@ -146,11 +148,11 @@ export default class extends BaseSeeder {
         shareCount: 8,
         allowsInquiries: true,
         showsPricing: true,
-        priceEstimate: 180.00,
+        priceEstimate: 180.0,
         priceCurrency: 'EUR',
         altText: {
           fr: 'Tatouage triangle géométrique minimaliste sur avant-bras',
-          en: 'Minimalist geometric triangle tattoo on forearm'
+          en: 'Minimalist geometric triangle tattoo on forearm',
         },
         searchKeywords: ['geometric', 'triangle', 'minimalist', 'forearm', 'linework'],
         metaTitle: 'Geometric Triangle Tattoo | Minimalist Design',
@@ -170,19 +172,22 @@ export default class extends BaseSeeder {
     if (styleTags.length > 0 && subjectTags.length > 0 && bodyPartTags.length > 0) {
       // Tattoo 1: Dragon Traditional
       await createdTattoos[0].related('tags').attach({
-        [styleTags[0].id]: { // Traditional
+        [styleTags[0].id]: {
+          // Traditional
           relevance_score: 1.0,
           is_primary: true,
           assignment_type: 'manual',
           is_approved: true,
         },
-        [subjectTags.find(t => t.slug === 'dragons')?.id || subjectTags[0].id]: { // Dragons
+        [subjectTags.find((t) => t.slug === 'dragons')?.id || subjectTags[0].id]: {
+          // Dragons
           relevance_score: 0.95,
           is_primary: false,
           assignment_type: 'manual',
           is_approved: true,
         },
-        [bodyPartTags.find(t => t.slug === 'arm')?.id || bodyPartTags[0].id]: { // Arm
+        [bodyPartTags.find((t) => t.slug === 'arm')?.id || bodyPartTags[0].id]: {
+          // Arm
           relevance_score: 0.9,
           is_primary: false,
           assignment_type: 'manual',
@@ -190,15 +195,17 @@ export default class extends BaseSeeder {
         },
       })
 
-      // Tattoo 2: Rose Realistic  
+      // Tattoo 2: Rose Realistic
       await createdTattoos[1].related('tags').attach({
-        [styleTags.find(t => t.slug === 'realistic')?.id || styleTags[1].id]: { // Realistic
+        [styleTags.find((t) => t.slug === 'realistic')?.id || styleTags[1].id]: {
+          // Realistic
           relevance_score: 1.0,
           is_primary: true,
           assignment_type: 'manual',
           is_approved: true,
         },
-        [subjectTags.find(t => t.slug === 'flowers')?.id || subjectTags[1].id]: { // Flowers
+        [subjectTags.find((t) => t.slug === 'flowers')?.id || subjectTags[1].id]: {
+          // Flowers
           relevance_score: 0.95,
           is_primary: false,
           assignment_type: 'manual',
@@ -208,7 +215,8 @@ export default class extends BaseSeeder {
 
       // Tattoo 3: Geometric Triangle
       await createdTattoos[2].related('tags').attach({
-        [styleTags.find(t => t.slug === 'geometric')?.id || styleTags[2].id]: { // Geometric
+        [styleTags.find((t) => t.slug === 'geometric')?.id || styleTags[2].id]: {
+          // Geometric
           relevance_score: 1.0,
           is_primary: true,
           assignment_type: 'manual',
@@ -223,7 +231,10 @@ export default class extends BaseSeeder {
 
       // Update tag usage counts
       const usedTags = await Tag.query().whereHas('tattoos', (query) => {
-        query.whereIn('tattoo_id', createdTattoos.map(t => t.id))
+        query.whereIn(
+          'tattoo_id',
+          createdTattoos.map((t) => t.id)
+        )
       })
 
       for (const tag of usedTags) {

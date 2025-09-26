@@ -238,7 +238,7 @@ test.group('Tag Model', (group) => {
     }
   })
 
-  test('doit incrémenter l\'usage et recalculer la popularité', async ({ assert }) => {
+  test("doit incrémenter l'usage et recalculer la popularité", async ({ assert }) => {
     // Arrange
     const tag = await Tag.create({
       name: 'Usage Test Tag',
@@ -294,14 +294,17 @@ test.group('Tag Model', (group) => {
       await tag.incrementUsage()
 
       // Verify that popularity score was calculated (should be > 0 after increment)
-      assert.isTrue(tag.popularityScore >= 0, `Popularity score should be calculated for case ${index}`)
+      assert.isTrue(
+        tag.popularityScore >= 0,
+        `Popularity score should be calculated for case ${index}`
+      )
 
       // Verify usage was incremented
       assert.equal(tag.usageCount, initialUsage + 1)
     }
   })
 
-  test('doit approuver un tag avec suivi de l\'approbateur', async ({ assert }) => {
+  test("doit approuver un tag avec suivi de l'approbateur", async ({ assert }) => {
     // Arrange
     const tag = await Tag.create({
       name: 'Tag À Approuver',
@@ -345,20 +348,20 @@ test.group('Tag Model', (group) => {
     // Act - Set translations
     await tag.setTranslation('fr', {
       name: 'Dragon FR',
-      description: 'Créature mythique crachant du feu'
+      description: 'Créature mythique crachant du feu',
     })
     await tag.setTranslation('en', {
       name: 'Dragon EN',
-      description: 'Fire-breathing mythical creature'
+      description: 'Fire-breathing mythical creature',
     })
     await tag.setTranslation('es', {
       name: 'Dragón ES',
-      description: 'Criatura mítica que escupe fuego'
+      description: 'Criatura mítica que escupe fuego',
     })
 
     // Update existing translation
     await tag.setTranslation('fr', {
-      description: 'Créature légendaire européenne ou asiatique'
+      description: 'Créature légendaire européenne ou asiatique',
     })
 
     // Assert
@@ -450,12 +453,12 @@ test.group('Tag Model', (group) => {
     const approvedTags = await Tag.query().apply((scopes) => scopes.approved())
 
     // Assert - Filter for our test data
-    const testApprovedTags = approvedTags.filter(t => t.slug === 'tag-approuve-scope')
+    const testApprovedTags = approvedTags.filter((t) => t.slug === 'tag-approuve-scope')
     assert.isAtLeast(testApprovedTags.length, 1)
     assert.equal(testApprovedTags[0].name, 'Tag Approuvé Scope')
 
     // Ensure non-approved tag is not in results
-    const nonApprovedInResults = approvedTags.some(t => t.slug === 'tag-non-approuve-scope')
+    const nonApprovedInResults = approvedTags.some((t) => t.slug === 'tag-non-approuve-scope')
     assert.isFalse(nonApprovedInResults)
   })
 
@@ -510,18 +513,18 @@ test.group('Tag Model', (group) => {
     const trendingTags = await Tag.query().apply((scopes) => scopes.trending())
 
     // Assert - Filter for our test data
-    const testStyleTags = styleTags.filter(t => t.slug === 'style-vedette-scopes')
+    const testStyleTags = styleTags.filter((t) => t.slug === 'style-vedette-scopes')
     assert.isAtLeast(testStyleTags.length, 1)
 
-    const testFeaturedTags = featuredTags.filter(t => t.slug === 'style-vedette-scopes')
+    const testFeaturedTags = featuredTags.filter((t) => t.slug === 'style-vedette-scopes')
     assert.isAtLeast(testFeaturedTags.length, 1)
 
-    const testPopularTags = popularTags.filter(t =>
+    const testPopularTags = popularTags.filter((t) =>
       ['sujet-populaire-scopes', 'couleur-tendance-scopes'].includes(t.slug)
     )
     assert.isAtLeast(testPopularTags.length, 2) // popularityScore > 5
 
-    const testTrendingTags = trendingTags.filter(t =>
+    const testTrendingTags = trendingTags.filter((t) =>
       ['sujet-populaire-scopes', 'couleur-tendance-scopes'].includes(t.slug)
     )
     assert.isAtLeast(testTrendingTags.length, 2)
@@ -581,18 +584,18 @@ test.group('Tag Model', (group) => {
     const patternResults = await Tag.query().apply((scopes) => scopes.search('pattern'))
 
     // Assert - Filter for our test data
-    const testDragon = dragonResults.filter(t => t.slug === 'dragon-japonais-search')
+    const testDragon = dragonResults.filter((t) => t.slug === 'dragon-japonais-search')
     assert.isAtLeast(testDragon.length, 1)
 
-    const testRose = roseResults.filter(t => t.slug === 'rose-realiste-search')
+    const testRose = roseResults.filter((t) => t.slug === 'rose-realiste-search')
     assert.isAtLeast(testRose.length, 1)
 
-    const testStyle = styleResults.filter(t =>
+    const testStyle = styleResults.filter((t) =>
       ['dragon-japonais-search', 'rose-realiste-search'].includes(t.slug)
     )
     assert.isAtLeast(testStyle.length, 2) // Found in descriptions
 
-    const testPattern = patternResults.filter(t => t.slug === 'geometrique-search')
+    const testPattern = patternResults.filter((t) => t.slug === 'geometrique-search')
     assert.isAtLeast(testPattern.length, 1)
   })
 
@@ -666,7 +669,8 @@ test.group('Tag Model', (group) => {
 
     // Load relationships with pivot data
     await tattoo.load('tags', (query) => {
-      query.pivotColumns(['relevance_score', 'is_primary', 'assignment_type', 'is_approved'])
+      query
+        .pivotColumns(['relevance_score', 'is_primary', 'assignment_type', 'is_approved'])
         .orderBy('pivot_is_primary', 'desc')
         .orderBy('pivot_relevance_score', 'desc')
     })
@@ -675,7 +679,7 @@ test.group('Tag Model', (group) => {
     assert.lengthOf(tattoo.tags, 3)
 
     // Check primary tag
-    const primaryTagData = tattoo.tags.find(t => t.id === primaryTag.id)
+    const primaryTagData = tattoo.tags.find((t) => t.id === primaryTag.id)
     assert.isNotNull(primaryTagData)
     assert.equal(primaryTagData!.$extras.pivot_relevance_score, 1.0)
     assert.equal(primaryTagData!.$extras.pivot_is_primary, true)
@@ -683,7 +687,7 @@ test.group('Tag Model', (group) => {
     assert.equal(primaryTagData!.$extras.pivot_is_approved, true)
 
     // Check secondary tag
-    const secondaryTagData = tattoo.tags.find(t => t.id === secondaryTag.id)
+    const secondaryTagData = tattoo.tags.find((t) => t.id === secondaryTag.id)
     assert.isNotNull(secondaryTagData)
     assert.equal(secondaryTagData!.$extras.pivot_relevance_score, 0.7)
     assert.equal(secondaryTagData!.$extras.pivot_is_primary, false)
@@ -691,7 +695,7 @@ test.group('Tag Model', (group) => {
     assert.equal(secondaryTagData!.$extras.pivot_is_approved, true)
 
     // Check AI suggested tag
-    const aiTagData = tattoo.tags.find(t => t.id === aiSuggestedTag.id)
+    const aiTagData = tattoo.tags.find((t) => t.id === aiSuggestedTag.id)
     assert.isNotNull(aiTagData)
     assert.equal(aiTagData!.$extras.pivot_relevance_score, 0.6)
     assert.equal(aiTagData!.$extras.pivot_is_primary, false)

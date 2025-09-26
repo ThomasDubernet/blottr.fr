@@ -27,41 +27,43 @@ export default class extends BaseSchema {
       table.string('content_hash', 64).nullable() // SHA256 for duplicate detection
 
       // Tattoo characteristics
-      table.enu('tattoo_style', [
-        'traditional',
-        'neo_traditional',
-        'realistic',
-        'black_and_grey',
-        'watercolor',
-        'geometric',
-        'minimalist',
-        'japanese',
-        'tribal',
-        'biomechanical',
-        'portrait',
-        'abstract',
-        'dotwork',
-        'linework',
-      ])
+      table
+        .enu('tattoo_style', [
+          'traditional',
+          'neo_traditional',
+          'realistic',
+          'black_and_grey',
+          'watercolor',
+          'geometric',
+          'minimalist',
+          'japanese',
+          'tribal',
+          'biomechanical',
+          'portrait',
+          'abstract',
+          'dotwork',
+          'linework',
+        ])
         .nullable()
         .index()
 
-      table.enu('body_placement', [
-        'arm',
-        'leg',
-        'back',
-        'chest',
-        'shoulder',
-        'hand',
-        'foot',
-        'neck',
-        'face',
-        'torso',
-        'ribs',
-        'thigh',
-        'calf',
-        'forearm',
-      ])
+      table
+        .enu('body_placement', [
+          'arm',
+          'leg',
+          'back',
+          'chest',
+          'shoulder',
+          'hand',
+          'foot',
+          'neck',
+          'face',
+          'torso',
+          'ribs',
+          'thigh',
+          'calf',
+          'forearm',
+        ])
         .nullable()
         .index()
 

@@ -9,6 +9,7 @@
 ### **Model Testing Patterns**
 
 #### **Default Value Testing**
+
 ```typescript
 test('doit créer avec des valeurs par défaut', async ({ assert }) => {
   const model = await Model.create({ requiredField: 'value' })
@@ -21,6 +22,7 @@ test('doit créer avec des valeurs par défaut', async ({ assert }) => {
 ```
 
 #### **Relationship Testing**
+
 ```typescript
 test('doit gérer les relations avec pivot', async ({ assert }) => {
   const artist = await Artist.create(artistData)
@@ -35,11 +37,12 @@ test('doit gérer les relations avec pivot', async ({ assert }) => {
 ```
 
 #### **JSON Column Testing**
+
 ```typescript
 test('doit gérer les propriétés JSON correctement', async ({ assert }) => {
   const model = await Model.create({
     jsonField: ['value1', 'value2'],
-    metadata: { key: 'value' }
+    metadata: { key: 'value' },
   })
 
   // Test serialization/deserialization
@@ -51,6 +54,7 @@ test('doit gérer les propriétés JSON correctement', async ({ assert }) => {
 ### **Database Query Testing**
 
 #### **PostgreSQL JSONB Testing**
+
 ```typescript
 test('doit rechercher dans les champs JSONB', async ({ assert }) => {
   await Model.create({ tags: ['tag1', 'tag2'] })
@@ -62,10 +66,12 @@ test('doit rechercher dans les champs JSONB', async ({ assert }) => {
 ```
 
 #### **Raw Query Testing**
+
 ```typescript
 test('doit exécuter des requêtes SQL brutes', async ({ assert }) => {
-  const results = await Database
-    .rawQuery('SELECT * FROM table WHERE jsonb_field @> ?', [JSON.stringify(['value'])])
+  const results = await Database.rawQuery('SELECT * FROM table WHERE jsonb_field @> ?', [
+    JSON.stringify(['value']),
+  ])
 
   assert.isArray(results)
 })
@@ -74,6 +80,7 @@ test('doit exécuter des requêtes SQL brutes', async ({ assert }) => {
 ### **Unicode & Localization Testing**
 
 #### **Currency Formatting Testing**
+
 ```typescript
 test('doit formater les prix en français', async ({ assert }) => {
   const model = await Model.create({ minPrice: 100, maxPrice: 500 })
@@ -86,6 +93,7 @@ test('doit formater les prix en français', async ({ assert }) => {
 ```
 
 #### **Locale-Safe Assertions**
+
 ```typescript
 // ❌ Fragile: Exact matching with unicode
 assert.equal(formatted, 'À partir de 100,00 €')
@@ -100,6 +108,7 @@ assert.include(formatted, '€')
 ### **Systematic Test Failure Resolution**
 
 #### **Step 1: Isolate Failures**
+
 ```bash
 # Run specific test suites
 npm test -- --filter "*artist.spec.ts"
@@ -107,17 +116,20 @@ npm test -- --filter "*salon.spec.ts"
 ```
 
 #### **Step 2: Analyze Error Messages**
+
 - Extract exact failure reasons from stack traces
 - Identify patterns across multiple failures
 - Separate database issues from business logic issues
 
 #### **Step 3: Layer-by-Layer Debugging**
+
 1. **Database Layer**: Test raw queries and constraints
 2. **Model Layer**: Test ORM operations and relationships
 3. **Business Logic**: Test computed properties and methods
 4. **Test Layer**: Verify assertions and test data
 
 #### **Step 4: Incremental Validation**
+
 - Apply one fix at a time
 - Run tests after each change
 - Verify no regressions introduced
@@ -125,12 +137,14 @@ npm test -- --filter "*salon.spec.ts"
 ### **PostgreSQL JSONB Debugging**
 
 #### **Query Analysis**
+
 ```sql
 -- Test JSONB operations directly in PostgreSQL
 EXPLAIN ANALYZE SELECT * FROM artists WHERE art_styles::jsonb @> '["realisme"]';
 ```
 
 #### **Parameter Binding Debug**
+
 ```typescript
 // Debug parameter binding issues
 console.log('Query:', query.toQuery())
@@ -138,6 +152,7 @@ console.log('Bindings:', query.bindings)
 ```
 
 #### **Operator Selection Guide**
+
 - `@>`: Contains (use for exact array element matching)
 - `?|`: Overlap (complex parameter binding, avoid if possible)
 - `->`: Extract JSON field (use for nested access)
@@ -146,6 +161,7 @@ console.log('Bindings:', query.bindings)
 ### **ORM Relationship Debugging**
 
 #### **Type Inspection**
+
 ```typescript
 // Debug relationship types
 const relation = model.related('relationName')
@@ -154,6 +170,7 @@ console.log('Available methods:', Object.getOwnPropertyNames(relation))
 ```
 
 #### **Query Builder Analysis**
+
 ```typescript
 // Debug generated SQL
 const query = model.related('relation').query()
@@ -163,12 +180,14 @@ console.log('SQL:', query.toQuery())
 ## ⚡ **Performance Optimization Patterns**
 
 ### **Database Optimization**
+
 - Use proper indexes on JSONB columns: `CREATE INDEX ON table USING GIN (jsonb_column)`
 - Avoid N+1 queries with `preload()` in Lucid
 - Use `select()` to limit columns returned
 - Optimize pivot queries with proper WHERE clauses
 
 ### **Test Performance**
+
 - Use `group.each.setup()` for proper test isolation
 - Clean up test data between tests
 - Use database transactions for faster test runs
@@ -177,18 +196,21 @@ console.log('SQL:', query.toQuery())
 ## 🚨 **Common Pitfalls & Solutions**
 
 ### **AdonisJS Specific**
+
 1. **Default Values**: Never use TypeScript defaults, always use beforeCreate hooks
 2. **Relationships**: Cast to `any` when accessing advanced ORM methods
 3. **JSON Columns**: Always handle parsing errors gracefully
 4. **Migrations**: Test both up and down migrations
 
 ### **PostgreSQL JSONB**
+
 1. **Parameter Binding**: Use simple operators to avoid binding complexity
 2. **Index Usage**: Create GIN indexes for JSONB queries
 3. **Array Operations**: Prefer containment (`@>`) over overlap (`?|`)
 4. **Type Casting**: Always cast to `::jsonb` in raw queries
 
 ### **Testing Anti-Patterns**
+
 1. **Exact Unicode Matching**: Use content inclusion instead
 2. **Shared Test State**: Always clean up between tests
 3. **Hard-coded Values**: Use factories for dynamic test data
@@ -197,6 +219,7 @@ console.log('SQL:', query.toQuery())
 ## ✅ **Quality Checklist**
 
 ### **Before Committing Tests**
+
 - [ ] All tests pass (100% success rate)
 - [ ] TypeScript compilation clean
 - [ ] No console.log statements left in code
@@ -207,6 +230,7 @@ console.log('SQL:', query.toQuery())
 - [ ] Documentation updated
 
 ### **Pattern Validation**
+
 - [ ] Default values use beforeCreate hooks
 - [ ] JSONB queries use appropriate operators
 - [ ] Unicode assertions use inclusion patterns
