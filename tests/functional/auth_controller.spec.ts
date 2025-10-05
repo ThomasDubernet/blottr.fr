@@ -69,11 +69,15 @@ test.group('AuthController - Inscription', (group) => {
     })
 
     // Act - Try to create user with same email
-    const response = await client.post('/inscription').redirects(0).json({
-      email: 'existing@example.com',
-      password: 'Password123',
-      role: 'client',
-    })
+    const response = await client
+      .post('/inscription')
+      .redirects(0)
+      .header('Accept', 'application/json')
+      .json({
+        email: 'existing@example.com',
+        password: 'Password123',
+        role: 'client',
+      })
 
     // Assert
     response.assertStatus(422)
@@ -100,7 +104,11 @@ test.group('AuthController - Inscription', (group) => {
     }
 
     // Act
-    const response = await client.post('/inscription').redirects(0).json(userData)
+    const response = await client
+      .post('/inscription')
+      .redirects(0)
+      .header('Accept', 'application/json')
+      .json(userData)
 
     // Assert
     response.assertStatus(422)
@@ -123,7 +131,11 @@ test.group('AuthController - Inscription', (group) => {
     }
 
     // Act
-    const response = await client.post('/inscription').redirects(0).json(userData)
+    const response = await client
+      .post('/inscription')
+      .redirects(0)
+      .header('Accept', 'application/json')
+      .json(userData)
 
     // Assert
     response.assertStatus(422)
@@ -146,7 +158,11 @@ test.group('AuthController - Inscription', (group) => {
     }
 
     // Act
-    const response = await client.post('/inscription').redirects(0).json(userData)
+    const response = await client
+      .post('/inscription')
+      .redirects(0)
+      .header('Accept', 'application/json')
+      .json(userData)
 
     // Assert
     response.assertStatus(422)
