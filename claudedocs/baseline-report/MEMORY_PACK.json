@@ -1,0 +1,237 @@
+{
+  "product": "Blottr.fr",
+  "version": "1.0.0-mvp",
+  "generated_at": "2025-10-05",
+  "analyst": "Claude (Architecte & Analyste)",
+
+  "stack": {
+    "frontend": "React 19.1.1 + Inertia.js 2.1.11 + Tailwind CSS (via tw-merge)",
+    "backend": "AdonisJS 6.18.0 + PostgreSQL + Lucid ORM 21.6.1",
+    "db": "PostgreSQL (14 migrations, 10 core tables)",
+    "build": "Vite 6.3.5 + TypeScript 5.8.3",
+    "auth": "Session-based (no JWT)",
+    "tests": "Japa 4.2.0",
+    "infra": "Dockploy + AWS (EC2/RDS eu-west-1)"
+  },
+
+  "domains": [
+    "tattoo",
+    "artist",
+    "salon",
+    "city",
+    "tag",
+    "contact_inquiry",
+    "user_management",
+    "portfolio_management",
+    "search_discovery"
+  ],
+
+  "key_features": [
+    "User registration & login (session-based)",
+    "Artist profiles with verification workflow",
+    "Salon management with artist associations",
+    "Tattoo portfolio with image upload & variants",
+    "Contact inquiry system with file uploads",
+    "Interactive map (Leaflet) for artist discovery",
+    "Search & filters (styles, cities)",
+    "Tagging system (8 categories)",
+    "Rate limiting on critical endpoints",
+    "Monitoring service (response time, errors)"
+  ],
+
+  "critical_flows": [
+    "Client search → view artist → contact inquiry",
+    "User registration → become artist → verification → public profile",
+    "Artist upload tattoo → tag → publish → visible in gallery",
+    "Admin verify artist/salon → approve documents → set verified status"
+  ],
+
+  "api": {
+    "endpoints_count": 8,
+    "auth": "Session cookies (web guard)",
+    "endpoints": [
+      {"method": "GET", "path": "/", "handler": "Inertia home page"},
+      {"method": "GET", "path": "/inscription", "handler": "Inertia register page"},
+      {"method": "GET", "path": "/connexion", "handler": "Inertia login page"},
+      {"method": "POST", "path": "/inscription", "handler": "AuthController.register", "rate_limit": "5/15min"},
+      {"method": "POST", "path": "/connexion", "handler": "AuthController.login"},
+      {"method": "POST", "path": "/logout", "handler": "AuthController.logout"},
+      {"method": "POST", "path": "/api/contact-inquiries", "handler": "ContactInquiriesController.store"},
+      {"method": "POST", "path": "/api/contact-inquiries/quick", "handler": "ContactInquiriesController.storeQuick"},
+      {"method": "GET", "path": "/api/contact-inquiries/:id", "handler": "ContactInquiriesController.show"},
+      {"method": "GET", "path": "/api/health/contact-inquiries", "handler": "ContactInquiriesController.health"},
+      {"method": "GET", "path": "/artists/:slug", "handler": "Mock artist data (not DB connected)"}
+    ],
+    "webhooks": []
+  },
+
+  "data": {
+    "tables": [
+      "users (auth + profile)",
+      "cities (INSEE référentiel)",
+      "artists (tatoueurs)",
+      "salons (studios)",
+      "artist_salons (M2M pivot)",
+      "tattoos (portfolio)",
+      "tags (taxonomie)",
+      "tag_tattoos (M2M pivot)",
+      "contact_inquiries (leads)",
+      "auth_access_tokens (unused)",
+      "rate_limits"
+    ],
+    "erd_notes": [
+      "Users 1-to-1 Artists (role=2)",
+      "Artists M-to-M Salons (via artist_salons)",
+      "Artists 1-to-M Tattoos",
+      "Tattoos M-to-M Tags (via tag_tattoos)",
+      "Cities referenced by Users, Artists, Salons",
+      "Full-text search on tattoos (PostgreSQL GIN index)"
+    ]
+  },
+
+  "rules": [
+    "User role: 1=client (default), 2=artist",
+    "Artist verification: unverified → scraped → contacted → onboarding → verified",
+    "Tattoo status: draft → pending_review → published → archived",
+    "Contact inquiry status: pending → in_progress → replied → closed (or spam)",
+    "Artist must have ≥5 published tattoos to be featured",
+    "Contact inquiry priority: 1-10 (1-3=low, 4-7=medium, 8-10=high)",
+    "Rate limits: registration 5/15min, contact 5/15min per IP",
+    "File uploads: max 5MB, formats jpg|jpeg|png|gif|webp",
+    "Geographic coordinates validated: lat [-90,90], lng [-180,180]"
+  ],
+
+  "integrations": [
+    {"name": "File Storage", "type": "AWS S3 + CloudFront", "region": "eu-west-1", "status": "planned", "adr": "ADR-002"},
+    {"name": "Email", "type": "Resend", "templates": "React Email", "status": "planned", "adr": "ADR-003"},
+    {"name": "Analytics", "type": "Amplitude → GA4", "status": "planned", "adr": "ADR-005"},
+    {"name": "Error Monitoring", "type": "Sentry + Better Stack", "status": "planned", "adr": "ADR-006"},
+    {"name": "Payments", "type": "Stripe Connect", "status": "future", "adr": "ADR-008"}
+  ],
+
+  "security_findings": [
+    {"severity": "low", "issue": "CORS configured (cors_provider)", "status": "ok"},
+    {"severity": "low", "issue": "Shield provider enabled (CSRF, XSS protection)", "status": "ok"},
+    {"severity": "medium", "issue": "Rate limiting on auth routes", "status": "ok"},
+    {"severity": "medium", "issue": "VineJS validators on all inputs", "status": "ok"},
+    {"severity": "high", "issue": "Session cookies (secure in prod?)", "status": "verify_prod_config"},
+    {"severity": "medium", "issue": "No Helmet.js equivalent", "status": "recommended"},
+    {"severity": "low", "issue": "IP tracking in contact_inquiries", "status": "ok_for_moderation"},
+    {"severity": "high", "issue": "File upload validation (5MB, formats)", "status": "ok"},
+    {"severity": "medium", "issue": "No content-hash duplicate detection active", "status": "implemented_but_unused"},
+    {"severity": "critical", "issue": "No HTTPS enforcement visible", "status": "must_configure_prod"}
+  ],
+
+  "ops": {
+    "ci_cd": "npm scripts only (no GitHub Actions/CircleCI detected)",
+    "envs": ["development (default)", "staging (.env.staging)", "production (.env.production)"],
+    "flags": [],
+    "scripts": {
+      "dev": "node ace serve --hmr",
+      "build": "node ace build",
+      "test": "node ace test",
+      "lint": "eslint . --fix",
+      "typecheck": "tsc --noEmit",
+      "quality": "npm run lint && npm run format:check && npm run typecheck",
+      "migration:run": "node ace migration:run",
+      "db:seed": "node ace db:seed"
+    },
+    "deployment": {
+      "platform": "Dockploy + AWS (EC2/ECS + RDS)",
+      "region": "eu-west-1",
+      "cdn": "CloudFront (global edge locations)",
+      "storage": "AWS S3",
+      "ssl": "AWS Certificate Manager",
+      "adr": "ADR-001"
+    },
+    "observability": {
+      "logs": "Better Stack (1GB/mois gratuit)",
+      "metrics": "MonitoringService (custom) + Sentry APM (10% sampling)",
+      "errors": "Sentry (5k errors/mois gratuit)",
+      "alerts": "Sentry webhooks (Slack/email)",
+      "apm": "Sentry performance monitoring",
+      "adr": "ADR-006"
+    }
+  },
+
+  "analytics": {
+    "events": [],
+    "kpis": [
+      "Total verified artists",
+      "Total active salons",
+      "Total published tattoos",
+      "Contact inquiry conversion rate (replied/total)",
+      "Average response time (first_replied_at - created_at)",
+      "Geographic coverage (cities with ≥1 artist)",
+      "Search → profile conversion",
+      "Profile → contact conversion",
+      "Signup → activation rate"
+    ],
+    "note": "No analytics tracking implemented (Amplitude/Mixpanel recommended)"
+  },
+
+  "tech_debt_top10": [
+    {"rank": 1, "priority": "P0", "item": "Mock data on artist pages", "impact": "Blocking real usage", "effort": "M"},
+    {"rank": 2, "priority": "P0", "item": "Email notifications missing", "impact": "No artist communication", "effort": "M"},
+    {"rank": 3, "priority": "P0", "item": "Production deployment config", "impact": "Cannot deploy", "effort": "L"},
+    {"rank": 4, "priority": "P1", "item": "Analytics not implemented", "impact": "No metrics", "effort": "M"},
+    {"rank": 5, "priority": "P1", "item": "Test coverage incomplete (~40%)", "impact": "Quality risk", "effort": "H"},
+    {"rank": 6, "priority": "P1", "item": "Seeders minimal (only cities)", "impact": "Hard to dev/test", "effort": "L"},
+    {"rank": 7, "priority": "P2", "item": "No error monitoring (Sentry)", "impact": "Blind in prod", "effort": "L"},
+    {"rank": 8, "priority": "P2", "item": "File storage local only", "impact": "Not scalable", "effort": "M"},
+    {"rank": 9, "priority": "P2", "item": "No i18n system", "impact": "France only", "effort": "M"},
+    {"rank": 10, "priority": "P3", "item": "Tailwind not configured (using tw-merge only)", "impact": "Missing design system", "effort": "S"}
+  ],
+
+  "open_questions": [
+    {"id": "Q1", "priority": "P0", "question": "Quelle plateforme de déploiement target?", "status": "✅ RESOLVED", "decision": "Dockploy + AWS (EC2/RDS)", "adr": "ADR-001"},
+    {"id": "Q2", "priority": "P0", "question": "Quel service email pour notifications?", "status": "✅ RESOLVED", "decision": "Resend (React Email templates)", "adr": "ADR-003"},
+    {"id": "Q3", "priority": "P1", "question": "Budget file storage cloud?", "status": "✅ RESOLVED", "decision": "AWS S3 + CloudFront (~$10/mois)", "adr": "ADR-002"},
+    {"id": "Q4", "priority": "P1", "question": "Analytics platform choix?", "status": "✅ RESOLVED", "decision": "Amplitude (MVP) → GA4 (scale)", "adr": "ADR-005"},
+    {"id": "Q5", "priority": "P1", "question": "Payment provider intention?", "status": "✅ RESOLVED", "decision": "Stripe Connect", "adr": "ADR-008"},
+    {"id": "Q6", "priority": "P2", "question": "Backup strategy database?", "status": "✅ RESOLVED", "decision": "pg_dump hebdo → S3", "adr": "ADR-007"},
+    {"id": "Q7", "priority": "P2", "question": "CDN pour images tattoos?", "status": "✅ RESOLVED", "decision": "CloudFront (included in ADR-002)", "adr": "ADR-002"},
+    {"id": "Q8", "priority": "P2", "question": "Monitoring/alerting tool?", "status": "✅ RESOLVED", "decision": "Sentry + Better Stack", "adr": "ADR-006"}
+  ],
+
+  "risks_top": [
+    {"id": "R1", "severity": "critical", "title": "No production deployment config", "status": "✅ MITIGATED", "mitigation": "Dockploy + AWS (EC2/RDS)", "adr": "ADR-001"},
+    {"id": "R2", "severity": "high", "title": "Mock data on artist pages", "status": "✅ MITIGATED", "mitigation": "Keep temporarily + Bubble.io migration", "adr": "ADR-004"},
+    {"id": "R3", "severity": "high", "title": "No email notifications", "status": "✅ MITIGATED", "mitigation": "Resend (React Email templates)", "adr": "ADR-003"},
+    {"id": "R4", "severity": "medium", "title": "Local file storage only", "status": "✅ MITIGATED", "mitigation": "AWS S3 + CloudFront CDN", "adr": "ADR-002"},
+    {"id": "R5", "severity": "medium", "title": "No error monitoring", "status": "✅ MITIGATED", "mitigation": "Sentry + Better Stack", "adr": "ADR-006"},
+    {"id": "R6", "severity": "medium", "title": "Test coverage 40%", "status": "✅ MITIGATED", "mitigation": "Unit 90% | Functional 70% | E2E 0%", "adr": "ADR-009"}
+  ],
+
+  "architecture_patterns": {
+    "backend": "Clean Architecture (Domain → Application → Infrastructure → Presentation)",
+    "use_cases": ["RegisterUserUseCase", "LoginUserUseCase"],
+    "repositories": ["ContactInquiryRepository"],
+    "services": ["MonitoringService", "DatabaseOptimizationService", "EnvironmentService", "FormService (frontend)"],
+    "validators": "VineJS schemas",
+    "middleware": ["auth", "guest", "silent_auth", "rate_limit", "monitoring", "container_bindings"]
+  },
+
+  "frontend_architecture": {
+    "pages": 12,
+    "components": 25,
+    "hooks": 3,
+    "services": 3,
+    "patterns": ["Inertia SSR", "Shared layouts", "Form services", "API client abstraction"]
+  },
+
+  "quality_metrics": {
+    "typescript_coverage": "100% (strict mode)",
+    "test_coverage": "~40% (needs improvement to 90%)",
+    "eslint": "configured (@adonisjs/eslint-config)",
+    "prettier": "configured (@adonisjs/prettier-config)",
+    "documentation": "partial (sparse code comments)"
+  },
+
+  "next_steps": [
+    "Sprint 1 (Week 1-2): Infrastructure - Dockploy+AWS, Resend emails, S3+CloudFront, Sentry+Better Stack, pg_dump backups (ADR-001,002,003,006,007)",
+    "Sprint 2 (Week 3-4): Quality - Test coverage 90%/70%, Amplitude analytics (ADR-005,009)",
+    "Sprint 3 (Week 5-6): Data Migration - Bubble.io → PostgreSQL, Real ArtistsController (ADR-004)",
+    "Post-MVP: Stripe payments (ADR-008), SEO advanced (ADR-010), i18n if expansion (ADR-011)"
+  ]
+}
