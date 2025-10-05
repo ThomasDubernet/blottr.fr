@@ -1,6 +1,7 @@
 import React, { FormEvent } from 'react'
 import { Head, useForm, Link } from '@inertiajs/react'
 import { Navbar } from '../../components/layout/Navbar'
+import { FlashMessage } from '../../components/FlashMessage'
 
 interface ConnexionForm {
   email: string
@@ -21,6 +22,7 @@ export default function Connexion() {
   return (
     <>
       <Head title="Connexion - Blottr" />
+      <FlashMessage />
 
       <div className="min-h-screen bg-white">
         <Navbar currentPage="connexion" />

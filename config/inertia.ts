@@ -11,6 +11,7 @@ const inertiaConfig = defineConfig({
    * Data that should be shared with all rendered pages
    */
   sharedData: {
+    flash: (ctx) => ctx.session.flashMessages.all(),
     // user: (ctx) => ctx.inertia.always(() => ctx.auth.user),
   },
 
@@ -18,7 +19,7 @@ const inertiaConfig = defineConfig({
    * Options for the server-side rendering
    */
   ssr: {
-    enabled: true,
+    enabled: process.env.NODE_ENV !== 'test',
     entrypoint: 'inertia/app/ssr.tsx',
   },
 })
