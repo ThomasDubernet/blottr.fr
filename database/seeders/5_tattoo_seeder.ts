@@ -1,4 +1,5 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import { DateTime } from 'luxon'
 import Tattoo from '#models/tattoo'
 import Artist from '#models/artist'
 import Tag from '#models/tag'
@@ -26,19 +27,19 @@ export default class extends BaseSeeder {
         slug: 'dragon-sleeve-traditional-001',
         originalFilename: 'dragon_sleeve_001.jpg',
         storagePath: '/uploads/tattoos/2024/01/dragon_sleeve_001.jpg',
-        imageVariants: {
+        imageVariants: JSON.stringify({
           thumbnail: '/uploads/tattoos/2024/01/dragon_sleeve_001_thumb.jpg',
           medium: '/uploads/tattoos/2024/01/dragon_sleeve_001_medium.jpg',
           large: '/uploads/tattoos/2024/01/dragon_sleeve_001_large.jpg',
           original: '/uploads/tattoos/2024/01/dragon_sleeve_001.jpg',
-        },
+        }),
         primaryColor: '#FF6B35',
         fileSize: 2456789,
-        dimensions: {
+        dimensions: JSON.stringify({
           width: 1920,
           height: 2880,
           aspectRatio: 0.67,
-        },
+        }),
         contentType: 'image/jpeg',
         tattooStyle: TattooStyle.TRADITIONAL,
         bodyPlacement: BodyPlacement.ARM,
@@ -56,15 +57,15 @@ export default class extends BaseSeeder {
         showsPricing: true,
         priceEstimate: 1800.0,
         priceCurrency: 'EUR',
-        altText: {
+        altText: JSON.stringify({
           fr: 'Tatouage dragon traditionnel sur bras complet avec couleurs vives',
           en: 'Traditional dragon tattoo full arm sleeve with vibrant colors',
-        },
-        searchKeywords: ['dragon', 'traditional', 'sleeve', 'arm', 'colorful'],
+        }),
+        searchKeywords: JSON.stringify(['dragon', 'traditional', 'sleeve', 'arm', 'colorful']),
         metaTitle: 'Dragon Sleeve Traditional Tattoo | Blottr Portfolio',
         metaDescription:
           'Stunning traditional dragon sleeve tattoo featuring vibrant colors and expert linework',
-        publishedAt: new Date('2024-01-15T10:00:00Z'),
+        publishedAt: DateTime.fromISO('2024-01-15T10:00:00Z'),
       },
       {
         artistId: artists[1].id,
@@ -73,19 +74,19 @@ export default class extends BaseSeeder {
         slug: 'realistic-rose-portrait-002',
         originalFilename: 'realistic_rose_002.jpg',
         storagePath: '/uploads/tattoos/2024/01/realistic_rose_002.jpg',
-        imageVariants: {
+        imageVariants: JSON.stringify({
           thumbnail: '/uploads/tattoos/2024/01/realistic_rose_002_thumb.jpg',
           medium: '/uploads/tattoos/2024/01/realistic_rose_002_medium.jpg',
           large: '/uploads/tattoos/2024/01/realistic_rose_002_large.jpg',
           original: '/uploads/tattoos/2024/01/realistic_rose_002.jpg',
-        },
+        }),
         primaryColor: '#666666',
         fileSize: 1845623,
-        dimensions: {
+        dimensions: JSON.stringify({
           width: 1440,
           height: 1920,
           aspectRatio: 0.75,
-        },
+        }),
         contentType: 'image/jpeg',
         tattooStyle: TattooStyle.REALISTIC,
         bodyPlacement: BodyPlacement.SHOULDER,
@@ -103,15 +104,15 @@ export default class extends BaseSeeder {
         showsPricing: true,
         priceEstimate: 650.0,
         priceCurrency: 'EUR',
-        altText: {
+        altText: JSON.stringify({
           fr: 'Tatouage rose réaliste en noir et gris sur épaule',
           en: 'Realistic black and grey rose tattoo on shoulder',
-        },
-        searchKeywords: ['rose', 'realistic', 'black and grey', 'shoulder', 'flower'],
+        }),
+        searchKeywords: JSON.stringify(['rose', 'realistic', 'black and grey', 'shoulder', 'flower']),
         metaTitle: 'Realistic Rose Tattoo | Professional Portfolio',
         metaDescription:
           'Beautiful realistic rose tattoo in black and grey with stunning detail work',
-        publishedAt: new Date('2024-01-20T14:30:00Z'),
+        publishedAt: DateTime.fromISO('2024-01-25T16:45:00Z'),
       },
       {
         artistId: artists[2].id,
@@ -120,19 +121,19 @@ export default class extends BaseSeeder {
         slug: 'minimalist-geometric-triangle-003',
         originalFilename: 'geometric_triangle_003.jpg',
         storagePath: '/uploads/tattoos/2024/01/geometric_triangle_003.jpg',
-        imageVariants: {
+        imageVariants: JSON.stringify({
           thumbnail: '/uploads/tattoos/2024/01/geometric_triangle_003_thumb.jpg',
           medium: '/uploads/tattoos/2024/01/geometric_triangle_003_medium.jpg',
           large: '/uploads/tattoos/2024/01/geometric_triangle_003_large.jpg',
           original: '/uploads/tattoos/2024/01/geometric_triangle_003.jpg',
-        },
+        }),
         primaryColor: '#000000',
         fileSize: 845231,
-        dimensions: {
+        dimensions: JSON.stringify({
           width: 1080,
           height: 1350,
           aspectRatio: 0.8,
-        },
+        }),
         contentType: 'image/jpeg',
         tattooStyle: TattooStyle.GEOMETRIC,
         bodyPlacement: BodyPlacement.FOREARM,
@@ -150,14 +151,14 @@ export default class extends BaseSeeder {
         showsPricing: true,
         priceEstimate: 180.0,
         priceCurrency: 'EUR',
-        altText: {
+        altText: JSON.stringify({
           fr: 'Tatouage triangle géométrique minimaliste sur avant-bras',
           en: 'Minimalist geometric triangle tattoo on forearm',
-        },
-        searchKeywords: ['geometric', 'triangle', 'minimalist', 'forearm', 'linework'],
+        }),
+        searchKeywords: JSON.stringify(['geometric', 'triangle', 'minimalist', 'forearm', 'linework']),
         metaTitle: 'Geometric Triangle Tattoo | Minimalist Design',
         metaDescription: 'Clean and precise geometric triangle tattoo with minimalist aesthetic',
-        publishedAt: new Date('2024-01-25T16:45:00Z'),
+        publishedAt: DateTime.fromISO('2024-02-01T09:15:00Z'),
       },
     ]
 

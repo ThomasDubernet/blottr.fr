@@ -288,15 +288,18 @@ export default class extends BaseSeeder {
       },
     ]
 
-    await Tag.createMany(tags)
+    for (const tagData of tags) {
+      await Tag.firstOrCreate({ slug: tagData.slug }, tagData)
+    }
 
     // Create some hierarchical tags
     const parentTags = await Tag.query().where('category', 'subject').limit(3)
 
     for (const parentTag of parentTags) {
-      await Tag.create({
+      const slug = `${parentTag.slug}-detailed`
+      await Tag.firstOrCreate({ slug }, {
         name: `${parentTag.name} Detailed`,
-        slug: `${parentTag.slug}-detailed`,
+        slug,
         description: `Detailed ${parentTag.name.toLowerCase()} designs`,
         category: parentTag.category,
         parentTagId: parentTag.id,

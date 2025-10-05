@@ -33,7 +33,7 @@ export default class SalonSeeder extends BaseSeeder {
         postalCode: '75001',
         latitude: 48.8566,
         longitude: 2.3522,
-        openingHours: {
+        openingHours: JSON.stringify({
           monday: { isOpen: false },
           tuesday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           wednesday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
@@ -41,23 +41,23 @@ export default class SalonSeeder extends BaseSeeder {
           friday: { isOpen: true, openTime: '10:00', closeTime: '20:00' },
           saturday: { isOpen: true, openTime: '09:00', closeTime: '18:00' },
           sunday: { isOpen: false },
-        },
-        services: [
+        }),
+        services: JSON.stringify([
           'Tatouage traditionnel',
           'Réalisme',
           'Noir et blanc',
           'Couleur',
           'Cover-up',
           'Retouches',
-        ],
+        ]),
         priceRangeMin: 120,
         priceRangeMax: 400,
         instagramHandle: '@inkpalaceparis',
-        galleryImages: [
+        galleryImages: JSON.stringify([
           'https://images.unsplash.com/photo-1565058379802-bbe93b2e6eb3?w=800',
           'https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=800',
           'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=800',
-        ],
+        ]),
         verificationStatus: SalonVerificationStatus.VERIFIED,
         verifiedAt: DateTime.fromISO('2024-01-15'),
         verifiedBy: 'admin@blottr.fr',
@@ -68,7 +68,7 @@ export default class SalonSeeder extends BaseSeeder {
         metaTitle: 'Ink Palace Studio - Tatouage Paris | Réalisme & Traditionnel',
         metaDescription:
           'Studio de tatouage parisien spécialisé en réalisme et traditionnel. Équipe expérimentée, matériel stérilisé, créations uniques sur rendez-vous.',
-        seoKeywords: ['tattoo', 'tatouage', 'paris', 'réalisme', 'traditionnel', 'rivoli'],
+        seoKeywords: JSON.stringify(['tattoo', 'tatouage', 'paris', 'réalisme', 'traditionnel', 'rivoli']),
       },
       {
         name: 'Black Rose Tattoo',
@@ -84,7 +84,7 @@ export default class SalonSeeder extends BaseSeeder {
         postalCode: '75004',
         latitude: 48.8577,
         longitude: 2.3596,
-        openingHours: {
+        openingHours: JSON.stringify({
           monday: { isOpen: false },
           tuesday: { isOpen: true, openTime: '11:00', closeTime: '18:00' },
           wednesday: { isOpen: true, openTime: '11:00', closeTime: '18:00' },
@@ -92,8 +92,8 @@ export default class SalonSeeder extends BaseSeeder {
           friday: { isOpen: true, openTime: '11:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '10:00', closeTime: '17:00' },
           sunday: { isOpen: false },
-        },
-        services: ['Tatouages féminins', 'Motifs floraux', 'Fine line', 'Minimaliste', 'Lettering'],
+        }),
+        services: JSON.stringify(['Tatouages féminins', 'Motifs floraux', 'Fine line', 'Minimaliste', 'Lettering']),
         priceRangeMin: 80,
         priceRangeMax: 250,
         instagramHandle: '@blackrosetattoo_paris',
@@ -119,7 +119,7 @@ export default class SalonSeeder extends BaseSeeder {
         postalCode: '69001',
         latitude: 45.764,
         longitude: 4.8357,
-        openingHours: {
+        openingHours: JSON.stringify({
           monday: { isOpen: false },
           tuesday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           wednesday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
@@ -127,14 +127,14 @@ export default class SalonSeeder extends BaseSeeder {
           friday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '09:00', closeTime: '18:00' },
           sunday: { isOpen: true, openTime: '11:00', closeTime: '17:00' },
-        },
-        services: [
+        }),
+        services: JSON.stringify([
           'Traditionnel japonais',
           'New School',
           'Géométrique',
           'Biomécanique',
           'Portrait',
-        ],
+        ]),
         priceRangeMin: 100,
         priceRangeMax: 350,
         instagramHandle: '@lyontattooCollective',
@@ -161,7 +161,7 @@ export default class SalonSeeder extends BaseSeeder {
         postalCode: '13002',
         latitude: 43.2965,
         longitude: 5.3698,
-        openingHours: {
+        openingHours: JSON.stringify({
           monday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
           tuesday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
           wednesday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
@@ -169,13 +169,13 @@ export default class SalonSeeder extends BaseSeeder {
           friday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           sunday: { isOpen: false },
-        },
-        services: [
+        }),
+        services: JSON.stringify([
           'Tatouages maritimes',
           'Tribal méditerranéen',
           'Anchors & nautique',
           'Provençal',
-        ],
+        ]),
         priceRangeMin: 90,
         priceRangeMax: 280,
         instagramHandle: '@mediterraneink',
@@ -201,7 +201,7 @@ export default class SalonSeeder extends BaseSeeder {
         postalCode: '33000',
         latitude: 44.8378,
         longitude: -0.5792,
-        openingHours: {
+        openingHours: JSON.stringify({
           monday: { isOpen: false },
           tuesday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
           wednesday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
@@ -209,14 +209,14 @@ export default class SalonSeeder extends BaseSeeder {
           friday: { isOpen: true, openTime: '10:00', closeTime: '19:00' },
           saturday: { isOpen: true, openTime: '09:00', closeTime: '18:00' },
           sunday: { isOpen: false },
-        },
-        services: [
+        }),
+        services: JSON.stringify([
           'Art sur-mesure',
           'Réalisme coloré',
           'Aquarelle',
           'Neo-traditional',
           'Cover-up artistique',
-        ],
+        ]),
         priceRangeMin: 110,
         priceRangeMax: 380,
         instagramHandle: '@bordeauxartink',
@@ -239,7 +239,7 @@ export default class SalonSeeder extends BaseSeeder {
         postalCode: '31000',
         latitude: 43.6047,
         longitude: 1.4442,
-        openingHours: {
+        openingHours: JSON.stringify({
           monday: { isOpen: false },
           tuesday: { isOpen: true, openTime: '11:00', closeTime: '19:00' },
           wednesday: { isOpen: true, openTime: '11:00', closeTime: '19:00' },
@@ -247,8 +247,8 @@ export default class SalonSeeder extends BaseSeeder {
           friday: { isOpen: true, openTime: '11:00', closeTime: '20:00' },
           saturday: { isOpen: true, openTime: '10:00', closeTime: '18:00' },
           sunday: { isOpen: false },
-        },
-        services: ['New School coloré', 'Pop Art', 'Cartoon', 'Illustration', 'Typography moderne'],
+        }),
+        services: JSON.stringify(['New School coloré', 'Pop Art', 'Cartoon', 'Illustration', 'Typography moderne']),
         priceRangeMin: 85,
         priceRangeMax: 300,
         instagramHandle: '@pinkcitytattoo',
