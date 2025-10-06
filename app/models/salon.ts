@@ -69,14 +69,13 @@ export default class Salon extends BaseModel {
 
   // Business information
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
   })
   declare openingHours: OpeningHours | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare services: string[] | null
 
@@ -100,8 +99,8 @@ export default class Salon extends BaseModel {
   declare tiktokHandle: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare galleryImages: string[] | null
 
@@ -142,8 +141,8 @@ export default class Salon extends BaseModel {
   declare metaDescription: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare seoKeywords: string[] | null
 

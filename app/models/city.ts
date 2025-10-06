@@ -56,7 +56,9 @@ export default class City extends BaseModel {
   @column()
   declare metaDescription: string | null
 
-  @column()
+  @column({
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+  })
   declare seoKeywords: Record<string, any> | null
 
   // Status and visibility

@@ -62,8 +62,8 @@ export default class ContactInquiry extends BaseModel {
   declare location: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare tattooStyles: string[] | null
 
@@ -77,8 +77,8 @@ export default class ContactInquiry extends BaseModel {
   declare hasExistingTattoos: boolean
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare referenceImages: string[] | null
 
@@ -113,8 +113,8 @@ export default class ContactInquiry extends BaseModel {
   declare userAgent: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare metadata: Record<string, any> | null
 

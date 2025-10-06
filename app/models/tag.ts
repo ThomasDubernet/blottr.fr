@@ -96,7 +96,10 @@ export default class Tag extends BaseModel {
   @column()
   declare approvedBy: string | null
 
-  @column()
+  @column({
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
+  })
   declare translations: TagTranslations | null
 
   @column.dateTime({ autoCreate: true })

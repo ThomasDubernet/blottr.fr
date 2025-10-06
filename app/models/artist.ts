@@ -68,18 +68,7 @@ export default class Artist extends BaseModel {
   declare experienceLevel: ArtistExperienceLevel
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => {
-      if (!value) return null
-      if (typeof value === 'string') {
-        try {
-          return JSON.parse(value)
-        } catch {
-          return [value] // If it's not JSON, treat as single value
-        }
-      }
-      return Array.isArray(value) ? value : null
-    },
+    prepare: (value) => (value ? JSON.stringify(value) : null),
   })
   declare artStyles: string[] | null
 
@@ -107,15 +96,15 @@ export default class Artist extends BaseModel {
   declare currency: string
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare availability: Availability | null
 
   // Portfolio and social presence
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare portfolioImages: string[] | null
 
@@ -129,8 +118,8 @@ export default class Artist extends BaseModel {
   declare website: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare socialLinks: Record<string, string> | null
 
@@ -148,8 +137,8 @@ export default class Artist extends BaseModel {
   declare verificationNotes: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare verificationDocuments: string[] | null
 
@@ -203,8 +192,8 @@ export default class Artist extends BaseModel {
   declare metaDescription: string | null
 
   @column({
-    prepare: (value) => JSON.stringify(value),
-    consume: (value) => (value ? JSON.parse(value) : null),
+    prepare: (value) => (value ? JSON.stringify(value) : null),
+    
   })
   declare seoKeywords: string[] | null
 
