@@ -12,28 +12,28 @@ import { registerThrottle } from '#start/limiter'
 const ContactInquiriesController = () => import('#controllers/contact_inquiries_controller')
 const AuthController = () => import('#controllers/auth_controller')
 
-router.on('/').renderInertia('home')
-router.on('/inscription').renderInertia('auth/Inscription')
-router.on('/connexion').renderInertia('auth/Connexion')
+router.on('/').renderInertia('home').as('accueil')
+router.on('/inscription').renderInertia('auth/Inscription').as('inscription')
+router.on('/connexion').renderInertia('auth/Connexion').as('connexion')
 
 // Auth routes - Rate limited to 5 requests per 15 minutes per IP
-router.post('/inscription', [AuthController, 'register']).use(registerThrottle)
-router.post('/connexion', [AuthController, 'login'])
-router.post('/logout', [AuthController, 'logout'])
+router.post('/inscription', [AuthController, 'register']).use(registerThrottle).as('auth.register')
+router.post('/connexion', [AuthController, 'login']).as('auth.login')
+router.post('/deconnexion', [AuthController, 'logout']).as('auth.logout')
 
 // API Routes
 router
   .group(() => {
     // Contact Inquiry routes - temporarily without middleware for testing
-    router.post('/contact-inquiries', [ContactInquiriesController, 'store'])
-    router.post('/contact-inquiries/quick', [ContactInquiriesController, 'storeQuick'])
-    router.get('/contact-inquiries/:id', [ContactInquiriesController, 'show'])
-    router.get('/health/contact-inquiries', [ContactInquiriesController, 'health'])
+    router.post('/contact-inquiries', [ContactInquiriesController, 'store']).as('api.contact-inquiries.store')
+    router.post('/contact-inquiries/quick', [ContactInquiriesController, 'storeQuick']).as('api.contact-inquiries.quick')
+    router.get('/contact-inquiries/:id', [ContactInquiriesController, 'show']).as('api.contact-inquiries.show')
+    router.get('/health/contact-inquiries', [ContactInquiriesController, 'health']).as('api.health.contact-inquiries')
   })
   .prefix('/api')
 
 // Artist routes
-router.get('/artists/:slug', async ({ params, inertia }) => {
+router.get('/artistes/:slug', async ({ params, inertia }) => {
   // Mock artist data for testing the contact form
   const mockArtist = {
     id: '1',
@@ -148,4 +148,4 @@ router.get('/artists/:slug', async ({ params, inertia }) => {
   return inertia.render('artists/Show', {
     artist: mockArtist,
   })
-})
+}).as('artistes.show')

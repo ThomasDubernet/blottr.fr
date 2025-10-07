@@ -1,5 +1,6 @@
 import React, { FormEvent } from 'react'
-import { Head, useForm, Link } from '@inertiajs/react'
+import { Head, useForm } from '@inertiajs/react'
+import { Link } from '@tuyau/inertia/react'
 import { Navbar } from '../../components/layout/Navbar'
 import { FlashMessage } from '../../components/FlashMessage'
 
@@ -85,7 +86,7 @@ export default function Connexion() {
                 Vous n'avez pas de compte ?
               </p>
               <Link
-                href="/inscription"
+                route="inscription"
                 className="w-full block py-3 px-4 bg-gray-100 text-black rounded-lg font-medium hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2"
               >
                 Inscription
