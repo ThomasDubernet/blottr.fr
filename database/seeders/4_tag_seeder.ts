@@ -479,20 +479,23 @@ export default class extends BaseSeeder {
 
     for (const parentTag of parentTags) {
       const slug = `${parentTag.slug}-detailed`
-      await Tag.firstOrCreate({ slug }, {
-        name: `${parentTag.name} Detailed`,
-        slug,
-        description: `Detailed ${parentTag.name.toLowerCase()} designs`,
-        category: parentTag.category,
-        parentTagId: parentTag.id,
-        level: 1,
-        colorCode: parentTag.colorCode,
-        iconName: parentTag.iconName,
-        isApproved: true,
-        displayOrder: parentTag.displayOrder + 100,
-        usageCount: Math.floor(parentTag.usageCount * 0.3),
-        popularityScore: parentTag.popularityScore - 1.0,
-      })
+      await Tag.firstOrCreate(
+        { slug },
+        {
+          name: `${parentTag.name} Detailed`,
+          slug,
+          description: `Detailed ${parentTag.name.toLowerCase()} designs`,
+          category: parentTag.category,
+          parentTagId: parentTag.id,
+          level: 1,
+          colorCode: parentTag.colorCode,
+          iconName: parentTag.iconName,
+          isApproved: true,
+          displayOrder: parentTag.displayOrder + 100,
+          usageCount: Math.floor(parentTag.usageCount * 0.3),
+          popularityScore: parentTag.popularityScore - 1.0,
+        }
+      )
     }
   }
 }

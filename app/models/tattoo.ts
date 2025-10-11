@@ -102,7 +102,6 @@ export default class Tattoo extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare imageVariants: ImageVariants
 
@@ -114,7 +113,6 @@ export default class Tattoo extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare dimensions: ImageDimensions
 
@@ -180,13 +178,11 @@ export default class Tattoo extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare altText: Record<string, string> | null
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare searchKeywords: string[] | null
 

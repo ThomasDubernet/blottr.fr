@@ -75,7 +75,6 @@ export default class Salon extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare services: string[] | null
 
@@ -100,7 +99,6 @@ export default class Salon extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare galleryImages: string[] | null
 
@@ -142,7 +140,6 @@ export default class Salon extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare seoKeywords: string[] | null
 

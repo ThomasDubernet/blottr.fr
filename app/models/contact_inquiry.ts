@@ -63,7 +63,6 @@ export default class ContactInquiry extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare tattooStyles: string[] | null
 
@@ -78,7 +77,6 @@ export default class ContactInquiry extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare referenceImages: string[] | null
 
@@ -114,7 +112,6 @@ export default class ContactInquiry extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare metadata: Record<string, any> | null
 

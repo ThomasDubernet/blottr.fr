@@ -97,14 +97,12 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare availability: Availability | null
 
   // Portfolio and social presence
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare portfolioImages: string[] | null
 
@@ -119,7 +117,6 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare socialLinks: Record<string, string> | null
 
@@ -138,7 +135,6 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare verificationDocuments: string[] | null
 
@@ -193,7 +189,6 @@ export default class Artist extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare seoKeywords: string[] | null
 

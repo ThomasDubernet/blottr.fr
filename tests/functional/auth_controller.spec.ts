@@ -9,7 +9,10 @@ test.group('AuthController - Inscription', (group) => {
     await db.from('rate_limits').delete()
   })
 
-  test('POST /inscription - doit cr\u00e9er un utilisateur client valide', async ({ client, assert }) => {
+  test('POST /inscription - doit cr\u00e9er un utilisateur client valide', async ({
+    client,
+    assert,
+  }) => {
     // Arrange
     const userData = {
       email: 'client@example.com',
@@ -22,7 +25,7 @@ test.group('AuthController - Inscription', (group) => {
 
     // Assert
     response.assertStatus(302) // Redirect
-    response.assertHeader("location", "/connexion")
+    response.assertHeader('location', '/connexion')
 
     // Verify in database
     const user = await User.findBy('email', userData.email)
@@ -31,12 +34,15 @@ test.group('AuthController - Inscription', (group) => {
     assert.equal(user!.role, UserRole.CLIENT)
     assert.isTrue(user!.isActive)
     assert.isFalse(user!.emailVerified)
-    
+
     // Password should be hashed, not plain text
     assert.notEqual(user!.password, userData.password)
   })
 
-  test('POST /inscription - doit cr\u00e9er un utilisateur artiste valide', async ({ client, assert }) => {
+  test('POST /inscription - doit cr\u00e9er un utilisateur artiste valide', async ({
+    client,
+    assert,
+  }) => {
     // Arrange
     const userData = {
       email: 'artist@example.com',
@@ -49,7 +55,7 @@ test.group('AuthController - Inscription', (group) => {
 
     // Assert
     response.assertStatus(302)
-    response.assertHeader("location", "/connexion")
+    response.assertHeader('location', '/connexion')
 
     // Verify in database
     const user = await User.findBy('email', userData.email)
@@ -57,7 +63,10 @@ test.group('AuthController - Inscription', (group) => {
     assert.equal(user!.role, UserRole.ARTIST)
   })
 
-  test('POST /inscription - doit rejeter un email d\u00e9j\u00e0 utilis\u00e9', async ({ client, assert }) => {
+  test('POST /inscription - doit rejeter un email d\u00e9j\u00e0 utilis\u00e9', async ({
+    client,
+    assert,
+  }) => {
     // Arrange - Create existing user
     await User.create({
       email: 'existing@example.com',
@@ -175,7 +184,7 @@ test.group('AuthController - Inscription', (group) => {
     })
   })
 
-  test('POST /inscription - doit authentifier l\'utilisateur apr\u00e8s inscription', async ({
+  test("POST /inscription - doit authentifier l'utilisateur apr\u00e8s inscription", async ({
     client,
     assert,
   }) => {
@@ -191,11 +200,11 @@ test.group('AuthController - Inscription', (group) => {
 
     // Assert
     response.assertStatus(302)
-    
+
     // Verify user is authenticated by checking session/cookie
     const cookies = response.cookies()
     assert.isNotEmpty(cookies)
-    
+
     // User should exist and be active
     const user = await User.findBy('email', userData.email)
     assert.isNotNull(user)
@@ -215,7 +224,7 @@ test.group('AuthController - Inscription', (group) => {
 
     // Assert
     response.assertStatus(302)
-    response.assertHeader("location", "/connexion")
+    response.assertHeader('location', '/connexion')
 
     // Note: Flash messages can only be verified after following the redirect
     // The controller sets session.flash('success', message) which is verified in integration tests

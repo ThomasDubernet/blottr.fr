@@ -15,17 +15,15 @@ const passwordMessages = {
  */
 export const registerValidator = vine.compile(
   vine.object({
-    email: vine
+    email: vine.string().trim().toLowerCase().email().normalizeEmail().unique({
+      table: 'users',
+      column: 'email',
+    }),
+    password: vine
       .string()
-      .trim()
-      .toLowerCase()
-      .email()
-      .normalizeEmail()
-      .unique({
-        table: 'users',
-        column: 'email',
-      }),
-    password: vine.string().minLength(8).maxLength(255).regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),
+      .minLength(8)
+      .maxLength(255)
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/),
     role: vine.enum(['client', 'artist']),
   })
 )

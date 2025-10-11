@@ -24,7 +24,7 @@ export default class extends BaseSeeder {
         phone: '+33612345001',
         subject: 'Demande de rendez-vous pour tatouage floral',
         message:
-          'Bonjour, je souhaiterais prendre rendez-vous pour un tatouage de fleurs sur l\'épaule. J\'aime beaucoup votre style aquarelle.',
+          "Bonjour, je souhaiterais prendre rendez-vous pour un tatouage de fleurs sur l'épaule. J'aime beaucoup votre style aquarelle.",
         projectType: ProjectType.APPOINTMENT,
         budget: '400-600€',
         preferredDate: DateTime.now().plus({ days: 15 }).toISO(),
@@ -45,8 +45,7 @@ export default class extends BaseSeeder {
         isRead: false,
         isStarred: false,
         ipAddress: '192.168.1.100',
-        userAgent:
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0',
         metadata: { utmSource: 'instagram', utmMedium: 'social' },
         firstRepliedAt: null,
         lastRepliedAt: null,
@@ -77,8 +76,7 @@ export default class extends BaseSeeder {
         isRead: false,
         isStarred: true,
         ipAddress: '192.168.1.101',
-        userAgent:
-          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
         metadata: { referrer: 'google' },
         firstRepliedAt: null,
         lastRepliedAt: null,
@@ -91,7 +89,7 @@ export default class extends BaseSeeder {
         phone: null,
         subject: 'Question sur le style minimaliste',
         message:
-          'Bonjour, je voudrais savoir si vous faites des tatouages minimalistes très fins. C\'est pour un petit motif sur le poignet.',
+          "Bonjour, je voudrais savoir si vous faites des tatouages minimalistes très fins. C'est pour un petit motif sur le poignet.",
         projectType: ProjectType.QUESTION,
         budget: '100-200€',
         preferredDate: null,
@@ -146,8 +144,7 @@ export default class extends BaseSeeder {
         isRead: true,
         isStarred: false,
         ipAddress: '192.168.1.103',
-        userAgent:
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         metadata: { utmSource: 'facebook', utmMedium: 'social' },
         firstRepliedAt: null,
         lastRepliedAt: null,
@@ -160,7 +157,7 @@ export default class extends BaseSeeder {
         phone: '+33612345004',
         subject: 'Tatouage géométrique sur le dos',
         message:
-          'Je recherche un artiste pour un grand tatouage géométrique sacré sur le dos. J\'ai déjà des idées précises.',
+          "Je recherche un artiste pour un grand tatouage géométrique sacré sur le dos. J'ai déjà des idées précises.",
         projectType: ProjectType.CONSULTATION,
         budget: '1500-2000€',
         preferredDate: DateTime.now().plus({ days: 20 }).toISO(),
@@ -226,8 +223,7 @@ export default class extends BaseSeeder {
         email: 'cecile.petit@hotmail.com',
         phone: '+33612345006',
         subject: 'Devis reçu pour tatouage aquarelle',
-        message:
-          'J\'ai bien reçu votre devis. Je vais réfléchir et reviens vers vous rapidement.',
+        message: "J'ai bien reçu votre devis. Je vais réfléchir et reviens vers vous rapidement.",
         projectType: ProjectType.QUOTE,
         budget: '500-700€',
         preferredDate: null,
@@ -355,8 +351,7 @@ export default class extends BaseSeeder {
         email: 'emma.garnier@gmail.com',
         phone: '+33612345010',
         subject: 'Tatouage lettering personnalisé',
-        message:
-          'Je souhaiterais un tatouage de citation en calligraphie élégante sur les côtes.',
+        message: 'Je souhaiterais un tatouage de citation en calligraphie élégante sur les côtes.',
         projectType: ProjectType.QUOTE,
         budget: '200-300€',
         preferredDate: null,
@@ -387,7 +382,7 @@ export default class extends BaseSeeder {
         phone: '+33612345011',
         subject: 'Rendez-vous urgent',
         message:
-          'Bonjour, j\'ai un événement dans 3 semaines et je voudrais absolument un tatouage avant. Est-ce possible?',
+          "Bonjour, j'ai un événement dans 3 semaines et je voudrais absolument un tatouage avant. Est-ce possible?",
         projectType: ProjectType.APPOINTMENT,
         budget: '500-700€',
         preferredDate: DateTime.now().plus({ days: 18 }).toISO(),
@@ -417,8 +412,7 @@ export default class extends BaseSeeder {
         email: 'chloe.bonnet@outlook.com',
         phone: null,
         subject: 'Tatouage ornamental bijou',
-        message:
-          'J\'aimerais un tatouage ornemental style bijou pour un bracelet sur le bras.',
+        message: "J'aimerais un tatouage ornemental style bijou pour un bracelet sur le bras.",
         projectType: ProjectType.CONSULTATION,
         budget: '400-500€',
         preferredDate: DateTime.now().plus({ days: 25 }).toISO(),
@@ -451,8 +445,7 @@ export default class extends BaseSeeder {
         email: 'maxime.durand@free.fr',
         phone: '+33612345012',
         subject: 'Tatouage biomécanique bras',
-        message:
-          'Je cherche un artiste spécialisé en biomécanique pour un projet de bras complet.',
+        message: 'Je cherche un artiste spécialisé en biomécanique pour un projet de bras complet.',
         projectType: ProjectType.QUOTE,
         budget: '1500-2000€',
         preferredDate: null,
@@ -486,8 +479,7 @@ export default class extends BaseSeeder {
         email: 'sarah.lambert@gmail.com',
         phone: '+33612345013',
         subject: 'Question sur les soins post-tatouage',
-        message:
-          'Quels sont vos conseils pour les soins d\'un tatouage en couleur sur la cuisse?',
+        message: "Quels sont vos conseils pour les soins d'un tatouage en couleur sur la cuisse?",
         projectType: ProjectType.QUESTION,
         budget: null,
         preferredDate: null,
@@ -551,7 +543,7 @@ export default class extends BaseSeeder {
         phone: '+33612345015',
         subject: 'Retouches tatouage ancien',
         message:
-          'J\'ai un ancien tatouage qui nécessite des retouches. Pouvez-vous évaluer le travail nécessaire?',
+          "J'ai un ancien tatouage qui nécessite des retouches. Pouvez-vous évaluer le travail nécessaire?",
         projectType: ProjectType.CONSULTATION,
         budget: '300-500€',
         preferredDate: null,
@@ -616,7 +608,7 @@ export default class extends BaseSeeder {
         email: 'oceane.girard@orange.fr',
         phone: '+33612345017',
         subject: 'Devis accepté - Tatouage phoenix',
-        message: 'J\'accepte votre devis pour le phoenix aquarelle. Quand pouvons-nous commencer?',
+        message: "J'accepte votre devis pour le phoenix aquarelle. Quand pouvons-nous commencer?",
         projectType: ProjectType.QUOTE,
         budget: '2000-2500€',
         preferredDate: DateTime.now().plus({ days: 28 }).toISO(),
@@ -650,7 +642,7 @@ export default class extends BaseSeeder {
         phone: '+33612345018',
         subject: 'Informations complémentaires fournies',
         message:
-          'Voici les photos supplémentaires que vous m\'avez demandées pour le projet de sleeve.',
+          "Voici les photos supplémentaires que vous m'avez demandées pour le projet de sleeve.",
         projectType: ProjectType.CONSULTATION,
         budget: '2500-3000€',
         preferredDate: null,
@@ -686,8 +678,7 @@ export default class extends BaseSeeder {
         email: 'camille.bertrand@gmail.com',
         phone: '+33612345019',
         subject: 'Projet finalisé - Merci infiniment',
-        message:
-          'Mon tatouage est exactement ce que je voulais ! Je recommanderai vos services.',
+        message: 'Mon tatouage est exactement ce que je voulais ! Je recommanderai vos services.',
         projectType: ProjectType.APPOINTMENT,
         budget: '700-900€',
         preferredDate: DateTime.now().minus({ days: 12 }).toISO(),
@@ -717,7 +708,7 @@ export default class extends BaseSeeder {
         email: 'theo.richard@sfr.fr',
         phone: '+33612345020',
         subject: 'Ne souhaite plus de tatouage',
-        message: 'Finalement j\'ai décidé de ne pas me faire tatouer. Merci quand même.',
+        message: "Finalement j'ai décidé de ne pas me faire tatouer. Merci quand même.",
         projectType: ProjectType.QUOTE,
         budget: '300-400€',
         preferredDate: null,
@@ -750,7 +741,7 @@ export default class extends BaseSeeder {
         phone: '+33612345021',
         subject: 'Tatouage celtique traditionnel',
         message:
-          'Je recherche un tatouage de nœud celtique en bracelet. Avez-vous de l\'expérience avec ce style?',
+          "Je recherche un tatouage de nœud celtique en bracelet. Avez-vous de l'expérience avec ce style?",
         projectType: ProjectType.QUOTE,
         budget: '350-450€',
         preferredDate: null,
@@ -781,7 +772,7 @@ export default class extends BaseSeeder {
         phone: '+33612345022',
         subject: 'Consultation tatouage surréaliste',
         message:
-          'Je voudrais discuter d\'un projet de tatouage surréaliste inspiré de Dali. Êtes-vous ouvert à ce genre de projet?',
+          "Je voudrais discuter d'un projet de tatouage surréaliste inspiré de Dali. Êtes-vous ouvert à ce genre de projet?",
         projectType: ProjectType.CONSULTATION,
         budget: '1000-1500€',
         preferredDate: DateTime.now().plus({ days: 14 }).toISO(),
@@ -814,8 +805,7 @@ export default class extends BaseSeeder {
         email: 'lea.fontaine@yahoo.fr',
         phone: null,
         subject: 'Allergie encre tatouage',
-        message:
-          'J\'ai des allergies cutanées. Utilisez-vous des encres hypoallergéniques?',
+        message: "J'ai des allergies cutanées. Utilisez-vous des encres hypoallergéniques?",
         projectType: ProjectType.QUESTION,
         budget: null,
         preferredDate: null,
@@ -879,8 +869,7 @@ export default class extends BaseSeeder {
         email: 'ines.garnier@hotmail.com',
         phone: '+33612345024',
         subject: 'Tatouage lavande botanique',
-        message:
-          'J\'adore les fleurs de lavande. Pouvez-vous créer un design botanique réaliste?',
+        message: "J'adore les fleurs de lavande. Pouvez-vous créer un design botanique réaliste?",
         projectType: ProjectType.QUOTE,
         budget: '400-550€',
         preferredDate: null,

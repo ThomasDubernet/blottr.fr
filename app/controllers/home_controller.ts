@@ -10,7 +10,7 @@ export default class HomeController {
       ? {
           id: auth.user.id,
           email: auth.user.email,
-          role: auth.user.role as 'client' | 'artist',
+          role: auth.user.isClient ? ('client' as const) : ('artist' as const),
         }
       : null
 

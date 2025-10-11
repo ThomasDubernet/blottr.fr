@@ -494,7 +494,8 @@ export default class extends BaseSeeder {
         },
         searchKeywords: ['biomechanical', 'mechanical', 'futuristic', 'arm', 'realistic'],
         metaTitle: 'Biomechanical Arm Tattoo | Futuristic Design',
-        metaDescription: 'Detailed biomechanical tattoo with mechanical elements and realistic shading',
+        metaDescription:
+          'Detailed biomechanical tattoo with mechanical elements and realistic shading',
         publishedAt: DateTime.fromISO('2024-03-10T14:45:00Z'),
       },
       {
@@ -1040,7 +1041,8 @@ export default class extends BaseSeeder {
         },
         searchKeywords: ['phoenix', 'watercolor', 'colorful', 'mythical', 'back'],
         metaTitle: 'Watercolor Phoenix Tattoo | Vibrant Design',
-        metaDescription: 'Stunning watercolor phoenix with vibrant flames and artistic color splashes',
+        metaDescription:
+          'Stunning watercolor phoenix with vibrant flames and artistic color splashes',
         publishedAt: DateTime.fromISO('2024-05-15T12:20:00Z'),
       },
       {
@@ -1292,7 +1294,8 @@ export default class extends BaseSeeder {
         },
         searchKeywords: ['japanese', 'dragon', 'back', 'irezumi', 'traditional', 'full back'],
         metaTitle: 'Japanese Dragon Back Tattoo | Full Irezumi',
-        metaDescription: 'Magnificent traditional Japanese dragon covering full back with clouds and waves',
+        metaDescription:
+          'Magnificent traditional Japanese dragon covering full back with clouds and waves',
         publishedAt: DateTime.fromISO('2024-06-15T10:30:00Z'),
       },
     ]

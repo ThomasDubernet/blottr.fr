@@ -68,8 +68,7 @@ export default class extends BaseSeeder {
       const shuffledSalons = salons.sort(() => 0.5 - Math.random())
       const selectedSalons = shuffledSalons.slice(0, numberOfSalons)
 
-      for (let i = 0; i < selectedSalons.length; i++) {
-        const salon = selectedSalons[i]
+      for (const [i, salon] of selectedSalons.entries()) {
         const isPrimary = i === 0 // First salon is primary
 
         // Determine relationship type
@@ -95,7 +94,10 @@ export default class extends BaseSeeder {
 
         // Start date (random date in the past 1-5 years)
         const yearsAgo = Math.floor(Math.random() * 5) + 1
-        const startedWorkingAt = DateTime.now().minus({ years: yearsAgo, days: Math.random() * 365 })
+        const startedWorkingAt = DateTime.now().minus({
+          years: yearsAgo,
+          days: Math.random() * 365,
+        })
 
         // End date (null for active, date for 20% of relationships)
         const isActive = Math.random() > 0.2

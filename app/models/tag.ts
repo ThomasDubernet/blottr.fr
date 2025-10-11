@@ -98,7 +98,6 @@ export default class Tag extends BaseModel {
 
   @column({
     prepare: (value) => (value ? JSON.stringify(value) : null),
-    
   })
   declare translations: TagTranslations | null
 

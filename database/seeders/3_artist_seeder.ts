@@ -25,7 +25,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[0].id,
         stageName: 'Vincent Noir',
-        bio: 'Artiste tatoueur spécialisé dans le réalisme depuis 15 ans. Formé auprès des plus grands maîtres européens, je transforme vos idées en œuvres d\'art permanentes.',
+        bio: "Artiste tatoueur spécialisé dans le réalisme depuis 15 ans. Formé auprès des plus grands maîtres européens, je transforme vos idées en œuvres d'art permanentes.",
         shortBio: 'Expert réalisme 15 ans',
         specialty: 'Réalisme photographique et portraits',
         yearsExperience: 15,
@@ -105,7 +105,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[2].id,
         stageName: 'Maxime Shadow',
-        bio: 'Expert en black & grey et portraits réalistes. Mon objectif: capturer l\'âme dans chaque tatouage avec des contrastes saisissants.',
+        bio: "Expert en black & grey et portraits réalistes. Mon objectif: capturer l'âme dans chaque tatouage avec des contrastes saisissants.",
         shortBio: 'Black & grey expert',
         specialty: 'Portraits et black & grey',
         yearsExperience: 12,
@@ -144,7 +144,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[3].id,
         stageName: 'Amélie Colors',
-        bio: 'Spécialiste du watercolor et des compositions colorées. L\'art abstrait rencontre la peau pour créer des œuvres uniques et vibrantes.',
+        bio: "Spécialiste du watercolor et des compositions colorées. L'art abstrait rencontre la peau pour créer des œuvres uniques et vibrantes.",
         shortBio: 'Watercolor specialist',
         specialty: 'Aquarelle et compositions colorées',
         yearsExperience: 6,
@@ -182,7 +182,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[4].id,
         stageName: 'Pierre Tribal',
-        bio: 'Maître du style tribal polynésien traditionnel. 20 ans d\'expérience avec formation en Polynésie. Respect des traditions et symboles ancestraux.',
+        bio: "Maître du style tribal polynésien traditionnel. 20 ans d'expérience avec formation en Polynésie. Respect des traditions et symboles ancestraux.",
         shortBio: 'Tribal polynésien maître',
         specialty: 'Tribal polynésien traditionnel',
         yearsExperience: 20,
@@ -221,7 +221,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[5].id,
         stageName: 'Clara Lines',
-        bio: 'Artiste minimaliste, lignes fines et élégantes. Philosophie : moins c\'est plus. Créations épurées et intemporelles.',
+        bio: "Artiste minimaliste, lignes fines et élégantes. Philosophie : moins c'est plus. Créations épurées et intemporelles.",
         shortBio: 'Minimaliste fine line',
         specialty: 'Minimalisme et lignes fines',
         yearsExperience: 5,
@@ -297,7 +297,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[7].id,
         stageName: 'Manon Flowers',
-        bio: 'Compositions botaniques et illustrations délicates. La nature comme source d\'inspiration infinie pour des créations poétiques.',
+        bio: "Compositions botaniques et illustrations délicates. La nature comme source d'inspiration infinie pour des créations poétiques.",
         shortBio: 'Botanique et floral',
         specialty: 'Illustrations botaniques',
         yearsExperience: 7,
@@ -665,7 +665,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[17].id,
         stageName: 'Audrey Celtic',
-        bio: 'Spécialiste des motifs celtiques et nordiques. Connexion avec nos racines ancestrales à travers l\'art corporel.',
+        bio: "Spécialiste des motifs celtiques et nordiques. Connexion avec nos racines ancestrales à travers l'art corporel.",
         shortBio: 'Celtique & nordique',
         specialty: 'Motifs celtiques',
         yearsExperience: 7,
@@ -699,7 +699,7 @@ export default class ArtistSeeder extends BaseSeeder {
       {
         userId: artistUsers[18].id,
         stageName: 'David Horror',
-        bio: 'Dark art, horror et macabre design. L\'obscurité a sa propre beauté troublante et fascinante.',
+        bio: "Dark art, horror et macabre design. L'obscurité a sa propre beauté troublante et fascinante.",
         shortBio: 'Dark art & horror',
         specialty: 'Horror et dark art',
         yearsExperience: 16,
