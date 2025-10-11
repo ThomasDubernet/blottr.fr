@@ -125,7 +125,7 @@ export default function Register() {
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Déjà membre ?{' '}
-                  <Link href="/login" className="font-medium text-gray-900 hover:text-gray-700">
+                  <Link href="/connexion" className="font-medium text-gray-900 hover:text-gray-700">
                     Se connecter
                   </Link>
                 </p>

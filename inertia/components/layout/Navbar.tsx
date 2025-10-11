@@ -40,7 +40,7 @@ export function Navbar({ currentPage = 'default', user }: NavbarProps) {
           // Authenticated user state
           <div className="flex items-center space-x-4">
             <span className="text-sm text-gray-600">{user.email}</span>
-            <Link href="/logout" method="post" as="button">
+            <Link href="/deconnexion" method="post" as="button">
               <button className="px-4 py-2 border border-gray-300 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
                 Déconnexion
               </button>

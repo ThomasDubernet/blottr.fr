@@ -124,7 +124,7 @@ export default function Inscription() {
           {/* Login Link */}
           <div className="text-center">
             <p className="text-sm text-gray-600 mb-3">Déjà membre ?</p>
-            <Link href="/login">
+            <Link href="/connexion">
               <button className="w-full bg-gray-100 text-gray-700 py-3 px-6 rounded-lg font-medium text-base hover:bg-gray-200 transition-colors">
                 Se connecter
               </button>

@@ -11,8 +11,9 @@ import router from '@adonisjs/core/services/router'
 import { registerThrottle } from '#start/limiter'
 const ContactInquiriesController = () => import('#controllers/contact_inquiries_controller')
 const AuthController = () => import('#controllers/auth_controller')
+const HomeController = () => import('#controllers/home_controller')
 
-router.on('/').renderInertia('home').as('accueil')
+router.get('/', [HomeController, 'index']).as('accueil')
 router.on('/inscription').renderInertia('auth/Inscription').as('inscription')
 router.on('/connexion').renderInertia('auth/Connexion').as('connexion')
 

@@ -37,26 +37,42 @@ export default class AuthController {
   /**
    * Login an existing user
    */
-  async login({ request, response, auth }: HttpContext) {
+  async login({ request, response, auth, session }: HttpContext) {
     // Validate request data
     const payload = await request.validateUsing(loginValidator)
 
-    // Execute use case
-    const useCase = new LoginUserUseCase()
-    const result = await useCase.execute(payload)
+    try {
+      // Execute use case
+      const useCase = new LoginUserUseCase()
+      const result = await useCase.execute(payload)
 
-    // Find user for authentication
-    const user = await User.find(result.userId)
+      // Find user for authentication
+      const user = await User.find(result.userId)
 
-    if (!user) {
-      return response.abort({ message: AUTH_ERRORS.USER_NOT_FOUND }, 500)
+      if (!user) {
+        return response.abort({ message: AUTH_ERRORS.USER_NOT_FOUND }, 500)
+      }
+
+      // Authenticate the user
+      await auth.use('web').login(user)
+
+      // Redirect to home page
+      return response.redirect('/')
+    } catch (error) {
+      // Handle authentication errors gracefully with flash message
+      if (error.code === 'E_INVALID_CREDENTIALS') {
+        session.flash('error', 'Email ou mot de passe incorrect')
+        return response.redirect().back()
+      }
+
+      if (error.code === 'E_ACCOUNT_DEACTIVATED') {
+        session.flash('error', 'Votre compte a été désactivé')
+        return response.redirect().back()
+      }
+
+      // Re-throw unexpected errors
+      throw error
     }
-
-    // Authenticate the user
-    await auth.use('web').login(user)
-
-    // Redirect to home page
-    return response.redirect('/')
   }
 
   /**

@@ -3,6 +3,7 @@ import { Head, useForm, Link } from '@inertiajs/react'
 import { Button } from '../../components/ui/Button'
 import { Input } from '../../components/ui/Input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/Card'
+import { ToastContainer } from '../../components/ui/Toast'
 
 interface LoginForm {
   email: string
@@ -25,6 +26,7 @@ export default function Login() {
   return (
     <>
       <Head title="Connexion - Blottr" />
+      <ToastContainer />
 
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
