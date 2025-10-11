@@ -1,6 +1,6 @@
 import { FormEvent } from 'react'
-import { useForm } from '@inertiajs/react'
-import { Link } from '@tuyau/inertia/react'
+import { useForm, Link } from '@inertiajs/react'
+import { route } from '~/lib/tuyau-helpers'
 import { MainLayout } from '~/components/layout/MainLayout'
 
 interface InscriptionForm {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Head } from '@inertiajs/react'
-import { Link } from '@tuyau/inertia/react'
+import { Head, Link } from '@inertiajs/react'
+import { route } from '~/lib/tuyau-helpers'
 import { MainLayout } from '../components/layout/MainLayout'
 import { Button } from '../components/ui/Button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/Card'
@@ -40,7 +40,7 @@ export default function Home({ user }: HomeProps) {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link route="inscription">
+          <Link href={route('inscription')}>
             <button className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-full text-base font-medium hover:bg-gray-50 transition-colors">
               Créer un compte
             </button>
